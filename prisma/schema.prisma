@@ -1,0 +1,311 @@
+// SLU Alumni Connect Database Schema
+// Based on the project ERD and CSV data structure
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// User Authentication and Roles
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(ALUMNI)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Profile relationship
+  profile Profile?
+
+  // Activity relationships
+  eventsCreated Event[]
+  rsvps         RSVP[]
+  donations     Donation[]
+  mentorships   Mentorship[] @relation("Mentor")
+  menteeships   Mentorship[] @relation("Mentee")
+  engagement    Engagement?
+
+  @@map("users")
+}
+
+// Alumni Profile Information
+model Profile {
+  id                String  @id @default(cuid())
+  userId            String  @unique
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Personal Information
+  firstName         String
+  lastName          String
+  phone             String?
+  profileImage      String?
+  bio               String?
+  
+  // Academic Information
+  graduationYear    Int
+  program           String
+  department        Department
+  
+  // Professional Information
+  currentEmployer   String?
+  jobTitle          String?
+  employmentStatus  EmploymentStatus @default(EMPLOYED)
+  
+  // Location Information
+  city              String?
+  state             String?
+  country           String   @default("USA")
+  
+  // Profile Management
+  verificationStatus VerificationStatus @default(PENDING)
+  profileCompleteness Int @default(0)
+  lastUpdatedDate   DateTime @default(now())
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("profiles")
+}
+
+// Events Management
+model Event {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  eventType   EventType
+  date        DateTime
+  time        String
+  location    String
+  maxCapacity Int
+  isVirtual   Boolean   @default(false)
+  budget      Int?
+  status      EventStatus @default(PLANNED)
+  
+  // Relationships
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  department  Department
+  
+  rsvps       RSVP[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("events")
+}
+
+// Event RSVPs
+model RSVP {
+  id                  String      @id @default(cuid())
+  alumniId            String
+  eventId             String
+  status              RSVPStatus  @default(NOT_RESPONDED)
+  guestCount          Int         @default(0)
+  specialRequirements String?
+  checkInStatus       CheckInStatus @default(NOT_YET)
+  
+  // Relationships
+  alumni              User        @relation(fields: [alumniId], references: [id])
+  event               Event       @relation(fields: [eventId], references: [id])
+  
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  @@unique([alumniId, eventId])
+  @@map("rsvps")
+}
+
+// Donations Management
+model Donation {
+  id                String        @id @default(cuid())
+  alumniId          String
+  amount            Float
+  donationType      DonationType
+  donationMethod    DonationMethod
+  purpose           DonationPurpose
+  isAnonymous       Boolean       @default(false)
+  taxDeductible     Boolean       @default(true)
+  recurringFrequency RecurringFrequency?
+  status            DonationStatus @default(COMPLETED)
+  
+  // Relationships
+  alumni            User          @relation(fields: [alumniId], references: [id])
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@map("donations")
+}
+
+// Mentorship System
+model Mentorship {
+  id                String            @id @default(cuid())
+  mentorId          String
+  menteeId          String
+  area              MentorshipArea
+  status            MentorshipStatus  @default(REQUESTED)
+  frequencyPerMonth Int               @default(1)
+  startDate         DateTime?
+  endDate           DateTime?
+  lastInteractionDate DateTime?
+  satisfactionRating Int?
+  
+  // Relationships
+  mentor            User              @relation("Mentor", fields: [mentorId], references: [id])
+  mentee            User              @relation("Mentee", fields: [menteeId], references: [id])
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@unique([mentorId, menteeId])
+  @@map("mentorships")
+}
+
+// Engagement Tracking
+model Engagement {
+  id                    String  @id @default(cuid())
+  alumniId              String  @unique
+  eventsAttended        Int     @default(0)
+  donationCount         Int     @default(0)
+  totalAmountDonated    Float   @default(0)
+  mentorshipsActive     Int     @default(0)
+  volunteerHours        Int     @default(0)
+  emailEngagementRate   Float   @default(0)
+  lastActivityDate      DateTime?
+  engagementScore       Int     @default(0)
+  engagementTier        EngagementTier @default(LOW)
+  assignedStaffId       String?
+  lastReviewDate        DateTime?
+  
+  // Relationships
+  alumni                User    @relation(fields: [alumniId], references: [id])
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("engagements")
+}
+
+// Enums
+enum Role {
+  ALUMNI
+  ADMIN
+  STAFF
+}
+
+enum Department {
+  STEM
+  BUSINESS
+  HUMANITIES
+  HEALTHCARE
+  SOCIAL_SCIENCES
+}
+
+enum EmploymentStatus {
+  EMPLOYED
+  SELF_EMPLOYED
+  RETIRED
+  SEEKING
+  NOT_AVAILABLE
+}
+
+enum VerificationStatus {
+  VERIFIED
+  UNVERIFIED
+  PENDING
+}
+
+enum EventType {
+  ALUMNI_REUNION
+  NETWORKING_MIXER
+  CAREER_FAIR
+  FUNDRAISING_GALA
+  WEBINAR
+  WORKSHOP
+  MENTORSHIP_PROGRAM
+  CLASS_REUNION
+}
+
+enum EventStatus {
+  PLANNED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum RSVPStatus {
+  CONFIRMED
+  TENTATIVE
+  DECLINED
+  NOT_RESPONDED
+}
+
+enum CheckInStatus {
+  YES
+  NO
+  NOT_YET
+}
+
+enum DonationType {
+  ONE_TIME_GIFT
+  RECURRING_MONTHLY
+  PLEDGE
+  MAJOR_GIFT
+  IN_KIND
+}
+
+enum DonationMethod {
+  CREDIT_CARD
+  BANK_TRANSFER
+  CHECK
+  STOCK
+  WIRE_TRANSFER
+}
+
+enum DonationPurpose {
+  SCHOLARSHIP
+  GENERAL_FUND
+  ENDOWMENT
+  RESEARCH
+  INFRASTRUCTURE
+}
+
+enum RecurringFrequency {
+  MONTHLY
+  QUARTERLY
+  ANNUAL
+}
+
+enum DonationStatus {
+  COMPLETED
+  PENDING
+  DECLINED
+}
+
+enum MentorshipArea {
+  CAREER_DEVELOPMENT
+  ACADEMIC_GUIDANCE
+  NETWORKING
+  LEADERSHIP
+  ENTREPRENEURSHIP
+  TECHNICAL_SKILLS
+  PROFESSIONAL_DEVELOPMENT
+}
+
+enum MentorshipStatus {
+  REQUESTED
+  ACTIVE
+  COMPLETED
+  ON_HOLD
+}
+
+enum EngagementTier {
+  HIGH
+  MEDIUM
+  LOW
+}
