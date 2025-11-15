@@ -1,56 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import bcrypt from 'bcryptjs'
 
+// Demo-only registration endpoint.
+// This does NOT write to a real database so it can run safely on Vercel
+// without any Prisma migrations or external DB setup.
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { email, password, firstName, lastName, graduationYear, program, department } = body
 
-    // Check if user already exists
-    const existingUser = await db.user.findUnique({
-      where: { email }
-    })
-
-    if (existingUser) {
+    if (!email || !password || !firstName || !lastName || !graduationYear || !program || !department) {
       return NextResponse.json(
-        { error: 'User already exists' },
+        { error: 'Missing required fields' },
         { status: 400 }
       )
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 12)
+    const parsedGraduationYear = parseInt(graduationYear, 10)
 
-    // Create user and profile
-    const user = await db.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        profile: {
-          create: {
-            firstName,
-            lastName,
-            graduationYear: parseInt(graduationYear),
-            program,
-            department,
-            profileCompleteness: 40, // Basic info completed
-          }
-        }
+    const user = {
+      id: `DEMO-${Date.now()}`,
+      email,
+      role: 'ALUMNI',
+      profile: {
+        firstName,
+        lastName,
+        graduationYear: isNaN(parsedGraduationYear) ? undefined : parsedGraduationYear,
+        program,
+        department,
       },
-      include: {
-        profile: true
-      }
-    })
-
-    // Remove password from response
-    const { password: _, ...userWithoutPassword } = user
+    }
 
     return NextResponse.json({
-      message: 'User created successfully',
-      user: userWithoutPassword
+      message: 'User registered successfully (demo only). Login is limited to admin and pre-loaded alumni accounts.',
+      user,
     })
-
   } catch (error) {
     console.error('Registration error:', error)
     return NextResponse.json(
