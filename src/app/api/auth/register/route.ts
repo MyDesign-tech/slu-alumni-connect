@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import bcrypt from 'bcryptjs'
+import { Prisma } from '@prisma/client'
 
 export async function POST(request: NextRequest) {
   try {
@@ -61,6 +62,18 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Registration error:', error)
+
+    // Handle duplicate email gracefully (Prisma P2002)
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === 'P2002'
+    ) {
+      return NextResponse.json(
+        { error: 'User already exists' },
+        { status: 400 }
+      )
+    }
+
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
