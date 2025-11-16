@@ -1,22 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import bcrypt from 'bcryptjs'
-import { Prisma } from '@prisma/client'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { email, password, firstName, lastName, graduationYear, program, department } = body
 
-    if (!email || !password || !firstName || !lastName || !graduationYear || !program || !department) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
-    }
-
+    // Check if user already exists
     const existingUser = await db.user.findUnique({
-      where: { email },
+      where: { email }
     })
 
     if (existingUser) {
@@ -26,54 +19,40 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const parsedGraduationYear =
-      typeof graduationYear === 'number'
-        ? graduationYear
-        : parseInt(String(graduationYear), 10)
-
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 12)
 
+    // Create user and profile
     const user = await db.user.create({
       data: {
         email,
         password: hashedPassword,
-        role: 'ALUMNI',
         profile: {
           create: {
             firstName,
             lastName,
-            graduationYear: isNaN(parsedGraduationYear) ? 0 : parsedGraduationYear,
+            graduationYear: parseInt(graduationYear),
             program,
             department,
-            profileCompleteness: 40,
-          },
-        },
+            profileCompleteness: 40, // Basic info completed
+          }
+        }
       },
       include: {
-        profile: true,
-      },
+        profile: true
+      }
     })
 
-    const { password: _password, ...userWithoutPassword } = user
+    // Remove password from response
+    const { password: _, ...userWithoutPassword } = user
 
     return NextResponse.json({
       message: 'User created successfully',
-      user: userWithoutPassword,
+      user: userWithoutPassword
     })
+
   } catch (error) {
     console.error('Registration error:', error)
-
-    // Handle duplicate email gracefully (Prisma P2002)
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === 'P2002'
-    ) {
-      return NextResponse.json(
-        { error: 'User already exists' },
-        { status: 400 }
-      )
-    }
-
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

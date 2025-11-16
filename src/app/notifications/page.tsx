@@ -50,7 +50,7 @@ export default function NotificationsPage() {
         setNotifications(data.notifications || []);
       }
     } catch (error) {
-      console.warn('Error fetching notifications:', error);
+      console.error('Error fetching notifications:', error);
     } finally {
       setLoading(false);
     }
