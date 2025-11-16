@@ -1,52 +1,69 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/lib/db'
+import bcrypt from 'bcryptjs'
 
-// Demo-only registration endpoint.
-// This does NOT write to a real database so it can run safely on Vercel
-// without any Prisma migrations or external DB setup.
 export async function POST(request: NextRequest) {
-  let body: any = {}
-
-  // Be defensive when reading the request body so we never throw.
   try {
-    body = await request.json()
-  } catch {
-    body = {}
+    const body = await request.json()
+    const { email, password, firstName, lastName, graduationYear, program, department } = body
+
+    if (!email || !password || !firstName || !lastName || !graduationYear || !program || !department) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      )
+    }
+
+    const existingUser = await db.user.findUnique({
+      where: { email },
+    })
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: 'User already exists' },
+        { status: 400 }
+      )
+    }
+
+    const parsedGraduationYear =
+      typeof graduationYear === 'number'
+        ? graduationYear
+        : parseInt(String(graduationYear), 10)
+
+    const hashedPassword = await bcrypt.hash(password, 12)
+
+    const user = await db.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+        role: 'ALUMNI',
+        profile: {
+          create: {
+            firstName,
+            lastName,
+            graduationYear: isNaN(parsedGraduationYear) ? 0 : parsedGraduationYear,
+            program,
+            department,
+            profileCompleteness: 40,
+          },
+        },
+      },
+      include: {
+        profile: true,
+      },
+    })
+
+    const { password: _password, ...userWithoutPassword } = user
+
+    return NextResponse.json({
+      message: 'User created successfully',
+      user: userWithoutPassword,
+    })
+  } catch (error) {
+    console.error('Registration error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    )
   }
-
-  const {
-    email,
-    firstName,
-    lastName,
-    graduationYear,
-    program,
-    department,
-  } = body ?? {}
-
-  const parsedGraduationYear =
-    typeof graduationYear === 'number'
-      ? graduationYear
-      : typeof graduationYear === 'string'
-      ? parseInt(graduationYear, 10)
-      : undefined
-
-  const user = {
-    id: `DEMO-${Date.now()}`,
-    email: email || 'demo@slu.edu',
-    role: 'ALUMNI',
-    profile: {
-      firstName: firstName || 'Demo',
-      lastName: lastName || 'User',
-      graduationYear: isNaN(Number(parsedGraduationYear))
-        ? undefined
-        : Number(parsedGraduationYear),
-      program: program || 'Demo Program',
-      department: department || 'DEMO',
-    },
-  }
-
-  return NextResponse.json({
-    message:
-      'User registered successfully (demo only). Please use admin or pre-loaded alumni credentials to log in.',
-    user,
-  })
 }
