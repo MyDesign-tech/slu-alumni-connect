@@ -55,7 +55,7 @@ export function NotificationBell() {
         setUnreadCount(data.unreadCount || 0);
       }
     } catch (error) {
-      console.error('Error fetching notifications:', error);
+      console.warn('Error fetching notifications:', error);
     } finally {
       setLoading(false);
     }
