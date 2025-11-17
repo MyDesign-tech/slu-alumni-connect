@@ -50,12 +50,17 @@ export default function MessageThreadPage() {
   }, [user?.email, params.id]);
 
   const fetchMessageThread = async () => {
-    if (!user?.email) return;
+    if (!user?.email) {
+      console.warn('No user email available');
+      return;
+    }
 
     try {
       setLoading(true);
       const rawId: string | string[] | undefined = (params as any).id;
       const messageId = Array.isArray(rawId) ? rawId[0] : rawId;
+
+      console.log('Fetching thread for message ID:', messageId);
 
       if (!messageId) {
         console.error('No message id found in route params');
@@ -63,65 +68,58 @@ export default function MessageThreadPage() {
         return;
       }
 
-      const response = await fetch('/api/messages', {
+      // Use the dedicated thread API endpoint
+      const response = await fetch(`/api/messages/${messageId}`, {
         headers: {
           'x-user-email': user.email
         }
       });
 
+      console.log('Thread API response status:', response.status);
+
       if (!response.ok) {
-        console.error('Failed to fetch messages for thread');
-        router.push('/messages');
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('Failed to fetch message thread:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorData,
+          messageId,
+          userEmail: user.email
+        });
+        // Don't redirect immediately, show error state
+        setOtherParticipant(null);
+        setMessages([]);
         return;
       }
 
       const data = await response.json();
-      const allMessages: Message[] = data.messages || [];
+      console.log('Thread data received:', data);
+      
+      if (data.success) {
+        // Set other participant info
+        setOtherParticipant(data.otherParticipant);
 
-      // Find the message that was clicked in the list
-      const targetMessage = allMessages.find(msg => msg.id === messageId);
-      if (!targetMessage) {
-        console.error('Target message not found for thread');
-        router.push('/messages');
-        return;
+        // Convert messages to chat format
+        const chatMessages: ChatMessage[] = (data.messages || []).map((msg: Message) => ({
+          id: msg.id,
+          content: msg.content,
+          senderEmail: msg.senderEmail,
+          senderName: msg.senderName,
+          timestamp: new Date(msg.timestamp),
+          isMe: msg.senderEmail.toLowerCase() === user.email.toLowerCase()
+        }));
+
+        console.log('Converted to chat messages:', chatMessages.length, 'messages');
+        setMessages(chatMessages);
+      } else {
+        console.error('Invalid response from thread API - success=false');
+        setOtherParticipant(null);
+        setMessages([]);
       }
-
-      // Determine the other participant
-      const otherEmail =
-        targetMessage.senderEmail === user.email
-          ? targetMessage.receiverEmail
-          : targetMessage.senderEmail;
-      const otherName =
-        targetMessage.senderEmail === user.email
-          ? targetMessage.receiverName
-          : targetMessage.senderName;
-
-      setOtherParticipant({ email: otherEmail, name: otherName });
-
-      // Collect all messages between current user and the other participant
-      const conversationMessages = allMessages.filter(msg =>
-        (msg.senderEmail === user.email && msg.receiverEmail === otherEmail) ||
-        (msg.senderEmail === otherEmail && msg.receiverEmail === user.email)
-      );
-
-      // Sort oldest -> newest for chat view
-      conversationMessages.sort(
-        (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-
-      const chatMessages: ChatMessage[] = conversationMessages.map((msg: Message) => ({
-        id: msg.id,
-        content: msg.content,
-        senderEmail: msg.senderEmail,
-        senderName: msg.senderName,
-        timestamp: new Date(msg.timestamp),
-        isMe: msg.senderEmail === user.email
-      }));
-
-      setMessages(chatMessages);
     } catch (error) {
       console.error('Error fetching message thread:', error);
-      router.push('/messages');
+      setOtherParticipant(null);
+      setMessages([]);
     } finally {
       setLoading(false);
     }
@@ -199,6 +197,33 @@ export default function MessageThreadPage() {
                 <CardContent className="p-8 text-center">
                   <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
                   <p className="text-muted-foreground">Loading conversation...</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </MainLayout>
+      </ProtectedRoute>
+    );
+  }
+
+  // Show error state if no participant or no messages
+  if (!loading && !otherParticipant) {
+    return (
+      <ProtectedRoute>
+        <MainLayout>
+          <div className="container mx-auto px-4 py-8">
+            <div className="max-w-4xl mx-auto">
+              <Card>
+                <CardContent className="p-8 text-center">
+                  <MessageSquare className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">Unable to Load Conversation</h3>
+                  <p className="text-muted-foreground mb-4">
+                    This conversation could not be found or you don't have access to it.
+                  </p>
+                  <Button onClick={() => router.push('/messages')}>
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    Back to Messages
+                  </Button>
                 </CardContent>
               </Card>
             </div>

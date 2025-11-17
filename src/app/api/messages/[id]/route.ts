@@ -1,41 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// In-memory storage for demo purposes
-let messages = [
-  {
-    id: '1',
-    senderEmail: 'linda.smith859@email.com',
-    senderName: 'Linda Smith',
-    receiverEmail: 'donald.davis559@email.com',
-    receiverName: 'Donald Davis',
-    subject: 'Alumni Event',
-    content: 'Hey Linda, are you planning to attend the upcoming alumni networking event in Los Angeles?',
-    timestamp: new Date('2024-11-14T10:30:00Z'),
-    read: false
-  },
-  {
-    id: '2',
-    senderEmail: 'donald.davis559@email.com',
-    senderName: 'Donald Davis',
-    receiverEmail: 'linda.smith859@email.com',
-    receiverName: 'Linda Smith',
-    subject: 'Re: Alumni Event',
-    content: 'Hi Donald! Yes, I\'m definitely planning to attend. It should be a great opportunity to reconnect with fellow alumni. Are you going?',
-    timestamp: new Date('2024-11-14T11:15:00Z'),
-    read: true
-  },
-  {
-    id: '3',
-    senderEmail: 'linda.smith859@email.com',
-    senderName: 'Linda Smith',
-    receiverEmail: 'donald.davis559@email.com',
-    receiverName: 'Donald Davis',
-    subject: 'Re: Alumni Event',
-    content: 'Absolutely! I wouldn\'t miss it. Maybe we can grab coffee beforehand and catch up properly?',
-    timestamp: new Date('2024-11-14T12:00:00Z'),
-    read: false
-  }
-];
+import { messagesStore } from '@/lib/messages-store';
 
 export async function GET(
   request: NextRequest,
@@ -49,33 +13,42 @@ export async function GET(
       return NextResponse.json({ error: 'User email required' }, { status: 401 });
     }
     
+    const userEmailLower = userEmail.toLowerCase();
+    
     // Find the specific message
-    const targetMessage = messages.find(m => m.id === messageId);
+    const targetMessage = messagesStore.find(m => m.id === messageId);
     
     if (!targetMessage) {
       return NextResponse.json({ error: 'Message not found' }, { status: 404 });
     }
 
     // Get the other participant
-    const otherParticipantEmail = targetMessage.senderEmail === userEmail 
+    const otherParticipantEmail = targetMessage.senderEmail.toLowerCase() === userEmailLower
       ? targetMessage.receiverEmail 
       : targetMessage.senderEmail;
 
     // Find all messages in this conversation thread
-    const threadMessages = messages.filter(message => 
-      (message.senderEmail === userEmail && message.receiverEmail === otherParticipantEmail) ||
-      (message.senderEmail === otherParticipantEmail && message.receiverEmail === userEmail)
+    const threadMessages = messagesStore.filter(message => 
+      (message.senderEmail.toLowerCase() === userEmailLower && message.receiverEmail.toLowerCase() === otherParticipantEmail.toLowerCase()) ||
+      (message.senderEmail.toLowerCase() === otherParticipantEmail.toLowerCase() && message.receiverEmail.toLowerCase() === userEmailLower)
     );
 
     // Sort by timestamp
     threadMessages.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+
+    // Mark unread messages as read
+    threadMessages.forEach(msg => {
+      if (msg.receiverEmail.toLowerCase() === userEmailLower && !msg.read) {
+        msg.read = true;
+      }
+    });
 
     return NextResponse.json({
       success: true,
       messages: threadMessages,
       otherParticipant: {
         email: otherParticipantEmail,
-        name: targetMessage.senderEmail === userEmail 
+        name: targetMessage.senderEmail.toLowerCase() === userEmailLower
           ? targetMessage.receiverName 
           : targetMessage.senderName
       }

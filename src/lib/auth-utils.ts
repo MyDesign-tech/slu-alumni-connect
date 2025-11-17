@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 import { AlumniDataService } from './data-service'
+import { registeredUsers } from './registered-users'
 
 export interface AuthUser {
   id: string
@@ -18,19 +19,29 @@ export async function getCurrentUser(request: NextRequest): Promise<AuthUser | n
       return null
     }
 
-    // Admin user (not in CSV)
-    const adminUser = {
-      id: 'ADMIN001',
-      email: 'admin@slu.edu',
-      role: 'ADMIN',
-      profile: { firstName: 'Admin', lastName: 'User', department: 'ADMIN' }
-    };
+    const emailLower = userEmail.toLowerCase()
+
+    // Check admin user first
+    if (emailLower === 'admin@slu.edu') {
+      return {
+        id: 'ADMIN001',
+        email: 'admin@slu.edu',
+        role: 'ADMIN',
+        profile: { firstName: 'Admin', lastName: 'User', department: 'ADMIN' }
+      }
+    }
+
+    // Check newly registered users
+    if (registeredUsers.has(emailLower)) {
+      const userData = registeredUsers.get(emailLower)
+      return userData!.user
+    }
 
     // Function to get user from real CSV data
     function getUserFromCSV(email: string) {
       try {
-        const alumni = AlumniDataService.getAll();
-        const alumniProfile = alumni.find(a => a.email === email);
+        const alumni = AlumniDataService.getAll()
+        const alumniProfile = alumni.find(a => a.email.toLowerCase() === email.toLowerCase())
         
         if (alumniProfile) {
           return {
@@ -46,24 +57,24 @@ export async function getCurrentUser(request: NextRequest): Promise<AuthUser | n
               jobTitle: alumniProfile.jobTitle,
               verificationStatus: alumniProfile.verificationStatus
             }
-          };
+          }
         }
-        return null;
+        return null
       } catch (error) {
-        console.error('Error loading user from CSV:', error);
-        return null;
+        console.error('Error loading user from CSV:', error)
+        return null
       }
     }
 
-    const user = userEmail === adminUser.email ? adminUser : getUserFromCSV(userEmail);
+    const user = getUserFromCSV(emailLower)
     
     if (!user) {
-      // Default to alumni role for unknown users
+      // Default to alumni role for unknown users (new registrations)
       return {
-        id: '999',
+        id: 'USER_' + Date.now(),
         email: userEmail,
         role: 'ALUMNI',
-        profile: { firstName: 'Unknown', lastName: 'User' }
+        profile: { firstName: 'User', lastName: '', department: 'STEM' }
       }
     }
 

@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { AlumniDataService } from "@/lib/data-service";
-
-// In-memory messages for the current session (in production, use a database).
-// Starts empty so only real messages sent while the app is running are shown.
-let messages: any[] = [];
+import { messagesStore } from "@/lib/messages-store";
+import { registeredUsers } from "@/lib/registered-users";
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,9 +11,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const userEmailLower = user.email.toLowerCase()
+
     // Return messages for the current user
-    const userMessages = messages.filter(msg => 
-      msg.senderEmail === user.email || msg.receiverEmail === user.email
+    const userMessages = messagesStore.filter(msg => 
+      msg.senderEmail.toLowerCase() === userEmailLower || 
+      msg.receiverEmail.toLowerCase() === userEmailLower
     );
     
     // Sort by timestamp (newest first)
@@ -42,28 +43,40 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // Get alumni data to find receiver info
-    const alumni = AlumniDataService.getAll();
-    const receiver = alumni.find(a => a.email === receiverEmail);
-    const sender = alumni.find(a => a.email === user.email);
+    const receiverEmailLower = receiverEmail.toLowerCase()
+
+    // Get receiver's name from multiple sources
+    let receiverName = "Unknown User"
+    let senderName = `${user.profile?.firstName || 'User'} ${user.profile?.lastName || ''}`.trim()
     
-    if (!receiver) {
-      return NextResponse.json({ error: "Recipient not found" }, { status: 404 });
+    // Check registered users first
+    if (registeredUsers.has(receiverEmailLower)) {
+      const userData = registeredUsers.get(receiverEmailLower)
+      receiverName = `${userData!.user.profile.firstName} ${userData!.user.profile.lastName}`
+    } else if (receiverEmailLower === 'admin@slu.edu') {
+      receiverName = "Admin User"
+    } else {
+      // Check CSV data
+      const alumni = AlumniDataService.getAll()
+      const receiver = alumni.find(a => a.email.toLowerCase() === receiverEmailLower)
+      if (receiver) {
+        receiverName = `${receiver.firstName} ${receiver.lastName}`
+      }
     }
 
     const newMessage = {
-      id: (messages.length + 1).toString(),
+      id: Date.now().toString(),
       senderEmail: user.email,
-      senderName: sender ? `${sender.firstName} ${sender.lastName}` : user.email,
+      senderName: senderName || user.email,
       receiverEmail,
-      receiverName: `${receiver.firstName} ${receiver.lastName}`,
+      receiverName,
       subject: subject || "New Message",
       content,
       timestamp: new Date(),
       read: false
     };
 
-    messages.push(newMessage);
+    messagesStore.push(newMessage);
 
     // Create notification for the recipient
     try {
@@ -107,8 +120,10 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json();
     const { messageId, read } = body;
 
-    const message = messages.find(m => 
-      m.id === messageId && m.receiverEmail === user.email
+    const userEmailLower = user.email.toLowerCase()
+
+    const message = messagesStore.find(m => 
+      m.id === messageId && m.receiverEmail.toLowerCase() === userEmailLower
     );
 
     if (!message) {

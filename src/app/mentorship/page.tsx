@@ -569,9 +569,11 @@ export default function MentorshipPage() {
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="flex flex-wrap gap-2 mb-6">
               <TabsTrigger value="find-mentors">Find Mentors</TabsTrigger>
-              <TabsTrigger value="my-mentorships">My Mentorships</TabsTrigger>
               {!isAdmin && (
-                <TabsTrigger value="become-mentor">Become a Mentor</TabsTrigger>
+                <>
+                  <TabsTrigger value="my-mentorships">My Mentorships</TabsTrigger>
+                  <TabsTrigger value="become-mentor">Become a Mentor</TabsTrigger>
+                </>
               )}
               {isAdmin && (
                 <>
@@ -676,7 +678,8 @@ export default function MentorshipPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="my-mentorships" className="space-y-6">
+            {!isAdmin && (
+              <TabsContent value="my-mentorships" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {mentorshipRequests.map((request) => (
                   <Card key={request.id} className="hover:shadow-md transition-shadow">
@@ -772,6 +775,7 @@ export default function MentorshipPage() {
                 )}
               </div>
             </TabsContent>
+            )}
 
             {!isAdmin && (
               <TabsContent value="become-mentor" className="space-y-6 max-w-2xl">

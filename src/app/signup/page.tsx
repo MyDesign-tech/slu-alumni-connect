@@ -13,6 +13,8 @@ import { SluLogo } from "@/components/slu-logo";
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -27,13 +29,40 @@ export default function SignupPage() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setError(""); // Clear error on input change
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+    setIsLoading(true);
     
+    // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      setError('Passwords do not match');
+      setIsLoading(false);
+      return;
+    }
+
+    // Validate password length
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      setIsLoading(false);
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      setIsLoading(false);
+      return;
+    }
+
+    // Validate required fields
+    if (!formData.firstName.trim() || !formData.lastName.trim()) {
+      setError('First name and last name are required');
+      setIsLoading(false);
       return;
     }
 
@@ -44,12 +73,12 @@ export default function SignupPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: formData.email,
+          email: formData.email.trim(),
           password: formData.password,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          graduationYear: formData.graduationYear,
-          program: formData.program,
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          graduationYear: formData.graduationYear || new Date().getFullYear().toString(),
+          program: formData.program || 'Computer Science',
           department: formData.program.includes('Computer Science') || formData.program.includes('Engineering') ? 'STEM' : 
                      formData.program.includes('Business') ? 'BUSINESS' :
                      formData.program.includes('Medicine') || formData.program.includes('Nursing') ? 'HEALTHCARE' :
@@ -60,14 +89,16 @@ export default function SignupPage() {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Registration successful! Please log in.');
+        alert('Registration successful! Redirecting to login page...');
         router.push('/login');
       } else {
-        alert(data.error || 'Registration failed');
+        setError(data.error || 'Registration failed. Please try again.');
       }
     } catch (error) {
       console.error('Registration error:', error);
-      alert('An error occurred during registration');
+      setError('An error occurred during registration. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -252,8 +283,14 @@ export default function SignupPage() {
               </label>
             </div>
 
-            <Button type="submit" className="w-full" size="lg">
-              Create Account
+            {error && (
+              <div className="p-3 rounded-md bg-red-50 border border-red-200">
+                <p className="text-sm text-red-600 font-medium">{error}</p>
+              </div>
+            )}
+
+            <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+              {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
           </form>
 
