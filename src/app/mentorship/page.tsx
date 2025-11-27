@@ -199,6 +199,34 @@ export default function MentorshipPage() {
 
   const [mentorshipRequests, setMentorshipRequests] = useState<MentorshipRequest[]>(initialMentorshipRequests);
 
+  // Analytics data state
+  const [analyticsData, setAnalyticsData] = useState<any>(null);
+  const [analyticsLoading, setAnalyticsLoading] = useState(false);
+  const [seasonalityData, setSeasonalityData] = useState<any[]>([]);
+
+  // Fetch analytics data
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      setAnalyticsLoading(true);
+      try {
+        const response = await fetch('/api/mentorship/analytics');
+        if (response.ok) {
+          const data = await response.json();
+          setAnalyticsData(data);
+          setSeasonalityData(data.seasonalityData || []);
+        }
+      } catch (error) {
+        console.error('Error fetching mentorship analytics:', error);
+      } finally {
+        setAnalyticsLoading(false);
+      }
+    };
+
+    if (activeTab === 'analytics') {
+      fetchAnalytics();
+    }
+  }, [activeTab]);
+
   // Analytics Data Preparation
   const expertiseDistribution = useMemo(() => {
     const areas: Record<string, number> = {};
@@ -1090,21 +1118,29 @@ export default function MentorshipPage() {
                 </TabsContent>
 
                 <TabsContent value="analytics" className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                     <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
-                      <div className="text-sm text-muted-foreground font-medium">Total Mentors</div>
-                      <div className="text-3xl font-bold text-primary mt-1">{mentors.length}</div>
-                    </div>
-                    <div className="p-4 bg-secondary/5 rounded-lg border border-secondary/10">
-                      <div className="text-sm text-muted-foreground font-medium">Active Mentorships</div>
-                      <div className="text-3xl font-bold text-secondary mt-1">
-                        {mentorshipRequests.filter(r => r.status === 'ACTIVE').length}
+                      <div className="text-sm text-muted-foreground font-medium">Total Mentorships</div>
+                      <div className="text-3xl font-bold text-primary mt-1">
+                        {analyticsData?.stats?.total || mentorshipRequests.length}
                       </div>
                     </div>
-                    <div className="p-4 bg-accent/5 rounded-lg border border-accent/10">
+                    <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <div className="text-sm text-muted-foreground font-medium">Active Mentorships</div>
+                      <div className="text-3xl font-bold text-blue-600 mt-1">
+                        {analyticsData?.stats?.active || mentorshipRequests.filter(r => r.status === 'ACTIVE').length}
+                      </div>
+                    </div>
+                    <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                      <div className="text-sm text-muted-foreground font-medium">Completed</div>
+                      <div className="text-3xl font-bold text-green-600 mt-1">
+                        {analyticsData?.stats?.completed || mentorshipRequests.filter(r => r.status === 'COMPLETED').length}
+                      </div>
+                    </div>
+                    <div className="p-4 bg-amber-50 rounded-lg border border-amber-200">
                       <div className="text-sm text-muted-foreground font-medium">Avg Rating</div>
-                      <div className="text-3xl font-bold text-accent mt-1">
-                        {(mentors.reduce((acc, m) => acc + m.rating, 0) / mentors.length).toFixed(1)}
+                      <div className="text-3xl font-bold text-amber-600 mt-1">
+                        {analyticsData?.stats?.avgRating ? analyticsData.stats.avgRating.toFixed(1) : (mentors.reduce((acc, m) => acc + m.rating, 0) / mentors.length).toFixed(1)}
                       </div>
                     </div>
                   </div>
@@ -1200,6 +1236,73 @@ export default function MentorshipPage() {
                             <Bar dataKey="value" fill="#f59e0b" radius={[0, 4, 4, 0]} name="Mentors" />
                           </BarChart>
                         </ResponsiveContainer>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="col-span-1 md:col-span-2">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Calendar className="h-5 w-5" />
+                          Mentorship Seasonality
+                        </CardTitle>
+                        <CardDescription>
+                          Monthly mentorship activity trends showing active, completed, and requested mentorships.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="h-[350px]">
+                        {analyticsLoading ? (
+                          <div className="flex items-center justify-center h-full">
+                            <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" />
+                          </div>
+                        ) : seasonalityData.length > 0 ? (
+                          <ResponsiveContainer width="100%" height="100%">
+                            <LineChart data={seasonalityData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis dataKey="month" />
+                              <YAxis />
+                              <Tooltip
+                                contentStyle={{
+                                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                                  borderRadius: '8px',
+                                  border: 'none',
+                                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                                }}
+                              />
+                              <Legend />
+                              <Line
+                                type="monotone"
+                                dataKey="active"
+                                stroke="#2563eb"
+                                strokeWidth={2}
+                                name="Active Mentorships"
+                                dot={{ fill: '#2563eb', r: 4 }}
+                                activeDot={{ r: 6 }}
+                              />
+                              <Line
+                                type="monotone"
+                                dataKey="completed"
+                                stroke="#16a34a"
+                                strokeWidth={2}
+                                name="Completed"
+                                dot={{ fill: '#16a34a', r: 4 }}
+                                activeDot={{ r: 6 }}
+                              />
+                              <Line
+                                type="monotone"
+                                dataKey="requested"
+                                stroke="#f59e0b"
+                                strokeWidth={2}
+                                name="Requested"
+                                dot={{ fill: '#f59e0b', r: 4 }}
+                                activeDot={{ r: 6 }}
+                              />
+                            </LineChart>
+                          </ResponsiveContainer>
+                        ) : (
+                          <div className="flex items-center justify-center h-full text-muted-foreground">
+                            <p>No seasonality data available</p>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </div>
