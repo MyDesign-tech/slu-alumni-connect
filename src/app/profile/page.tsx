@@ -98,6 +98,7 @@ export default function ProfilePage() {
           email: profileData.email,
           profile: {
             ...user.profile,
+            id: user.profile?.id || `PROF${Date.now()}`,
             firstName: profileData.firstName,
             lastName: profileData.lastName,
             phone: profileData.phone,
@@ -110,6 +111,7 @@ export default function ProfilePage() {
             state: profileData.state,
             country: profileData.country,
             bio: profileData.bio,
+            profileCompleteness: user.profile?.profileCompleteness || 0,
           }
         };
 
