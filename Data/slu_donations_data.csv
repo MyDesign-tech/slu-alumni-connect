@@ -1,0 +1,2101 @@
+DonationID,AlumniID,DonationAmount,DonationType,DonationMethod,DonationDate,Purpose,IsAnonymous,TaxDeductible,RecurringFrequency,Status
+DON000001,ALM01995,157,In-Kind,Credit Card,2025-03-10,Infrastructure,False,True,Monthly,Completed
+DON000002,ALM00461,387,One-Time Gift,Check,2025-02-10,Endowment,False,True,,Completed
+DON000003,ALM00071,405,One-Time Gift,Bank Transfer,2024-09-12,Research,False,True,,Completed
+DON000004,ALM00789,190,In-Kind,Stock,2024-02-25,Infrastructure,False,True,,Completed
+DON000005,ALM02982,485,Pledge,Stock,2023-12-31,Scholarship,True,True,,Completed
+DON000006,ALM01837,499,In-Kind,Stock,2024-11-03,Infrastructure,False,True,Quarterly,Completed
+DON000007,ALM02170,25000,Recurring Monthly,Credit Card,2024-04-04,Scholarship,False,True,,Completed
+DON000008,ALM02486,489,Major Gift,Bank Transfer,2025-07-28,Infrastructure,False,True,,Completed
+DON000009,ALM01012,129,Recurring Monthly,Wire Transfer,2025-10-20,General Fund,False,True,,Completed
+DON000010,ALM01387,303,In-Kind,Bank Transfer,2024-12-11,General Fund,False,False,,Completed
+DON000011,ALM01866,118,Recurring Monthly,Check,2024-10-06,Scholarship,False,True,,Completed
+DON000012,ALM02652,485,In-Kind,Wire Transfer,2024-06-28,Infrastructure,False,True,,Completed
+DON000013,ALM01547,329,Pledge,Wire Transfer,2025-06-15,Endowment,False,True,,Completed
+DON000014,ALM02578,250000,Recurring Monthly,Wire Transfer,2024-10-13,Infrastructure,False,True,,Pending
+DON000015,ALM01679,297,Major Gift,Check,2024-07-20,General Fund,False,True,,Completed
+DON000016,ALM01129,250000,Pledge,Credit Card,2025-04-20,Infrastructure,False,True,,Completed
+DON000017,ALM00659,250000,Pledge,Wire Transfer,2025-05-17,Infrastructure,False,True,,Completed
+DON000018,ALM03243,82,Pledge,Stock,2025-01-23,Endowment,False,True,Monthly,Completed
+DON000019,ALM00059,50000,Recurring Monthly,Stock,2025-03-24,Infrastructure,False,True,,Completed
+DON000020,ALM03245,399,Major Gift,Wire Transfer,2025-03-06,Research,True,True,,Completed
+DON000021,ALM00794,423,Recurring Monthly,Credit Card,2025-06-11,Endowment,False,True,,Completed
+DON000022,ALM01546,278,In-Kind,Wire Transfer,2024-02-19,General Fund,False,True,,Completed
+DON000023,ALM00206,52,Recurring Monthly,Check,2024-08-18,Scholarship,False,True,,Completed
+DON000024,ALM03048,348,Pledge,Wire Transfer,2023-11-11,Endowment,True,True,,Completed
+DON000025,ALM02335,283,Pledge,Check,2023-12-21,General Fund,False,True,Quarterly,Completed
+DON000026,ALM02300,100000,Recurring Monthly,Credit Card,2024-03-22,Scholarship,False,True,,Completed
+DON000027,ALM02810,50000,In-Kind,Credit Card,2025-09-14,General Fund,False,True,,Completed
+DON000028,ALM01139,456,Major Gift,Bank Transfer,2023-12-07,Infrastructure,False,True,,Completed
+DON000029,ALM02227,10000,Recurring Monthly,Credit Card,2025-06-21,Scholarship,False,True,,Completed
+DON000030,ALM01986,90,In-Kind,Stock,2025-06-23,Endowment,False,True,,Completed
+DON000031,ALM03093,305,Recurring Monthly,Wire Transfer,2025-08-19,Endowment,False,True,,Completed
+DON000032,ALM00116,74,One-Time Gift,Check,2024-07-30,Research,False,True,Quarterly,Pending
+DON000033,ALM00532,50000,Pledge,Credit Card,2025-10-14,Scholarship,False,True,Quarterly,Completed
+DON000034,ALM02916,250000,Major Gift,Stock,2024-04-10,General Fund,False,True,,Declined
+DON000035,ALM01183,25000,Recurring Monthly,Credit Card,2024-12-08,Endowment,False,True,Monthly,Completed
+DON000036,ALM02501,492,Major Gift,Check,2025-03-18,Research,False,False,Annual,Completed
+DON000037,ALM02879,100000,Pledge,Stock,2024-01-20,General Fund,False,True,,Completed
+DON000038,ALM00842,307,Major Gift,Credit Card,2025-10-06,Research,False,True,,Completed
+DON000039,ALM02010,366,Recurring Monthly,Bank Transfer,2024-03-19,Endowment,False,True,Quarterly,Completed
+DON000040,ALM02290,327,One-Time Gift,Check,2024-08-05,General Fund,False,True,,Completed
+DON000041,ALM00652,290,Major Gift,Check,2024-03-07,Scholarship,False,True,,Completed
+DON000042,ALM02789,192,In-Kind,Credit Card,2025-05-09,Endowment,False,True,,Completed
+DON000043,ALM02283,182,Recurring Monthly,Check,2024-06-12,Infrastructure,False,True,,Completed
+DON000044,ALM00308,50000,Recurring Monthly,Bank Transfer,2024-01-07,Scholarship,False,True,,Completed
+DON000045,ALM02673,25000,One-Time Gift,Stock,2025-01-24,Research,False,True,,Completed
+DON000046,ALM03056,109,Major Gift,Stock,2024-10-26,Scholarship,False,True,,Completed
+DON000047,ALM03202,25000,In-Kind,Credit Card,2024-08-26,Infrastructure,False,True,,Completed
+DON000048,ALM01038,250000,One-Time Gift,Stock,2024-03-27,Endowment,True,True,,Completed
+DON000049,ALM02683,25000,One-Time Gift,Wire Transfer,2024-08-30,Infrastructure,False,True,,Declined
+DON000050,ALM00217,51,In-Kind,Credit Card,2025-10-03,Infrastructure,False,True,,Completed
+DON000051,ALM00962,358,Pledge,Credit Card,2024-06-08,General Fund,False,True,,Completed
+DON000052,ALM01758,406,Major Gift,Credit Card,2024-07-04,General Fund,False,True,,Declined
+DON000053,ALM01232,389,Recurring Monthly,Wire Transfer,2024-12-10,General Fund,False,True,Monthly,Completed
+DON000054,ALM00567,250000,In-Kind,Bank Transfer,2024-12-14,General Fund,False,True,,Completed
+DON000055,ALM02363,242,Pledge,Credit Card,2024-03-26,Scholarship,False,True,,Completed
+DON000056,ALM00411,250000,One-Time Gift,Bank Transfer,2025-06-25,Endowment,False,True,,Completed
+DON000057,ALM02224,106,Recurring Monthly,Credit Card,2024-09-15,General Fund,False,True,,Declined
+DON000058,ALM02998,192,Pledge,Wire Transfer,2024-04-03,Endowment,False,True,,Completed
+DON000059,ALM02622,250000,Major Gift,Wire Transfer,2025-05-08,Infrastructure,False,True,,Declined
+DON000060,ALM02610,200,Recurring Monthly,Check,2024-05-17,Research,False,False,,Pending
+DON000061,ALM00941,174,Major Gift,Check,2025-10-20,General Fund,False,True,,Pending
+DON000062,ALM00257,453,Major Gift,Check,2024-04-12,Research,False,True,,Completed
+DON000063,ALM01373,258,Major Gift,Credit Card,2024-04-28,Endowment,False,True,,Completed
+DON000064,ALM01065,85,Major Gift,Stock,2025-04-20,Endowment,False,True,,Completed
+DON000065,ALM01941,100000,One-Time Gift,Bank Transfer,2024-02-27,General Fund,False,True,,Completed
+DON000066,ALM01250,255,One-Time Gift,Bank Transfer,2024-02-26,General Fund,False,True,,Completed
+DON000067,ALM01009,117,In-Kind,Bank Transfer,2024-02-29,Endowment,False,True,,Completed
+DON000068,ALM00613,25000,One-Time Gift,Wire Transfer,2024-06-04,Infrastructure,False,False,,Completed
+DON000069,ALM02477,10000,One-Time Gift,Wire Transfer,2025-05-29,Research,False,True,,Completed
+DON000070,ALM02281,100000,Pledge,Stock,2024-06-16,Endowment,False,True,Monthly,Completed
+DON000071,ALM02661,264,One-Time Gift,Stock,2024-01-16,Scholarship,False,True,,Declined
+DON000072,ALM01147,179,Major Gift,Stock,2025-02-12,Endowment,False,False,,Completed
+DON000073,ALM02140,493,Major Gift,Bank Transfer,2025-10-17,Endowment,False,True,,Completed
+DON000074,ALM02225,168,Major Gift,Stock,2024-01-05,Scholarship,False,True,,Completed
+DON000075,ALM00129,67,One-Time Gift,Wire Transfer,2024-01-17,Endowment,True,True,,Completed
+DON000076,ALM01878,116,Recurring Monthly,Stock,2023-11-21,Research,False,True,,Completed
+DON000077,ALM01979,203,Pledge,Stock,2025-03-12,Endowment,False,True,Quarterly,Completed
+DON000078,ALM01655,77,In-Kind,Check,2024-01-08,Infrastructure,False,True,,Completed
+DON000079,ALM00029,275,In-Kind,Check,2024-01-27,Endowment,False,True,,Completed
+DON000080,ALM00100,25000,In-Kind,Wire Transfer,2024-09-14,Scholarship,False,True,Monthly,Completed
+DON000081,ALM01998,100000,In-Kind,Bank Transfer,2025-05-25,Scholarship,True,True,,Completed
+DON000082,ALM02095,261,Pledge,Credit Card,2024-06-03,Research,True,True,Quarterly,Completed
+DON000083,ALM02862,132,One-Time Gift,Check,2025-08-28,Infrastructure,False,True,Monthly,Completed
+DON000084,ALM02578,283,Major Gift,Credit Card,2024-11-04,Infrastructure,False,True,Monthly,Completed
+DON000085,ALM03425,50000,In-Kind,Check,2024-09-07,General Fund,False,True,,Completed
+DON000086,ALM01419,491,Recurring Monthly,Stock,2025-04-05,Infrastructure,False,True,,Completed
+DON000087,ALM00747,462,Recurring Monthly,Credit Card,2025-10-29,Scholarship,True,True,,Completed
+DON000088,ALM00769,370,Recurring Monthly,Check,2025-04-05,Endowment,False,True,,Completed
+DON000089,ALM02248,328,One-Time Gift,Stock,2024-04-22,Endowment,True,False,Quarterly,Pending
+DON000090,ALM00709,301,Major Gift,Check,2023-12-21,Scholarship,False,True,,Completed
+DON000091,ALM03387,145,Recurring Monthly,Bank Transfer,2024-05-04,Research,True,True,,Completed
+DON000092,ALM01971,299,In-Kind,Wire Transfer,2024-04-15,Research,False,True,,Pending
+DON000093,ALM03245,458,Pledge,Wire Transfer,2025-07-27,Scholarship,False,True,,Completed
+DON000094,ALM00665,252,Major Gift,Credit Card,2024-11-16,General Fund,False,True,,Completed
+DON000095,ALM00659,213,Recurring Monthly,Stock,2023-12-22,Infrastructure,False,True,Monthly,Completed
+DON000096,ALM01173,202,Major Gift,Stock,2024-01-25,Infrastructure,False,True,,Declined
+DON000097,ALM01551,491,Recurring Monthly,Credit Card,2024-12-01,General Fund,False,True,Annual,Completed
+DON000098,ALM00149,312,Recurring Monthly,Credit Card,2024-02-23,Endowment,False,True,,Completed
+DON000099,ALM03211,168,One-Time Gift,Check,2024-01-14,General Fund,False,True,Annual,Completed
+DON000100,ALM01027,216,In-Kind,Stock,2025-01-02,Scholarship,False,True,,Completed
+DON000101,ALM00366,50000,Recurring Monthly,Check,2025-06-02,Infrastructure,False,False,,Completed
+DON000102,ALM02501,64,In-Kind,Wire Transfer,2024-11-19,Infrastructure,False,False,,Completed
+DON000103,ALM01263,487,Major Gift,Stock,2024-10-12,General Fund,True,True,,Completed
+DON000104,ALM02523,317,One-Time Gift,Credit Card,2025-10-22,Endowment,False,True,,Completed
+DON000105,ALM01865,121,Recurring Monthly,Wire Transfer,2024-08-04,Scholarship,True,True,,Completed
+DON000106,ALM01375,137,Major Gift,Bank Transfer,2025-01-14,Infrastructure,True,True,Monthly,Completed
+DON000107,ALM02688,250000,Pledge,Check,2024-06-02,General Fund,False,True,Monthly,Completed
+DON000108,ALM01518,100000,Pledge,Wire Transfer,2024-08-03,Infrastructure,False,True,,Completed
+DON000109,ALM00267,71,Pledge,Wire Transfer,2024-03-04,Research,False,True,,Completed
+DON000110,ALM01229,50000,Recurring Monthly,Wire Transfer,2025-05-08,Infrastructure,True,True,Monthly,Completed
+DON000111,ALM02677,250000,Recurring Monthly,Wire Transfer,2023-11-18,Research,False,True,,Completed
+DON000112,ALM01825,351,In-Kind,Wire Transfer,2024-06-24,Endowment,False,True,Quarterly,Completed
+DON000113,ALM03078,250000,Pledge,Bank Transfer,2024-10-20,Infrastructure,False,True,Quarterly,Completed
+DON000114,ALM00171,208,Pledge,Credit Card,2025-01-02,General Fund,False,True,,Completed
+DON000115,ALM03453,306,Major Gift,Wire Transfer,2025-03-30,General Fund,False,True,,Completed
+DON000116,ALM01802,250000,Major Gift,Bank Transfer,2025-01-14,Infrastructure,False,True,,Completed
+DON000117,ALM02358,100000,Major Gift,Credit Card,2025-07-18,Scholarship,False,False,,Completed
+DON000118,ALM01167,50000,One-Time Gift,Wire Transfer,2024-02-09,General Fund,False,True,Annual,Completed
+DON000119,ALM00728,174,In-Kind,Wire Transfer,2024-02-17,General Fund,True,False,,Completed
+DON000120,ALM02081,162,Recurring Monthly,Wire Transfer,2025-02-08,General Fund,True,True,Monthly,Completed
+DON000121,ALM01469,25000,Pledge,Stock,2024-02-24,Infrastructure,False,True,Monthly,Completed
+DON000122,ALM02053,250000,Recurring Monthly,Bank Transfer,2025-08-01,Scholarship,False,True,,Completed
+DON000123,ALM01375,285,Pledge,Wire Transfer,2025-09-14,Endowment,False,True,,Completed
+DON000124,ALM02946,425,One-Time Gift,Wire Transfer,2024-03-27,Research,False,True,,Completed
+DON000125,ALM02160,25000,Major Gift,Bank Transfer,2025-09-09,Research,False,True,,Completed
+DON000126,ALM02945,131,Recurring Monthly,Bank Transfer,2024-12-24,Scholarship,False,True,,Completed
+DON000127,ALM03256,25000,Major Gift,Stock,2024-04-18,Endowment,False,True,Monthly,Completed
+DON000128,ALM02136,100000,Major Gift,Stock,2025-05-19,Infrastructure,False,True,Monthly,Completed
+DON000129,ALM02540,200,Major Gift,Bank Transfer,2024-06-10,Scholarship,False,True,Monthly,Completed
+DON000130,ALM01439,276,In-Kind,Bank Transfer,2025-10-29,Infrastructure,False,True,,Completed
+DON000131,ALM02971,100000,One-Time Gift,Credit Card,2025-07-09,Infrastructure,False,True,,Pending
+DON000132,ALM02838,119,Pledge,Wire Transfer,2023-12-11,Scholarship,False,True,,Completed
+DON000133,ALM02129,327,Major Gift,Bank Transfer,2024-05-07,Research,False,True,Annual,Completed
+DON000134,ALM01514,50000,Recurring Monthly,Stock,2025-11-01,Endowment,False,True,,Completed
+DON000135,ALM01331,123,In-Kind,Check,2025-02-05,General Fund,False,True,,Completed
+DON000136,ALM01612,428,One-Time Gift,Credit Card,2025-04-03,Scholarship,False,True,Annual,Completed
+DON000137,ALM01517,64,Pledge,Wire Transfer,2025-02-28,Research,False,True,Quarterly,Completed
+DON000138,ALM01007,25000,In-Kind,Bank Transfer,2025-02-15,General Fund,False,True,Monthly,Completed
+DON000139,ALM00608,297,Major Gift,Credit Card,2025-01-13,Endowment,False,True,,Completed
+DON000140,ALM01806,165,Major Gift,Credit Card,2025-05-04,Endowment,True,True,,Completed
+DON000141,ALM00213,100000,In-Kind,Check,2023-11-09,Infrastructure,False,True,,Completed
+DON000142,ALM00444,10000,Recurring Monthly,Credit Card,2023-11-14,Endowment,False,True,,Completed
+DON000143,ALM01569,390,In-Kind,Bank Transfer,2024-05-23,Infrastructure,False,True,,Completed
+DON000144,ALM03403,471,Pledge,Stock,2025-10-31,Endowment,False,True,,Completed
+DON000145,ALM00788,376,One-Time Gift,Credit Card,2024-08-03,Infrastructure,False,True,,Completed
+DON000146,ALM02618,466,In-Kind,Check,2024-01-13,Infrastructure,False,True,,Completed
+DON000147,ALM01188,50000,One-Time Gift,Credit Card,2024-06-19,Research,False,True,,Completed
+DON000148,ALM02781,225,In-Kind,Check,2024-02-23,General Fund,False,True,,Completed
+DON000149,ALM01794,25000,In-Kind,Bank Transfer,2024-06-19,Research,False,True,,Completed
+DON000150,ALM02840,382,Recurring Monthly,Wire Transfer,2025-06-30,Scholarship,False,True,,Completed
+DON000151,ALM01138,461,Recurring Monthly,Stock,2024-09-09,Endowment,False,False,,Completed
+DON000152,ALM00712,100000,Recurring Monthly,Credit Card,2024-08-31,Scholarship,False,True,Quarterly,Completed
+DON000153,ALM03206,415,Major Gift,Check,2025-07-23,Infrastructure,False,True,,Completed
+DON000154,ALM02776,10000,In-Kind,Wire Transfer,2025-02-14,General Fund,False,True,Annual,Completed
+DON000155,ALM01044,159,Major Gift,Stock,2024-01-16,General Fund,False,True,,Completed
+DON000156,ALM02351,232,In-Kind,Check,2024-02-25,Infrastructure,False,True,,Completed
+DON000157,ALM03241,100000,One-Time Gift,Check,2025-06-26,Research,False,True,,Completed
+DON000158,ALM03430,114,Pledge,Stock,2025-09-06,Endowment,False,True,,Completed
+DON000159,ALM01903,25000,Recurring Monthly,Check,2025-07-08,General Fund,False,True,,Completed
+DON000160,ALM02048,25000,Recurring Monthly,Bank Transfer,2025-03-05,Infrastructure,False,True,,Completed
+DON000161,ALM02168,226,Major Gift,Check,2025-01-24,Endowment,False,True,,Completed
+DON000162,ALM02661,100000,Pledge,Bank Transfer,2024-08-21,Research,False,True,,Completed
+DON000163,ALM02415,10000,In-Kind,Wire Transfer,2023-11-22,Research,False,True,,Completed
+DON000164,ALM03009,133,Major Gift,Check,2024-06-08,Endowment,False,True,,Completed
+DON000165,ALM01469,10000,Major Gift,Bank Transfer,2025-09-08,Scholarship,False,True,,Completed
+DON000166,ALM01715,25000,One-Time Gift,Wire Transfer,2024-10-27,Infrastructure,False,False,,Completed
+DON000167,ALM01340,222,In-Kind,Credit Card,2023-11-20,Infrastructure,False,True,,Completed
+DON000168,ALM03123,260,Pledge,Credit Card,2024-09-14,General Fund,False,True,,Completed
+DON000169,ALM01219,421,One-Time Gift,Check,2025-06-22,General Fund,False,True,Monthly,Completed
+DON000170,ALM01646,25000,Pledge,Credit Card,2024-03-20,General Fund,False,True,,Completed
+DON000171,ALM01323,100000,Recurring Monthly,Stock,2024-02-26,Infrastructure,False,True,,Completed
+DON000172,ALM03156,100000,Major Gift,Check,2024-01-15,Scholarship,False,True,,Completed
+DON000173,ALM01711,200,One-Time Gift,Credit Card,2024-01-26,General Fund,False,True,,Completed
+DON000174,ALM01114,262,Recurring Monthly,Wire Transfer,2025-06-29,Research,False,True,Quarterly,Completed
+DON000175,ALM01693,335,One-Time Gift,Bank Transfer,2024-03-03,Scholarship,False,True,,Completed
+DON000176,ALM00829,85,One-Time Gift,Wire Transfer,2024-05-16,Infrastructure,False,True,Quarterly,Completed
+DON000177,ALM00834,348,Major Gift,Wire Transfer,2024-10-27,Research,False,True,Monthly,Completed
+DON000178,ALM01811,451,Pledge,Bank Transfer,2025-07-12,Research,False,True,Annual,Completed
+DON000179,ALM02237,100000,Recurring Monthly,Credit Card,2024-04-05,Scholarship,False,True,,Completed
+DON000180,ALM01101,100000,Major Gift,Check,2024-06-17,Research,False,True,Monthly,Completed
+DON000181,ALM02141,250,One-Time Gift,Credit Card,2025-10-16,Endowment,False,True,,Completed
+DON000182,ALM01963,50000,In-Kind,Credit Card,2024-01-04,Research,False,True,,Completed
+DON000183,ALM03011,55,One-Time Gift,Credit Card,2023-11-04,Infrastructure,False,True,,Completed
+DON000184,ALM03163,192,Pledge,Credit Card,2023-12-01,Scholarship,False,True,,Completed
+DON000185,ALM01836,185,One-Time Gift,Stock,2024-03-23,Endowment,False,True,Monthly,Pending
+DON000186,ALM01422,100000,Recurring Monthly,Credit Card,2025-07-25,Research,False,True,Monthly,Completed
+DON000187,ALM00844,166,Pledge,Stock,2023-12-28,Endowment,False,True,,Completed
+DON000188,ALM00847,414,In-Kind,Check,2024-12-24,General Fund,False,True,,Completed
+DON000189,ALM00473,484,One-Time Gift,Check,2024-02-04,Research,True,True,,Completed
+DON000190,ALM00784,403,Pledge,Check,2024-03-12,General Fund,False,True,,Completed
+DON000191,ALM00862,328,Recurring Monthly,Check,2025-04-08,Research,True,True,,Completed
+DON000192,ALM00371,230,Pledge,Wire Transfer,2025-02-27,Research,True,True,,Completed
+DON000193,ALM00188,403,Recurring Monthly,Bank Transfer,2024-10-13,Infrastructure,False,True,Annual,Completed
+DON000194,ALM03450,55,Recurring Monthly,Credit Card,2025-09-21,Scholarship,False,True,,Completed
+DON000195,ALM02892,266,Major Gift,Wire Transfer,2025-07-04,Infrastructure,False,True,,Completed
+DON000196,ALM02003,25000,Major Gift,Check,2024-07-10,General Fund,False,True,Monthly,Completed
+DON000197,ALM02919,184,Pledge,Wire Transfer,2023-11-22,Endowment,False,True,,Completed
+DON000198,ALM01680,250000,In-Kind,Stock,2025-08-21,General Fund,False,True,Annual,Completed
+DON000199,ALM02053,50000,One-Time Gift,Wire Transfer,2024-06-13,Infrastructure,False,True,,Completed
+DON000200,ALM02615,100000,Major Gift,Check,2025-07-04,General Fund,True,True,,Completed
+DON000201,ALM00729,299,Recurring Monthly,Wire Transfer,2024-01-21,Endowment,False,True,,Completed
+DON000202,ALM02836,375,In-Kind,Stock,2025-04-04,Endowment,False,False,,Completed
+DON000203,ALM01614,215,Recurring Monthly,Wire Transfer,2024-10-30,Endowment,False,True,,Completed
+DON000204,ALM01828,93,Recurring Monthly,Check,2025-08-27,General Fund,False,True,,Completed
+DON000205,ALM01786,417,Recurring Monthly,Check,2025-03-02,Infrastructure,False,True,,Completed
+DON000206,ALM01216,490,Major Gift,Bank Transfer,2024-02-03,Research,True,True,,Completed
+DON000207,ALM02198,250000,One-Time Gift,Bank Transfer,2025-05-21,Infrastructure,False,True,,Completed
+DON000208,ALM01310,405,In-Kind,Bank Transfer,2024-06-18,Endowment,False,True,,Completed
+DON000209,ALM01367,419,In-Kind,Credit Card,2025-05-25,Scholarship,True,True,,Completed
+DON000210,ALM01581,100000,Pledge,Bank Transfer,2025-06-15,General Fund,False,True,,Completed
+DON000211,ALM00765,438,In-Kind,Stock,2025-01-29,Research,False,True,,Completed
+DON000212,ALM03354,328,In-Kind,Wire Transfer,2024-07-25,Infrastructure,True,True,Quarterly,Completed
+DON000213,ALM00605,232,Recurring Monthly,Credit Card,2025-04-14,Scholarship,False,True,,Completed
+DON000214,ALM00075,369,In-Kind,Credit Card,2025-08-30,General Fund,False,True,,Completed
+DON000215,ALM03179,330,Major Gift,Credit Card,2025-04-12,Infrastructure,False,True,,Completed
+DON000216,ALM01002,10000,Major Gift,Wire Transfer,2025-08-04,General Fund,False,True,Quarterly,Completed
+DON000217,ALM00037,394,In-Kind,Wire Transfer,2024-08-30,Endowment,True,True,,Completed
+DON000218,ALM01550,109,Recurring Monthly,Check,2024-01-17,Scholarship,False,True,,Completed
+DON000219,ALM00072,161,Major Gift,Wire Transfer,2025-04-26,Scholarship,False,True,,Completed
+DON000220,ALM02727,193,Major Gift,Check,2023-12-30,Research,False,True,,Completed
+DON000221,ALM00643,25000,Major Gift,Check,2024-11-20,General Fund,False,True,Monthly,Completed
+DON000222,ALM02518,284,One-Time Gift,Check,2025-07-02,Infrastructure,False,True,Annual,Completed
+DON000223,ALM00692,375,In-Kind,Wire Transfer,2025-03-16,Infrastructure,False,True,Monthly,Completed
+DON000224,ALM01212,301,Pledge,Wire Transfer,2025-06-08,General Fund,False,True,Monthly,Completed
+DON000225,ALM02324,442,In-Kind,Stock,2024-11-23,Endowment,True,True,,Completed
+DON000226,ALM02548,213,Major Gift,Check,2025-10-20,General Fund,False,True,,Completed
+DON000227,ALM01071,50000,Major Gift,Bank Transfer,2025-04-29,Scholarship,False,True,,Completed
+DON000228,ALM00241,387,Major Gift,Credit Card,2024-09-20,Research,False,True,,Completed
+DON000229,ALM01153,286,One-Time Gift,Wire Transfer,2024-07-22,Infrastructure,False,True,Monthly,Completed
+DON000230,ALM03348,347,Recurring Monthly,Stock,2024-12-18,Infrastructure,False,True,Monthly,Completed
+DON000231,ALM00645,201,Recurring Monthly,Bank Transfer,2025-03-08,Endowment,False,True,,Declined
+DON000232,ALM00632,303,Pledge,Credit Card,2025-03-26,Infrastructure,False,True,,Completed
+DON000233,ALM03053,225,In-Kind,Credit Card,2024-10-17,Endowment,False,True,,Completed
+DON000234,ALM01021,239,Pledge,Bank Transfer,2025-09-06,Infrastructure,False,True,,Completed
+DON000235,ALM01114,10000,One-Time Gift,Credit Card,2024-12-27,Scholarship,True,True,,Completed
+DON000236,ALM00338,50000,Major Gift,Stock,2024-11-11,Endowment,False,True,Monthly,Completed
+DON000237,ALM00952,25000,In-Kind,Wire Transfer,2024-06-08,Infrastructure,False,True,,Completed
+DON000238,ALM00401,248,Major Gift,Stock,2024-02-03,Infrastructure,False,True,,Completed
+DON000239,ALM03258,413,Pledge,Bank Transfer,2025-10-19,Research,False,True,Quarterly,Completed
+DON000240,ALM02736,276,In-Kind,Credit Card,2024-06-11,Research,False,True,,Declined
+DON000241,ALM02924,313,In-Kind,Bank Transfer,2025-07-29,Infrastructure,True,True,,Completed
+DON000242,ALM03105,479,In-Kind,Stock,2025-10-08,Scholarship,False,True,,Pending
+DON000243,ALM00213,88,Recurring Monthly,Stock,2025-07-24,General Fund,False,True,,Completed
+DON000244,ALM02550,369,Major Gift,Check,2025-02-20,Endowment,False,True,,Completed
+DON000245,ALM03004,132,Major Gift,Wire Transfer,2024-03-31,General Fund,True,False,,Completed
+DON000246,ALM02702,117,In-Kind,Check,2024-05-08,Research,True,True,,Pending
+DON000247,ALM03466,50000,One-Time Gift,Bank Transfer,2024-02-21,Infrastructure,False,True,,Completed
+DON000248,ALM02886,81,Pledge,Check,2025-01-14,Research,False,True,Monthly,Pending
+DON000249,ALM03019,250000,One-Time Gift,Check,2024-02-15,Research,False,True,,Completed
+DON000250,ALM01856,306,Recurring Monthly,Stock,2025-02-27,Scholarship,False,True,,Completed
+DON000251,ALM02999,438,Major Gift,Bank Transfer,2024-12-15,General Fund,False,True,,Completed
+DON000252,ALM02023,382,Pledge,Credit Card,2024-04-26,Scholarship,False,True,,Completed
+DON000253,ALM02272,497,In-Kind,Bank Transfer,2024-05-31,Infrastructure,True,False,,Completed
+DON000254,ALM02891,372,Pledge,Wire Transfer,2024-12-18,Scholarship,False,True,,Completed
+DON000255,ALM01580,10000,In-Kind,Bank Transfer,2024-04-05,Research,False,False,,Completed
+DON000256,ALM03462,241,One-Time Gift,Credit Card,2024-12-02,Scholarship,False,True,,Completed
+DON000257,ALM02296,413,Recurring Monthly,Wire Transfer,2024-05-16,Endowment,False,True,,Completed
+DON000258,ALM01806,126,Major Gift,Check,2025-09-01,Research,False,False,,Pending
+DON000259,ALM01639,154,One-Time Gift,Credit Card,2024-12-26,Endowment,False,False,,Completed
+DON000260,ALM01215,463,One-Time Gift,Wire Transfer,2025-05-18,Infrastructure,False,True,Quarterly,Completed
+DON000261,ALM02633,292,Recurring Monthly,Check,2024-09-26,Research,True,True,Monthly,Completed
+DON000262,ALM00390,441,In-Kind,Bank Transfer,2025-05-21,Scholarship,False,True,Quarterly,Completed
+DON000263,ALM03311,184,Major Gift,Stock,2024-04-11,Infrastructure,False,True,,Completed
+DON000264,ALM00337,63,One-Time Gift,Stock,2024-03-02,Research,False,True,Quarterly,Completed
+DON000265,ALM00556,446,Recurring Monthly,Credit Card,2023-12-31,Endowment,False,True,,Completed
+DON000266,ALM01416,203,Pledge,Wire Transfer,2024-12-19,General Fund,True,True,Monthly,Completed
+DON000267,ALM01905,25000,In-Kind,Stock,2025-03-23,Scholarship,False,True,Quarterly,Completed
+DON000268,ALM03450,50000,Pledge,Stock,2023-11-28,General Fund,False,True,,Completed
+DON000269,ALM03270,173,One-Time Gift,Stock,2025-02-02,Infrastructure,False,True,,Completed
+DON000270,ALM01877,96,One-Time Gift,Check,2024-11-29,Endowment,False,True,Quarterly,Completed
+DON000271,ALM00006,50000,Recurring Monthly,Wire Transfer,2025-08-18,Scholarship,False,True,,Completed
+DON000272,ALM01683,50000,In-Kind,Credit Card,2024-04-28,General Fund,False,True,,Completed
+DON000273,ALM02406,409,Recurring Monthly,Stock,2025-10-29,General Fund,True,True,,Completed
+DON000274,ALM02930,152,Major Gift,Stock,2025-08-11,Endowment,False,True,,Completed
+DON000275,ALM02335,100000,In-Kind,Bank Transfer,2025-08-29,Research,False,True,,Completed
+DON000276,ALM01501,379,In-Kind,Wire Transfer,2025-02-15,Infrastructure,False,True,,Completed
+DON000277,ALM00006,10000,One-Time Gift,Check,2024-11-03,Scholarship,False,True,,Completed
+DON000278,ALM02432,96,One-Time Gift,Bank Transfer,2024-02-08,General Fund,False,True,Monthly,Completed
+DON000279,ALM00471,416,One-Time Gift,Credit Card,2025-10-04,Scholarship,False,True,,Completed
+DON000280,ALM02304,332,One-Time Gift,Stock,2024-04-18,Endowment,False,True,,Completed
+DON000281,ALM02800,50000,Pledge,Bank Transfer,2025-02-07,Scholarship,False,True,Quarterly,Completed
+DON000282,ALM02163,25000,Major Gift,Stock,2024-05-04,Scholarship,False,True,Monthly,Completed
+DON000283,ALM01648,342,Recurring Monthly,Wire Transfer,2025-03-13,Research,False,True,,Completed
+DON000284,ALM03244,340,Recurring Monthly,Wire Transfer,2025-04-17,Endowment,False,True,,Completed
+DON000285,ALM01698,63,Major Gift,Credit Card,2024-08-16,Infrastructure,False,True,,Pending
+DON000286,ALM01711,468,Recurring Monthly,Wire Transfer,2024-05-22,Research,False,True,Quarterly,Completed
+DON000287,ALM02772,179,Major Gift,Bank Transfer,2025-04-16,Endowment,False,True,,Completed
+DON000288,ALM03473,459,One-Time Gift,Bank Transfer,2024-11-12,Scholarship,False,True,,Completed
+DON000289,ALM02506,25000,One-Time Gift,Stock,2024-02-05,Endowment,False,True,,Completed
+DON000290,ALM00605,50000,Major Gift,Wire Transfer,2024-01-26,Research,False,True,,Completed
+DON000291,ALM00547,54,In-Kind,Credit Card,2025-06-29,Infrastructure,False,True,,Completed
+DON000292,ALM01632,354,One-Time Gift,Bank Transfer,2023-11-13,General Fund,False,True,,Completed
+DON000293,ALM00761,450,One-Time Gift,Check,2024-05-23,Infrastructure,False,True,Quarterly,Completed
+DON000294,ALM03141,459,In-Kind,Bank Transfer,2024-05-11,Endowment,False,True,Quarterly,Completed
+DON000295,ALM00465,423,Pledge,Stock,2025-04-02,Endowment,False,True,Quarterly,Completed
+DON000296,ALM00135,50000,Pledge,Stock,2025-03-05,Endowment,False,True,Annual,Completed
+DON000297,ALM00810,50000,Recurring Monthly,Credit Card,2024-10-27,General Fund,False,True,Monthly,Completed
+DON000298,ALM00401,153,Major Gift,Stock,2024-02-02,Scholarship,False,True,,Completed
+DON000299,ALM01295,442,Pledge,Credit Card,2024-12-08,Endowment,False,True,,Completed
+DON000300,ALM01541,271,In-Kind,Wire Transfer,2024-12-25,Infrastructure,False,True,,Completed
+DON000301,ALM01618,286,One-Time Gift,Check,2024-06-01,Scholarship,False,True,,Completed
+DON000302,ALM02049,262,Recurring Monthly,Wire Transfer,2025-10-08,Endowment,False,True,,Completed
+DON000303,ALM01050,302,Major Gift,Check,2025-09-28,Scholarship,True,True,,Completed
+DON000304,ALM01280,469,One-Time Gift,Credit Card,2025-07-23,Infrastructure,True,True,Monthly,Completed
+DON000305,ALM01803,443,Recurring Monthly,Credit Card,2025-06-04,General Fund,False,True,,Completed
+DON000306,ALM00730,63,In-Kind,Wire Transfer,2024-11-22,Scholarship,False,True,,Declined
+DON000307,ALM00113,250000,Recurring Monthly,Check,2024-08-26,Endowment,False,True,,Completed
+DON000308,ALM03088,406,Major Gift,Check,2025-10-12,General Fund,True,True,,Completed
+DON000309,ALM02506,250000,In-Kind,Bank Transfer,2024-07-26,Infrastructure,False,True,,Completed
+DON000310,ALM02956,164,Major Gift,Wire Transfer,2025-09-30,Infrastructure,False,True,,Completed
+DON000311,ALM02364,198,In-Kind,Bank Transfer,2024-05-28,Infrastructure,True,True,,Completed
+DON000312,ALM00615,206,Pledge,Credit Card,2023-11-19,Research,False,True,,Completed
+DON000313,ALM02031,133,Major Gift,Credit Card,2025-05-23,General Fund,False,True,Monthly,Completed
+DON000314,ALM00204,358,Recurring Monthly,Wire Transfer,2023-12-28,Research,False,True,,Completed
+DON000315,ALM00092,329,Major Gift,Credit Card,2024-05-29,Research,False,True,,Completed
+DON000316,ALM02460,414,Major Gift,Check,2024-12-15,Scholarship,False,True,,Pending
+DON000317,ALM01148,244,One-Time Gift,Credit Card,2024-09-24,General Fund,False,True,Monthly,Completed
+DON000318,ALM00313,204,Pledge,Bank Transfer,2024-07-11,Infrastructure,False,True,Quarterly,Completed
+DON000319,ALM01465,25000,Major Gift,Credit Card,2023-12-10,Research,False,True,Monthly,Completed
+DON000320,ALM02395,472,In-Kind,Wire Transfer,2025-05-23,Research,True,False,Monthly,Completed
+DON000321,ALM02020,396,Recurring Monthly,Wire Transfer,2024-03-25,Scholarship,False,True,,Completed
+DON000322,ALM02463,352,Recurring Monthly,Wire Transfer,2025-06-28,Endowment,False,True,,Completed
+DON000323,ALM02407,128,Pledge,Credit Card,2024-03-10,General Fund,False,True,Annual,Pending
+DON000324,ALM02769,161,Pledge,Credit Card,2024-08-12,General Fund,False,True,,Completed
+DON000325,ALM02705,250,Major Gift,Stock,2024-09-02,Scholarship,False,True,,Completed
+DON000326,ALM03201,25000,Recurring Monthly,Bank Transfer,2025-02-03,Scholarship,False,True,,Completed
+DON000327,ALM03097,127,Pledge,Credit Card,2024-04-11,Research,False,True,,Completed
+DON000328,ALM00164,270,Major Gift,Check,2025-09-21,Infrastructure,False,True,,Completed
+DON000329,ALM02493,100000,In-Kind,Bank Transfer,2025-01-10,Infrastructure,False,True,Annual,Completed
+DON000330,ALM01960,203,Major Gift,Bank Transfer,2024-08-01,Research,False,True,Monthly,Completed
+DON000331,ALM00647,10000,Major Gift,Check,2025-08-18,Infrastructure,True,True,Quarterly,Completed
+DON000332,ALM01528,10000,Major Gift,Stock,2024-07-30,General Fund,False,True,,Completed
+DON000333,ALM00954,385,Pledge,Stock,2025-06-24,Research,False,True,Monthly,Completed
+DON000334,ALM00176,330,In-Kind,Bank Transfer,2024-12-28,Endowment,False,True,Monthly,Completed
+DON000335,ALM01786,10000,In-Kind,Check,2024-03-05,General Fund,True,True,,Completed
+DON000336,ALM00087,309,Pledge,Wire Transfer,2025-09-16,Research,False,True,Quarterly,Completed
+DON000337,ALM01626,100000,Pledge,Bank Transfer,2025-06-24,Infrastructure,False,True,,Completed
+DON000338,ALM00241,214,Pledge,Credit Card,2024-02-25,General Fund,False,True,,Completed
+DON000339,ALM01757,10000,One-Time Gift,Wire Transfer,2025-06-28,Scholarship,False,True,,Completed
+DON000340,ALM01343,419,One-Time Gift,Check,2024-09-10,Research,False,True,Monthly,Completed
+DON000341,ALM01674,131,Major Gift,Credit Card,2023-12-31,General Fund,False,False,,Completed
+DON000342,ALM00576,177,Major Gift,Credit Card,2025-03-27,Research,False,False,,Completed
+DON000343,ALM01294,459,In-Kind,Check,2024-06-16,Scholarship,False,True,,Completed
+DON000344,ALM01103,238,Recurring Monthly,Check,2025-10-22,General Fund,False,True,,Completed
+DON000345,ALM01281,302,Recurring Monthly,Wire Transfer,2025-07-08,Research,True,True,,Completed
+DON000346,ALM00477,315,Major Gift,Wire Transfer,2024-12-28,General Fund,False,True,Monthly,Completed
+DON000347,ALM02934,250,In-Kind,Check,2024-11-07,General Fund,False,True,Annual,Completed
+DON000348,ALM03453,473,One-Time Gift,Bank Transfer,2025-03-01,Infrastructure,False,True,Monthly,Completed
+DON000349,ALM01158,100000,Pledge,Check,2025-10-10,Scholarship,True,True,,Completed
+DON000350,ALM00777,410,One-Time Gift,Stock,2025-03-25,General Fund,False,True,,Pending
+DON000351,ALM01413,412,In-Kind,Stock,2025-06-09,General Fund,False,True,,Completed
+DON000352,ALM00528,100000,In-Kind,Bank Transfer,2024-05-21,Scholarship,False,True,,Completed
+DON000353,ALM01739,88,Pledge,Credit Card,2025-02-01,Scholarship,False,True,,Completed
+DON000354,ALM00662,25000,Major Gift,Check,2024-05-25,Endowment,False,True,,Completed
+DON000355,ALM02752,63,One-Time Gift,Wire Transfer,2025-06-19,Scholarship,False,False,,Completed
+DON000356,ALM00274,100000,Pledge,Bank Transfer,2024-12-27,General Fund,False,True,Monthly,Completed
+DON000357,ALM01845,250000,Major Gift,Bank Transfer,2025-04-29,Infrastructure,True,True,,Completed
+DON000358,ALM00203,10000,One-Time Gift,Credit Card,2023-12-23,Infrastructure,False,True,Annual,Completed
+DON000359,ALM01701,486,Major Gift,Bank Transfer,2025-02-21,Endowment,False,True,,Completed
+DON000360,ALM02455,443,One-Time Gift,Bank Transfer,2025-08-27,General Fund,False,True,,Completed
+DON000361,ALM02808,444,Major Gift,Stock,2025-06-28,Infrastructure,False,True,,Completed
+DON000362,ALM00414,100000,Major Gift,Wire Transfer,2024-07-08,General Fund,False,False,,Completed
+DON000363,ALM01951,10000,Recurring Monthly,Check,2024-07-23,Research,False,True,,Completed
+DON000364,ALM02047,250000,One-Time Gift,Bank Transfer,2024-01-25,Scholarship,False,True,,Pending
+DON000365,ALM02963,490,Pledge,Wire Transfer,2023-11-22,General Fund,False,True,,Completed
+DON000366,ALM00391,10000,Major Gift,Stock,2024-12-21,Scholarship,False,True,,Completed
+DON000367,ALM00146,495,Major Gift,Stock,2024-04-26,General Fund,True,True,,Completed
+DON000368,ALM02835,56,Pledge,Credit Card,2024-01-19,Research,False,True,Monthly,Completed
+DON000369,ALM00486,361,Recurring Monthly,Wire Transfer,2024-12-25,Research,False,True,,Pending
+DON000370,ALM00509,355,In-Kind,Check,2024-01-05,General Fund,False,True,,Completed
+DON000371,ALM02216,100000,Major Gift,Wire Transfer,2024-06-10,Infrastructure,False,True,,Completed
+DON000372,ALM01519,359,One-Time Gift,Bank Transfer,2025-03-08,Endowment,False,True,,Completed
+DON000373,ALM03162,416,Pledge,Bank Transfer,2025-04-07,Infrastructure,False,True,Quarterly,Pending
+DON000374,ALM01429,442,Major Gift,Wire Transfer,2024-06-19,Research,False,True,Quarterly,Completed
+DON000375,ALM00884,403,Major Gift,Credit Card,2024-06-29,Scholarship,False,True,Monthly,Completed
+DON000376,ALM01921,64,One-Time Gift,Check,2024-07-14,Research,False,True,,Completed
+DON000377,ALM00849,430,Pledge,Wire Transfer,2024-02-02,Endowment,False,True,,Completed
+DON000378,ALM02828,317,In-Kind,Stock,2025-01-23,Infrastructure,False,True,,Declined
+DON000379,ALM02839,10000,Recurring Monthly,Wire Transfer,2024-12-09,Infrastructure,False,True,Monthly,Completed
+DON000380,ALM00687,493,Pledge,Credit Card,2024-08-10,Scholarship,True,True,,Completed
+DON000381,ALM00762,50000,In-Kind,Wire Transfer,2024-05-01,Research,False,True,,Completed
+DON000382,ALM01906,336,In-Kind,Check,2023-12-08,General Fund,False,True,Quarterly,Completed
+DON000383,ALM02141,177,Major Gift,Stock,2024-10-28,Research,False,True,,Completed
+DON000384,ALM00507,202,Recurring Monthly,Wire Transfer,2024-04-15,Research,False,True,,Completed
+DON000385,ALM03197,65,Recurring Monthly,Credit Card,2024-11-14,Scholarship,False,True,,Completed
+DON000386,ALM01362,100000,One-Time Gift,Check,2023-12-07,Infrastructure,False,True,,Completed
+DON000387,ALM02977,323,In-Kind,Stock,2024-05-21,Endowment,False,True,,Completed
+DON000388,ALM02029,50000,One-Time Gift,Bank Transfer,2024-09-20,Endowment,False,True,,Completed
+DON000389,ALM00569,406,Recurring Monthly,Wire Transfer,2024-02-25,General Fund,False,True,Monthly,Declined
+DON000390,ALM03193,319,Pledge,Credit Card,2024-05-01,Endowment,False,False,,Completed
+DON000391,ALM00507,369,Major Gift,Bank Transfer,2024-09-06,General Fund,False,True,,Pending
+DON000392,ALM00653,25000,One-Time Gift,Credit Card,2025-06-29,Scholarship,False,True,Quarterly,Completed
+DON000393,ALM01425,221,Pledge,Bank Transfer,2025-09-14,General Fund,False,True,Quarterly,Completed
+DON000394,ALM00807,52,Major Gift,Check,2024-04-19,General Fund,False,True,Monthly,Completed
+DON000395,ALM01522,100000,Major Gift,Check,2024-01-31,Infrastructure,False,True,,Completed
+DON000396,ALM00072,318,In-Kind,Stock,2023-12-11,Scholarship,False,True,,Completed
+DON000397,ALM02642,50000,One-Time Gift,Credit Card,2024-03-28,Research,False,True,,Completed
+DON000398,ALM00369,25000,In-Kind,Bank Transfer,2025-07-29,Infrastructure,False,True,,Completed
+DON000399,ALM03213,331,Pledge,Check,2025-05-23,Scholarship,False,True,,Completed
+DON000400,ALM00841,50000,In-Kind,Bank Transfer,2024-06-12,Endowment,False,True,,Completed
+DON000401,ALM02569,495,One-Time Gift,Check,2025-06-18,Infrastructure,False,True,,Completed
+DON000402,ALM02151,367,Pledge,Stock,2025-09-09,Research,True,True,Monthly,Completed
+DON000403,ALM02652,250000,One-Time Gift,Stock,2024-07-01,Research,False,True,,Completed
+DON000404,ALM01573,10000,Major Gift,Wire Transfer,2024-09-28,Endowment,True,True,,Completed
+DON000405,ALM03172,50000,Major Gift,Stock,2024-02-01,Scholarship,False,True,,Completed
+DON000406,ALM01513,134,Recurring Monthly,Credit Card,2025-07-13,General Fund,False,True,,Completed
+DON000407,ALM01738,25000,In-Kind,Bank Transfer,2025-01-28,Scholarship,True,True,,Completed
+DON000408,ALM00653,327,In-Kind,Bank Transfer,2024-07-10,Research,False,False,,Completed
+DON000409,ALM02326,155,Major Gift,Credit Card,2024-09-26,Infrastructure,False,True,,Completed
+DON000410,ALM01631,300,Pledge,Check,2024-09-23,Scholarship,False,True,,Completed
+DON000411,ALM00751,499,One-Time Gift,Bank Transfer,2025-01-06,Research,False,True,,Completed
+DON000412,ALM02319,375,One-Time Gift,Credit Card,2025-06-23,Infrastructure,False,True,,Completed
+DON000413,ALM02407,173,Major Gift,Stock,2025-04-12,Endowment,False,True,,Pending
+DON000414,ALM01969,66,Pledge,Stock,2024-05-19,Endowment,False,True,,Completed
+DON000415,ALM00453,170,Major Gift,Stock,2024-11-10,Scholarship,True,True,Monthly,Completed
+DON000416,ALM02025,274,Pledge,Credit Card,2024-09-26,Infrastructure,False,True,Annual,Completed
+DON000417,ALM02232,209,Recurring Monthly,Wire Transfer,2024-03-26,Scholarship,False,True,Monthly,Completed
+DON000418,ALM00050,459,In-Kind,Wire Transfer,2025-09-14,General Fund,False,True,,Completed
+DON000419,ALM01327,270,Pledge,Check,2024-07-25,Infrastructure,False,True,Monthly,Completed
+DON000420,ALM02197,50000,Pledge,Wire Transfer,2024-12-15,Infrastructure,False,True,Monthly,Completed
+DON000421,ALM02904,168,In-Kind,Wire Transfer,2025-06-18,General Fund,False,True,,Pending
+DON000422,ALM00872,95,Major Gift,Bank Transfer,2024-08-30,Scholarship,False,True,,Pending
+DON000423,ALM01582,254,One-Time Gift,Stock,2024-10-04,Research,False,True,Monthly,Completed
+DON000424,ALM00622,284,Recurring Monthly,Stock,2023-12-22,General Fund,False,True,,Completed
+DON000425,ALM01781,136,Recurring Monthly,Wire Transfer,2024-09-25,Research,False,True,Quarterly,Completed
+DON000426,ALM00143,296,Major Gift,Check,2024-03-20,General Fund,False,True,,Pending
+DON000427,ALM01062,112,One-Time Gift,Check,2024-12-15,Research,False,True,,Completed
+DON000428,ALM00540,312,Pledge,Check,2024-02-05,Scholarship,False,True,,Completed
+DON000429,ALM00185,312,Major Gift,Credit Card,2024-11-09,General Fund,False,True,,Completed
+DON000430,ALM02329,433,Pledge,Check,2025-04-24,Scholarship,False,True,,Completed
+DON000431,ALM00094,50000,In-Kind,Stock,2025-07-31,Research,False,True,,Completed
+DON000432,ALM03074,50000,One-Time Gift,Bank Transfer,2025-01-20,Scholarship,False,True,,Completed
+DON000433,ALM03075,328,In-Kind,Stock,2024-01-10,General Fund,False,True,,Completed
+DON000434,ALM01798,209,In-Kind,Credit Card,2025-08-18,General Fund,False,True,,Completed
+DON000435,ALM03305,100000,Pledge,Bank Transfer,2024-04-09,General Fund,False,True,Monthly,Pending
+DON000436,ALM01489,10000,One-Time Gift,Wire Transfer,2024-06-28,Scholarship,True,True,,Completed
+DON000437,ALM02944,245,Recurring Monthly,Check,2025-02-26,Endowment,False,False,,Completed
+DON000438,ALM00565,207,One-Time Gift,Bank Transfer,2023-12-10,Infrastructure,False,True,Monthly,Completed
+DON000439,ALM02128,65,One-Time Gift,Stock,2025-09-20,Endowment,False,True,,Completed
+DON000440,ALM01920,100000,In-Kind,Credit Card,2025-03-12,Infrastructure,False,True,,Completed
+DON000441,ALM00069,314,Pledge,Stock,2024-12-07,Endowment,False,True,,Completed
+DON000442,ALM01499,254,One-Time Gift,Wire Transfer,2024-03-03,Infrastructure,False,True,,Completed
+DON000443,ALM02219,10000,Recurring Monthly,Check,2025-04-21,Endowment,False,True,,Completed
+DON000444,ALM01847,50000,Pledge,Check,2025-10-09,Scholarship,True,True,Monthly,Completed
+DON000445,ALM01058,372,Major Gift,Credit Card,2025-04-03,Infrastructure,False,True,,Completed
+DON000446,ALM02085,229,Pledge,Check,2024-10-02,Infrastructure,False,True,,Completed
+DON000447,ALM02794,25000,One-Time Gift,Check,2024-04-05,Endowment,False,True,Quarterly,Pending
+DON000448,ALM02334,250000,Major Gift,Wire Transfer,2025-07-05,Endowment,True,True,,Completed
+DON000449,ALM03241,100000,Major Gift,Wire Transfer,2025-07-28,General Fund,False,True,Monthly,Completed
+DON000450,ALM02381,180,In-Kind,Bank Transfer,2023-12-27,Scholarship,False,True,,Completed
+DON000451,ALM00278,25000,Recurring Monthly,Check,2025-03-16,Infrastructure,False,True,,Completed
+DON000452,ALM01857,95,Pledge,Credit Card,2025-07-10,General Fund,False,True,,Pending
+DON000453,ALM02677,10000,Major Gift,Check,2024-02-05,Infrastructure,False,True,Annual,Completed
+DON000454,ALM03482,499,Major Gift,Check,2025-03-01,Research,False,True,Monthly,Declined
+DON000455,ALM00662,50000,In-Kind,Stock,2024-05-29,Scholarship,True,True,,Completed
+DON000456,ALM02955,211,One-Time Gift,Stock,2023-12-02,Scholarship,False,True,Annual,Completed
+DON000457,ALM00003,223,One-Time Gift,Check,2024-06-22,Infrastructure,False,True,,Completed
+DON000458,ALM02194,50000,In-Kind,Credit Card,2024-01-18,Endowment,False,True,Quarterly,Completed
+DON000459,ALM03277,453,Pledge,Credit Card,2024-05-30,Research,False,True,Monthly,Completed
+DON000460,ALM03384,54,Pledge,Bank Transfer,2024-11-29,Research,False,True,,Completed
+DON000461,ALM02213,53,Pledge,Bank Transfer,2025-08-17,Endowment,False,True,,Completed
+DON000462,ALM01420,10000,One-Time Gift,Stock,2025-10-07,Infrastructure,False,True,,Completed
+DON000463,ALM01527,261,One-Time Gift,Check,2025-08-28,General Fund,False,True,,Completed
+DON000464,ALM03361,120,In-Kind,Bank Transfer,2025-06-20,Endowment,False,True,,Completed
+DON000465,ALM02353,447,Recurring Monthly,Bank Transfer,2024-05-22,General Fund,False,True,,Completed
+DON000466,ALM03260,162,Recurring Monthly,Bank Transfer,2024-08-22,Infrastructure,False,True,Monthly,Completed
+DON000467,ALM01411,100000,One-Time Gift,Credit Card,2024-03-05,Scholarship,False,True,,Completed
+DON000468,ALM01883,100000,In-Kind,Check,2023-12-24,Endowment,False,True,,Completed
+DON000469,ALM01056,25000,In-Kind,Credit Card,2023-12-20,Infrastructure,False,True,,Completed
+DON000470,ALM03305,383,In-Kind,Stock,2023-12-30,General Fund,False,True,,Completed
+DON000471,ALM00046,100000,One-Time Gift,Wire Transfer,2025-04-20,Scholarship,True,True,,Completed
+DON000472,ALM02721,25000,Pledge,Bank Transfer,2024-05-29,Infrastructure,False,True,,Completed
+DON000473,ALM03269,321,In-Kind,Wire Transfer,2025-10-15,General Fund,False,True,,Completed
+DON000474,ALM00614,238,One-Time Gift,Credit Card,2024-12-26,Infrastructure,False,True,,Completed
+DON000475,ALM03099,497,Recurring Monthly,Credit Card,2025-02-09,Scholarship,False,True,Quarterly,Completed
+DON000476,ALM00385,347,Major Gift,Credit Card,2025-01-05,Scholarship,False,True,,Completed
+DON000477,ALM00720,397,Major Gift,Bank Transfer,2025-08-14,Scholarship,False,True,Quarterly,Completed
+DON000478,ALM02507,60,Recurring Monthly,Wire Transfer,2024-11-22,General Fund,False,True,Quarterly,Completed
+DON000479,ALM00795,250000,One-Time Gift,Bank Transfer,2024-01-07,General Fund,False,True,,Completed
+DON000480,ALM00971,65,Pledge,Credit Card,2024-09-01,Infrastructure,False,True,,Completed
+DON000481,ALM01171,250000,One-Time Gift,Credit Card,2025-07-03,Endowment,False,True,,Completed
+DON000482,ALM00349,258,Major Gift,Stock,2024-04-30,General Fund,False,True,,Declined
+DON000483,ALM00035,234,One-Time Gift,Wire Transfer,2024-07-20,Endowment,False,True,,Completed
+DON000484,ALM02165,108,One-Time Gift,Check,2024-02-25,Scholarship,False,True,,Completed
+DON000485,ALM01066,260,Major Gift,Credit Card,2024-09-10,Research,False,True,,Completed
+DON000486,ALM03273,50000,In-Kind,Bank Transfer,2024-04-08,Scholarship,False,True,Annual,Completed
+DON000487,ALM01942,10000,One-Time Gift,Credit Card,2024-03-09,General Fund,True,True,,Completed
+DON000488,ALM01232,467,In-Kind,Wire Transfer,2025-09-01,Scholarship,False,True,,Completed
+DON000489,ALM02940,178,Pledge,Stock,2025-10-08,Endowment,False,True,,Completed
+DON000490,ALM03226,146,Pledge,Stock,2025-08-14,Research,False,True,,Completed
+DON000491,ALM00972,100000,Major Gift,Check,2025-05-08,Infrastructure,False,True,,Completed
+DON000492,ALM01423,10000,Pledge,Stock,2024-11-19,Endowment,False,True,,Completed
+DON000493,ALM02544,265,Recurring Monthly,Check,2024-09-18,Scholarship,False,True,,Completed
+DON000494,ALM00766,299,One-Time Gift,Check,2025-02-19,Infrastructure,False,True,Quarterly,Declined
+DON000495,ALM01201,50000,Pledge,Credit Card,2025-05-06,General Fund,False,True,,Completed
+DON000496,ALM00565,250000,One-Time Gift,Credit Card,2025-10-05,Research,False,True,Quarterly,Pending
+DON000497,ALM03326,413,In-Kind,Credit Card,2023-12-29,General Fund,False,True,Monthly,Completed
+DON000498,ALM02411,465,Major Gift,Wire Transfer,2024-02-15,Infrastructure,False,True,Quarterly,Pending
+DON000499,ALM01542,231,In-Kind,Stock,2024-11-01,Infrastructure,False,False,,Completed
+DON000500,ALM00853,363,Pledge,Credit Card,2025-04-21,Scholarship,False,True,,Completed
+DON000501,ALM01411,100000,Pledge,Bank Transfer,2025-06-22,Scholarship,False,True,,Completed
+DON000502,ALM00341,200,Recurring Monthly,Wire Transfer,2025-01-04,Research,False,True,,Completed
+DON000503,ALM02588,93,In-Kind,Credit Card,2025-07-15,Research,False,True,,Completed
+DON000504,ALM00825,100000,One-Time Gift,Stock,2025-04-14,General Fund,False,True,,Completed
+DON000505,ALM00025,50000,Recurring Monthly,Stock,2025-08-04,Infrastructure,True,False,,Completed
+DON000506,ALM01316,25000,One-Time Gift,Stock,2025-10-22,Research,False,True,Monthly,Completed
+DON000507,ALM00176,136,Recurring Monthly,Credit Card,2024-09-01,Endowment,False,True,Monthly,Completed
+DON000508,ALM03247,56,One-Time Gift,Credit Card,2024-02-18,Infrastructure,False,True,,Completed
+DON000509,ALM02992,430,Recurring Monthly,Wire Transfer,2025-03-13,Endowment,False,True,,Completed
+DON000510,ALM01980,10000,One-Time Gift,Wire Transfer,2024-06-02,Endowment,False,True,,Completed
+DON000511,ALM00469,278,In-Kind,Check,2025-05-24,Scholarship,False,True,Quarterly,Completed
+DON000512,ALM03394,206,Major Gift,Credit Card,2025-08-24,Scholarship,False,True,,Completed
+DON000513,ALM00840,389,One-Time Gift,Bank Transfer,2024-07-15,Research,False,True,,Completed
+DON000514,ALM00284,50000,In-Kind,Check,2024-12-01,Research,False,True,Quarterly,Completed
+DON000515,ALM03146,169,One-Time Gift,Credit Card,2025-09-18,Endowment,False,True,Monthly,Completed
+DON000516,ALM01079,110,Major Gift,Wire Transfer,2025-08-09,General Fund,False,True,,Completed
+DON000517,ALM03138,25000,Major Gift,Credit Card,2024-04-24,Endowment,False,False,,Completed
+DON000518,ALM00517,471,Pledge,Wire Transfer,2023-11-10,General Fund,False,False,,Completed
+DON000519,ALM02143,192,Major Gift,Credit Card,2024-07-02,Research,True,True,,Completed
+DON000520,ALM02798,250000,In-Kind,Wire Transfer,2024-06-11,Research,False,True,Quarterly,Completed
+DON000521,ALM02347,417,Major Gift,Stock,2025-05-10,Scholarship,False,True,,Completed
+DON000522,ALM02210,399,In-Kind,Credit Card,2024-06-04,Research,False,True,,Completed
+DON000523,ALM01491,10000,Major Gift,Credit Card,2025-10-24,Endowment,True,True,,Completed
+DON000524,ALM01652,56,Major Gift,Bank Transfer,2025-01-05,General Fund,False,True,,Completed
+DON000525,ALM02839,102,Recurring Monthly,Stock,2025-02-28,Scholarship,False,True,,Completed
+DON000526,ALM03024,414,Recurring Monthly,Bank Transfer,2025-05-26,Scholarship,False,True,Quarterly,Completed
+DON000527,ALM00556,375,One-Time Gift,Bank Transfer,2025-04-03,General Fund,True,True,,Completed
+DON000528,ALM01210,279,One-Time Gift,Wire Transfer,2025-05-06,Infrastructure,False,True,,Completed
+DON000529,ALM00578,88,In-Kind,Stock,2024-10-24,Infrastructure,False,True,,Completed
+DON000530,ALM00749,25000,In-Kind,Bank Transfer,2023-12-08,Infrastructure,False,True,,Pending
+DON000531,ALM01878,188,One-Time Gift,Stock,2024-03-18,Endowment,False,True,,Completed
+DON000532,ALM01042,250000,One-Time Gift,Credit Card,2024-10-23,Endowment,False,True,Annual,Completed
+DON000533,ALM02553,194,Recurring Monthly,Stock,2024-11-28,Infrastructure,False,True,,Completed
+DON000534,ALM02946,486,Major Gift,Credit Card,2025-08-06,Infrastructure,True,True,,Completed
+DON000535,ALM02680,370,In-Kind,Credit Card,2024-08-20,Research,False,True,Monthly,Completed
+DON000536,ALM01290,25000,Recurring Monthly,Wire Transfer,2024-06-01,Infrastructure,False,True,,Completed
+DON000537,ALM00094,229,In-Kind,Wire Transfer,2025-08-04,Endowment,False,True,,Pending
+DON000538,ALM00959,250000,One-Time Gift,Wire Transfer,2024-03-26,Endowment,False,True,,Completed
+DON000539,ALM03226,159,In-Kind,Wire Transfer,2024-06-18,Infrastructure,False,True,Quarterly,Completed
+DON000540,ALM00852,395,Recurring Monthly,Bank Transfer,2024-04-09,Research,False,True,,Completed
+DON000541,ALM03414,291,Pledge,Check,2025-03-02,Research,False,True,,Completed
+DON000542,ALM00331,100000,Major Gift,Bank Transfer,2025-03-16,Infrastructure,False,True,,Completed
+DON000543,ALM00965,343,Recurring Monthly,Check,2025-05-25,Infrastructure,False,True,Annual,Completed
+DON000544,ALM02532,10000,In-Kind,Check,2025-03-07,Endowment,False,True,,Completed
+DON000545,ALM03309,74,Recurring Monthly,Stock,2024-06-04,Scholarship,False,True,,Completed
+DON000546,ALM00552,100000,Recurring Monthly,Credit Card,2025-04-07,Infrastructure,False,True,Monthly,Completed
+DON000547,ALM02844,100000,Recurring Monthly,Credit Card,2024-04-07,Infrastructure,False,True,,Completed
+DON000548,ALM01710,283,Major Gift,Bank Transfer,2025-04-01,Infrastructure,False,True,,Pending
+DON000549,ALM00572,100000,In-Kind,Credit Card,2024-06-03,Infrastructure,False,True,Monthly,Completed
+DON000550,ALM02132,92,One-Time Gift,Credit Card,2025-07-12,Infrastructure,False,True,Annual,Completed
+DON000551,ALM02820,336,Pledge,Stock,2025-01-05,Scholarship,False,True,Monthly,Completed
+DON000552,ALM00414,423,Pledge,Wire Transfer,2024-08-24,Scholarship,False,True,,Completed
+DON000553,ALM01790,10000,One-Time Gift,Credit Card,2024-04-14,Scholarship,False,True,,Completed
+DON000554,ALM01360,100000,Pledge,Check,2024-06-25,General Fund,False,True,,Completed
+DON000555,ALM02809,250000,Major Gift,Wire Transfer,2025-09-15,Research,True,True,Monthly,Completed
+DON000556,ALM01154,50000,Major Gift,Stock,2025-10-19,Infrastructure,False,True,,Completed
+DON000557,ALM03312,419,In-Kind,Wire Transfer,2024-06-24,Scholarship,False,True,,Completed
+DON000558,ALM02322,100000,Recurring Monthly,Check,2025-08-15,Research,False,True,,Pending
+DON000559,ALM00996,10000,Pledge,Bank Transfer,2025-03-06,Research,False,True,Monthly,Completed
+DON000560,ALM00406,263,One-Time Gift,Check,2024-03-09,General Fund,False,True,,Completed
+DON000561,ALM01359,203,Major Gift,Wire Transfer,2025-03-22,Infrastructure,False,True,,Completed
+DON000562,ALM02875,50000,Major Gift,Bank Transfer,2023-12-09,Scholarship,False,True,,Pending
+DON000563,ALM00746,414,In-Kind,Stock,2024-01-09,Scholarship,False,True,,Completed
+DON000564,ALM02869,102,Recurring Monthly,Stock,2024-02-10,Endowment,False,True,,Completed
+DON000565,ALM01687,250000,One-Time Gift,Bank Transfer,2024-09-06,Research,False,True,,Completed
+DON000566,ALM01435,438,In-Kind,Credit Card,2025-08-06,Endowment,False,True,Quarterly,Completed
+DON000567,ALM02136,235,Major Gift,Check,2025-01-22,Research,False,True,,Completed
+DON000568,ALM01399,25000,Pledge,Wire Transfer,2025-06-03,Endowment,False,True,Monthly,Completed
+DON000569,ALM03030,50000,Major Gift,Stock,2024-12-21,Endowment,False,True,Monthly,Completed
+DON000570,ALM01535,100000,Major Gift,Stock,2023-12-15,Endowment,False,False,,Completed
+DON000571,ALM00977,424,Recurring Monthly,Stock,2024-12-18,General Fund,False,True,Annual,Completed
+DON000572,ALM02173,250000,Recurring Monthly,Wire Transfer,2024-02-24,Scholarship,False,True,,Completed
+DON000573,ALM01817,50000,Recurring Monthly,Credit Card,2023-12-11,Endowment,False,False,Monthly,Completed
+DON000574,ALM03454,25000,Major Gift,Bank Transfer,2024-10-13,Endowment,False,True,Quarterly,Completed
+DON000575,ALM02090,419,Pledge,Bank Transfer,2024-10-13,Endowment,False,True,,Completed
+DON000576,ALM01327,199,Major Gift,Bank Transfer,2024-09-01,Research,False,True,,Completed
+DON000577,ALM02163,479,Recurring Monthly,Credit Card,2024-05-11,Research,False,True,,Completed
+DON000578,ALM00638,100000,Pledge,Bank Transfer,2024-06-24,Scholarship,False,True,,Completed
+DON000579,ALM03118,78,Recurring Monthly,Check,2025-05-21,Research,False,True,,Completed
+DON000580,ALM03140,336,One-Time Gift,Check,2025-06-30,Endowment,False,True,,Completed
+DON000581,ALM02406,25000,In-Kind,Credit Card,2024-11-24,Endowment,False,True,,Completed
+DON000582,ALM00408,138,Major Gift,Stock,2024-02-12,Research,False,True,,Completed
+DON000583,ALM02321,98,Recurring Monthly,Wire Transfer,2024-07-27,Infrastructure,False,True,,Completed
+DON000584,ALM00876,434,In-Kind,Credit Card,2024-04-21,Scholarship,False,True,,Completed
+DON000585,ALM01923,444,Pledge,Wire Transfer,2024-01-23,Infrastructure,False,True,,Completed
+DON000586,ALM03298,65,Recurring Monthly,Bank Transfer,2024-03-21,Infrastructure,False,True,,Completed
+DON000587,ALM03147,133,One-Time Gift,Stock,2025-04-22,Endowment,False,True,,Completed
+DON000588,ALM02929,100000,Pledge,Check,2025-10-14,Infrastructure,False,True,,Completed
+DON000589,ALM00852,349,Pledge,Check,2024-11-04,Scholarship,False,True,,Completed
+DON000590,ALM02337,259,Pledge,Bank Transfer,2024-04-09,Endowment,False,False,,Completed
+DON000591,ALM00299,260,Recurring Monthly,Check,2024-07-26,Scholarship,False,True,Quarterly,Completed
+DON000592,ALM01138,25000,Major Gift,Check,2024-08-14,Infrastructure,False,True,,Completed
+DON000593,ALM00427,234,One-Time Gift,Stock,2025-03-24,Scholarship,False,True,,Completed
+DON000594,ALM03313,25000,Recurring Monthly,Stock,2025-04-22,Research,False,True,Annual,Completed
+DON000595,ALM03131,160,One-Time Gift,Stock,2024-04-01,Research,False,True,,Declined
+DON000596,ALM00934,50000,Major Gift,Credit Card,2025-08-05,Research,False,True,,Completed
+DON000597,ALM00522,259,Recurring Monthly,Bank Transfer,2025-01-11,Infrastructure,False,True,,Completed
+DON000598,ALM00807,438,One-Time Gift,Credit Card,2024-11-06,Research,False,True,,Completed
+DON000599,ALM03010,250000,Major Gift,Bank Transfer,2025-07-22,Scholarship,False,True,,Completed
+DON000600,ALM02489,105,Recurring Monthly,Check,2025-08-15,Endowment,True,True,,Completed
+DON000601,ALM03238,10000,Pledge,Stock,2025-05-08,Endowment,False,True,,Completed
+DON000602,ALM02436,25000,One-Time Gift,Stock,2025-09-26,Research,False,True,,Completed
+DON000603,ALM02356,431,In-Kind,Stock,2025-05-15,Scholarship,False,True,,Completed
+DON000604,ALM03423,475,Recurring Monthly,Stock,2025-08-14,Scholarship,True,True,,Completed
+DON000605,ALM00260,250000,Recurring Monthly,Stock,2025-02-03,General Fund,False,True,,Completed
+DON000606,ALM01304,10000,Recurring Monthly,Bank Transfer,2024-02-09,General Fund,False,True,,Completed
+DON000607,ALM02311,465,Recurring Monthly,Wire Transfer,2025-08-10,Endowment,False,True,,Completed
+DON000608,ALM02330,316,One-Time Gift,Stock,2024-08-31,General Fund,False,True,,Completed
+DON000609,ALM02591,250000,In-Kind,Wire Transfer,2024-02-10,General Fund,False,True,,Completed
+DON000610,ALM03482,434,Recurring Monthly,Credit Card,2025-07-12,Research,False,False,,Pending
+DON000611,ALM02557,100000,Major Gift,Check,2024-07-26,Research,False,True,Quarterly,Completed
+DON000612,ALM02874,250000,Recurring Monthly,Bank Transfer,2024-11-08,Research,False,True,,Completed
+DON000613,ALM01355,68,One-Time Gift,Credit Card,2025-08-07,Infrastructure,False,True,,Completed
+DON000614,ALM01392,480,Major Gift,Check,2024-05-08,General Fund,False,True,,Completed
+DON000615,ALM03244,10000,In-Kind,Credit Card,2025-02-28,Scholarship,False,True,Quarterly,Completed
+DON000616,ALM03132,313,In-Kind,Wire Transfer,2024-05-13,Infrastructure,True,True,Quarterly,Completed
+DON000617,ALM02644,308,Major Gift,Wire Transfer,2024-12-08,General Fund,False,True,,Completed
+DON000618,ALM03144,129,Recurring Monthly,Credit Card,2024-08-09,General Fund,False,True,,Completed
+DON000619,ALM00111,404,Pledge,Stock,2025-05-09,Infrastructure,False,True,,Declined
+DON000620,ALM00187,419,Pledge,Wire Transfer,2025-05-13,Research,False,True,,Completed
+DON000621,ALM00711,275,Major Gift,Credit Card,2024-02-26,General Fund,False,True,,Completed
+DON000622,ALM03375,25000,Pledge,Wire Transfer,2024-02-21,Endowment,False,True,,Completed
+DON000623,ALM01801,227,Major Gift,Bank Transfer,2024-11-07,Infrastructure,True,True,,Completed
+DON000624,ALM03347,293,Pledge,Bank Transfer,2024-10-04,General Fund,True,True,Monthly,Completed
+DON000625,ALM01534,50000,In-Kind,Bank Transfer,2024-09-14,Infrastructure,False,True,Monthly,Completed
+DON000626,ALM00249,100000,Major Gift,Check,2025-08-05,Infrastructure,False,True,,Completed
+DON000627,ALM00384,118,Pledge,Credit Card,2025-09-18,Endowment,False,True,Monthly,Completed
+DON000628,ALM00422,252,One-Time Gift,Wire Transfer,2024-03-16,Endowment,False,True,Monthly,Completed
+DON000629,ALM03254,191,One-Time Gift,Stock,2025-09-01,Research,False,True,,Completed
+DON000630,ALM02759,356,Major Gift,Credit Card,2025-04-23,General Fund,False,True,,Completed
+DON000631,ALM01970,307,In-Kind,Check,2025-10-22,Infrastructure,False,True,Quarterly,Completed
+DON000632,ALM01521,350,One-Time Gift,Wire Transfer,2024-04-13,Scholarship,False,True,Monthly,Completed
+DON000633,ALM01294,294,Pledge,Bank Transfer,2024-11-04,Scholarship,False,True,Annual,Completed
+DON000634,ALM01878,51,Major Gift,Check,2025-08-22,Endowment,True,True,Monthly,Completed
+DON000635,ALM02738,10000,Major Gift,Credit Card,2025-01-25,Scholarship,False,True,Quarterly,Completed
+DON000636,ALM00275,220,Recurring Monthly,Wire Transfer,2025-01-05,General Fund,False,True,,Completed
+DON000637,ALM00683,25000,Recurring Monthly,Bank Transfer,2024-10-26,Research,False,True,,Completed
+DON000638,ALM02536,273,Recurring Monthly,Wire Transfer,2025-09-28,General Fund,False,True,,Completed
+DON000639,ALM01312,100000,Pledge,Wire Transfer,2024-10-15,Endowment,False,True,Quarterly,Completed
+DON000640,ALM01590,165,In-Kind,Check,2024-07-21,General Fund,False,True,,Completed
+DON000641,ALM00122,114,Major Gift,Check,2024-07-11,Research,False,True,,Declined
+DON000642,ALM02021,100000,Recurring Monthly,Bank Transfer,2024-08-29,Infrastructure,False,False,Monthly,Pending
+DON000643,ALM00864,180,One-Time Gift,Bank Transfer,2025-05-25,Infrastructure,False,True,,Completed
+DON000644,ALM00613,240,Major Gift,Stock,2025-04-09,Endowment,False,True,,Pending
+DON000645,ALM03388,25000,One-Time Gift,Bank Transfer,2023-11-11,Scholarship,False,True,,Completed
+DON000646,ALM02486,363,Major Gift,Credit Card,2025-06-26,Endowment,False,True,,Completed
+DON000647,ALM01578,10000,One-Time Gift,Bank Transfer,2025-10-15,Endowment,False,True,,Completed
+DON000648,ALM00963,100000,Major Gift,Stock,2025-08-17,Scholarship,False,True,,Completed
+DON000649,ALM00918,50000,Major Gift,Stock,2024-06-05,Endowment,False,True,,Completed
+DON000650,ALM00986,10000,One-Time Gift,Stock,2025-04-01,Infrastructure,True,True,,Completed
+DON000651,ALM02071,25000,Major Gift,Credit Card,2024-05-22,Scholarship,False,True,,Completed
+DON000652,ALM01198,271,Major Gift,Wire Transfer,2025-03-18,Research,False,True,Monthly,Completed
+DON000653,ALM03467,125,One-Time Gift,Wire Transfer,2025-10-24,General Fund,True,False,,Completed
+DON000654,ALM03268,189,Pledge,Bank Transfer,2025-03-20,Endowment,False,True,,Completed
+DON000655,ALM00979,431,Recurring Monthly,Bank Transfer,2024-07-15,General Fund,False,True,Annual,Completed
+DON000656,ALM01308,112,One-Time Gift,Wire Transfer,2024-08-05,Scholarship,True,True,,Completed
+DON000657,ALM00486,412,Pledge,Credit Card,2025-05-03,Infrastructure,False,True,,Completed
+DON000658,ALM03179,296,Recurring Monthly,Stock,2024-11-24,Scholarship,False,True,,Completed
+DON000659,ALM03008,250000,Major Gift,Bank Transfer,2025-08-09,Endowment,False,True,,Completed
+DON000660,ALM01975,62,Pledge,Wire Transfer,2024-10-06,General Fund,False,True,,Completed
+DON000661,ALM00222,458,Recurring Monthly,Bank Transfer,2024-07-21,Endowment,False,True,,Completed
+DON000662,ALM03395,479,One-Time Gift,Check,2025-04-28,Endowment,False,True,,Completed
+DON000663,ALM00285,100000,In-Kind,Check,2024-10-18,Research,False,True,,Pending
+DON000664,ALM00771,100000,Pledge,Check,2024-03-25,Infrastructure,False,True,,Completed
+DON000665,ALM00321,156,In-Kind,Bank Transfer,2025-02-11,Research,False,True,,Completed
+DON000666,ALM00460,302,Major Gift,Bank Transfer,2025-02-11,Research,False,True,,Completed
+DON000667,ALM01033,161,Pledge,Stock,2024-11-02,General Fund,False,False,,Completed
+DON000668,ALM02179,25000,Major Gift,Wire Transfer,2024-04-09,General Fund,False,True,,Completed
+DON000669,ALM01760,231,Pledge,Check,2024-05-14,General Fund,False,True,,Completed
+DON000670,ALM01905,131,Recurring Monthly,Credit Card,2024-09-17,Research,False,True,,Completed
+DON000671,ALM00982,250000,One-Time Gift,Wire Transfer,2024-01-30,General Fund,False,True,,Completed
+DON000672,ALM02277,121,Recurring Monthly,Stock,2024-04-29,Endowment,False,True,,Completed
+DON000673,ALM01709,25000,Pledge,Credit Card,2025-08-04,Endowment,False,True,,Declined
+DON000674,ALM01684,140,In-Kind,Wire Transfer,2025-08-01,Endowment,False,True,,Completed
+DON000675,ALM01083,434,Recurring Monthly,Bank Transfer,2024-02-20,Infrastructure,False,True,,Completed
+DON000676,ALM02853,102,Major Gift,Bank Transfer,2025-04-12,General Fund,False,True,,Declined
+DON000677,ALM03372,464,Major Gift,Check,2024-12-18,Infrastructure,False,True,,Completed
+DON000678,ALM01533,291,Pledge,Wire Transfer,2025-07-06,Endowment,False,True,,Completed
+DON000679,ALM00579,10000,In-Kind,Stock,2025-05-11,Infrastructure,False,True,,Completed
+DON000680,ALM01940,404,Recurring Monthly,Credit Card,2025-06-27,Infrastructure,False,True,,Completed
+DON000681,ALM03484,122,One-Time Gift,Stock,2023-11-17,Research,False,True,,Completed
+DON000682,ALM01199,178,Major Gift,Credit Card,2024-09-19,Scholarship,False,True,,Completed
+DON000683,ALM01354,10000,Pledge,Bank Transfer,2024-05-10,Scholarship,False,True,,Completed
+DON000684,ALM03263,278,Recurring Monthly,Bank Transfer,2024-02-29,Infrastructure,False,True,,Pending
+DON000685,ALM02804,151,In-Kind,Stock,2023-12-09,General Fund,False,True,Monthly,Completed
+DON000686,ALM03179,439,Recurring Monthly,Stock,2024-03-04,Research,True,True,Quarterly,Completed
+DON000687,ALM02401,113,In-Kind,Credit Card,2024-12-31,General Fund,False,True,,Completed
+DON000688,ALM01273,325,Recurring Monthly,Credit Card,2024-05-31,Scholarship,False,True,,Completed
+DON000689,ALM00935,250000,Pledge,Credit Card,2024-09-08,Research,False,True,,Completed
+DON000690,ALM00223,193,Pledge,Bank Transfer,2023-12-01,Endowment,False,True,,Completed
+DON000691,ALM00956,374,Major Gift,Credit Card,2025-07-01,Infrastructure,False,True,,Completed
+DON000692,ALM02775,10000,Pledge,Stock,2025-05-04,Scholarship,False,True,Monthly,Completed
+DON000693,ALM03155,380,In-Kind,Credit Card,2025-08-31,General Fund,False,True,,Completed
+DON000694,ALM00589,330,Pledge,Credit Card,2024-01-03,Infrastructure,False,True,Monthly,Completed
+DON000695,ALM03497,56,Recurring Monthly,Check,2024-02-12,Infrastructure,False,True,,Completed
+DON000696,ALM00988,162,Major Gift,Bank Transfer,2025-06-08,General Fund,False,True,,Completed
+DON000697,ALM02032,353,One-Time Gift,Stock,2024-02-22,Endowment,False,True,Annual,Completed
+DON000698,ALM00282,413,One-Time Gift,Credit Card,2025-08-24,Research,False,True,Monthly,Completed
+DON000699,ALM01359,240,Recurring Monthly,Credit Card,2023-12-27,Infrastructure,False,True,,Completed
+DON000700,ALM01561,10000,Major Gift,Check,2025-06-04,Endowment,True,True,Monthly,Completed
+DON000701,ALM01075,265,Pledge,Stock,2025-05-07,Endowment,True,True,,Completed
+DON000702,ALM02651,247,In-Kind,Wire Transfer,2024-07-14,Scholarship,False,True,,Completed
+DON000703,ALM02866,384,Recurring Monthly,Stock,2024-09-21,Endowment,False,True,,Completed
+DON000704,ALM03097,201,In-Kind,Bank Transfer,2024-11-26,Infrastructure,False,True,,Completed
+DON000705,ALM00753,411,Pledge,Stock,2023-12-14,Scholarship,False,True,,Completed
+DON000706,ALM02535,204,Major Gift,Credit Card,2024-05-13,General Fund,True,True,Quarterly,Completed
+DON000707,ALM00193,25000,Recurring Monthly,Stock,2024-12-24,Infrastructure,False,True,,Declined
+DON000708,ALM01980,300,In-Kind,Stock,2024-06-27,Scholarship,False,True,Monthly,Completed
+DON000709,ALM01921,326,In-Kind,Bank Transfer,2025-08-26,Scholarship,False,True,,Pending
+DON000710,ALM02403,100000,Recurring Monthly,Wire Transfer,2025-03-12,General Fund,False,True,,Completed
+DON000711,ALM03370,130,Major Gift,Bank Transfer,2025-09-28,Research,False,True,Annual,Completed
+DON000712,ALM01313,65,Recurring Monthly,Check,2024-12-09,Scholarship,False,True,,Completed
+DON000713,ALM01192,415,Pledge,Stock,2025-06-13,General Fund,False,True,,Completed
+DON000714,ALM00937,471,In-Kind,Bank Transfer,2025-05-24,Research,False,True,Quarterly,Completed
+DON000715,ALM01591,381,Recurring Monthly,Bank Transfer,2024-02-12,Endowment,False,True,,Completed
+DON000716,ALM03205,250000,Major Gift,Check,2025-04-18,Endowment,False,True,,Completed
+DON000717,ALM01012,321,Recurring Monthly,Wire Transfer,2024-09-30,Scholarship,False,True,,Completed
+DON000718,ALM02855,154,Major Gift,Credit Card,2024-11-21,Infrastructure,False,True,,Pending
+DON000719,ALM03439,117,Major Gift,Bank Transfer,2024-04-25,Infrastructure,False,True,,Completed
+DON000720,ALM00064,334,Major Gift,Credit Card,2023-11-10,Infrastructure,False,False,,Completed
+DON000721,ALM00757,461,In-Kind,Bank Transfer,2024-02-02,General Fund,True,False,,Completed
+DON000722,ALM00495,163,One-Time Gift,Wire Transfer,2025-07-24,Infrastructure,False,True,,Completed
+DON000723,ALM03483,364,One-Time Gift,Wire Transfer,2025-06-15,General Fund,False,True,,Completed
+DON000724,ALM01628,100000,Recurring Monthly,Bank Transfer,2024-01-10,Scholarship,False,True,,Completed
+DON000725,ALM02009,250000,Pledge,Bank Transfer,2025-08-10,Research,True,True,,Completed
+DON000726,ALM02080,25000,In-Kind,Check,2024-06-11,Infrastructure,False,True,,Completed
+DON000727,ALM00810,240,One-Time Gift,Check,2025-01-09,Endowment,False,True,,Completed
+DON000728,ALM01828,134,Pledge,Check,2024-06-10,General Fund,False,True,,Completed
+DON000729,ALM02318,311,In-Kind,Wire Transfer,2025-10-30,Endowment,False,True,,Completed
+DON000730,ALM02714,347,One-Time Gift,Check,2025-03-15,Scholarship,False,True,Annual,Completed
+DON000731,ALM01856,100000,Recurring Monthly,Stock,2025-09-10,Scholarship,True,True,,Completed
+DON000732,ALM00871,50000,Recurring Monthly,Stock,2025-04-03,Research,False,True,,Completed
+DON000733,ALM01671,10000,One-Time Gift,Stock,2023-12-20,Endowment,False,True,,Completed
+DON000734,ALM00061,55,Recurring Monthly,Wire Transfer,2025-04-27,Scholarship,False,True,Monthly,Completed
+DON000735,ALM03314,272,One-Time Gift,Stock,2023-12-24,Endowment,False,True,,Completed
+DON000736,ALM01373,250000,Recurring Monthly,Stock,2024-08-09,Research,True,True,Quarterly,Completed
+DON000737,ALM02221,393,Pledge,Wire Transfer,2023-12-11,Scholarship,False,True,,Completed
+DON000738,ALM00331,100000,One-Time Gift,Bank Transfer,2025-02-20,Infrastructure,False,True,,Completed
+DON000739,ALM01924,164,One-Time Gift,Stock,2025-07-04,Infrastructure,False,True,,Completed
+DON000740,ALM00051,100000,Recurring Monthly,Bank Transfer,2024-10-23,Scholarship,False,True,Monthly,Completed
+DON000741,ALM03059,97,Pledge,Bank Transfer,2025-09-12,General Fund,False,True,,Completed
+DON000742,ALM02816,250000,Pledge,Wire Transfer,2024-11-13,Research,False,True,,Completed
+DON000743,ALM00453,322,Major Gift,Stock,2025-04-23,Scholarship,False,True,,Declined
+DON000744,ALM01749,122,Recurring Monthly,Bank Transfer,2025-09-23,Infrastructure,False,True,,Completed
+DON000745,ALM01963,233,Major Gift,Bank Transfer,2024-05-26,Endowment,False,True,Monthly,Completed
+DON000746,ALM02009,10000,Major Gift,Credit Card,2024-02-19,Infrastructure,False,True,,Completed
+DON000747,ALM03194,10000,Recurring Monthly,Bank Transfer,2024-06-24,Research,False,True,Quarterly,Completed
+DON000748,ALM02912,221,Recurring Monthly,Check,2024-08-28,General Fund,False,True,,Completed
+DON000749,ALM01544,125,Pledge,Credit Card,2024-01-06,Endowment,False,True,Monthly,Completed
+DON000750,ALM02041,100000,Major Gift,Wire Transfer,2025-02-16,Endowment,False,True,Monthly,Completed
+DON000751,ALM03151,102,One-Time Gift,Check,2023-11-16,Endowment,False,True,,Completed
+DON000752,ALM02181,339,Major Gift,Wire Transfer,2025-06-28,Scholarship,False,True,,Completed
+DON000753,ALM02214,25000,Pledge,Wire Transfer,2024-08-24,Scholarship,False,True,,Declined
+DON000754,ALM01895,100000,Recurring Monthly,Check,2024-12-30,General Fund,False,True,,Completed
+DON000755,ALM02753,343,Pledge,Bank Transfer,2024-08-13,General Fund,False,True,,Completed
+DON000756,ALM00737,262,Pledge,Stock,2023-11-21,Infrastructure,False,False,,Completed
+DON000757,ALM01249,359,Major Gift,Check,2025-04-14,General Fund,True,True,,Completed
+DON000758,ALM02911,222,Recurring Monthly,Stock,2025-04-13,Endowment,False,False,,Completed
+DON000759,ALM01293,50000,Recurring Monthly,Check,2024-06-19,Research,False,True,,Completed
+DON000760,ALM01058,334,In-Kind,Bank Transfer,2024-03-21,Scholarship,False,True,,Completed
+DON000761,ALM02324,214,Pledge,Check,2025-08-15,General Fund,False,True,,Completed
+DON000762,ALM01548,50000,One-Time Gift,Credit Card,2025-06-04,Endowment,True,True,,Completed
+DON000763,ALM03341,272,Major Gift,Check,2024-04-07,Research,False,True,,Completed
+DON000764,ALM01536,50000,Pledge,Credit Card,2025-09-12,Endowment,False,True,,Completed
+DON000765,ALM02645,290,One-Time Gift,Wire Transfer,2025-01-27,Scholarship,False,True,,Completed
+DON000766,ALM03065,301,Major Gift,Credit Card,2025-10-31,Scholarship,False,True,,Completed
+DON000767,ALM00202,77,One-Time Gift,Check,2024-05-10,Scholarship,False,True,,Completed
+DON000768,ALM01402,486,In-Kind,Bank Transfer,2023-11-04,General Fund,False,True,Annual,Completed
+DON000769,ALM01083,389,One-Time Gift,Stock,2025-05-03,General Fund,True,True,,Completed
+DON000770,ALM01340,463,In-Kind,Wire Transfer,2024-11-24,Endowment,False,True,Annual,Completed
+DON000771,ALM03436,25000,In-Kind,Wire Transfer,2024-01-28,General Fund,False,True,Monthly,Completed
+DON000772,ALM01006,242,In-Kind,Bank Transfer,2025-06-20,Infrastructure,False,True,Monthly,Completed
+DON000773,ALM01964,430,Major Gift,Wire Transfer,2025-09-24,Infrastructure,False,True,Monthly,Completed
+DON000774,ALM02147,50000,Major Gift,Bank Transfer,2024-10-03,General Fund,False,True,,Completed
+DON000775,ALM00966,100000,Pledge,Check,2023-11-19,Research,False,True,Quarterly,Completed
+DON000776,ALM02921,410,Recurring Monthly,Credit Card,2023-12-24,Scholarship,False,True,,Completed
+DON000777,ALM02760,25000,Major Gift,Wire Transfer,2025-01-03,Infrastructure,False,True,Quarterly,Completed
+DON000778,ALM00889,25000,Major Gift,Credit Card,2025-09-09,Scholarship,False,True,,Completed
+DON000779,ALM02661,308,Pledge,Check,2025-07-23,General Fund,False,True,,Completed
+DON000780,ALM00178,338,In-Kind,Wire Transfer,2023-12-05,General Fund,False,True,Monthly,Completed
+DON000781,ALM01318,83,Pledge,Stock,2025-09-10,Research,False,True,Monthly,Completed
+DON000782,ALM00321,250,Pledge,Wire Transfer,2024-09-29,Scholarship,False,True,,Completed
+DON000783,ALM02766,99,One-Time Gift,Check,2024-08-15,Infrastructure,False,True,,Completed
+DON000784,ALM01316,67,Major Gift,Credit Card,2024-05-14,Endowment,False,True,,Completed
+DON000785,ALM01780,204,Pledge,Credit Card,2025-01-27,Scholarship,False,True,Annual,Completed
+DON000786,ALM02386,270,Recurring Monthly,Credit Card,2025-10-23,Research,False,False,,Completed
+DON000787,ALM02567,422,In-Kind,Bank Transfer,2024-03-02,Research,False,True,,Completed
+DON000788,ALM03135,276,One-Time Gift,Bank Transfer,2025-02-10,Infrastructure,False,True,,Completed
+DON000789,ALM00355,489,Major Gift,Wire Transfer,2024-06-03,Endowment,False,True,,Completed
+DON000790,ALM03020,100000,Recurring Monthly,Credit Card,2025-06-21,Research,False,True,,Completed
+DON000791,ALM03017,436,Recurring Monthly,Check,2024-05-11,Research,False,True,,Completed
+DON000792,ALM01504,443,Major Gift,Wire Transfer,2025-09-02,Endowment,False,True,,Completed
+DON000793,ALM02762,342,Recurring Monthly,Bank Transfer,2024-07-28,General Fund,False,True,,Completed
+DON000794,ALM00016,151,Major Gift,Bank Transfer,2024-09-28,Scholarship,False,True,,Completed
+DON000795,ALM01339,313,Major Gift,Wire Transfer,2024-10-22,Infrastructure,False,True,,Completed
+DON000796,ALM01568,235,Pledge,Stock,2024-04-27,General Fund,False,False,,Completed
+DON000797,ALM02305,193,One-Time Gift,Bank Transfer,2024-04-21,Infrastructure,False,True,,Completed
+DON000798,ALM02029,270,One-Time Gift,Credit Card,2024-05-18,Infrastructure,False,True,,Completed
+DON000799,ALM00723,250000,Major Gift,Wire Transfer,2025-06-11,General Fund,False,True,,Completed
+DON000800,ALM01189,356,One-Time Gift,Wire Transfer,2024-04-06,Infrastructure,False,True,Monthly,Completed
+DON000801,ALM01581,99,Major Gift,Credit Card,2024-03-18,Scholarship,False,True,Monthly,Completed
+DON000802,ALM02785,50000,In-Kind,Wire Transfer,2025-04-09,Research,False,True,,Completed
+DON000803,ALM01352,50000,Recurring Monthly,Bank Transfer,2025-05-06,General Fund,False,True,,Completed
+DON000804,ALM01402,336,Recurring Monthly,Credit Card,2024-04-15,Scholarship,True,True,,Completed
+DON000805,ALM00054,196,Major Gift,Credit Card,2025-07-30,General Fund,False,True,,Completed
+DON000806,ALM00223,301,One-Time Gift,Credit Card,2024-09-14,Infrastructure,False,True,,Completed
+DON000807,ALM03105,50000,Pledge,Stock,2023-12-13,Research,False,True,Monthly,Declined
+DON000808,ALM00085,344,Major Gift,Bank Transfer,2023-11-19,Infrastructure,False,True,,Completed
+DON000809,ALM00237,50000,One-Time Gift,Stock,2024-03-13,Infrastructure,False,True,,Completed
+DON000810,ALM00247,25000,Major Gift,Wire Transfer,2024-01-25,General Fund,False,True,Quarterly,Completed
+DON000811,ALM02595,169,Pledge,Stock,2025-04-08,Research,False,True,,Completed
+DON000812,ALM02108,443,One-Time Gift,Check,2024-01-28,Infrastructure,False,True,Annual,Completed
+DON000813,ALM02381,79,Recurring Monthly,Check,2024-07-15,Infrastructure,False,True,Monthly,Completed
+DON000814,ALM02127,50000,Pledge,Check,2024-10-10,Research,False,True,,Completed
+DON000815,ALM00202,343,Pledge,Check,2024-08-26,Research,False,True,,Completed
+DON000816,ALM02491,219,Major Gift,Credit Card,2023-12-01,Research,False,True,Monthly,Completed
+DON000817,ALM01631,226,Major Gift,Bank Transfer,2024-01-22,Infrastructure,False,False,,Completed
+DON000818,ALM00200,10000,Recurring Monthly,Wire Transfer,2025-10-18,Endowment,False,True,Monthly,Completed
+DON000819,ALM02961,276,One-Time Gift,Credit Card,2025-07-12,Endowment,False,True,,Completed
+DON000820,ALM00135,205,One-Time Gift,Credit Card,2025-04-15,Scholarship,False,True,,Completed
+DON000821,ALM02719,100000,Major Gift,Check,2024-02-12,Scholarship,False,True,,Completed
+DON000822,ALM01389,320,In-Kind,Stock,2024-01-31,General Fund,False,True,,Completed
+DON000823,ALM03324,250000,Major Gift,Wire Transfer,2025-04-26,Scholarship,False,True,Quarterly,Completed
+DON000824,ALM01529,277,Recurring Monthly,Stock,2025-04-26,Research,False,True,,Completed
+DON000825,ALM00732,467,Recurring Monthly,Credit Card,2024-04-13,Endowment,False,True,Quarterly,Completed
+DON000826,ALM01000,72,Pledge,Bank Transfer,2024-01-28,General Fund,False,True,,Completed
+DON000827,ALM01509,256,Pledge,Stock,2024-11-25,General Fund,False,True,,Completed
+DON000828,ALM01759,366,Recurring Monthly,Wire Transfer,2023-12-06,Infrastructure,False,True,,Completed
+DON000829,ALM02460,70,In-Kind,Stock,2025-08-12,Infrastructure,True,True,,Completed
+DON000830,ALM00525,432,One-Time Gift,Wire Transfer,2024-08-12,Endowment,False,True,,Completed
+DON000831,ALM01808,126,One-Time Gift,Stock,2024-09-30,Scholarship,False,True,,Completed
+DON000832,ALM03497,311,Major Gift,Credit Card,2023-11-24,Endowment,False,True,,Completed
+DON000833,ALM00880,250000,One-Time Gift,Bank Transfer,2024-12-31,Endowment,False,True,,Pending
+DON000834,ALM03003,100000,Major Gift,Stock,2023-11-22,Endowment,False,True,Quarterly,Completed
+DON000835,ALM02364,460,One-Time Gift,Credit Card,2024-03-16,Scholarship,False,True,,Completed
+DON000836,ALM00086,377,Recurring Monthly,Wire Transfer,2024-02-22,Research,False,False,,Completed
+DON000837,ALM00728,163,In-Kind,Credit Card,2024-11-25,Endowment,True,True,Annual,Completed
+DON000838,ALM02126,497,In-Kind,Check,2024-10-09,Infrastructure,False,True,,Completed
+DON000839,ALM02343,178,In-Kind,Check,2024-12-15,Endowment,True,True,,Pending
+DON000840,ALM02240,354,Pledge,Check,2024-02-23,General Fund,False,True,,Completed
+DON000841,ALM03292,107,One-Time Gift,Wire Transfer,2024-11-29,Infrastructure,False,True,Monthly,Completed
+DON000842,ALM03345,102,Major Gift,Bank Transfer,2024-03-03,Scholarship,False,True,,Completed
+DON000843,ALM02778,249,Major Gift,Bank Transfer,2024-05-22,General Fund,False,True,,Completed
+DON000844,ALM01121,170,Recurring Monthly,Bank Transfer,2025-10-08,General Fund,True,True,,Pending
+DON000845,ALM01746,82,Major Gift,Wire Transfer,2024-08-27,Scholarship,False,True,,Completed
+DON000846,ALM01491,329,One-Time Gift,Wire Transfer,2023-12-30,Endowment,True,True,,Completed
+DON000847,ALM02983,219,Pledge,Bank Transfer,2024-08-12,Scholarship,False,True,,Completed
+DON000848,ALM02941,100000,One-Time Gift,Stock,2025-05-04,Research,False,True,Annual,Completed
+DON000849,ALM01215,245,In-Kind,Stock,2025-04-18,Infrastructure,True,True,Quarterly,Completed
+DON000850,ALM02703,203,Recurring Monthly,Credit Card,2024-12-30,General Fund,False,True,,Completed
+DON000851,ALM01558,80,In-Kind,Check,2025-02-14,General Fund,False,True,Monthly,Completed
+DON000852,ALM01695,256,Pledge,Stock,2025-09-25,General Fund,False,True,Quarterly,Completed
+DON000853,ALM00511,191,Pledge,Stock,2025-10-05,Research,False,False,Monthly,Completed
+DON000854,ALM02853,426,Major Gift,Stock,2024-09-27,Scholarship,False,True,,Completed
+DON000855,ALM00842,10000,Recurring Monthly,Wire Transfer,2025-06-09,Endowment,False,True,,Completed
+DON000856,ALM01102,91,Pledge,Wire Transfer,2024-01-12,Infrastructure,False,True,,Pending
+DON000857,ALM03465,145,Major Gift,Bank Transfer,2024-12-08,General Fund,True,True,,Completed
+DON000858,ALM02550,465,Pledge,Stock,2024-09-17,Scholarship,False,True,,Completed
+DON000859,ALM00786,436,One-Time Gift,Check,2025-06-26,Endowment,False,True,,Completed
+DON000860,ALM00861,344,Major Gift,Check,2025-02-28,General Fund,False,True,,Pending
+DON000861,ALM00284,100000,Recurring Monthly,Stock,2024-07-28,Scholarship,False,True,,Completed
+DON000862,ALM01485,229,Pledge,Wire Transfer,2025-07-28,Research,False,True,,Completed
+DON000863,ALM00791,259,Major Gift,Wire Transfer,2024-05-13,General Fund,False,True,,Completed
+DON000864,ALM00939,10000,Major Gift,Stock,2024-06-16,General Fund,False,True,,Completed
+DON000865,ALM00844,377,Recurring Monthly,Stock,2023-12-05,Research,False,True,,Completed
+DON000866,ALM02510,453,Major Gift,Wire Transfer,2025-08-16,Scholarship,False,False,Quarterly,Completed
+DON000867,ALM00838,10000,Recurring Monthly,Bank Transfer,2024-05-16,General Fund,False,True,,Completed
+DON000868,ALM02256,358,Pledge,Credit Card,2025-05-03,Research,False,True,,Completed
+DON000869,ALM02709,160,In-Kind,Check,2025-01-02,General Fund,False,True,,Completed
+DON000870,ALM00989,482,In-Kind,Wire Transfer,2024-10-01,Research,False,True,,Completed
+DON000871,ALM03360,415,Recurring Monthly,Check,2025-04-20,General Fund,False,True,,Completed
+DON000872,ALM00916,100000,In-Kind,Check,2025-07-17,Infrastructure,False,False,,Completed
+DON000873,ALM02573,467,Recurring Monthly,Credit Card,2024-04-19,General Fund,False,True,Quarterly,Completed
+DON000874,ALM00222,210,One-Time Gift,Wire Transfer,2023-11-07,Research,False,True,Monthly,Completed
+DON000875,ALM01063,50,In-Kind,Bank Transfer,2025-07-31,General Fund,False,True,Monthly,Pending
+DON000876,ALM01681,10000,One-Time Gift,Stock,2025-10-25,Infrastructure,True,False,,Completed
+DON000877,ALM00375,223,One-Time Gift,Check,2024-11-18,General Fund,False,True,,Completed
+DON000878,ALM02244,100000,In-Kind,Wire Transfer,2024-03-12,Endowment,False,True,,Completed
+DON000879,ALM00367,315,Recurring Monthly,Bank Transfer,2024-11-21,Scholarship,True,True,,Completed
+DON000880,ALM01204,498,One-Time Gift,Stock,2024-03-25,Research,False,True,,Completed
+DON000881,ALM03044,10000,Major Gift,Wire Transfer,2023-12-13,General Fund,False,True,,Completed
+DON000882,ALM01827,200,Major Gift,Wire Transfer,2024-02-24,Infrastructure,True,True,,Completed
+DON000883,ALM00819,100000,Recurring Monthly,Wire Transfer,2025-07-19,Infrastructure,False,True,,Completed
+DON000884,ALM01442,327,In-Kind,Stock,2025-04-16,Infrastructure,False,True,,Completed
+DON000885,ALM01331,241,Pledge,Wire Transfer,2025-10-30,Infrastructure,False,True,,Declined
+DON000886,ALM03319,247,In-Kind,Wire Transfer,2025-05-07,Scholarship,False,True,,Completed
+DON000887,ALM02772,10000,In-Kind,Check,2025-04-03,Research,False,True,,Completed
+DON000888,ALM00019,361,Recurring Monthly,Bank Transfer,2024-06-02,Research,False,True,,Completed
+DON000889,ALM01839,346,Major Gift,Bank Transfer,2025-05-04,Endowment,True,True,Quarterly,Completed
+DON000890,ALM01107,255,In-Kind,Check,2024-12-24,Scholarship,False,True,,Completed
+DON000891,ALM02172,420,Recurring Monthly,Check,2024-06-30,Scholarship,False,True,Quarterly,Completed
+DON000892,ALM01713,499,Recurring Monthly,Check,2025-09-29,Scholarship,False,True,,Completed
+DON000893,ALM00268,111,One-Time Gift,Stock,2024-03-19,Endowment,False,True,,Completed
+DON000894,ALM01150,393,Major Gift,Credit Card,2025-06-15,Infrastructure,False,False,,Completed
+DON000895,ALM02478,250000,Major Gift,Check,2024-06-21,General Fund,False,True,,Completed
+DON000896,ALM00743,345,One-Time Gift,Credit Card,2024-02-06,Research,False,True,Monthly,Completed
+DON000897,ALM01049,274,In-Kind,Check,2024-06-08,Endowment,False,True,,Completed
+DON000898,ALM02658,271,Major Gift,Check,2024-02-23,Endowment,False,True,,Completed
+DON000899,ALM00687,100000,Recurring Monthly,Check,2024-01-09,Research,False,True,,Completed
+DON000900,ALM00596,53,In-Kind,Credit Card,2025-07-13,General Fund,False,True,,Completed
+DON000901,ALM02959,378,Major Gift,Wire Transfer,2024-06-19,Scholarship,False,True,,Declined
+DON000902,ALM00474,125,Pledge,Check,2024-11-01,Infrastructure,False,True,,Completed
+DON000903,ALM02260,154,Pledge,Check,2023-12-07,Infrastructure,False,True,Quarterly,Completed
+DON000904,ALM00975,250000,Recurring Monthly,Credit Card,2023-11-03,Scholarship,False,True,,Completed
+DON000905,ALM00879,50000,Major Gift,Stock,2025-02-02,Research,False,True,,Completed
+DON000906,ALM00243,409,Major Gift,Bank Transfer,2024-02-18,Infrastructure,False,True,,Completed
+DON000907,ALM00243,266,Pledge,Stock,2024-12-14,General Fund,False,True,,Completed
+DON000908,ALM02396,352,Pledge,Wire Transfer,2024-12-28,Scholarship,False,True,,Completed
+DON000909,ALM01778,466,One-Time Gift,Credit Card,2025-04-03,Endowment,False,True,Quarterly,Completed
+DON000910,ALM02280,440,Pledge,Wire Transfer,2024-10-19,Infrastructure,True,True,,Completed
+DON000911,ALM01560,345,Major Gift,Stock,2024-11-03,General Fund,False,True,Quarterly,Completed
+DON000912,ALM01243,119,Major Gift,Check,2024-05-07,Scholarship,False,True,,Completed
+DON000913,ALM02803,496,In-Kind,Credit Card,2024-02-18,General Fund,False,True,,Completed
+DON000914,ALM02480,50000,In-Kind,Wire Transfer,2024-03-11,Research,False,True,,Completed
+DON000915,ALM02613,76,Recurring Monthly,Check,2025-09-17,Endowment,False,True,,Completed
+DON000916,ALM01841,25000,Recurring Monthly,Credit Card,2024-01-12,Endowment,False,True,,Completed
+DON000917,ALM02120,396,Major Gift,Credit Card,2025-03-16,Scholarship,False,True,Quarterly,Completed
+DON000918,ALM00176,291,In-Kind,Stock,2024-02-18,Research,False,True,Monthly,Completed
+DON000919,ALM01383,317,In-Kind,Stock,2024-08-15,Endowment,False,True,,Completed
+DON000920,ALM03184,247,In-Kind,Check,2023-11-08,Endowment,False,True,,Completed
+DON000921,ALM01992,279,In-Kind,Stock,2024-03-14,Scholarship,False,True,,Completed
+DON000922,ALM02768,53,Recurring Monthly,Wire Transfer,2024-11-11,Infrastructure,True,True,,Completed
+DON000923,ALM00560,104,One-Time Gift,Stock,2024-01-28,General Fund,False,True,,Completed
+DON000924,ALM01076,142,Major Gift,Check,2025-05-18,Endowment,False,True,Monthly,Completed
+DON000925,ALM03293,25000,In-Kind,Check,2024-05-17,Infrastructure,False,True,,Completed
+DON000926,ALM00489,25000,Recurring Monthly,Credit Card,2023-12-24,Endowment,False,True,,Completed
+DON000927,ALM01122,100000,One-Time Gift,Stock,2024-07-17,Endowment,False,True,,Completed
+DON000928,ALM02482,475,Recurring Monthly,Credit Card,2024-12-07,General Fund,False,True,,Completed
+DON000929,ALM00374,87,Recurring Monthly,Credit Card,2024-05-23,Scholarship,False,True,,Completed
+DON000930,ALM03009,301,Pledge,Check,2024-01-10,Scholarship,False,True,Annual,Completed
+DON000931,ALM02385,136,One-Time Gift,Stock,2024-05-03,Endowment,False,True,,Completed
+DON000932,ALM00096,333,Major Gift,Stock,2025-03-04,Infrastructure,False,True,,Completed
+DON000933,ALM02724,475,One-Time Gift,Check,2023-12-03,Research,False,True,,Pending
+DON000934,ALM01975,327,Pledge,Check,2025-04-06,Endowment,False,True,,Completed
+DON000935,ALM03287,112,Major Gift,Bank Transfer,2024-01-14,Scholarship,False,True,,Completed
+DON000936,ALM03042,117,Pledge,Stock,2025-09-19,Research,False,True,,Completed
+DON000937,ALM03453,25000,In-Kind,Wire Transfer,2025-06-16,Endowment,False,False,,Completed
+DON000938,ALM01518,250000,Major Gift,Stock,2025-05-14,General Fund,False,True,,Completed
+DON000939,ALM03350,25000,Pledge,Wire Transfer,2024-01-30,Infrastructure,False,True,,Completed
+DON000940,ALM00880,143,In-Kind,Bank Transfer,2025-10-11,Infrastructure,False,True,,Completed
+DON000941,ALM00879,348,Major Gift,Wire Transfer,2024-07-22,Scholarship,False,True,,Completed
+DON000942,ALM02427,250000,Pledge,Stock,2024-11-25,General Fund,False,True,,Completed
+DON000943,ALM01911,250000,Pledge,Stock,2024-01-28,Scholarship,False,True,,Completed
+DON000944,ALM01817,25000,One-Time Gift,Check,2023-12-24,General Fund,False,True,Monthly,Completed
+DON000945,ALM03079,453,Pledge,Check,2024-08-19,Infrastructure,False,True,Monthly,Completed
+DON000946,ALM01955,108,Recurring Monthly,Check,2024-10-10,General Fund,True,True,,Completed
+DON000947,ALM02685,50000,Pledge,Bank Transfer,2025-07-15,Scholarship,True,True,,Completed
+DON000948,ALM02410,334,Pledge,Credit Card,2025-09-30,General Fund,False,True,,Completed
+DON000949,ALM00416,308,In-Kind,Stock,2025-08-24,General Fund,True,True,,Completed
+DON000950,ALM00923,10000,Recurring Monthly,Check,2025-04-10,Scholarship,False,False,Monthly,Completed
+DON000951,ALM03306,250000,Pledge,Check,2024-10-24,General Fund,False,True,Quarterly,Completed
+DON000952,ALM02571,10000,In-Kind,Wire Transfer,2024-04-12,Infrastructure,False,True,Annual,Completed
+DON000953,ALM00018,257,Recurring Monthly,Bank Transfer,2025-02-06,General Fund,False,True,,Completed
+DON000954,ALM02640,10000,In-Kind,Bank Transfer,2025-08-17,Scholarship,False,True,,Completed
+DON000955,ALM01127,50000,Recurring Monthly,Wire Transfer,2024-05-11,General Fund,False,True,,Declined
+DON000956,ALM01120,133,Recurring Monthly,Check,2024-03-20,Research,False,True,,Completed
+DON000957,ALM02960,122,Recurring Monthly,Credit Card,2024-04-06,Scholarship,False,True,,Completed
+DON000958,ALM02439,25000,Pledge,Check,2024-07-12,Endowment,False,True,,Completed
+DON000959,ALM00359,10000,In-Kind,Bank Transfer,2025-09-24,Endowment,False,True,,Completed
+DON000960,ALM03079,257,One-Time Gift,Wire Transfer,2024-02-03,Endowment,True,True,,Completed
+DON000961,ALM00149,10000,In-Kind,Stock,2024-12-05,Infrastructure,False,True,,Completed
+DON000962,ALM01503,250000,Major Gift,Credit Card,2024-09-09,Research,False,True,,Completed
+DON000963,ALM02410,50000,Major Gift,Bank Transfer,2025-06-16,Scholarship,False,True,Monthly,Completed
+DON000964,ALM02520,457,In-Kind,Credit Card,2025-01-18,Scholarship,False,True,,Declined
+DON000965,ALM01027,10000,Pledge,Wire Transfer,2025-08-30,Infrastructure,False,True,,Completed
+DON000966,ALM02955,10000,In-Kind,Credit Card,2025-10-08,General Fund,False,True,Monthly,Completed
+DON000967,ALM01648,305,One-Time Gift,Bank Transfer,2025-02-17,Research,False,True,Quarterly,Completed
+DON000968,ALM00222,50000,Major Gift,Credit Card,2025-01-02,General Fund,False,True,Annual,Completed
+DON000969,ALM00028,446,Major Gift,Check,2024-06-18,Scholarship,False,True,,Completed
+DON000970,ALM03229,170,In-Kind,Bank Transfer,2025-06-09,Scholarship,False,True,,Completed
+DON000971,ALM02154,338,Major Gift,Check,2024-07-03,Infrastructure,False,True,,Completed
+DON000972,ALM03495,193,In-Kind,Check,2024-02-29,Infrastructure,False,True,,Completed
+DON000973,ALM01283,230,Pledge,Bank Transfer,2024-05-27,Scholarship,False,True,,Pending
+DON000974,ALM01096,256,Major Gift,Bank Transfer,2024-05-30,Infrastructure,False,True,,Completed
+DON000975,ALM00249,398,Major Gift,Stock,2023-12-25,Research,False,False,,Completed
+DON000976,ALM02108,50000,One-Time Gift,Stock,2024-09-13,Scholarship,False,True,,Completed
+DON000977,ALM01651,250000,Recurring Monthly,Wire Transfer,2025-02-27,Scholarship,False,True,,Completed
+DON000978,ALM01681,473,Major Gift,Wire Transfer,2023-12-13,Scholarship,False,True,,Completed
+DON000979,ALM02810,283,Pledge,Bank Transfer,2024-01-28,Infrastructure,False,True,,Completed
+DON000980,ALM00204,253,Pledge,Credit Card,2024-11-12,General Fund,False,True,,Pending
+DON000981,ALM00109,335,Major Gift,Check,2024-06-13,Endowment,False,True,,Completed
+DON000982,ALM00296,366,One-Time Gift,Stock,2024-03-09,Scholarship,False,True,,Completed
+DON000983,ALM01889,476,In-Kind,Stock,2025-09-03,Scholarship,False,True,Annual,Declined
+DON000984,ALM02960,384,Major Gift,Stock,2025-10-15,General Fund,True,True,Annual,Completed
+DON000985,ALM00891,182,One-Time Gift,Credit Card,2024-10-13,Infrastructure,False,True,,Completed
+DON000986,ALM03077,190,Pledge,Bank Transfer,2023-12-15,Research,False,True,Annual,Completed
+DON000987,ALM00537,123,Recurring Monthly,Stock,2024-08-04,Infrastructure,False,True,,Completed
+DON000988,ALM02828,386,Recurring Monthly,Credit Card,2025-02-11,General Fund,False,True,Quarterly,Completed
+DON000989,ALM02841,367,Pledge,Stock,2024-02-12,General Fund,False,True,,Declined
+DON000990,ALM02653,490,Recurring Monthly,Wire Transfer,2024-08-02,Scholarship,False,True,Quarterly,Completed
+DON000991,ALM00131,100000,Pledge,Wire Transfer,2025-05-24,Scholarship,False,True,Annual,Completed
+DON000992,ALM00411,25000,Major Gift,Check,2024-05-09,Infrastructure,False,True,,Completed
+DON000993,ALM02519,147,One-Time Gift,Credit Card,2024-02-25,Research,False,True,Monthly,Declined
+DON000994,ALM02149,371,Recurring Monthly,Check,2024-05-03,Scholarship,False,True,,Completed
+DON000995,ALM03144,282,Pledge,Stock,2024-06-13,Scholarship,False,False,,Completed
+DON000996,ALM00482,249,Recurring Monthly,Stock,2024-11-17,General Fund,False,True,,Completed
+DON000997,ALM03191,499,Pledge,Bank Transfer,2024-08-12,Infrastructure,False,True,Monthly,Completed
+DON000998,ALM00984,226,Major Gift,Wire Transfer,2025-01-23,Infrastructure,False,True,Annual,Completed
+DON000999,ALM03278,99,Pledge,Wire Transfer,2024-06-07,General Fund,False,True,,Completed
+DON001000,ALM02945,488,In-Kind,Wire Transfer,2024-12-21,Infrastructure,True,True,,Completed
+DON001001,ALM01239,100000,One-Time Gift,Stock,2025-06-14,Research,False,True,,Completed
+DON001002,ALM03115,372,Recurring Monthly,Credit Card,2024-12-16,Endowment,False,True,,Completed
+DON001003,ALM02603,290,Major Gift,Stock,2025-07-01,Research,False,True,,Completed
+DON001004,ALM01783,100000,One-Time Gift,Bank Transfer,2024-08-06,General Fund,True,True,,Completed
+DON001005,ALM00059,50000,Recurring Monthly,Stock,2024-01-26,General Fund,False,True,,Completed
+DON001006,ALM01863,57,Major Gift,Bank Transfer,2025-02-27,General Fund,False,False,,Completed
+DON001007,ALM00829,450,One-Time Gift,Check,2024-02-05,Research,True,True,,Completed
+DON001008,ALM01577,100000,In-Kind,Check,2024-11-03,General Fund,False,True,,Completed
+DON001009,ALM00380,462,In-Kind,Wire Transfer,2024-10-08,General Fund,False,True,,Completed
+DON001010,ALM01964,248,Pledge,Bank Transfer,2025-08-01,Scholarship,False,True,Annual,Completed
+DON001011,ALM01456,438,Major Gift,Check,2025-10-03,Endowment,False,True,,Completed
+DON001012,ALM00505,120,Pledge,Credit Card,2025-03-23,Infrastructure,False,True,Quarterly,Completed
+DON001013,ALM00258,250000,In-Kind,Stock,2024-09-30,Infrastructure,False,True,,Completed
+DON001014,ALM03091,54,Major Gift,Check,2025-08-26,Infrastructure,False,True,,Completed
+DON001015,ALM02806,50000,Recurring Monthly,Bank Transfer,2025-04-24,Endowment,False,True,,Pending
+DON001016,ALM01027,115,Recurring Monthly,Stock,2024-03-08,Endowment,False,True,,Completed
+DON001017,ALM02520,254,In-Kind,Stock,2024-12-23,Infrastructure,False,True,Annual,Completed
+DON001018,ALM02512,250000,Major Gift,Stock,2024-01-03,Endowment,False,True,Quarterly,Completed
+DON001019,ALM01896,100000,Pledge,Check,2024-02-12,Research,False,True,,Completed
+DON001020,ALM03382,73,In-Kind,Credit Card,2025-08-01,Endowment,False,True,,Completed
+DON001021,ALM00940,239,Recurring Monthly,Wire Transfer,2024-11-10,Scholarship,True,True,,Completed
+DON001022,ALM02838,479,Major Gift,Credit Card,2024-05-20,General Fund,False,True,Annual,Completed
+DON001023,ALM01786,301,Recurring Monthly,Credit Card,2024-09-23,Scholarship,False,True,,Completed
+DON001024,ALM00165,50000,Major Gift,Wire Transfer,2024-05-17,General Fund,False,True,,Completed
+DON001025,ALM02234,82,One-Time Gift,Credit Card,2024-02-04,Scholarship,False,True,,Pending
+DON001026,ALM00565,100000,One-Time Gift,Wire Transfer,2024-09-28,Scholarship,False,True,,Completed
+DON001027,ALM00422,25000,Pledge,Credit Card,2024-06-09,Research,False,True,,Completed
+DON001028,ALM01523,125,Pledge,Credit Card,2024-07-17,Scholarship,False,True,,Completed
+DON001029,ALM01864,190,Major Gift,Credit Card,2025-05-13,Scholarship,False,True,,Completed
+DON001030,ALM00954,153,Pledge,Bank Transfer,2024-06-28,General Fund,False,True,,Completed
+DON001031,ALM00527,224,One-Time Gift,Stock,2025-01-17,General Fund,False,True,,Pending
+DON001032,ALM02634,100000,Recurring Monthly,Credit Card,2024-12-16,Infrastructure,False,True,Annual,Completed
+DON001033,ALM00628,10000,Recurring Monthly,Wire Transfer,2024-05-15,Research,False,True,Monthly,Completed
+DON001034,ALM00148,431,Major Gift,Stock,2025-03-02,General Fund,False,False,,Completed
+DON001035,ALM03007,250000,Pledge,Stock,2025-07-28,Research,True,True,,Completed
+DON001036,ALM01950,249,Major Gift,Bank Transfer,2025-05-01,Infrastructure,True,True,,Completed
+DON001037,ALM00448,100000,Recurring Monthly,Wire Transfer,2024-03-31,Research,False,True,,Completed
+DON001038,ALM01082,235,Major Gift,Stock,2025-08-20,General Fund,False,True,,Completed
+DON001039,ALM00743,10000,One-Time Gift,Credit Card,2024-09-23,Infrastructure,False,True,,Completed
+DON001040,ALM03241,126,One-Time Gift,Credit Card,2024-06-06,Endowment,False,False,,Completed
+DON001041,ALM02142,234,Pledge,Credit Card,2025-04-16,Research,False,True,Monthly,Completed
+DON001042,ALM02927,25000,One-Time Gift,Credit Card,2024-06-20,Endowment,False,True,,Completed
+DON001043,ALM01640,442,In-Kind,Bank Transfer,2024-08-05,Endowment,False,True,Annual,Completed
+DON001044,ALM02671,418,Recurring Monthly,Stock,2025-02-03,Research,False,True,Quarterly,Pending
+DON001045,ALM00298,189,Pledge,Wire Transfer,2024-10-15,General Fund,False,True,,Completed
+DON001046,ALM02575,261,In-Kind,Stock,2024-10-07,Research,False,True,,Completed
+DON001047,ALM03076,363,One-Time Gift,Stock,2023-12-10,Infrastructure,False,True,Quarterly,Pending
+DON001048,ALM00494,250000,In-Kind,Wire Transfer,2024-02-04,Scholarship,False,True,,Completed
+DON001049,ALM00334,389,Recurring Monthly,Check,2024-03-21,Research,False,True,,Completed
+DON001050,ALM01239,126,Major Gift,Wire Transfer,2025-02-02,Scholarship,False,True,Monthly,Completed
+DON001051,ALM03018,417,Pledge,Bank Transfer,2023-11-10,General Fund,False,True,,Completed
+DON001052,ALM03387,10000,Recurring Monthly,Wire Transfer,2025-07-16,General Fund,False,True,,Completed
+DON001053,ALM03110,125,Major Gift,Check,2025-08-31,Scholarship,False,True,,Completed
+DON001054,ALM00071,250000,Major Gift,Wire Transfer,2025-09-11,Research,False,True,,Completed
+DON001055,ALM00666,182,Major Gift,Bank Transfer,2025-09-04,Scholarship,False,True,,Declined
+DON001056,ALM02497,25000,One-Time Gift,Stock,2025-10-09,Research,True,True,,Completed
+DON001057,ALM00827,50000,One-Time Gift,Stock,2025-03-23,Research,False,True,,Completed
+DON001058,ALM02612,10000,Major Gift,Credit Card,2025-07-03,Research,False,True,,Completed
+DON001059,ALM02619,65,Recurring Monthly,Check,2025-09-06,Infrastructure,False,True,,Pending
+DON001060,ALM02959,250000,One-Time Gift,Wire Transfer,2023-12-15,Infrastructure,False,True,,Completed
+DON001061,ALM03487,100000,Major Gift,Bank Transfer,2025-08-01,Scholarship,False,True,Quarterly,Completed
+DON001062,ALM02979,185,Recurring Monthly,Wire Transfer,2025-08-12,General Fund,False,True,Annual,Completed
+DON001063,ALM03041,459,Recurring Monthly,Wire Transfer,2024-01-13,Scholarship,False,True,,Completed
+DON001064,ALM01772,100000,Pledge,Check,2024-07-07,General Fund,False,True,,Completed
+DON001065,ALM02196,100000,In-Kind,Check,2024-12-28,Research,False,True,,Completed
+DON001066,ALM02563,328,Recurring Monthly,Check,2024-01-21,General Fund,False,True,,Pending
+DON001067,ALM02755,497,In-Kind,Wire Transfer,2025-03-14,General Fund,False,True,,Completed
+DON001068,ALM01350,437,Pledge,Credit Card,2024-08-30,Infrastructure,False,True,,Pending
+DON001069,ALM02647,108,Major Gift,Credit Card,2023-12-13,Infrastructure,False,True,,Completed
+DON001070,ALM02362,321,Recurring Monthly,Stock,2024-02-02,Infrastructure,False,True,,Completed
+DON001071,ALM01068,97,Recurring Monthly,Bank Transfer,2024-01-27,Research,True,True,,Completed
+DON001072,ALM01923,368,Major Gift,Check,2024-01-22,Endowment,False,True,,Completed
+DON001073,ALM01336,250000,One-Time Gift,Credit Card,2024-06-12,Endowment,False,True,,Completed
+DON001074,ALM00530,105,One-Time Gift,Wire Transfer,2025-02-02,Endowment,False,True,,Completed
+DON001075,ALM03026,71,Major Gift,Credit Card,2024-10-06,Endowment,False,True,,Completed
+DON001076,ALM00713,250000,In-Kind,Credit Card,2024-03-02,Infrastructure,False,False,Quarterly,Completed
+DON001077,ALM00141,491,Pledge,Check,2024-07-13,Scholarship,False,True,,Completed
+DON001078,ALM01624,259,Major Gift,Bank Transfer,2025-09-21,General Fund,False,False,,Completed
+DON001079,ALM00116,287,Recurring Monthly,Wire Transfer,2024-10-20,Endowment,False,True,Quarterly,Completed
+DON001080,ALM02501,365,Pledge,Bank Transfer,2024-02-28,Scholarship,False,True,,Completed
+DON001081,ALM02549,100000,Major Gift,Bank Transfer,2025-03-27,Research,False,True,,Completed
+DON001082,ALM01494,50000,Recurring Monthly,Bank Transfer,2025-05-30,Endowment,False,True,,Completed
+DON001083,ALM02769,292,In-Kind,Check,2023-11-28,Endowment,False,True,Monthly,Completed
+DON001084,ALM02563,194,Recurring Monthly,Credit Card,2024-11-04,Infrastructure,True,True,,Completed
+DON001085,ALM00557,50000,One-Time Gift,Check,2024-01-10,Endowment,False,True,Monthly,Completed
+DON001086,ALM00979,100000,Major Gift,Wire Transfer,2025-02-01,Research,False,True,,Declined
+DON001087,ALM02122,409,In-Kind,Credit Card,2024-11-16,General Fund,False,True,,Completed
+DON001088,ALM02591,317,Recurring Monthly,Credit Card,2025-09-11,Scholarship,False,True,,Completed
+DON001089,ALM00467,25000,One-Time Gift,Wire Transfer,2024-10-22,General Fund,False,True,,Completed
+DON001090,ALM01364,437,Recurring Monthly,Bank Transfer,2023-11-29,General Fund,False,True,,Pending
+DON001091,ALM01592,25000,One-Time Gift,Wire Transfer,2024-05-31,Scholarship,False,True,,Completed
+DON001092,ALM00547,201,One-Time Gift,Bank Transfer,2025-05-09,Infrastructure,False,True,Annual,Completed
+DON001093,ALM01912,25000,Recurring Monthly,Check,2024-04-30,Research,False,True,,Completed
+DON001094,ALM01301,153,Recurring Monthly,Check,2024-02-26,Scholarship,False,True,,Completed
+DON001095,ALM01740,84,Pledge,Credit Card,2024-03-07,Infrastructure,False,True,,Completed
+DON001096,ALM03018,250000,Pledge,Credit Card,2025-05-02,Scholarship,False,True,Quarterly,Completed
+DON001097,ALM02210,437,Recurring Monthly,Bank Transfer,2024-10-15,General Fund,False,True,Annual,Completed
+DON001098,ALM01047,62,Major Gift,Stock,2025-06-21,Scholarship,False,True,,Completed
+DON001099,ALM01420,177,Recurring Monthly,Wire Transfer,2025-08-04,Research,False,True,,Completed
+DON001100,ALM00650,237,Major Gift,Credit Card,2024-05-04,Research,False,True,,Completed
+DON001101,ALM01835,426,Pledge,Credit Card,2024-03-19,Infrastructure,False,True,Quarterly,Completed
+DON001102,ALM02793,311,Recurring Monthly,Stock,2024-04-02,Research,False,True,,Completed
+DON001103,ALM01538,25000,Pledge,Wire Transfer,2024-03-22,Infrastructure,False,True,Monthly,Completed
+DON001104,ALM00102,184,In-Kind,Check,2023-12-04,Endowment,True,True,,Completed
+DON001105,ALM03148,292,In-Kind,Wire Transfer,2024-05-22,Scholarship,True,True,,Completed
+DON001106,ALM02922,243,Major Gift,Credit Card,2024-01-16,General Fund,False,True,,Completed
+DON001107,ALM01587,250000,Recurring Monthly,Stock,2024-03-08,Infrastructure,False,True,,Completed
+DON001108,ALM01660,329,Pledge,Credit Card,2024-05-17,Infrastructure,True,True,Quarterly,Completed
+DON001109,ALM01287,50000,In-Kind,Stock,2025-01-21,Infrastructure,False,True,,Completed
+DON001110,ALM02934,406,Pledge,Bank Transfer,2024-05-30,Infrastructure,False,True,Monthly,Completed
+DON001111,ALM02071,100000,In-Kind,Stock,2025-05-01,Research,False,True,Annual,Pending
+DON001112,ALM03195,390,Recurring Monthly,Credit Card,2024-12-19,Research,False,True,,Completed
+DON001113,ALM03084,370,Major Gift,Wire Transfer,2024-10-16,Research,False,True,,Completed
+DON001114,ALM02573,156,Pledge,Wire Transfer,2025-04-24,Scholarship,True,True,,Completed
+DON001115,ALM01283,481,In-Kind,Bank Transfer,2024-05-01,Infrastructure,False,True,Annual,Completed
+DON001116,ALM00811,100000,Recurring Monthly,Wire Transfer,2025-07-14,Research,False,True,,Completed
+DON001117,ALM03448,359,Pledge,Bank Transfer,2024-12-24,Infrastructure,False,True,,Completed
+DON001118,ALM00716,240,In-Kind,Check,2025-05-14,Endowment,False,True,,Completed
+DON001119,ALM01161,25000,Recurring Monthly,Stock,2025-04-09,Infrastructure,False,True,Quarterly,Pending
+DON001120,ALM02664,98,Recurring Monthly,Wire Transfer,2024-05-08,Infrastructure,False,True,,Completed
+DON001121,ALM02158,67,Pledge,Wire Transfer,2024-11-26,Scholarship,False,True,Quarterly,Completed
+DON001122,ALM01029,201,Recurring Monthly,Wire Transfer,2025-08-04,Research,False,True,Quarterly,Completed
+DON001123,ALM00968,10000,Major Gift,Stock,2024-12-18,Infrastructure,False,True,,Completed
+DON001124,ALM01765,184,Recurring Monthly,Credit Card,2024-11-16,Scholarship,True,True,Quarterly,Completed
+DON001125,ALM00789,375,Pledge,Check,2024-02-18,Research,False,True,Monthly,Completed
+DON001126,ALM02481,10000,Major Gift,Credit Card,2025-04-06,Infrastructure,False,True,Quarterly,Completed
+DON001127,ALM03038,10000,Pledge,Credit Card,2025-06-07,Research,False,True,,Completed
+DON001128,ALM01165,196,In-Kind,Credit Card,2025-10-31,Infrastructure,True,True,,Completed
+DON001129,ALM02756,352,Major Gift,Credit Card,2024-09-09,Infrastructure,False,True,,Completed
+DON001130,ALM03227,250000,Pledge,Stock,2024-10-20,Endowment,False,True,,Completed
+DON001131,ALM01123,206,Major Gift,Credit Card,2024-12-10,Scholarship,False,True,,Completed
+DON001132,ALM02960,286,Recurring Monthly,Bank Transfer,2025-10-17,Scholarship,False,True,,Declined
+DON001133,ALM01996,154,One-Time Gift,Wire Transfer,2024-11-26,General Fund,False,True,,Completed
+DON001134,ALM00354,354,Major Gift,Stock,2025-02-18,General Fund,False,False,Monthly,Completed
+DON001135,ALM02187,100000,Major Gift,Wire Transfer,2025-09-08,General Fund,False,True,,Completed
+DON001136,ALM02906,112,One-Time Gift,Stock,2024-03-12,Infrastructure,False,True,,Completed
+DON001137,ALM03292,235,Recurring Monthly,Bank Transfer,2023-12-21,Infrastructure,False,True,,Completed
+DON001138,ALM03365,469,In-Kind,Wire Transfer,2025-07-15,Infrastructure,True,True,,Completed
+DON001139,ALM02856,191,In-Kind,Bank Transfer,2024-11-10,Endowment,False,True,,Completed
+DON001140,ALM01889,100000,Pledge,Check,2025-07-21,Scholarship,False,False,,Completed
+DON001141,ALM00342,271,One-Time Gift,Wire Transfer,2024-01-13,Scholarship,False,True,,Completed
+DON001142,ALM01453,100000,Major Gift,Stock,2024-05-27,Scholarship,False,True,,Completed
+DON001143,ALM01083,62,In-Kind,Wire Transfer,2024-10-05,Infrastructure,False,True,,Completed
+DON001144,ALM00515,25000,Recurring Monthly,Stock,2024-04-15,Scholarship,False,False,,Declined
+DON001145,ALM00185,50000,Major Gift,Wire Transfer,2024-12-04,General Fund,False,True,,Completed
+DON001146,ALM02111,204,Pledge,Stock,2024-04-06,Endowment,False,True,,Completed
+DON001147,ALM02526,304,Pledge,Wire Transfer,2023-11-22,Infrastructure,False,True,,Completed
+DON001148,ALM00769,414,Recurring Monthly,Wire Transfer,2024-09-20,Scholarship,False,True,,Completed
+DON001149,ALM02974,232,Major Gift,Stock,2025-09-13,Research,False,True,,Pending
+DON001150,ALM02972,100000,Major Gift,Credit Card,2025-05-16,General Fund,False,True,Annual,Completed
+DON001151,ALM02430,425,Major Gift,Stock,2025-01-03,Research,False,True,,Completed
+DON001152,ALM03173,309,In-Kind,Stock,2024-09-20,Scholarship,False,True,,Completed
+DON001153,ALM03069,293,One-Time Gift,Wire Transfer,2025-08-04,Research,False,True,,Completed
+DON001154,ALM00765,77,One-Time Gift,Wire Transfer,2025-07-21,Scholarship,False,True,,Completed
+DON001155,ALM00550,25000,Recurring Monthly,Bank Transfer,2023-12-14,Research,False,True,Quarterly,Completed
+DON001156,ALM03298,343,One-Time Gift,Bank Transfer,2024-12-29,Research,False,True,Annual,Completed
+DON001157,ALM00743,305,Recurring Monthly,Bank Transfer,2024-09-27,Infrastructure,True,True,,Completed
+DON001158,ALM02943,161,In-Kind,Stock,2023-12-09,General Fund,False,True,,Completed
+DON001159,ALM02978,162,Major Gift,Wire Transfer,2024-04-06,Scholarship,False,True,,Completed
+DON001160,ALM01185,301,Pledge,Bank Transfer,2024-05-02,Research,False,True,,Completed
+DON001161,ALM01088,250000,Major Gift,Stock,2025-08-20,Infrastructure,False,True,,Completed
+DON001162,ALM01128,25000,Recurring Monthly,Credit Card,2025-02-20,Research,False,True,,Completed
+DON001163,ALM01561,132,Pledge,Check,2025-09-12,Infrastructure,False,True,,Completed
+DON001164,ALM02138,167,One-Time Gift,Credit Card,2024-03-31,Endowment,False,True,Monthly,Completed
+DON001165,ALM03482,50000,In-Kind,Check,2024-08-13,General Fund,False,True,,Pending
+DON001166,ALM03095,70,Major Gift,Wire Transfer,2025-04-05,General Fund,False,True,,Completed
+DON001167,ALM00558,100000,Major Gift,Bank Transfer,2023-11-21,Endowment,False,True,,Completed
+DON001168,ALM01139,280,Major Gift,Credit Card,2024-09-17,Research,False,True,,Completed
+DON001169,ALM01080,110,One-Time Gift,Stock,2024-01-14,Endowment,False,True,Quarterly,Completed
+DON001170,ALM03216,250000,Major Gift,Bank Transfer,2025-01-17,Research,False,True,Monthly,Completed
+DON001171,ALM01306,252,One-Time Gift,Bank Transfer,2024-09-08,Scholarship,True,True,,Completed
+DON001172,ALM00227,208,Recurring Monthly,Credit Card,2024-02-07,Infrastructure,False,True,,Completed
+DON001173,ALM00203,420,Recurring Monthly,Bank Transfer,2025-03-17,Infrastructure,False,False,,Completed
+DON001174,ALM00855,50000,In-Kind,Credit Card,2025-03-15,Endowment,False,True,,Completed
+DON001175,ALM01970,59,Major Gift,Stock,2024-01-14,Endowment,False,True,,Completed
+DON001176,ALM02300,247,Recurring Monthly,Stock,2024-01-12,Scholarship,False,True,Quarterly,Completed
+DON001177,ALM03260,440,One-Time Gift,Wire Transfer,2025-09-10,Scholarship,False,True,,Completed
+DON001178,ALM03005,56,One-Time Gift,Credit Card,2023-12-26,General Fund,False,True,,Completed
+DON001179,ALM03063,280,One-Time Gift,Credit Card,2024-09-25,Scholarship,False,True,,Completed
+DON001180,ALM01645,417,Recurring Monthly,Bank Transfer,2024-10-21,Scholarship,True,False,,Completed
+DON001181,ALM03428,487,Major Gift,Wire Transfer,2024-12-04,Infrastructure,False,True,,Completed
+DON001182,ALM01918,25000,Major Gift,Bank Transfer,2024-12-21,Endowment,False,True,,Completed
+DON001183,ALM01561,142,Recurring Monthly,Credit Card,2023-12-13,Endowment,False,True,,Completed
+DON001184,ALM00056,250000,Pledge,Wire Transfer,2024-01-30,Research,False,True,,Completed
+DON001185,ALM02907,347,Major Gift,Check,2024-03-18,Endowment,False,True,Annual,Completed
+DON001186,ALM02312,25000,One-Time Gift,Credit Card,2024-01-20,Scholarship,True,True,Annual,Completed
+DON001187,ALM03173,250000,Major Gift,Stock,2024-03-17,General Fund,False,True,,Completed
+DON001188,ALM01303,325,Pledge,Wire Transfer,2025-09-06,Research,False,True,,Pending
+DON001189,ALM00219,334,Recurring Monthly,Bank Transfer,2024-11-29,Infrastructure,False,True,,Completed
+DON001190,ALM03387,100000,Recurring Monthly,Credit Card,2024-05-30,Infrastructure,False,True,,Completed
+DON001191,ALM00953,183,One-Time Gift,Wire Transfer,2025-06-30,Scholarship,False,True,,Completed
+DON001192,ALM03473,25000,Recurring Monthly,Wire Transfer,2024-09-28,Research,False,True,,Declined
+DON001193,ALM01780,151,Pledge,Check,2025-09-11,Endowment,False,True,,Completed
+DON001194,ALM03319,50000,Pledge,Bank Transfer,2024-11-12,General Fund,False,True,,Declined
+DON001195,ALM00759,50000,Major Gift,Bank Transfer,2024-09-22,Infrastructure,False,True,,Completed
+DON001196,ALM01768,479,Recurring Monthly,Wire Transfer,2024-09-25,Endowment,False,True,,Completed
+DON001197,ALM02274,135,Pledge,Credit Card,2024-08-02,Research,False,True,,Completed
+DON001198,ALM01689,68,Major Gift,Stock,2023-12-21,General Fund,False,True,,Pending
+DON001199,ALM02869,100000,Recurring Monthly,Credit Card,2024-05-15,Scholarship,False,True,Monthly,Completed
+DON001200,ALM00467,253,Recurring Monthly,Credit Card,2024-12-11,Research,True,True,,Completed
+DON001201,ALM02889,189,One-Time Gift,Wire Transfer,2024-12-20,Research,False,True,,Completed
+DON001202,ALM02977,168,Recurring Monthly,Credit Card,2024-10-15,Research,False,True,Quarterly,Completed
+DON001203,ALM01067,153,Pledge,Wire Transfer,2024-07-18,Scholarship,True,True,Quarterly,Completed
+DON001204,ALM01525,185,Recurring Monthly,Check,2025-08-16,Scholarship,False,True,,Completed
+DON001205,ALM01255,224,Pledge,Check,2025-04-19,Infrastructure,False,True,,Completed
+DON001206,ALM00807,422,Major Gift,Check,2024-12-28,Scholarship,False,True,,Completed
+DON001207,ALM02646,499,In-Kind,Wire Transfer,2025-02-20,Research,False,True,,Completed
+DON001208,ALM01233,10000,In-Kind,Wire Transfer,2023-11-26,Infrastructure,False,True,,Completed
+DON001209,ALM01378,316,Major Gift,Wire Transfer,2024-11-06,Endowment,False,True,,Completed
+DON001210,ALM01456,490,Pledge,Stock,2025-02-23,Endowment,False,True,,Completed
+DON001211,ALM01033,50000,In-Kind,Wire Transfer,2024-02-09,Endowment,True,True,,Completed
+DON001212,ALM03217,183,Pledge,Bank Transfer,2024-07-16,Endowment,False,True,,Completed
+DON001213,ALM01648,64,In-Kind,Wire Transfer,2025-04-06,General Fund,False,True,,Completed
+DON001214,ALM01570,25000,Recurring Monthly,Wire Transfer,2025-08-07,Endowment,False,True,,Completed
+DON001215,ALM01395,399,Pledge,Credit Card,2025-05-06,Infrastructure,False,True,,Completed
+DON001216,ALM03462,437,Pledge,Wire Transfer,2025-03-18,Research,False,True,Monthly,Completed
+DON001217,ALM01978,50000,In-Kind,Stock,2025-10-12,Infrastructure,False,True,,Completed
+DON001218,ALM02117,421,In-Kind,Stock,2023-11-17,General Fund,False,True,Monthly,Completed
+DON001219,ALM00258,100000,In-Kind,Check,2025-05-25,Research,False,True,Monthly,Completed
+DON001220,ALM03276,320,Pledge,Stock,2025-10-14,Scholarship,False,True,Monthly,Completed
+DON001221,ALM01522,402,In-Kind,Wire Transfer,2024-02-23,Research,True,True,Monthly,Completed
+DON001222,ALM03466,223,Major Gift,Check,2025-05-10,General Fund,False,True,,Completed
+DON001223,ALM00722,235,In-Kind,Wire Transfer,2024-01-12,Endowment,False,True,,Completed
+DON001224,ALM01035,250000,In-Kind,Stock,2025-03-23,General Fund,False,True,,Completed
+DON001225,ALM01572,50000,In-Kind,Stock,2025-03-04,General Fund,False,True,Monthly,Pending
+DON001226,ALM00575,182,In-Kind,Credit Card,2024-05-27,Infrastructure,False,True,,Completed
+DON001227,ALM01478,368,Recurring Monthly,Bank Transfer,2024-04-13,General Fund,False,True,,Completed
+DON001228,ALM00915,343,One-Time Gift,Wire Transfer,2025-06-23,Endowment,True,True,Monthly,Completed
+DON001229,ALM00300,10000,In-Kind,Check,2024-09-03,Research,False,True,,Completed
+DON001230,ALM01810,486,Major Gift,Credit Card,2025-04-15,General Fund,False,True,Annual,Completed
+DON001231,ALM00713,402,One-Time Gift,Wire Transfer,2025-05-14,Infrastructure,True,True,,Completed
+DON001232,ALM02141,345,Recurring Monthly,Check,2024-09-10,Research,False,True,,Completed
+DON001233,ALM02417,300,Major Gift,Bank Transfer,2025-06-23,Research,False,True,,Completed
+DON001234,ALM02594,268,Pledge,Bank Transfer,2023-12-18,Research,True,True,Monthly,Completed
+DON001235,ALM01974,293,Major Gift,Stock,2024-07-14,Scholarship,False,True,,Completed
+DON001236,ALM00172,340,In-Kind,Check,2025-07-24,Infrastructure,False,True,,Completed
+DON001237,ALM03274,453,Recurring Monthly,Check,2025-04-18,Scholarship,True,True,,Completed
+DON001238,ALM03369,86,Major Gift,Credit Card,2025-10-01,Endowment,False,True,,Completed
+DON001239,ALM01694,447,Recurring Monthly,Stock,2024-05-31,General Fund,False,True,,Pending
+DON001240,ALM01416,298,Pledge,Bank Transfer,2025-08-25,Scholarship,False,False,Annual,Completed
+DON001241,ALM02566,354,Pledge,Credit Card,2025-04-27,Endowment,False,False,,Completed
+DON001242,ALM02228,227,Pledge,Wire Transfer,2025-04-11,Research,False,True,,Completed
+DON001243,ALM00897,466,Recurring Monthly,Check,2025-09-18,Endowment,False,True,,Completed
+DON001244,ALM00907,10000,Recurring Monthly,Credit Card,2025-07-31,Endowment,False,True,Annual,Pending
+DON001245,ALM02981,250000,Major Gift,Credit Card,2024-10-21,Endowment,False,True,Quarterly,Completed
+DON001246,ALM00975,25000,In-Kind,Bank Transfer,2024-07-02,Scholarship,False,True,,Completed
+DON001247,ALM01604,301,One-Time Gift,Bank Transfer,2024-08-19,Endowment,False,True,,Completed
+DON001248,ALM03280,25000,Recurring Monthly,Bank Transfer,2023-11-06,Endowment,False,True,,Completed
+DON001249,ALM02922,360,Major Gift,Wire Transfer,2025-01-15,General Fund,False,True,,Completed
+DON001250,ALM00383,465,Major Gift,Credit Card,2024-08-13,General Fund,False,True,,Completed
+DON001251,ALM00073,257,In-Kind,Wire Transfer,2024-09-20,Infrastructure,False,True,,Completed
+DON001252,ALM00220,493,Pledge,Wire Transfer,2025-04-10,Research,False,True,Monthly,Completed
+DON001253,ALM02640,98,In-Kind,Wire Transfer,2024-01-02,Endowment,False,False,,Completed
+DON001254,ALM01944,164,One-Time Gift,Wire Transfer,2024-02-12,General Fund,False,True,Annual,Completed
+DON001255,ALM03100,221,One-Time Gift,Check,2025-04-11,Infrastructure,False,True,Quarterly,Completed
+DON001256,ALM03125,50,Major Gift,Wire Transfer,2025-01-25,General Fund,False,True,,Completed
+DON001257,ALM03401,143,One-Time Gift,Credit Card,2024-01-16,Scholarship,False,True,,Completed
+DON001258,ALM02071,100000,Pledge,Bank Transfer,2025-10-29,Research,False,True,,Completed
+DON001259,ALM01649,100000,Major Gift,Stock,2024-11-25,Scholarship,False,True,,Completed
+DON001260,ALM01384,438,Pledge,Stock,2025-01-30,Endowment,False,True,,Completed
+DON001261,ALM01362,349,Major Gift,Bank Transfer,2025-07-29,Endowment,False,True,Monthly,Completed
+DON001262,ALM02363,94,Pledge,Check,2025-07-15,Scholarship,False,True,Monthly,Completed
+DON001263,ALM00323,421,In-Kind,Wire Transfer,2024-07-16,Research,False,True,,Completed
+DON001264,ALM03439,251,In-Kind,Check,2024-11-03,Infrastructure,False,True,,Completed
+DON001265,ALM01752,246,In-Kind,Bank Transfer,2024-10-17,General Fund,False,True,Monthly,Completed
+DON001266,ALM00490,50000,One-Time Gift,Check,2025-02-23,Infrastructure,False,True,,Completed
+DON001267,ALM03307,250000,Major Gift,Bank Transfer,2025-02-22,Endowment,False,True,Quarterly,Completed
+DON001268,ALM01126,479,Pledge,Credit Card,2025-03-12,Scholarship,False,True,,Completed
+DON001269,ALM02278,459,Major Gift,Wire Transfer,2025-01-15,Endowment,False,True,,Completed
+DON001270,ALM01169,342,One-Time Gift,Check,2025-04-19,Endowment,False,True,Annual,Completed
+DON001271,ALM01902,50000,Recurring Monthly,Bank Transfer,2023-11-29,Scholarship,False,True,,Pending
+DON001272,ALM02844,100000,In-Kind,Wire Transfer,2025-10-21,Endowment,False,True,Monthly,Completed
+DON001273,ALM02082,388,Major Gift,Check,2024-12-26,Research,False,True,Monthly,Completed
+DON001274,ALM00916,100000,Major Gift,Credit Card,2025-09-18,Research,False,True,,Completed
+DON001275,ALM02866,343,One-Time Gift,Bank Transfer,2025-01-07,General Fund,False,True,,Completed
+DON001276,ALM02226,391,Pledge,Wire Transfer,2024-03-21,General Fund,False,True,Quarterly,Pending
+DON001277,ALM01620,281,Major Gift,Wire Transfer,2024-04-28,Endowment,False,True,,Completed
+DON001278,ALM00722,68,In-Kind,Check,2025-10-26,Endowment,False,True,,Completed
+DON001279,ALM00596,251,In-Kind,Bank Transfer,2024-05-18,Scholarship,False,True,,Completed
+DON001280,ALM01152,460,Recurring Monthly,Wire Transfer,2025-04-04,Scholarship,False,True,,Completed
+DON001281,ALM02885,149,In-Kind,Credit Card,2024-12-28,Scholarship,False,True,Monthly,Completed
+DON001282,ALM01217,271,Recurring Monthly,Bank Transfer,2024-02-08,Infrastructure,False,True,,Completed
+DON001283,ALM02135,395,Pledge,Bank Transfer,2025-05-10,General Fund,False,True,,Completed
+DON001284,ALM00134,236,In-Kind,Bank Transfer,2025-10-28,Endowment,False,True,Annual,Completed
+DON001285,ALM03153,248,One-Time Gift,Bank Transfer,2024-02-11,Endowment,False,True,,Completed
+DON001286,ALM02747,274,Pledge,Credit Card,2025-01-06,Scholarship,False,True,,Completed
+DON001287,ALM00278,50000,One-Time Gift,Check,2024-05-25,Scholarship,False,True,Quarterly,Pending
+DON001288,ALM01674,250000,Pledge,Stock,2024-09-09,Research,False,True,,Completed
+DON001289,ALM02577,10000,Pledge,Credit Card,2024-04-25,Scholarship,False,True,,Completed
+DON001290,ALM00999,435,Pledge,Check,2025-01-16,General Fund,False,True,Quarterly,Completed
+DON001291,ALM00112,235,Major Gift,Stock,2023-12-07,Infrastructure,False,True,Quarterly,Completed
+DON001292,ALM03207,100000,In-Kind,Credit Card,2025-02-17,General Fund,True,True,,Completed
+DON001293,ALM00178,130,One-Time Gift,Wire Transfer,2025-06-30,Scholarship,False,True,Annual,Completed
+DON001294,ALM00749,100000,Recurring Monthly,Stock,2024-11-02,Research,False,True,Annual,Completed
+DON001295,ALM03295,110,Major Gift,Credit Card,2024-02-14,Research,True,True,,Completed
+DON001296,ALM00342,221,Recurring Monthly,Credit Card,2023-12-07,Infrastructure,False,True,Quarterly,Completed
+DON001297,ALM02317,366,Recurring Monthly,Bank Transfer,2024-07-08,Scholarship,False,True,,Completed
+DON001298,ALM02956,288,Pledge,Bank Transfer,2023-11-11,Research,False,False,Annual,Completed
+DON001299,ALM02248,155,In-Kind,Wire Transfer,2025-08-14,General Fund,False,True,,Completed
+DON001300,ALM01197,143,Pledge,Bank Transfer,2025-02-05,Scholarship,False,True,,Completed
+DON001301,ALM00643,100000,In-Kind,Bank Transfer,2025-07-30,Endowment,False,True,Monthly,Declined
+DON001302,ALM02101,350,Recurring Monthly,Bank Transfer,2024-03-21,Scholarship,False,True,,Completed
+DON001303,ALM01921,224,Major Gift,Check,2025-03-07,Endowment,False,True,Quarterly,Completed
+DON001304,ALM02179,332,Major Gift,Stock,2024-07-21,Endowment,False,True,,Completed
+DON001305,ALM02066,494,Pledge,Bank Transfer,2023-11-14,Infrastructure,True,True,,Completed
+DON001306,ALM01672,331,Pledge,Bank Transfer,2024-12-07,Research,False,True,,Completed
+DON001307,ALM00228,82,In-Kind,Stock,2025-10-03,Research,False,True,,Completed
+DON001308,ALM03109,437,Recurring Monthly,Bank Transfer,2024-03-05,General Fund,False,True,,Completed
+DON001309,ALM02163,394,Major Gift,Check,2025-10-26,Scholarship,False,False,,Completed
+DON001310,ALM02841,152,In-Kind,Bank Transfer,2024-03-24,General Fund,False,True,,Completed
+DON001311,ALM03122,250000,Major Gift,Wire Transfer,2024-03-06,Research,True,True,,Completed
+DON001312,ALM03268,295,One-Time Gift,Stock,2024-12-08,Infrastructure,False,True,,Completed
+DON001313,ALM01926,250000,Recurring Monthly,Stock,2024-12-28,Research,False,True,Monthly,Completed
+DON001314,ALM00627,158,Recurring Monthly,Credit Card,2024-07-29,Scholarship,False,True,,Completed
+DON001315,ALM00696,25000,In-Kind,Check,2024-02-18,General Fund,True,True,Monthly,Completed
+DON001316,ALM01200,100000,In-Kind,Credit Card,2024-10-01,Endowment,False,True,Monthly,Completed
+DON001317,ALM02399,304,In-Kind,Check,2024-08-17,General Fund,False,True,Monthly,Completed
+DON001318,ALM02059,245,Recurring Monthly,Wire Transfer,2025-05-30,Endowment,False,True,,Completed
+DON001319,ALM03418,300,One-Time Gift,Stock,2023-11-30,Research,True,True,,Completed
+DON001320,ALM01970,302,Pledge,Bank Transfer,2024-10-03,General Fund,False,True,Monthly,Completed
+DON001321,ALM03242,460,Pledge,Wire Transfer,2024-09-07,Infrastructure,False,True,,Completed
+DON001322,ALM01382,50000,In-Kind,Credit Card,2024-07-09,Research,True,True,,Completed
+DON001323,ALM02951,463,Recurring Monthly,Bank Transfer,2024-11-07,Scholarship,False,True,,Completed
+DON001324,ALM00445,50000,Pledge,Wire Transfer,2024-11-04,Research,False,True,,Declined
+DON001325,ALM01179,250000,Pledge,Stock,2024-02-15,Endowment,True,True,,Completed
+DON001326,ALM02157,429,One-Time Gift,Credit Card,2023-11-23,Infrastructure,False,True,Monthly,Completed
+DON001327,ALM00694,366,One-Time Gift,Credit Card,2025-10-03,General Fund,False,True,Annual,Completed
+DON001328,ALM00626,348,One-Time Gift,Wire Transfer,2024-03-20,Endowment,False,True,Monthly,Completed
+DON001329,ALM03135,276,Pledge,Stock,2025-03-06,Scholarship,True,True,,Completed
+DON001330,ALM00444,50000,Pledge,Credit Card,2025-05-19,Scholarship,False,True,,Completed
+DON001331,ALM00245,371,In-Kind,Credit Card,2024-05-16,Scholarship,False,True,,Completed
+DON001332,ALM01128,25000,In-Kind,Bank Transfer,2024-08-07,Endowment,False,True,,Completed
+DON001333,ALM00217,276,In-Kind,Bank Transfer,2023-11-08,Infrastructure,False,True,,Completed
+DON001334,ALM01371,50000,Recurring Monthly,Bank Transfer,2024-09-13,Infrastructure,False,True,,Completed
+DON001335,ALM02587,417,Recurring Monthly,Wire Transfer,2025-02-23,Research,False,True,,Pending
+DON001336,ALM01523,179,Recurring Monthly,Wire Transfer,2025-02-05,Scholarship,False,True,,Completed
+DON001337,ALM03351,236,In-Kind,Credit Card,2024-07-07,Scholarship,False,True,,Completed
+DON001338,ALM00439,303,One-Time Gift,Stock,2025-04-09,Infrastructure,False,True,,Completed
+DON001339,ALM01943,381,One-Time Gift,Bank Transfer,2025-02-25,General Fund,False,True,,Completed
+DON001340,ALM03183,421,Pledge,Stock,2025-08-18,Endowment,False,False,Monthly,Completed
+DON001341,ALM00466,475,Recurring Monthly,Wire Transfer,2024-11-11,General Fund,False,True,,Completed
+DON001342,ALM03215,250000,Major Gift,Wire Transfer,2025-08-15,Infrastructure,False,True,,Completed
+DON001343,ALM03182,499,Pledge,Wire Transfer,2025-09-09,Infrastructure,False,True,Annual,Completed
+DON001344,ALM00307,369,Major Gift,Bank Transfer,2024-04-14,General Fund,False,True,,Completed
+DON001345,ALM00087,499,In-Kind,Wire Transfer,2025-05-25,Endowment,False,True,Quarterly,Completed
+DON001346,ALM01972,275,One-Time Gift,Stock,2024-09-06,Research,False,True,Monthly,Completed
+DON001347,ALM00936,50000,Pledge,Stock,2024-10-13,Infrastructure,False,True,,Completed
+DON001348,ALM01031,493,Recurring Monthly,Stock,2024-09-05,Research,False,True,Quarterly,Completed
+DON001349,ALM00814,100000,One-Time Gift,Bank Transfer,2025-07-26,Scholarship,False,True,,Completed
+DON001350,ALM02062,241,One-Time Gift,Credit Card,2024-10-24,Research,False,True,,Completed
+DON001351,ALM03166,160,Major Gift,Bank Transfer,2024-04-20,General Fund,False,False,,Completed
+DON001352,ALM01427,323,Pledge,Bank Transfer,2023-12-04,Endowment,True,True,,Completed
+DON001353,ALM01158,256,Pledge,Check,2024-09-03,General Fund,False,True,,Completed
+DON001354,ALM00329,145,Major Gift,Check,2025-04-10,General Fund,True,False,,Completed
+DON001355,ALM01351,10000,One-Time Gift,Wire Transfer,2025-02-13,Infrastructure,False,True,,Completed
+DON001356,ALM02915,357,Recurring Monthly,Bank Transfer,2024-08-06,Endowment,False,True,,Completed
+DON001357,ALM03155,429,In-Kind,Stock,2023-11-13,General Fund,False,True,,Completed
+DON001358,ALM02741,406,Recurring Monthly,Bank Transfer,2025-05-17,Endowment,False,True,,Completed
+DON001359,ALM02959,10000,Recurring Monthly,Check,2025-04-21,Scholarship,False,True,,Completed
+DON001360,ALM01484,284,Major Gift,Stock,2024-05-14,General Fund,False,True,,Completed
+DON001361,ALM01671,461,Major Gift,Bank Transfer,2025-02-02,Scholarship,False,True,,Completed
+DON001362,ALM02720,10000,Major Gift,Stock,2025-04-20,Research,False,True,,Completed
+DON001363,ALM02450,419,Recurring Monthly,Check,2023-12-20,General Fund,False,True,,Completed
+DON001364,ALM01604,25000,Pledge,Wire Transfer,2024-04-17,Endowment,False,True,Monthly,Completed
+DON001365,ALM00049,411,One-Time Gift,Wire Transfer,2023-12-31,Endowment,False,True,,Completed
+DON001366,ALM00733,65,One-Time Gift,Wire Transfer,2024-08-20,Endowment,False,True,,Completed
+DON001367,ALM02274,73,Pledge,Credit Card,2024-10-26,Infrastructure,True,True,Monthly,Completed
+DON001368,ALM00640,25000,Major Gift,Wire Transfer,2025-08-20,Scholarship,False,False,,Completed
+DON001369,ALM00464,314,Recurring Monthly,Wire Transfer,2025-02-12,Infrastructure,False,True,,Completed
+DON001370,ALM02170,322,In-Kind,Credit Card,2025-06-17,Research,False,True,,Completed
+DON001371,ALM01471,347,Pledge,Bank Transfer,2025-07-12,General Fund,False,True,,Completed
+DON001372,ALM01862,153,One-Time Gift,Stock,2024-09-20,Endowment,False,True,,Completed
+DON001373,ALM03216,100000,Recurring Monthly,Wire Transfer,2025-03-10,General Fund,False,True,Quarterly,Completed
+DON001374,ALM00435,381,Major Gift,Stock,2024-12-09,General Fund,False,True,,Completed
+DON001375,ALM00432,404,Pledge,Check,2023-12-07,Endowment,False,True,,Completed
+DON001376,ALM01975,100000,One-Time Gift,Stock,2025-09-11,General Fund,False,True,,Completed
+DON001377,ALM02043,10000,Major Gift,Stock,2025-01-01,Scholarship,False,False,Quarterly,Completed
+DON001378,ALM01025,485,Recurring Monthly,Check,2025-02-17,Endowment,False,True,,Completed
+DON001379,ALM00329,25000,Pledge,Wire Transfer,2024-03-19,Research,False,True,,Completed
+DON001380,ALM00502,25000,One-Time Gift,Check,2025-05-23,Research,False,True,Quarterly,Declined
+DON001381,ALM02615,250000,Pledge,Check,2024-12-18,Research,False,True,,Pending
+DON001382,ALM02459,185,One-Time Gift,Credit Card,2025-07-20,Endowment,True,True,,Pending
+DON001383,ALM01454,354,Recurring Monthly,Stock,2025-05-29,Infrastructure,True,True,,Completed
+DON001384,ALM02123,77,In-Kind,Credit Card,2025-02-17,General Fund,False,True,,Declined
+DON001385,ALM01391,250000,Major Gift,Wire Transfer,2024-05-17,Endowment,True,True,,Declined
+DON001386,ALM03117,467,Major Gift,Check,2024-10-29,General Fund,False,True,,Completed
+DON001387,ALM00259,499,In-Kind,Stock,2025-08-13,Scholarship,False,True,,Completed
+DON001388,ALM02997,141,Pledge,Bank Transfer,2025-02-24,Scholarship,False,True,,Completed
+DON001389,ALM00448,273,In-Kind,Credit Card,2025-06-07,Scholarship,False,True,,Completed
+DON001390,ALM00650,461,One-Time Gift,Stock,2024-07-23,Research,False,True,,Pending
+DON001391,ALM01318,399,Recurring Monthly,Bank Transfer,2025-06-02,General Fund,False,True,,Completed
+DON001392,ALM01476,50000,Major Gift,Credit Card,2024-12-11,Endowment,False,True,Quarterly,Completed
+DON001393,ALM01501,203,In-Kind,Check,2024-07-21,Endowment,False,True,,Completed
+DON001394,ALM00986,50000,Major Gift,Check,2024-10-09,General Fund,False,True,,Completed
+DON001395,ALM01642,286,In-Kind,Stock,2024-07-12,Scholarship,False,True,Monthly,Completed
+DON001396,ALM02792,374,In-Kind,Wire Transfer,2024-11-06,Scholarship,False,True,,Completed
+DON001397,ALM01369,315,Recurring Monthly,Credit Card,2025-10-02,Research,False,True,Quarterly,Completed
+DON001398,ALM02555,170,Major Gift,Credit Card,2023-12-25,Endowment,False,True,Annual,Completed
+DON001399,ALM01519,10000,In-Kind,Bank Transfer,2024-01-08,Research,False,True,,Completed
+DON001400,ALM00451,184,Recurring Monthly,Bank Transfer,2025-06-12,Scholarship,False,True,,Completed
+DON001401,ALM00147,214,Pledge,Bank Transfer,2025-09-07,Scholarship,False,True,,Completed
+DON001402,ALM00271,385,Recurring Monthly,Credit Card,2025-09-02,Research,False,True,Monthly,Completed
+DON001403,ALM02296,411,Pledge,Wire Transfer,2024-11-17,Scholarship,False,True,,Completed
+DON001404,ALM02472,250000,Major Gift,Wire Transfer,2024-05-12,General Fund,False,True,,Completed
+DON001405,ALM01257,487,In-Kind,Bank Transfer,2024-12-11,Endowment,False,True,,Completed
+DON001406,ALM01583,463,Major Gift,Bank Transfer,2025-06-09,Scholarship,False,True,Monthly,Completed
+DON001407,ALM00539,25000,Pledge,Credit Card,2024-05-25,Scholarship,False,True,,Declined
+DON001408,ALM00026,145,Major Gift,Wire Transfer,2025-10-21,Research,False,True,Quarterly,Completed
+DON001409,ALM02438,10000,Recurring Monthly,Stock,2025-04-08,Infrastructure,False,True,Monthly,Completed
+DON001410,ALM01991,250000,Pledge,Wire Transfer,2024-08-14,Infrastructure,False,True,Monthly,Completed
+DON001411,ALM01315,271,Major Gift,Check,2024-05-23,Endowment,False,True,Quarterly,Completed
+DON001412,ALM00520,10000,Recurring Monthly,Credit Card,2024-05-06,Infrastructure,False,True,,Pending
+DON001413,ALM00454,375,Recurring Monthly,Wire Transfer,2025-10-31,Infrastructure,False,True,Monthly,Completed
+DON001414,ALM01965,250000,In-Kind,Bank Transfer,2024-07-12,Research,False,True,,Completed
+DON001415,ALM00994,111,Major Gift,Credit Card,2025-07-01,Scholarship,False,True,,Completed
+DON001416,ALM00831,250000,Pledge,Credit Card,2023-12-21,General Fund,False,True,Monthly,Completed
+DON001417,ALM00354,418,Recurring Monthly,Bank Transfer,2024-04-29,Endowment,False,True,,Completed
+DON001418,ALM02426,98,Major Gift,Credit Card,2024-02-10,Research,False,True,,Completed
+DON001419,ALM01089,250000,Pledge,Bank Transfer,2024-08-15,General Fund,False,True,,Completed
+DON001420,ALM01859,146,One-Time Gift,Wire Transfer,2024-03-26,Research,False,True,,Completed
+DON001421,ALM02208,179,In-Kind,Bank Transfer,2025-01-13,Endowment,False,True,,Completed
+DON001422,ALM03409,380,One-Time Gift,Bank Transfer,2024-05-11,Endowment,False,True,,Completed
+DON001423,ALM00294,202,Recurring Monthly,Check,2024-07-14,Scholarship,False,True,,Completed
+DON001424,ALM02381,10000,Pledge,Credit Card,2025-07-21,Infrastructure,False,True,,Pending
+DON001425,ALM01857,156,Recurring Monthly,Credit Card,2024-02-25,Infrastructure,False,True,,Completed
+DON001426,ALM01073,25000,In-Kind,Bank Transfer,2025-03-07,General Fund,True,True,Annual,Completed
+DON001427,ALM03480,306,In-Kind,Stock,2024-12-25,Endowment,False,True,,Pending
+DON001428,ALM01388,221,Recurring Monthly,Wire Transfer,2024-12-13,Endowment,False,True,,Completed
+DON001429,ALM01471,250000,One-Time Gift,Credit Card,2024-04-24,Infrastructure,False,False,,Completed
+DON001430,ALM01780,10000,One-Time Gift,Credit Card,2024-04-16,General Fund,True,False,,Completed
+DON001431,ALM00515,83,Pledge,Stock,2024-09-14,Endowment,False,True,Quarterly,Completed
+DON001432,ALM02896,100000,Major Gift,Wire Transfer,2024-06-04,Research,False,True,,Completed
+DON001433,ALM02113,50000,Pledge,Check,2024-02-13,Endowment,False,True,,Pending
+DON001434,ALM02494,65,Major Gift,Check,2024-09-13,Research,False,True,,Completed
+DON001435,ALM02738,50000,Major Gift,Credit Card,2024-02-26,General Fund,False,True,Monthly,Completed
+DON001436,ALM01370,68,Recurring Monthly,Bank Transfer,2025-05-15,General Fund,False,True,Annual,Completed
+DON001437,ALM00902,250000,In-Kind,Stock,2025-10-07,General Fund,False,True,,Declined
+DON001438,ALM02879,325,Recurring Monthly,Stock,2025-03-06,Research,False,True,,Completed
+DON001439,ALM01143,204,In-Kind,Bank Transfer,2025-09-13,General Fund,False,True,,Completed
+DON001440,ALM01946,424,One-Time Gift,Credit Card,2023-12-16,Infrastructure,False,True,,Completed
+DON001441,ALM02699,150,Major Gift,Credit Card,2025-07-30,Scholarship,False,True,,Completed
+DON001442,ALM00196,25000,In-Kind,Wire Transfer,2025-08-11,Infrastructure,False,True,,Completed
+DON001443,ALM00142,480,Major Gift,Bank Transfer,2023-11-04,Endowment,False,True,,Completed
+DON001444,ALM00419,100000,In-Kind,Wire Transfer,2025-07-13,Scholarship,False,True,,Declined
+DON001445,ALM02574,493,Pledge,Check,2025-07-19,Endowment,False,True,Monthly,Completed
+DON001446,ALM02935,195,One-Time Gift,Bank Transfer,2023-11-05,Infrastructure,False,False,,Completed
+DON001447,ALM03302,53,In-Kind,Bank Transfer,2024-09-07,Infrastructure,False,True,,Completed
+DON001448,ALM02853,50000,Recurring Monthly,Bank Transfer,2025-03-02,Scholarship,False,True,,Completed
+DON001449,ALM03490,295,One-Time Gift,Check,2025-01-04,Infrastructure,False,True,,Completed
+DON001450,ALM00186,79,Major Gift,Stock,2024-08-03,Scholarship,False,True,Monthly,Completed
+DON001451,ALM00718,146,In-Kind,Credit Card,2024-11-16,Research,False,True,,Completed
+DON001452,ALM00379,281,Recurring Monthly,Bank Transfer,2024-08-18,Endowment,False,True,,Completed
+DON001453,ALM01771,469,Recurring Monthly,Wire Transfer,2024-11-19,Endowment,False,True,,Completed
+DON001454,ALM02567,455,Pledge,Stock,2024-10-14,Research,False,True,,Completed
+DON001455,ALM00347,249,Major Gift,Check,2025-02-21,Infrastructure,False,True,Quarterly,Completed
+DON001456,ALM03274,50000,Recurring Monthly,Check,2024-06-15,Endowment,False,True,Quarterly,Completed
+DON001457,ALM02151,92,In-Kind,Bank Transfer,2023-12-18,Endowment,True,True,,Completed
+DON001458,ALM01721,431,Major Gift,Credit Card,2025-03-18,Scholarship,True,True,,Completed
+DON001459,ALM01005,432,Major Gift,Check,2024-04-06,Endowment,False,True,,Completed
+DON001460,ALM01073,474,Major Gift,Credit Card,2025-07-17,Research,False,True,,Completed
+DON001461,ALM01266,183,Recurring Monthly,Bank Transfer,2025-09-14,Scholarship,False,True,,Completed
+DON001462,ALM00677,10000,In-Kind,Credit Card,2024-05-24,General Fund,False,True,,Completed
+DON001463,ALM00303,387,Recurring Monthly,Wire Transfer,2024-12-16,Endowment,False,True,Monthly,Completed
+DON001464,ALM00647,211,Pledge,Check,2025-08-19,Infrastructure,False,True,Quarterly,Completed
+DON001465,ALM02277,250000,Major Gift,Wire Transfer,2024-04-12,Scholarship,False,True,,Completed
+DON001466,ALM01666,152,Recurring Monthly,Credit Card,2025-05-21,Infrastructure,False,True,,Completed
+DON001467,ALM02607,10000,In-Kind,Credit Card,2024-04-02,General Fund,False,True,Annual,Completed
+DON001468,ALM00153,240,Recurring Monthly,Stock,2024-12-25,General Fund,False,True,,Completed
+DON001469,ALM02740,482,In-Kind,Wire Transfer,2024-04-20,General Fund,False,True,,Completed
+DON001470,ALM02721,50000,Pledge,Bank Transfer,2025-10-09,General Fund,False,True,,Completed
+DON001471,ALM03219,367,One-Time Gift,Wire Transfer,2024-04-25,Endowment,True,False,,Completed
+DON001472,ALM02753,77,Major Gift,Check,2025-03-03,Infrastructure,False,True,,Completed
+DON001473,ALM02374,235,Pledge,Wire Transfer,2024-01-25,Infrastructure,False,True,,Completed
+DON001474,ALM01164,476,Major Gift,Bank Transfer,2024-09-15,Infrastructure,False,True,,Completed
+DON001475,ALM01914,10000,Major Gift,Credit Card,2025-01-16,Endowment,False,True,,Completed
+DON001476,ALM01418,250000,Pledge,Bank Transfer,2024-12-28,General Fund,True,True,,Completed
+DON001477,ALM02902,250000,Recurring Monthly,Wire Transfer,2024-11-08,General Fund,False,True,,Completed
+DON001478,ALM02669,150,One-Time Gift,Bank Transfer,2025-03-31,Scholarship,True,True,Quarterly,Completed
+DON001479,ALM01946,357,In-Kind,Stock,2025-02-09,General Fund,False,True,,Completed
+DON001480,ALM02522,25000,Major Gift,Credit Card,2024-02-19,Research,False,True,,Completed
+DON001481,ALM01500,50000,One-Time Gift,Check,2024-11-23,General Fund,False,True,,Completed
+DON001482,ALM03042,100000,In-Kind,Check,2024-02-23,Infrastructure,False,True,Quarterly,Completed
+DON001483,ALM00262,51,In-Kind,Bank Transfer,2024-07-23,General Fund,False,True,,Completed
+DON001484,ALM03442,10000,Pledge,Stock,2025-06-28,Infrastructure,False,True,,Completed
+DON001485,ALM01409,379,In-Kind,Stock,2024-05-11,Infrastructure,False,False,,Completed
+DON001486,ALM00145,461,Recurring Monthly,Check,2024-10-13,Infrastructure,False,True,,Completed
+DON001487,ALM00831,462,Recurring Monthly,Bank Transfer,2025-09-05,General Fund,False,True,,Completed
+DON001488,ALM01998,10000,Major Gift,Check,2025-07-06,Endowment,False,True,,Completed
+DON001489,ALM03055,100000,In-Kind,Stock,2024-07-18,General Fund,False,True,,Completed
+DON001490,ALM01304,133,One-Time Gift,Credit Card,2025-01-27,Scholarship,False,True,,Completed
+DON001491,ALM03235,124,One-Time Gift,Wire Transfer,2024-06-21,Research,False,True,Monthly,Completed
+DON001492,ALM03230,250000,Major Gift,Bank Transfer,2024-02-17,Research,False,True,Quarterly,Completed
+DON001493,ALM01703,97,Major Gift,Credit Card,2024-10-17,Endowment,False,True,,Completed
+DON001494,ALM01565,217,One-Time Gift,Wire Transfer,2024-06-28,Endowment,False,True,Monthly,Completed
+DON001495,ALM00199,199,Major Gift,Check,2025-06-15,Infrastructure,False,True,Annual,Pending
+DON001496,ALM01285,90,Major Gift,Credit Card,2025-07-09,General Fund,False,True,Monthly,Completed
+DON001497,ALM01361,322,In-Kind,Credit Card,2024-12-06,Research,False,True,Quarterly,Pending
+DON001498,ALM00789,69,Pledge,Stock,2024-02-20,Endowment,False,True,,Completed
+DON001499,ALM00090,100000,Major Gift,Bank Transfer,2024-11-13,General Fund,False,True,Monthly,Completed
+DON001500,ALM01205,25000,Pledge,Bank Transfer,2024-03-14,Infrastructure,False,True,,Completed
+DON001501,ALM02065,10000,Recurring Monthly,Stock,2025-07-25,Endowment,True,True,,Completed
+DON001502,ALM00182,497,Pledge,Check,2025-06-07,General Fund,False,True,,Completed
+DON001503,ALM00421,404,In-Kind,Stock,2024-07-08,Research,False,True,,Completed
+DON001504,ALM01724,171,Recurring Monthly,Stock,2024-02-24,Infrastructure,False,True,,Completed
+DON001505,ALM01866,10000,Recurring Monthly,Credit Card,2024-11-23,Research,False,True,,Completed
+DON001506,ALM01515,50000,Recurring Monthly,Check,2025-03-20,Research,False,True,Monthly,Completed
+DON001507,ALM02702,197,Major Gift,Wire Transfer,2025-02-23,Infrastructure,True,True,,Completed
+DON001508,ALM01362,25000,Recurring Monthly,Credit Card,2024-12-30,Infrastructure,False,True,Monthly,Pending
+DON001509,ALM01262,50000,Pledge,Check,2024-10-26,Research,False,True,,Completed
+DON001510,ALM01431,472,One-Time Gift,Bank Transfer,2025-01-26,Endowment,True,True,Monthly,Completed
+DON001511,ALM02393,278,One-Time Gift,Stock,2024-03-22,Endowment,False,False,Annual,Completed
+DON001512,ALM00824,250000,One-Time Gift,Bank Transfer,2025-03-21,Infrastructure,False,True,,Completed
+DON001513,ALM03209,25000,One-Time Gift,Stock,2024-12-09,Endowment,True,True,Quarterly,Completed
+DON001514,ALM03142,416,In-Kind,Check,2024-02-27,Infrastructure,False,True,,Completed
+DON001515,ALM01109,398,In-Kind,Check,2025-02-25,General Fund,False,True,,Completed
+DON001516,ALM01587,319,Pledge,Bank Transfer,2024-04-02,Research,False,True,,Completed
+DON001517,ALM02981,50000,Pledge,Bank Transfer,2024-10-28,Research,False,True,Annual,Completed
+DON001518,ALM00182,250000,Pledge,Stock,2024-07-20,Research,False,True,Monthly,Completed
+DON001519,ALM03346,124,Major Gift,Credit Card,2024-12-24,Endowment,False,True,,Completed
+DON001520,ALM01465,25000,In-Kind,Check,2025-09-14,Research,False,True,,Completed
+DON001521,ALM02880,25000,Pledge,Check,2024-05-17,General Fund,False,True,,Completed
+DON001522,ALM01897,190,Pledge,Bank Transfer,2024-01-22,Endowment,False,True,,Completed
+DON001523,ALM02273,250000,One-Time Gift,Stock,2024-08-11,Infrastructure,False,True,Quarterly,Completed
+DON001524,ALM01065,100,In-Kind,Bank Transfer,2025-02-24,Scholarship,False,True,,Completed
+DON001525,ALM02004,144,In-Kind,Stock,2025-05-16,Infrastructure,False,True,Monthly,Completed
+DON001526,ALM03173,50000,In-Kind,Bank Transfer,2025-08-08,Endowment,False,True,Monthly,Completed
+DON001527,ALM01391,401,One-Time Gift,Wire Transfer,2025-02-21,Research,False,True,,Completed
+DON001528,ALM03280,320,Recurring Monthly,Check,2024-08-02,Research,True,True,,Completed
+DON001529,ALM00029,10000,Pledge,Wire Transfer,2024-12-30,Endowment,False,True,Quarterly,Completed
+DON001530,ALM00620,223,Major Gift,Bank Transfer,2025-07-08,Infrastructure,False,True,Quarterly,Completed
+DON001531,ALM01432,174,Pledge,Stock,2024-12-16,Endowment,False,True,,Completed
+DON001532,ALM02630,312,In-Kind,Stock,2025-05-04,Infrastructure,False,True,,Completed
+DON001533,ALM00601,266,In-Kind,Wire Transfer,2024-07-24,Endowment,False,True,,Completed
+DON001534,ALM01948,250000,Pledge,Credit Card,2025-06-21,Endowment,False,True,,Completed
+DON001535,ALM00158,205,One-Time Gift,Stock,2024-12-19,Infrastructure,False,True,,Completed
+DON001536,ALM01284,306,Major Gift,Wire Transfer,2025-08-08,General Fund,False,True,,Completed
+DON001537,ALM03353,102,Recurring Monthly,Bank Transfer,2024-12-11,General Fund,False,True,,Completed
+DON001538,ALM02348,223,Recurring Monthly,Wire Transfer,2023-12-17,Research,False,True,,Completed
+DON001539,ALM03213,412,Recurring Monthly,Credit Card,2025-07-28,Scholarship,False,True,,Completed
+DON001540,ALM02969,250000,In-Kind,Credit Card,2025-09-10,Research,False,True,,Completed
+DON001541,ALM01634,349,Pledge,Wire Transfer,2024-09-15,Research,False,True,,Pending
+DON001542,ALM00008,50000,One-Time Gift,Check,2024-12-08,Endowment,False,True,,Completed
+DON001543,ALM00586,250000,One-Time Gift,Check,2025-07-07,Infrastructure,False,True,,Completed
+DON001544,ALM01195,385,Recurring Monthly,Credit Card,2024-04-01,Research,False,True,,Completed
+DON001545,ALM00111,258,Major Gift,Check,2025-07-06,Scholarship,False,True,,Completed
+DON001546,ALM00090,10000,Recurring Monthly,Credit Card,2024-03-21,Scholarship,False,True,,Completed
+DON001547,ALM00711,220,In-Kind,Check,2024-09-23,Endowment,False,True,,Completed
+DON001548,ALM00254,485,Major Gift,Stock,2024-09-24,Endowment,False,True,,Declined
+DON001549,ALM01714,234,Major Gift,Bank Transfer,2025-08-23,Scholarship,False,True,Monthly,Completed
+DON001550,ALM03496,230,In-Kind,Bank Transfer,2025-05-06,Research,False,True,,Declined
+DON001551,ALM01471,459,Pledge,Stock,2024-03-06,Infrastructure,False,True,Quarterly,Declined
+DON001552,ALM02283,25000,One-Time Gift,Wire Transfer,2025-10-31,Endowment,False,True,,Completed
+DON001553,ALM02651,220,Major Gift,Bank Transfer,2025-07-01,Research,False,True,,Completed
+DON001554,ALM00524,89,Pledge,Check,2025-08-21,General Fund,False,True,,Completed
+DON001555,ALM01933,250000,One-Time Gift,Stock,2024-02-04,Scholarship,False,True,,Declined
+DON001556,ALM03210,25000,One-Time Gift,Stock,2025-09-05,Endowment,False,True,,Completed
+DON001557,ALM00889,278,Major Gift,Wire Transfer,2025-06-05,Infrastructure,False,True,,Pending
+DON001558,ALM01721,218,Major Gift,Stock,2025-04-20,Infrastructure,False,True,,Completed
+DON001559,ALM00341,443,Major Gift,Credit Card,2024-01-01,Infrastructure,False,True,Monthly,Completed
+DON001560,ALM01207,100000,Recurring Monthly,Check,2023-12-11,Scholarship,False,True,,Completed
+DON001561,ALM00565,50000,Major Gift,Check,2024-11-03,Scholarship,False,True,,Completed
+DON001562,ALM01212,497,One-Time Gift,Check,2025-05-29,Research,False,True,,Completed
+DON001563,ALM00513,195,Recurring Monthly,Credit Card,2024-01-06,Infrastructure,False,True,,Completed
+DON001564,ALM00559,10000,One-Time Gift,Stock,2025-05-29,Endowment,True,True,,Completed
+DON001565,ALM01465,313,Recurring Monthly,Bank Transfer,2023-11-29,Endowment,False,True,,Completed
+DON001566,ALM02954,485,Pledge,Credit Card,2024-09-18,General Fund,False,False,Monthly,Completed
+DON001567,ALM02584,350,Recurring Monthly,Credit Card,2024-11-06,Research,False,True,,Completed
+DON001568,ALM02588,25000,In-Kind,Wire Transfer,2025-01-08,Research,False,True,,Completed
+DON001569,ALM03355,290,Pledge,Check,2024-03-13,General Fund,False,True,,Completed
+DON001570,ALM01517,58,In-Kind,Bank Transfer,2025-07-09,Scholarship,False,True,,Completed
+DON001571,ALM00776,413,One-Time Gift,Bank Transfer,2023-12-27,Endowment,False,True,,Completed
+DON001572,ALM01542,219,Major Gift,Stock,2024-05-31,General Fund,False,True,Monthly,Completed
+DON001573,ALM02154,250000,In-Kind,Credit Card,2025-08-30,Endowment,True,True,,Pending
+DON001574,ALM01849,250000,In-Kind,Check,2024-06-02,Scholarship,False,True,Quarterly,Pending
+DON001575,ALM01794,250000,Major Gift,Stock,2025-02-25,General Fund,False,True,,Completed
+DON001576,ALM00405,263,One-Time Gift,Wire Transfer,2025-08-29,General Fund,False,True,,Completed
+DON001577,ALM00556,185,Recurring Monthly,Stock,2024-02-20,General Fund,False,True,Quarterly,Completed
+DON001578,ALM01547,10000,Pledge,Wire Transfer,2025-10-07,Endowment,False,True,,Completed
+DON001579,ALM00281,117,Recurring Monthly,Credit Card,2023-12-03,Scholarship,False,True,,Completed
+DON001580,ALM03382,338,Pledge,Bank Transfer,2025-07-24,Infrastructure,True,True,,Completed
+DON001581,ALM02784,265,Major Gift,Stock,2024-06-23,Scholarship,False,True,Annual,Completed
+DON001582,ALM02433,300,One-Time Gift,Wire Transfer,2024-10-12,Infrastructure,False,True,Monthly,Completed
+DON001583,ALM02208,218,Pledge,Check,2025-06-17,Research,False,True,,Completed
+DON001584,ALM02608,163,In-Kind,Bank Transfer,2023-12-21,Research,False,True,,Completed
+DON001585,ALM02908,65,Major Gift,Bank Transfer,2025-05-31,Infrastructure,False,True,,Completed
+DON001586,ALM02939,100000,Pledge,Stock,2024-02-17,Endowment,False,True,,Completed
+DON001587,ALM01346,184,One-Time Gift,Stock,2025-01-21,Research,False,True,,Completed
+DON001588,ALM01352,455,Recurring Monthly,Stock,2025-04-21,General Fund,False,True,,Completed
+DON001589,ALM01888,204,Major Gift,Wire Transfer,2024-02-10,Research,False,True,,Completed
+DON001590,ALM00455,129,Major Gift,Stock,2024-02-19,Infrastructure,False,True,,Completed
+DON001591,ALM00386,25000,In-Kind,Credit Card,2024-03-07,Scholarship,False,True,,Completed
+DON001592,ALM02627,397,Major Gift,Check,2024-05-17,General Fund,True,True,,Pending
+DON001593,ALM02075,234,Pledge,Wire Transfer,2025-07-03,Scholarship,False,True,Annual,Completed
+DON001594,ALM03007,82,One-Time Gift,Credit Card,2025-04-16,General Fund,True,True,,Completed
+DON001595,ALM02600,50000,Recurring Monthly,Check,2025-06-11,Research,False,False,,Completed
+DON001596,ALM03462,25000,One-Time Gift,Check,2025-10-21,Research,False,True,,Completed
+DON001597,ALM01295,304,Major Gift,Bank Transfer,2024-11-02,Endowment,False,True,,Completed
+DON001598,ALM02268,10000,Pledge,Credit Card,2025-08-04,Infrastructure,False,True,,Completed
+DON001599,ALM01466,194,Recurring Monthly,Wire Transfer,2025-03-17,Scholarship,False,True,,Completed
+DON001600,ALM02190,50000,In-Kind,Bank Transfer,2024-09-19,Research,False,True,,Completed
+DON001601,ALM00831,454,In-Kind,Credit Card,2024-12-24,Infrastructure,False,True,,Completed
+DON001602,ALM01092,232,In-Kind,Bank Transfer,2024-12-20,General Fund,False,True,Monthly,Completed
+DON001603,ALM03088,222,One-Time Gift,Wire Transfer,2025-08-01,Infrastructure,False,True,,Completed
+DON001604,ALM02496,50000,In-Kind,Bank Transfer,2025-01-26,General Fund,False,True,Monthly,Completed
+DON001605,ALM00869,25000,In-Kind,Check,2024-03-09,General Fund,False,True,,Completed
+DON001606,ALM01116,100000,In-Kind,Wire Transfer,2025-05-18,General Fund,False,True,Monthly,Completed
+DON001607,ALM02386,25000,One-Time Gift,Wire Transfer,2024-03-21,Research,False,True,,Completed
+DON001608,ALM02158,456,One-Time Gift,Credit Card,2023-11-30,Scholarship,False,True,Quarterly,Pending
+DON001609,ALM00660,100000,In-Kind,Stock,2025-03-09,Research,False,True,,Completed
+DON001610,ALM00352,490,One-Time Gift,Credit Card,2025-05-14,Endowment,False,True,Annual,Completed
+DON001611,ALM02762,100000,In-Kind,Wire Transfer,2024-04-24,Research,False,True,,Completed
+DON001612,ALM02062,336,Major Gift,Bank Transfer,2024-12-27,Infrastructure,True,True,,Completed
+DON001613,ALM00990,250000,Major Gift,Wire Transfer,2025-08-04,General Fund,False,True,,Completed
+DON001614,ALM02703,53,Major Gift,Credit Card,2025-10-20,Endowment,False,True,,Completed
+DON001615,ALM02487,461,In-Kind,Credit Card,2024-06-30,Scholarship,False,True,,Completed
+DON001616,ALM03396,10000,Pledge,Check,2024-11-22,Research,False,True,,Completed
+DON001617,ALM02430,263,Major Gift,Stock,2023-12-07,Endowment,True,True,,Completed
+DON001618,ALM03368,10000,Recurring Monthly,Check,2023-11-10,General Fund,False,True,,Completed
+DON001619,ALM01651,90,Major Gift,Bank Transfer,2024-03-30,Scholarship,False,True,,Completed
+DON001620,ALM01358,239,Pledge,Check,2025-10-30,General Fund,False,True,,Completed
+DON001621,ALM00084,100000,Major Gift,Check,2025-01-24,Infrastructure,False,True,,Completed
+DON001622,ALM03377,442,Pledge,Bank Transfer,2025-08-15,Scholarship,True,True,,Completed
+DON001623,ALM01739,370,Recurring Monthly,Check,2024-04-04,General Fund,False,True,,Completed
+DON001624,ALM00141,100000,Major Gift,Stock,2024-07-07,Endowment,False,True,,Completed
+DON001625,ALM01452,164,Recurring Monthly,Bank Transfer,2025-04-08,Infrastructure,False,True,,Declined
+DON001626,ALM01926,246,Recurring Monthly,Wire Transfer,2025-05-06,Scholarship,False,True,Monthly,Completed
+DON001627,ALM01502,250000,One-Time Gift,Stock,2024-12-14,Research,False,True,Annual,Completed
+DON001628,ALM03444,174,In-Kind,Bank Transfer,2025-08-04,Research,False,False,,Completed
+DON001629,ALM01063,100000,In-Kind,Stock,2024-11-13,General Fund,False,True,,Completed
+DON001630,ALM01836,344,One-Time Gift,Bank Transfer,2024-08-14,Research,True,True,Monthly,Pending
+DON001631,ALM00281,250000,Major Gift,Stock,2024-02-29,General Fund,False,True,Quarterly,Completed
+DON001632,ALM02098,250000,Recurring Monthly,Wire Transfer,2024-06-24,Scholarship,False,True,,Completed
+DON001633,ALM00610,397,In-Kind,Bank Transfer,2025-10-27,Scholarship,False,False,,Completed
+DON001634,ALM01485,95,One-Time Gift,Credit Card,2024-10-31,Research,False,True,Monthly,Completed
+DON001635,ALM02949,240,One-Time Gift,Check,2025-01-03,Scholarship,False,True,Quarterly,Completed
+DON001636,ALM01718,250000,In-Kind,Check,2024-10-17,Infrastructure,False,False,,Completed
+DON001637,ALM03110,90,Recurring Monthly,Wire Transfer,2023-12-02,Scholarship,False,True,,Completed
+DON001638,ALM03053,239,One-Time Gift,Stock,2024-09-16,Research,False,True,,Completed
+DON001639,ALM02372,25000,Recurring Monthly,Credit Card,2024-03-01,Scholarship,False,True,,Completed
+DON001640,ALM00556,257,Pledge,Check,2024-08-14,Scholarship,False,True,,Completed
+DON001641,ALM02506,66,Pledge,Credit Card,2023-12-29,Scholarship,False,True,Quarterly,Declined
+DON001642,ALM02312,147,Major Gift,Check,2025-07-18,Scholarship,False,True,,Completed
+DON001643,ALM02971,425,Recurring Monthly,Stock,2024-10-11,Endowment,False,True,,Completed
+DON001644,ALM02989,161,Recurring Monthly,Credit Card,2025-05-04,Scholarship,False,True,,Completed
+DON001645,ALM02795,100000,Pledge,Wire Transfer,2025-03-24,General Fund,False,True,,Completed
+DON001646,ALM02378,350,In-Kind,Bank Transfer,2024-09-02,Research,False,False,Monthly,Completed
+DON001647,ALM00917,51,Recurring Monthly,Wire Transfer,2024-08-14,Endowment,False,True,Annual,Pending
+DON001648,ALM03053,170,Major Gift,Stock,2024-09-10,Research,False,True,,Completed
+DON001649,ALM01668,375,Pledge,Wire Transfer,2024-06-16,Research,False,True,,Completed
+DON001650,ALM00923,136,In-Kind,Stock,2024-02-23,General Fund,False,True,Monthly,Declined
+DON001651,ALM03129,10000,Recurring Monthly,Wire Transfer,2025-07-23,Research,True,True,,Completed
+DON001652,ALM01725,364,Recurring Monthly,Wire Transfer,2024-02-29,Endowment,False,True,,Completed
+DON001653,ALM02423,202,Major Gift,Check,2023-11-16,General Fund,False,True,Monthly,Completed
+DON001654,ALM02308,280,Major Gift,Bank Transfer,2024-08-14,General Fund,False,True,Quarterly,Completed
+DON001655,ALM01936,435,In-Kind,Bank Transfer,2025-10-29,General Fund,False,True,,Completed
+DON001656,ALM00322,100000,In-Kind,Stock,2024-09-13,Endowment,False,True,Quarterly,Completed
+DON001657,ALM01335,177,Recurring Monthly,Bank Transfer,2025-11-01,Scholarship,False,True,Quarterly,Completed
+DON001658,ALM00421,50000,Pledge,Wire Transfer,2024-01-16,Research,False,True,,Completed
+DON001659,ALM02442,25000,Pledge,Stock,2025-05-16,General Fund,False,True,,Completed
+DON001660,ALM03262,250000,One-Time Gift,Wire Transfer,2024-10-24,Research,False,True,,Completed
+DON001661,ALM01940,312,Pledge,Credit Card,2025-01-19,Endowment,False,True,,Completed
+DON001662,ALM03073,145,Recurring Monthly,Check,2024-11-11,General Fund,True,True,,Completed
+DON001663,ALM03230,430,One-Time Gift,Wire Transfer,2024-03-18,Scholarship,False,True,,Completed
+DON001664,ALM02958,100000,One-Time Gift,Credit Card,2025-10-29,General Fund,False,True,Quarterly,Completed
+DON001665,ALM02069,192,Recurring Monthly,Credit Card,2025-01-29,Scholarship,False,False,,Completed
+DON001666,ALM02207,467,One-Time Gift,Stock,2025-02-07,Infrastructure,False,True,,Completed
+DON001667,ALM02563,190,Pledge,Check,2025-09-15,General Fund,False,True,Monthly,Completed
+DON001668,ALM02100,50000,Recurring Monthly,Check,2024-11-01,Scholarship,True,True,Monthly,Completed
+DON001669,ALM02354,336,Major Gift,Credit Card,2025-09-02,Infrastructure,False,True,,Completed
+DON001670,ALM01382,400,One-Time Gift,Credit Card,2024-08-31,Infrastructure,False,True,Annual,Completed
+DON001671,ALM00738,100000,Major Gift,Wire Transfer,2024-03-31,Research,False,True,,Completed
+DON001672,ALM00381,272,Pledge,Credit Card,2024-06-27,General Fund,False,True,,Completed
+DON001673,ALM00506,276,Pledge,Wire Transfer,2024-01-29,Research,True,True,Monthly,Pending
+DON001674,ALM00650,383,Pledge,Credit Card,2024-11-25,Research,False,True,,Completed
+DON001675,ALM01490,97,Pledge,Wire Transfer,2024-02-01,Endowment,False,True,,Completed
+DON001676,ALM00085,331,One-Time Gift,Bank Transfer,2025-10-23,General Fund,False,True,,Completed
+DON001677,ALM00992,472,Pledge,Check,2023-12-31,Infrastructure,False,True,,Pending
+DON001678,ALM03314,50000,One-Time Gift,Wire Transfer,2024-10-16,Research,False,True,,Completed
+DON001679,ALM00184,136,Recurring Monthly,Bank Transfer,2024-04-07,Infrastructure,False,True,Monthly,Completed
+DON001680,ALM02804,319,Major Gift,Bank Transfer,2024-09-25,Scholarship,False,True,,Completed
+DON001681,ALM03152,95,One-Time Gift,Check,2024-08-12,Endowment,False,True,,Declined
+DON001682,ALM01016,181,In-Kind,Credit Card,2025-06-10,Infrastructure,False,True,,Completed
+DON001683,ALM03388,362,Pledge,Bank Transfer,2025-02-27,Infrastructure,False,True,Annual,Completed
+DON001684,ALM01015,456,Pledge,Bank Transfer,2024-07-09,Infrastructure,False,True,,Completed
+DON001685,ALM02664,410,Major Gift,Check,2024-02-09,General Fund,False,True,Quarterly,Completed
+DON001686,ALM02105,97,Pledge,Stock,2024-01-01,Infrastructure,False,True,,Completed
+DON001687,ALM02584,50000,Recurring Monthly,Bank Transfer,2025-04-24,General Fund,False,True,Annual,Declined
+DON001688,ALM01912,100000,In-Kind,Check,2025-07-13,Endowment,False,True,Annual,Completed
+DON001689,ALM00175,123,Pledge,Credit Card,2024-08-25,General Fund,False,True,Quarterly,Pending
+DON001690,ALM01946,192,One-Time Gift,Stock,2024-05-19,General Fund,False,True,,Completed
+DON001691,ALM00732,128,Recurring Monthly,Bank Transfer,2025-09-13,General Fund,True,True,,Completed
+DON001692,ALM00268,455,Pledge,Check,2025-06-22,Scholarship,False,True,,Completed
+DON001693,ALM00029,10000,In-Kind,Check,2023-11-07,Scholarship,True,True,Quarterly,Completed
+DON001694,ALM00176,250000,In-Kind,Bank Transfer,2023-11-29,Research,False,True,,Completed
+DON001695,ALM01122,50000,Pledge,Credit Card,2025-02-05,Infrastructure,False,True,,Completed
+DON001696,ALM00970,250000,Recurring Monthly,Stock,2025-10-06,Infrastructure,False,True,,Completed
+DON001697,ALM02661,264,In-Kind,Bank Transfer,2024-01-17,Scholarship,True,False,,Pending
+DON001698,ALM02229,463,Pledge,Stock,2025-05-20,General Fund,True,True,Annual,Completed
+DON001699,ALM03292,112,One-Time Gift,Bank Transfer,2025-04-07,Endowment,False,True,,Declined
+DON001700,ALM03435,325,One-Time Gift,Wire Transfer,2024-08-24,Infrastructure,False,True,,Completed
+DON001701,ALM02702,121,One-Time Gift,Bank Transfer,2024-04-06,Infrastructure,False,True,Quarterly,Completed
+DON001702,ALM00392,454,Recurring Monthly,Credit Card,2024-08-14,Infrastructure,False,True,,Pending
+DON001703,ALM03155,390,Major Gift,Bank Transfer,2025-09-07,Endowment,False,True,Quarterly,Completed
+DON001704,ALM03260,25000,In-Kind,Credit Card,2025-03-24,Scholarship,False,True,,Completed
+DON001705,ALM00320,336,Major Gift,Wire Transfer,2024-06-29,General Fund,False,True,,Completed
+DON001706,ALM01465,145,Major Gift,Bank Transfer,2025-06-08,Scholarship,False,True,Quarterly,Completed
+DON001707,ALM00836,25000,In-Kind,Stock,2025-05-16,Endowment,False,True,Quarterly,Declined
+DON001708,ALM01446,167,Pledge,Bank Transfer,2024-03-13,General Fund,True,True,Quarterly,Completed
+DON001709,ALM01435,335,Major Gift,Bank Transfer,2025-02-22,General Fund,False,True,,Completed
+DON001710,ALM00230,10000,One-Time Gift,Wire Transfer,2023-12-18,Infrastructure,False,True,,Completed
+DON001711,ALM01944,10000,In-Kind,Stock,2025-09-01,Research,False,True,,Completed
+DON001712,ALM02766,261,One-Time Gift,Stock,2024-10-18,Scholarship,False,True,,Pending
+DON001713,ALM01902,204,Pledge,Check,2025-04-12,Endowment,False,True,,Completed
+DON001714,ALM02966,250000,In-Kind,Wire Transfer,2023-12-10,General Fund,False,True,Monthly,Pending
+DON001715,ALM00986,100000,One-Time Gift,Check,2024-06-14,Endowment,False,True,,Completed
+DON001716,ALM03452,76,One-Time Gift,Bank Transfer,2025-09-14,General Fund,True,True,,Completed
+DON001717,ALM02228,50000,One-Time Gift,Wire Transfer,2024-11-19,Research,False,True,,Completed
+DON001718,ALM01983,247,Recurring Monthly,Wire Transfer,2024-11-21,Infrastructure,False,True,,Completed
+DON001719,ALM02875,216,Recurring Monthly,Credit Card,2025-03-13,Endowment,False,True,,Completed
+DON001720,ALM02075,280,One-Time Gift,Check,2025-07-16,General Fund,False,True,Monthly,Completed
+DON001721,ALM02440,383,One-Time Gift,Credit Card,2025-06-29,Scholarship,False,True,,Completed
+DON001722,ALM00561,50000,Recurring Monthly,Check,2024-11-18,Infrastructure,False,True,Monthly,Completed
+DON001723,ALM01852,100000,Recurring Monthly,Check,2024-05-20,General Fund,False,False,,Completed
+DON001724,ALM00298,337,Recurring Monthly,Wire Transfer,2024-01-01,Research,False,True,,Completed
+DON001725,ALM01131,77,Recurring Monthly,Wire Transfer,2025-10-13,Scholarship,False,True,,Completed
+DON001726,ALM01892,50000,Pledge,Check,2025-07-20,Research,False,True,,Completed
+DON001727,ALM03360,426,One-Time Gift,Wire Transfer,2024-03-17,Scholarship,False,True,,Completed
+DON001728,ALM02564,252,Recurring Monthly,Stock,2024-04-13,Endowment,False,True,Monthly,Completed
+DON001729,ALM01737,295,Major Gift,Bank Transfer,2025-09-01,Endowment,False,True,,Completed
+DON001730,ALM01321,183,Recurring Monthly,Credit Card,2024-04-24,Infrastructure,False,True,,Completed
+DON001731,ALM00823,358,One-Time Gift,Stock,2025-10-21,Infrastructure,False,True,,Completed
+DON001732,ALM00143,262,In-Kind,Check,2025-02-03,Research,False,True,,Completed
+DON001733,ALM00072,25000,One-Time Gift,Wire Transfer,2025-07-23,General Fund,False,True,,Completed
+DON001734,ALM01345,238,Pledge,Stock,2025-06-20,Scholarship,False,True,,Completed
+DON001735,ALM02042,180,Recurring Monthly,Bank Transfer,2024-10-30,Scholarship,False,True,Monthly,Completed
+DON001736,ALM02464,50000,In-Kind,Wire Transfer,2025-04-18,Research,False,True,Quarterly,Completed
+DON001737,ALM03285,178,In-Kind,Check,2024-08-21,Endowment,False,True,,Completed
+DON001738,ALM02917,25000,In-Kind,Check,2025-01-04,Research,False,True,,Completed
+DON001739,ALM02488,199,In-Kind,Credit Card,2025-10-21,Infrastructure,False,True,Monthly,Completed
+DON001740,ALM03500,400,Pledge,Bank Transfer,2024-05-13,General Fund,False,True,,Completed
+DON001741,ALM00247,276,Pledge,Stock,2024-02-07,Research,True,True,Monthly,Completed
+DON001742,ALM01321,416,Recurring Monthly,Wire Transfer,2024-07-20,Infrastructure,False,True,,Completed
+DON001743,ALM02881,238,Recurring Monthly,Wire Transfer,2024-07-21,Research,False,True,,Completed
+DON001744,ALM00847,177,Recurring Monthly,Stock,2023-11-06,Research,False,True,,Completed
+DON001745,ALM01923,373,Pledge,Stock,2025-03-22,Infrastructure,False,True,,Completed
+DON001746,ALM01555,342,Major Gift,Credit Card,2025-03-09,Research,False,True,,Completed
+DON001747,ALM02146,50000,Recurring Monthly,Bank Transfer,2025-03-06,General Fund,False,True,Quarterly,Completed
+DON001748,ALM00442,386,One-Time Gift,Bank Transfer,2025-09-27,Endowment,False,True,,Completed
+DON001749,ALM01071,224,Major Gift,Check,2024-02-23,Endowment,True,True,,Completed
+DON001750,ALM02783,371,Major Gift,Check,2024-04-23,Infrastructure,False,True,Monthly,Completed
+DON001751,ALM00504,164,One-Time Gift,Check,2025-06-14,General Fund,False,True,,Completed
+DON001752,ALM02986,486,In-Kind,Check,2025-07-22,General Fund,False,True,,Completed
+DON001753,ALM00106,75,In-Kind,Credit Card,2025-10-23,Infrastructure,False,True,,Pending
+DON001754,ALM00912,370,One-Time Gift,Bank Transfer,2024-10-23,General Fund,False,True,,Completed
+DON001755,ALM03460,146,Major Gift,Stock,2024-12-01,Research,False,True,,Completed
+DON001756,ALM01905,25000,In-Kind,Wire Transfer,2024-04-20,Infrastructure,False,True,,Completed
+DON001757,ALM02958,250000,Major Gift,Credit Card,2025-06-24,General Fund,False,True,,Completed
+DON001758,ALM02512,100000,Recurring Monthly,Wire Transfer,2024-04-01,Infrastructure,False,True,,Completed
+DON001759,ALM03143,100000,One-Time Gift,Bank Transfer,2024-04-05,Research,False,True,,Completed
+DON001760,ALM00773,25000,Major Gift,Bank Transfer,2024-03-17,Infrastructure,False,True,,Completed
+DON001761,ALM03045,300,Major Gift,Bank Transfer,2025-10-01,General Fund,False,False,Monthly,Completed
+DON001762,ALM01404,404,Recurring Monthly,Credit Card,2025-02-27,Scholarship,False,True,,Completed
+DON001763,ALM02124,50000,Major Gift,Bank Transfer,2025-07-16,General Fund,False,True,,Completed
+DON001764,ALM01400,154,Major Gift,Stock,2024-11-23,Research,False,True,,Completed
+DON001765,ALM02225,50,Recurring Monthly,Credit Card,2025-04-04,Infrastructure,True,False,,Completed
+DON001766,ALM02918,430,Pledge,Stock,2025-03-19,Research,False,True,,Completed
+DON001767,ALM01731,250000,Major Gift,Check,2024-08-15,General Fund,False,True,,Completed
+DON001768,ALM02497,100000,Pledge,Check,2024-03-23,Scholarship,False,True,,Completed
+DON001769,ALM01932,236,One-Time Gift,Wire Transfer,2025-06-05,General Fund,False,True,Monthly,Completed
+DON001770,ALM01092,358,Recurring Monthly,Stock,2024-05-04,Infrastructure,False,True,Quarterly,Declined
+DON001771,ALM00830,186,One-Time Gift,Stock,2025-02-18,Endowment,False,True,Monthly,Completed
+DON001772,ALM03187,479,Pledge,Bank Transfer,2025-11-01,General Fund,False,True,,Completed
+DON001773,ALM01076,476,Pledge,Bank Transfer,2025-10-07,General Fund,False,True,,Completed
+DON001774,ALM01205,250000,Recurring Monthly,Bank Transfer,2025-10-20,General Fund,False,True,,Completed
+DON001775,ALM02858,100000,One-Time Gift,Credit Card,2024-10-08,Scholarship,False,True,,Completed
+DON001776,ALM02362,356,Major Gift,Wire Transfer,2025-08-04,Infrastructure,False,True,,Completed
+DON001777,ALM02704,483,Pledge,Credit Card,2025-08-21,Scholarship,True,True,,Completed
+DON001778,ALM02785,59,Recurring Monthly,Stock,2025-07-19,Scholarship,False,True,,Completed
+DON001779,ALM01688,50000,Pledge,Wire Transfer,2024-06-16,Research,False,True,Annual,Completed
+DON001780,ALM02541,269,In-Kind,Stock,2025-10-16,Scholarship,False,True,,Completed
+DON001781,ALM00755,107,Major Gift,Credit Card,2024-02-29,Infrastructure,False,False,,Completed
+DON001782,ALM01018,25000,Recurring Monthly,Check,2024-12-15,Endowment,False,True,,Completed
+DON001783,ALM03067,307,Recurring Monthly,Credit Card,2024-05-04,Research,False,True,Monthly,Completed
+DON001784,ALM00010,10000,Pledge,Stock,2025-05-31,General Fund,False,True,,Completed
+DON001785,ALM01318,494,Recurring Monthly,Bank Transfer,2025-06-26,Research,False,True,,Completed
+DON001786,ALM02518,297,Major Gift,Bank Transfer,2024-11-28,Scholarship,False,True,,Completed
+DON001787,ALM02100,429,In-Kind,Wire Transfer,2024-12-07,Infrastructure,True,True,Quarterly,Completed
+DON001788,ALM02565,10000,Recurring Monthly,Check,2024-06-26,General Fund,False,True,,Completed
+DON001789,ALM02544,269,One-Time Gift,Check,2025-03-16,Research,False,True,,Completed
+DON001790,ALM01795,354,Recurring Monthly,Credit Card,2024-09-04,Research,False,True,Quarterly,Completed
+DON001791,ALM02455,25000,Recurring Monthly,Stock,2024-04-17,Research,False,True,Quarterly,Completed
+DON001792,ALM01509,331,Pledge,Credit Card,2023-12-29,Infrastructure,False,True,,Completed
+DON001793,ALM02274,197,Recurring Monthly,Check,2024-09-01,Scholarship,False,True,,Completed
+DON001794,ALM01042,152,In-Kind,Bank Transfer,2024-05-23,Research,False,True,Monthly,Completed
+DON001795,ALM02913,10000,Recurring Monthly,Credit Card,2025-09-17,Infrastructure,False,True,Monthly,Completed
+DON001796,ALM02844,278,One-Time Gift,Check,2025-07-01,General Fund,False,True,,Completed
+DON001797,ALM02272,477,One-Time Gift,Bank Transfer,2025-09-26,Endowment,False,True,,Completed
+DON001798,ALM00502,195,One-Time Gift,Stock,2024-05-07,Infrastructure,False,True,Monthly,Completed
+DON001799,ALM03112,362,In-Kind,Credit Card,2024-12-24,Endowment,True,True,,Completed
+DON001800,ALM01021,194,Major Gift,Stock,2025-02-28,Endowment,False,True,Monthly,Completed
+DON001801,ALM02369,94,Major Gift,Wire Transfer,2024-09-13,Research,False,True,,Completed
+DON001802,ALM00306,267,Recurring Monthly,Stock,2024-07-20,Infrastructure,False,True,,Completed
+DON001803,ALM02275,253,Recurring Monthly,Wire Transfer,2023-11-05,Research,False,True,,Completed
+DON001804,ALM01768,25000,Major Gift,Wire Transfer,2023-12-13,Scholarship,False,True,,Completed
+DON001805,ALM01207,255,Major Gift,Wire Transfer,2024-07-23,Scholarship,False,True,,Completed
+DON001806,ALM00967,261,Pledge,Check,2023-12-21,Research,False,True,,Completed
+DON001807,ALM02503,50000,Recurring Monthly,Stock,2024-04-16,Infrastructure,False,True,Monthly,Completed
+DON001808,ALM03062,264,In-Kind,Bank Transfer,2025-03-09,Endowment,False,True,,Completed
+DON001809,ALM00269,50000,Recurring Monthly,Check,2025-10-26,Infrastructure,False,True,,Completed
+DON001810,ALM00595,219,Major Gift,Credit Card,2025-06-17,Infrastructure,False,True,Annual,Completed
+DON001811,ALM00225,265,One-Time Gift,Bank Transfer,2025-07-23,Research,False,True,,Declined
+DON001812,ALM00246,121,Recurring Monthly,Credit Card,2024-03-12,Research,False,True,,Completed
+DON001813,ALM00932,25000,One-Time Gift,Wire Transfer,2024-07-02,Infrastructure,False,True,,Completed
+DON001814,ALM03044,292,Major Gift,Credit Card,2025-05-11,Endowment,False,True,,Completed
+DON001815,ALM01716,25000,Recurring Monthly,Wire Transfer,2024-03-18,General Fund,True,True,Monthly,Completed
+DON001816,ALM02067,210,One-Time Gift,Wire Transfer,2023-12-25,Scholarship,False,True,Monthly,Completed
+DON001817,ALM02809,53,One-Time Gift,Check,2024-02-24,Research,False,True,,Completed
+DON001818,ALM02844,50000,In-Kind,Bank Transfer,2024-06-19,Endowment,True,True,,Completed
+DON001819,ALM02612,100000,One-Time Gift,Wire Transfer,2025-05-09,Endowment,False,True,,Completed
+DON001820,ALM03356,71,Pledge,Check,2024-10-23,General Fund,True,True,,Completed
+DON001821,ALM00319,51,One-Time Gift,Check,2025-10-27,Endowment,False,True,,Completed
+DON001822,ALM02363,88,Major Gift,Bank Transfer,2025-05-18,General Fund,False,True,,Completed
+DON001823,ALM02375,25000,Pledge,Bank Transfer,2025-10-02,General Fund,False,True,,Completed
+DON001824,ALM02414,317,Pledge,Stock,2025-02-18,Scholarship,True,True,,Completed
+DON001825,ALM00519,246,In-Kind,Bank Transfer,2024-04-01,Scholarship,False,True,,Completed
+DON001826,ALM03264,402,Pledge,Wire Transfer,2024-07-20,Research,False,True,,Completed
+DON001827,ALM00190,464,Recurring Monthly,Wire Transfer,2023-12-03,Infrastructure,False,True,,Completed
+DON001828,ALM03254,173,Recurring Monthly,Credit Card,2025-05-07,General Fund,False,True,Monthly,Completed
+DON001829,ALM02514,457,One-Time Gift,Credit Card,2024-10-26,Endowment,True,False,,Completed
+DON001830,ALM00802,461,Pledge,Credit Card,2025-08-11,General Fund,False,True,,Completed
+DON001831,ALM02266,406,Recurring Monthly,Wire Transfer,2024-10-11,Endowment,False,True,,Completed
+DON001832,ALM01459,10000,In-Kind,Bank Transfer,2025-04-26,General Fund,False,False,Quarterly,Completed
+DON001833,ALM00725,239,Recurring Monthly,Credit Card,2024-09-29,Endowment,False,True,,Completed
+DON001834,ALM01793,194,Major Gift,Credit Card,2024-02-16,Infrastructure,False,True,,Completed
+DON001835,ALM00313,50000,Major Gift,Wire Transfer,2024-07-21,Infrastructure,False,True,,Completed
+DON001836,ALM00170,100000,Major Gift,Wire Transfer,2023-12-25,Endowment,False,True,Monthly,Completed
+DON001837,ALM01596,468,In-Kind,Check,2024-07-28,Scholarship,False,True,,Completed
+DON001838,ALM00094,276,Pledge,Credit Card,2023-12-24,Scholarship,False,True,Quarterly,Completed
+DON001839,ALM00461,146,Pledge,Wire Transfer,2024-05-11,Endowment,True,True,,Completed
+DON001840,ALM03132,105,Major Gift,Check,2024-09-06,General Fund,False,True,,Completed
+DON001841,ALM01499,25000,Major Gift,Wire Transfer,2025-05-29,Scholarship,False,False,,Completed
+DON001842,ALM02084,188,One-Time Gift,Stock,2025-01-27,Endowment,False,True,Quarterly,Completed
+DON001843,ALM01628,399,In-Kind,Wire Transfer,2023-12-04,Research,False,True,,Completed
+DON001844,ALM02127,433,Pledge,Bank Transfer,2024-04-28,Research,False,True,,Completed
+DON001845,ALM00465,221,Pledge,Wire Transfer,2025-10-09,Research,False,True,Monthly,Completed
+DON001846,ALM00704,400,Pledge,Stock,2024-06-29,General Fund,False,True,,Completed
+DON001847,ALM02260,106,Major Gift,Wire Transfer,2025-05-23,Infrastructure,False,True,Annual,Completed
+DON001848,ALM02436,123,Major Gift,Bank Transfer,2024-01-03,General Fund,False,True,,Pending
+DON001849,ALM01630,50000,Recurring Monthly,Credit Card,2024-03-26,Scholarship,False,True,Quarterly,Declined
+DON001850,ALM00714,446,Recurring Monthly,Credit Card,2025-06-06,Scholarship,False,True,,Completed
+DON001851,ALM01559,83,In-Kind,Bank Transfer,2024-12-18,Endowment,True,True,,Completed
+DON001852,ALM03250,206,In-Kind,Credit Card,2023-12-19,Research,False,True,,Completed
+DON001853,ALM02880,66,Major Gift,Credit Card,2025-05-31,Infrastructure,False,True,,Completed
+DON001854,ALM00382,10000,Pledge,Credit Card,2025-04-29,Scholarship,False,True,Annual,Completed
+DON001855,ALM02131,163,Pledge,Check,2025-02-21,Infrastructure,True,True,,Completed
+DON001856,ALM02425,250,One-Time Gift,Wire Transfer,2024-11-08,Scholarship,False,True,,Completed
+DON001857,ALM01270,25000,Recurring Monthly,Check,2024-12-07,General Fund,False,True,,Pending
+DON001858,ALM00680,263,One-Time Gift,Check,2025-07-19,Research,False,True,Annual,Completed
+DON001859,ALM00479,171,In-Kind,Credit Card,2024-09-13,Research,False,True,,Completed
+DON001860,ALM02955,296,Major Gift,Check,2023-11-17,Infrastructure,False,True,,Completed
+DON001861,ALM00423,50000,Recurring Monthly,Wire Transfer,2024-10-12,Research,False,True,,Completed
+DON001862,ALM02072,149,Major Gift,Check,2024-11-14,Infrastructure,False,True,Monthly,Completed
+DON001863,ALM01859,495,One-Time Gift,Stock,2024-06-27,Scholarship,False,True,,Completed
+DON001864,ALM03265,345,Recurring Monthly,Wire Transfer,2024-07-25,Endowment,False,False,Quarterly,Completed
+DON001865,ALM01354,50000,Pledge,Check,2024-03-26,General Fund,False,True,Quarterly,Completed
+DON001866,ALM02029,444,One-Time Gift,Wire Transfer,2025-06-22,Endowment,False,True,Monthly,Completed
+DON001867,ALM01670,25000,Major Gift,Credit Card,2025-06-15,Infrastructure,False,True,,Completed
+DON001868,ALM01147,279,Major Gift,Check,2024-11-11,Research,False,True,,Completed
+DON001869,ALM02934,381,Recurring Monthly,Bank Transfer,2024-07-05,General Fund,False,True,,Completed
+DON001870,ALM01892,452,One-Time Gift,Bank Transfer,2025-01-08,General Fund,False,True,,Completed
+DON001871,ALM00917,474,Recurring Monthly,Stock,2024-12-29,Endowment,False,True,Annual,Completed
+DON001872,ALM02163,50000,Recurring Monthly,Stock,2024-09-18,General Fund,False,True,,Completed
+DON001873,ALM00977,106,Pledge,Stock,2024-05-03,Endowment,False,True,,Completed
+DON001874,ALM01379,50000,Pledge,Credit Card,2024-01-16,Research,True,True,,Completed
+DON001875,ALM00775,250000,Recurring Monthly,Credit Card,2024-11-19,Research,False,True,,Completed
+DON001876,ALM00389,398,In-Kind,Check,2025-01-13,Scholarship,True,True,,Declined
+DON001877,ALM01552,25000,In-Kind,Check,2024-08-05,Scholarship,False,True,,Completed
+DON001878,ALM00488,250000,Recurring Monthly,Credit Card,2024-04-16,Scholarship,False,False,,Completed
+DON001879,ALM00164,10000,Pledge,Check,2024-02-15,Infrastructure,True,True,,Completed
+DON001880,ALM01568,480,Recurring Monthly,Wire Transfer,2025-09-30,Endowment,False,True,Monthly,Completed
+DON001881,ALM03114,50000,Recurring Monthly,Credit Card,2023-12-06,Research,False,True,,Completed
+DON001882,ALM01482,105,One-Time Gift,Bank Transfer,2024-11-06,Scholarship,False,True,,Completed
+DON001883,ALM03186,359,In-Kind,Wire Transfer,2025-09-12,Scholarship,False,True,Monthly,Completed
+DON001884,ALM01917,68,In-Kind,Stock,2025-01-03,Endowment,False,True,,Completed
+DON001885,ALM03252,98,Pledge,Wire Transfer,2025-06-24,General Fund,False,True,,Completed
+DON001886,ALM01445,428,Pledge,Bank Transfer,2024-01-29,Scholarship,False,True,,Completed
+DON001887,ALM02725,402,Recurring Monthly,Check,2023-11-12,Endowment,True,True,,Completed
+DON001888,ALM01526,25000,One-Time Gift,Stock,2025-11-01,Endowment,False,True,,Completed
+DON001889,ALM00538,409,Pledge,Check,2025-04-08,General Fund,False,True,Monthly,Completed
+DON001890,ALM00624,79,One-Time Gift,Wire Transfer,2025-10-23,Research,False,True,,Pending
+DON001891,ALM00049,419,Pledge,Check,2025-08-05,Research,False,True,,Completed
+DON001892,ALM00397,472,In-Kind,Check,2025-10-02,Research,False,True,Quarterly,Completed
+DON001893,ALM01048,446,Major Gift,Wire Transfer,2025-07-03,Scholarship,False,True,,Declined
+DON001894,ALM01629,443,Major Gift,Stock,2024-05-27,Infrastructure,False,True,,Completed
+DON001895,ALM02476,176,Major Gift,Credit Card,2024-09-22,Endowment,False,True,,Completed
+DON001896,ALM00422,10000,One-Time Gift,Stock,2024-06-27,Infrastructure,False,True,,Pending
+DON001897,ALM00863,158,Recurring Monthly,Credit Card,2025-05-14,Research,False,True,,Completed
+DON001898,ALM03362,100000,Major Gift,Wire Transfer,2023-12-15,Scholarship,False,True,,Completed
+DON001899,ALM02395,305,Major Gift,Stock,2024-03-06,Research,True,True,,Completed
+DON001900,ALM02719,358,In-Kind,Wire Transfer,2024-11-22,Research,False,True,Annual,Completed
+DON001901,ALM01809,50000,One-Time Gift,Check,2025-01-30,General Fund,False,True,,Completed
+DON001902,ALM01228,10000,Major Gift,Wire Transfer,2025-06-14,Research,False,True,,Declined
+DON001903,ALM01701,410,In-Kind,Bank Transfer,2025-01-07,Endowment,True,True,,Completed
+DON001904,ALM01213,50000,One-Time Gift,Stock,2024-07-31,General Fund,False,False,,Completed
+DON001905,ALM01909,50000,Pledge,Stock,2024-09-05,Endowment,False,True,Monthly,Completed
+DON001906,ALM00161,50000,Recurring Monthly,Wire Transfer,2024-08-11,General Fund,False,True,,Completed
+DON001907,ALM00238,480,In-Kind,Wire Transfer,2025-09-14,Infrastructure,False,True,,Completed
+DON001908,ALM01508,60,Major Gift,Bank Transfer,2024-09-23,Research,False,True,,Completed
+DON001909,ALM00736,486,In-Kind,Wire Transfer,2025-07-05,Scholarship,False,True,,Completed
+DON001910,ALM00805,100000,In-Kind,Check,2024-04-03,Endowment,False,True,,Completed
+DON001911,ALM02808,10000,Recurring Monthly,Credit Card,2024-12-10,Endowment,False,True,Monthly,Completed
+DON001912,ALM03426,250,In-Kind,Stock,2023-11-10,Scholarship,False,True,,Completed
+DON001913,ALM02012,56,One-Time Gift,Stock,2024-05-18,Endowment,False,True,,Completed
+DON001914,ALM02808,500,In-Kind,Bank Transfer,2024-05-06,Infrastructure,False,True,,Completed
+DON001915,ALM00594,267,Recurring Monthly,Bank Transfer,2025-06-07,Scholarship,False,True,,Completed
+DON001916,ALM01229,419,In-Kind,Check,2025-06-05,Endowment,False,True,,Completed
+DON001917,ALM02850,106,Pledge,Credit Card,2024-02-24,Scholarship,False,True,,Declined
+DON001918,ALM01771,469,Recurring Monthly,Check,2024-02-17,Endowment,False,True,,Completed
+DON001919,ALM02947,63,Pledge,Credit Card,2025-03-06,Endowment,True,True,,Completed
+DON001920,ALM03342,100000,Recurring Monthly,Wire Transfer,2024-04-19,General Fund,False,True,Monthly,Completed
+DON001921,ALM01505,10000,Recurring Monthly,Bank Transfer,2024-11-12,Endowment,False,True,,Completed
+DON001922,ALM00616,273,Pledge,Stock,2024-10-26,General Fund,False,True,Quarterly,Completed
+DON001923,ALM00351,492,Major Gift,Stock,2024-04-12,General Fund,False,True,,Completed
+DON001924,ALM02165,110,One-Time Gift,Credit Card,2024-09-10,Research,False,True,,Pending
+DON001925,ALM03415,360,Pledge,Stock,2024-10-09,Infrastructure,False,True,,Completed
+DON001926,ALM02010,25000,Pledge,Check,2024-12-06,Scholarship,False,True,,Completed
+DON001927,ALM01461,51,Major Gift,Credit Card,2024-03-09,Endowment,False,True,,Completed
+DON001928,ALM00774,84,Major Gift,Bank Transfer,2025-05-25,Research,False,True,Monthly,Pending
+DON001929,ALM02475,482,Major Gift,Credit Card,2024-12-24,Endowment,False,True,Monthly,Completed
+DON001930,ALM01881,467,One-Time Gift,Stock,2025-07-25,Endowment,False,True,,Completed
+DON001931,ALM01600,384,One-Time Gift,Check,2025-07-05,Endowment,False,False,,Completed
+DON001932,ALM01866,75,Major Gift,Stock,2024-12-19,Scholarship,False,True,,Completed
+DON001933,ALM03276,25000,One-Time Gift,Wire Transfer,2024-04-23,General Fund,False,True,,Completed
+DON001934,ALM00116,257,In-Kind,Stock,2025-05-26,General Fund,False,True,,Completed
+DON001935,ALM03200,320,In-Kind,Check,2024-12-06,Endowment,False,True,,Completed
+DON001936,ALM02598,482,In-Kind,Credit Card,2025-08-04,Endowment,False,True,,Completed
+DON001937,ALM01551,250000,Pledge,Wire Transfer,2024-01-05,General Fund,False,True,Monthly,Completed
+DON001938,ALM00788,471,Major Gift,Bank Transfer,2024-12-10,Research,False,True,Quarterly,Completed
+DON001939,ALM03483,303,One-Time Gift,Credit Card,2025-10-21,General Fund,False,True,Annual,Completed
+DON001940,ALM00467,10000,One-Time Gift,Stock,2025-10-16,Research,False,True,Monthly,Declined
+DON001941,ALM01109,351,In-Kind,Wire Transfer,2023-11-07,Endowment,False,True,Monthly,Completed
+DON001942,ALM03133,407,Major Gift,Wire Transfer,2024-12-30,Scholarship,False,True,,Completed
+DON001943,ALM00344,116,Major Gift,Wire Transfer,2024-05-31,Research,False,True,Monthly,Completed
+DON001944,ALM02578,10000,Recurring Monthly,Credit Card,2025-08-14,General Fund,False,True,,Completed
+DON001945,ALM02531,221,Pledge,Check,2024-06-10,Endowment,False,True,,Completed
+DON001946,ALM00599,385,In-Kind,Check,2025-09-10,Research,False,True,,Completed
+DON001947,ALM01572,250000,Recurring Monthly,Wire Transfer,2024-05-27,Scholarship,False,True,,Completed
+DON001948,ALM01633,50000,In-Kind,Bank Transfer,2024-10-28,Infrastructure,False,True,Quarterly,Completed
+DON001949,ALM03478,301,Recurring Monthly,Check,2024-11-07,General Fund,False,True,,Completed
+DON001950,ALM00810,375,Recurring Monthly,Credit Card,2024-01-26,Research,False,True,,Completed
+DON001951,ALM00486,354,Pledge,Wire Transfer,2023-11-20,Research,False,True,Quarterly,Completed
+DON001952,ALM01689,406,Pledge,Credit Card,2025-07-23,Endowment,False,True,Annual,Completed
+DON001953,ALM00529,10000,Recurring Monthly,Credit Card,2024-01-29,General Fund,False,True,,Completed
+DON001954,ALM03328,25000,Major Gift,Stock,2024-01-01,Infrastructure,False,True,,Completed
+DON001955,ALM03441,231,One-Time Gift,Credit Card,2025-09-10,Endowment,False,True,,Completed
+DON001956,ALM01798,10000,In-Kind,Bank Transfer,2025-09-19,Research,True,False,,Completed
+DON001957,ALM03320,50000,Pledge,Wire Transfer,2024-08-03,General Fund,False,False,,Pending
+DON001958,ALM03365,488,Major Gift,Check,2024-01-30,Scholarship,False,True,,Completed
+DON001959,ALM02199,250000,One-Time Gift,Check,2025-05-09,Research,False,True,,Completed
+DON001960,ALM01890,100000,In-Kind,Bank Transfer,2024-07-06,Infrastructure,False,True,Monthly,Completed
+DON001961,ALM01843,250000,Pledge,Bank Transfer,2025-09-12,Endowment,False,True,,Completed
+DON001962,ALM00312,250000,Pledge,Wire Transfer,2024-06-25,Scholarship,False,True,,Completed
+DON001963,ALM02990,72,One-Time Gift,Check,2024-11-30,Endowment,False,True,,Completed
+DON001964,ALM01967,232,One-Time Gift,Bank Transfer,2024-04-26,Endowment,False,True,Monthly,Pending
+DON001965,ALM02328,289,Major Gift,Credit Card,2025-08-22,Infrastructure,False,True,,Completed
+DON001966,ALM02159,250000,One-Time Gift,Wire Transfer,2025-10-09,Scholarship,False,True,Annual,Pending
+DON001967,ALM00775,292,Recurring Monthly,Credit Card,2024-04-26,Scholarship,False,True,,Declined
+DON001968,ALM01811,327,Major Gift,Wire Transfer,2024-01-09,Infrastructure,False,True,,Completed
+DON001969,ALM02503,116,Recurring Monthly,Wire Transfer,2025-02-01,Endowment,False,False,,Completed
+DON001970,ALM00902,100000,Pledge,Check,2025-09-20,General Fund,False,True,Quarterly,Completed
+DON001971,ALM01019,50000,Major Gift,Wire Transfer,2025-01-28,Infrastructure,False,True,,Completed
+DON001972,ALM01740,194,Recurring Monthly,Bank Transfer,2023-11-20,General Fund,False,True,,Completed
+DON001973,ALM02914,360,In-Kind,Wire Transfer,2025-07-16,Endowment,True,True,Monthly,Completed
+DON001974,ALM03443,492,Recurring Monthly,Bank Transfer,2024-12-29,Research,False,True,,Completed
+DON001975,ALM01637,250000,Pledge,Credit Card,2025-04-03,Infrastructure,False,True,,Declined
+DON001976,ALM02259,220,Recurring Monthly,Credit Card,2025-03-07,Infrastructure,False,True,,Completed
+DON001977,ALM02395,207,One-Time Gift,Stock,2025-01-05,Endowment,False,True,Quarterly,Completed
+DON001978,ALM01531,170,Major Gift,Bank Transfer,2025-02-06,Infrastructure,False,True,,Completed
+DON001979,ALM01813,359,Pledge,Stock,2024-12-24,Research,False,True,,Completed
+DON001980,ALM00171,290,In-Kind,Credit Card,2025-09-04,General Fund,False,True,,Completed
+DON001981,ALM02327,25000,Pledge,Check,2024-08-04,General Fund,False,True,Monthly,Completed
+DON001982,ALM02507,445,Recurring Monthly,Credit Card,2025-06-18,Infrastructure,False,True,,Completed
+DON001983,ALM03261,91,In-Kind,Credit Card,2024-05-17,Infrastructure,False,True,Monthly,Completed
+DON001984,ALM02314,81,One-Time Gift,Check,2025-10-20,Infrastructure,False,True,,Completed
+DON001985,ALM03495,180,One-Time Gift,Stock,2024-07-23,Endowment,False,False,,Completed
+DON001986,ALM00217,345,Recurring Monthly,Wire Transfer,2025-09-20,Scholarship,False,True,,Completed
+DON001987,ALM00929,245,Recurring Monthly,Credit Card,2024-06-29,General Fund,False,True,Quarterly,Completed
+DON001988,ALM01695,10000,Major Gift,Check,2024-08-21,General Fund,False,True,Annual,Completed
+DON001989,ALM02823,341,Recurring Monthly,Wire Transfer,2025-02-26,Endowment,False,True,,Completed
+DON001990,ALM00224,349,One-Time Gift,Check,2025-03-02,Research,False,True,,Completed
+DON001991,ALM02518,157,Pledge,Wire Transfer,2024-08-20,Infrastructure,False,True,,Completed
+DON001992,ALM00770,397,One-Time Gift,Check,2024-04-19,Endowment,False,True,,Completed
+DON001993,ALM00049,371,Major Gift,Credit Card,2024-10-29,Scholarship,False,True,,Completed
+DON001994,ALM01248,441,In-Kind,Wire Transfer,2024-02-27,Endowment,False,True,,Completed
+DON001995,ALM00468,335,Pledge,Stock,2024-11-17,Scholarship,True,True,,Completed
+DON001996,ALM02312,214,Recurring Monthly,Check,2025-03-09,Scholarship,False,True,,Completed
+DON001997,ALM00814,321,Recurring Monthly,Check,2024-10-20,Infrastructure,False,True,,Completed
+DON001998,ALM00352,458,In-Kind,Credit Card,2024-03-08,General Fund,False,True,Quarterly,Completed
+DON001999,ALM02252,100000,One-Time Gift,Wire Transfer,2023-12-16,Infrastructure,False,True,,Completed
+DON002000,ALM01096,170,Pledge,Bank Transfer,2024-08-27,Scholarship,False,True,,Declined
+DON002001,ALM00713,219,Pledge,Credit Card,2024-02-22,General Fund,False,True,,Completed
+DON002002,ALM02956,403,Recurring Monthly,Wire Transfer,2024-05-11,Research,False,True,,Declined
+DON002003,ALM02072,119,Recurring Monthly,Bank Transfer,2024-06-22,Infrastructure,False,True,,Completed
+DON002004,ALM02981,191,In-Kind,Wire Transfer,2024-04-26,Endowment,False,True,,Completed
+DON002005,ALM00248,100000,Recurring Monthly,Bank Transfer,2025-04-26,Endowment,False,True,,Completed
+DON002006,ALM01567,308,In-Kind,Wire Transfer,2024-10-22,Endowment,False,True,Monthly,Completed
+DON002007,ALM01399,145,In-Kind,Check,2025-08-01,Endowment,False,True,,Completed
+DON002008,ALM00092,256,Pledge,Wire Transfer,2025-10-26,Infrastructure,False,True,,Completed
+DON002009,ALM00235,390,One-Time Gift,Credit Card,2025-05-29,General Fund,True,True,,Completed
+DON002010,ALM00216,198,Pledge,Stock,2024-09-20,General Fund,False,True,Monthly,Completed
+DON002011,ALM01832,10000,Major Gift,Check,2025-03-21,Infrastructure,False,True,Quarterly,Completed
+DON002012,ALM02680,342,In-Kind,Check,2024-03-09,Research,False,True,Quarterly,Completed
+DON002013,ALM02705,25000,Major Gift,Wire Transfer,2024-12-25,Infrastructure,False,True,,Completed
+DON002014,ALM02894,163,Major Gift,Credit Card,2023-12-30,Endowment,False,True,,Completed
+DON002015,ALM00358,380,Recurring Monthly,Stock,2025-07-20,Endowment,False,True,Quarterly,Completed
+DON002016,ALM03404,270,Major Gift,Stock,2024-07-29,Endowment,False,True,,Completed
+DON002017,ALM01237,54,One-Time Gift,Credit Card,2025-08-29,Scholarship,False,True,,Declined
+DON002018,ALM01773,250000,Recurring Monthly,Bank Transfer,2024-01-27,Research,False,True,,Completed
+DON002019,ALM01721,401,In-Kind,Bank Transfer,2024-07-23,Research,False,True,,Completed
+DON002020,ALM01392,100000,Major Gift,Wire Transfer,2025-04-09,Scholarship,False,True,Monthly,Completed
+DON002021,ALM00093,438,Major Gift,Stock,2023-12-11,General Fund,False,True,,Completed
+DON002022,ALM02211,78,One-Time Gift,Wire Transfer,2023-12-09,Scholarship,False,True,,Completed
+DON002023,ALM02398,296,Pledge,Credit Card,2024-08-23,General Fund,False,True,Annual,Completed
+DON002024,ALM02632,303,Recurring Monthly,Wire Transfer,2024-05-13,General Fund,False,True,Monthly,Completed
+DON002025,ALM02486,250000,In-Kind,Credit Card,2025-04-28,Research,False,True,,Completed
+DON002026,ALM02677,203,In-Kind,Bank Transfer,2024-08-01,General Fund,False,True,,Completed
+DON002027,ALM00546,114,Major Gift,Stock,2025-04-07,General Fund,False,True,,Completed
+DON002028,ALM02494,158,Pledge,Check,2024-01-30,Infrastructure,False,True,,Completed
+DON002029,ALM02429,213,Pledge,Credit Card,2024-10-30,Research,False,True,,Completed
+DON002030,ALM00067,176,In-Kind,Credit Card,2024-09-27,Research,False,True,Monthly,Completed
+DON002031,ALM02718,406,Major Gift,Credit Card,2023-12-04,Endowment,False,True,,Completed
+DON002032,ALM01870,403,Major Gift,Bank Transfer,2025-02-09,Infrastructure,False,True,,Completed
+DON002033,ALM00896,230,One-Time Gift,Stock,2025-08-24,Endowment,False,True,Annual,Completed
+DON002034,ALM01133,350,Recurring Monthly,Credit Card,2025-06-06,Scholarship,False,True,,Completed
+DON002035,ALM03288,285,Recurring Monthly,Check,2025-09-10,Research,False,True,,Completed
+DON002036,ALM00830,366,One-Time Gift,Stock,2024-08-31,Scholarship,True,True,,Completed
+DON002037,ALM02273,67,In-Kind,Bank Transfer,2025-03-19,General Fund,False,True,Monthly,Completed
+DON002038,ALM00043,25000,Recurring Monthly,Check,2024-01-03,Infrastructure,False,True,,Completed
+DON002039,ALM00793,409,Pledge,Credit Card,2024-10-20,Research,False,True,,Pending
+DON002040,ALM01180,100000,Pledge,Check,2025-08-25,Research,False,True,,Completed
+DON002041,ALM00812,263,Recurring Monthly,Wire Transfer,2024-05-17,General Fund,False,True,,Completed
+DON002042,ALM02359,363,Major Gift,Check,2025-08-18,Scholarship,False,True,,Completed
+DON002043,ALM00217,152,One-Time Gift,Wire Transfer,2025-03-19,Research,True,True,,Completed
+DON002044,ALM00192,258,Major Gift,Wire Transfer,2023-11-27,Scholarship,False,True,,Completed
+DON002045,ALM02956,473,In-Kind,Bank Transfer,2024-09-20,Scholarship,False,True,Annual,Completed
+DON002046,ALM00211,10000,Pledge,Stock,2025-08-21,Research,False,True,,Completed
+DON002047,ALM00482,250000,One-Time Gift,Check,2024-11-13,Scholarship,False,True,Monthly,Completed
+DON002048,ALM02134,58,Recurring Monthly,Credit Card,2024-08-03,Research,False,True,,Completed
+DON002049,ALM01278,438,One-Time Gift,Stock,2024-08-26,Scholarship,False,True,Annual,Completed
+DON002050,ALM00153,446,Major Gift,Check,2024-01-07,Infrastructure,False,True,,Completed
+DON002051,ALM02971,50000,Recurring Monthly,Stock,2024-07-02,Scholarship,False,True,Annual,Completed
+DON002052,ALM00300,104,Pledge,Bank Transfer,2023-12-01,General Fund,False,True,,Completed
+DON002053,ALM02437,417,Recurring Monthly,Credit Card,2024-09-04,Endowment,False,True,,Completed
+DON002054,ALM01906,203,Pledge,Stock,2025-03-30,General Fund,False,True,,Completed
+DON002055,ALM00360,299,One-Time Gift,Check,2025-06-10,Infrastructure,False,True,Quarterly,Completed
+DON002056,ALM01949,250000,Major Gift,Stock,2025-08-27,Research,False,True,,Completed
+DON002057,ALM02826,368,One-Time Gift,Credit Card,2025-08-19,Endowment,False,True,,Pending
+DON002058,ALM01622,192,Recurring Monthly,Check,2025-05-31,General Fund,False,True,,Completed
+DON002059,ALM01908,25000,Recurring Monthly,Stock,2024-12-21,General Fund,False,True,,Completed
+DON002060,ALM02662,50,In-Kind,Wire Transfer,2025-10-22,Infrastructure,False,True,,Completed
+DON002061,ALM01151,318,Recurring Monthly,Wire Transfer,2024-10-09,Scholarship,True,True,,Completed
+DON002062,ALM02028,250000,Major Gift,Credit Card,2025-07-26,Scholarship,False,True,,Completed
+DON002063,ALM00741,377,Pledge,Bank Transfer,2024-10-22,Scholarship,False,True,,Completed
+DON002064,ALM02034,362,Pledge,Wire Transfer,2024-07-03,Infrastructure,False,True,,Completed
+DON002065,ALM02278,250000,Recurring Monthly,Stock,2025-03-01,Research,False,True,,Completed
+DON002066,ALM01705,159,One-Time Gift,Wire Transfer,2024-07-21,Scholarship,False,True,,Completed
+DON002067,ALM01159,250000,One-Time Gift,Stock,2023-12-22,Infrastructure,False,True,,Completed
+DON002068,ALM02432,279,Pledge,Check,2025-01-16,Research,False,True,,Completed
+DON002069,ALM03260,50000,One-Time Gift,Stock,2024-01-12,Endowment,False,True,,Completed
+DON002070,ALM00089,207,Pledge,Credit Card,2024-01-15,General Fund,False,True,,Completed
+DON002071,ALM02364,10000,Pledge,Wire Transfer,2024-01-11,Research,False,True,,Completed
+DON002072,ALM00245,216,Major Gift,Stock,2024-08-24,General Fund,False,True,Annual,Completed
+DON002073,ALM00470,10000,Recurring Monthly,Stock,2024-12-12,Scholarship,False,True,,Completed
+DON002074,ALM01351,50000,Recurring Monthly,Stock,2024-05-30,Research,False,True,Quarterly,Completed
+DON002075,ALM01247,252,Pledge,Bank Transfer,2024-06-20,Infrastructure,False,True,Monthly,Completed
+DON002076,ALM01475,97,Major Gift,Check,2025-04-25,Scholarship,False,True,Annual,Completed
+DON002077,ALM01265,100000,Major Gift,Bank Transfer,2025-01-23,Scholarship,False,True,,Completed
+DON002078,ALM01410,499,In-Kind,Credit Card,2025-01-23,Endowment,True,True,,Completed
+DON002079,ALM02045,246,Major Gift,Stock,2025-05-05,Endowment,False,False,,Completed
+DON002080,ALM02318,476,In-Kind,Stock,2024-04-17,Endowment,False,True,,Completed
+DON002081,ALM03301,50000,One-Time Gift,Check,2025-07-06,General Fund,False,True,Monthly,Completed
+DON002082,ALM02584,133,One-Time Gift,Credit Card,2024-07-30,Scholarship,False,True,Annual,Completed
+DON002083,ALM02742,141,Recurring Monthly,Credit Card,2025-05-21,Research,False,True,,Completed
+DON002084,ALM01739,25000,In-Kind,Check,2025-05-01,Research,False,True,,Completed
+DON002085,ALM01639,178,Major Gift,Bank Transfer,2024-07-23,Scholarship,False,True,,Completed
+DON002086,ALM00993,250000,One-Time Gift,Bank Transfer,2024-01-17,Infrastructure,False,True,,Completed
+DON002087,ALM01579,25000,One-Time Gift,Stock,2024-12-19,Endowment,False,True,Monthly,Completed
+DON002088,ALM01432,177,In-Kind,Credit Card,2024-02-27,Endowment,False,True,,Completed
+DON002089,ALM00423,52,Major Gift,Bank Transfer,2024-01-11,Endowment,False,True,,Completed
+DON002090,ALM01943,490,One-Time Gift,Credit Card,2024-11-23,Infrastructure,True,True,Monthly,Completed
+DON002091,ALM02801,277,One-Time Gift,Stock,2023-11-20,Infrastructure,False,True,,Completed
+DON002092,ALM03016,201,One-Time Gift,Bank Transfer,2024-04-24,Endowment,False,True,Quarterly,Completed
+DON002093,ALM02866,247,One-Time Gift,Bank Transfer,2024-08-23,Infrastructure,False,True,,Completed
+DON002094,ALM01771,81,Recurring Monthly,Check,2024-04-06,Scholarship,False,True,Monthly,Completed
+DON002095,ALM01869,250000,In-Kind,Bank Transfer,2025-02-15,General Fund,False,True,,Completed
+DON002096,ALM03241,50000,Recurring Monthly,Wire Transfer,2025-02-18,Infrastructure,False,True,,Completed
+DON002097,ALM02098,75,Major Gift,Stock,2023-11-23,Infrastructure,False,True,,Completed
+DON002098,ALM03219,10000,Major Gift,Credit Card,2025-08-29,General Fund,False,True,,Completed
+DON002099,ALM00207,457,In-Kind,Credit Card,2025-02-28,General Fund,True,True,,Completed
+DON002100,ALM03458,250000,One-Time Gift,Bank Transfer,2025-02-13,Research,False,True,,Completed
