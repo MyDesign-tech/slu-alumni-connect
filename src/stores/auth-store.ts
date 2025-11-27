@@ -33,6 +33,7 @@ interface AuthState {
   login: (user: User) => void
   logout: () => void
   updateProfile: (profile: Partial<User['profile']>) => void
+  updateUser: (user: User) => void
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -40,15 +41,15 @@ export const useAuthStore = create<AuthState>()(
     (set, get) => ({
       user: null,
       isAuthenticated: false,
-      
+
       login: (user: User) => {
         set({ user, isAuthenticated: true })
       },
-      
+
       logout: () => {
         set({ user: null, isAuthenticated: false })
       },
-      
+
       updateProfile: (profileUpdate: Partial<User['profile']>) => {
         const currentUser = get().user
         if (currentUser && currentUser.profile) {
@@ -62,13 +63,17 @@ export const useAuthStore = create<AuthState>()(
             }
           })
         }
+      },
+
+      updateUser: (user: User) => {
+        set({ user })
       }
     }),
     {
       name: 'auth-storage',
-      partialize: (state) => ({ 
-        user: state.user, 
-        isAuthenticated: state.isAuthenticated 
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated
       }),
       skipHydration: true,
     }

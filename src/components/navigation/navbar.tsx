@@ -41,13 +41,12 @@ export function Navbar() {
 
   // Filter out current page from navigation
   const isAdmin = user?.role === "ADMIN";
-  const allNavItems = isAuthenticated ? (isAdmin ? adminNavItems : authenticatedNavItems) : publicNavItems;
-  const navItems = allNavItems.filter(item => item.href !== pathname);
+  const navItems = isAuthenticated ? (isAdmin ? adminNavItems : authenticatedNavItems) : publicNavItems;
 
   // Show loading state during hydration to prevent mismatch
   if (!isHydrated) {
     return (
-      <nav className="sticky top-0 z-50 w-full border-b bg-white">
+      <nav className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
@@ -66,7 +65,7 @@ export function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-white">
+    <nav className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -80,7 +79,10 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-primary hover:text-primary/80 transition-colors font-medium"
+                className={`transition-colors font-medium ${pathname === item.href
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-primary/70 hover:text-primary'
+                  }`}
               >
                 {item.label}
               </Link>
@@ -95,8 +97,8 @@ export function Navbar() {
                 <span className="text-primary text-sm">
                   Welcome, {user?.profile?.firstName || user?.email}
                 </span>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   className="text-primary hover:bg-primary/5"
                   onClick={logout}
                 >
@@ -142,8 +144,8 @@ export function Navbar() {
                       <div className="text-sm text-muted-foreground mb-2">
                         Welcome, {user?.profile?.firstName || user?.email}
                       </div>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         onClick={() => {
                           logout();
                           setIsOpen(false);

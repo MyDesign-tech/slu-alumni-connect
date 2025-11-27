@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { MainLayout } from "@/components/layout/main-layout";
 import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useHydratedAuthStore } from "@/hooks/use-auth-store";
 import { Users, Star, Clock, MessageCircle, Calendar, Award, Target, TrendingUp, Settings, Edit, Trash2, Plus, Shield, RefreshCw } from "lucide-react";
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, AreaChart, Area, PieChart, Pie, Cell, BarChart, Bar } from "recharts";
 
 interface Mentor {
   id: string;
@@ -66,7 +66,7 @@ const mentorshipGrowthData = [
 export default function MentorshipPage() {
   const { user, isHydrated } = useHydratedAuthStore();
   const isAdmin = user?.role === "ADMIN";
-  
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedExpertise, setSelectedExpertise] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
@@ -199,16 +199,56 @@ export default function MentorshipPage() {
 
   const [mentorshipRequests, setMentorshipRequests] = useState<MentorshipRequest[]>(initialMentorshipRequests);
 
+  // Analytics Data Preparation
+  const expertiseDistribution = useMemo(() => {
+    const areas: Record<string, number> = {};
+    mentors.forEach(m => {
+      m.expertise.forEach(exp => {
+        areas[exp] = (areas[exp] || 0) + 1;
+      });
+    });
+    return Object.entries(areas)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([name, value]) => ({ name, value }));
+  }, [mentors]);
+
+  const mentorshipAreasDistribution = useMemo(() => {
+    const areas: Record<string, number> = {};
+    mentors.forEach(m => {
+      m.mentorshipAreas.forEach(area => {
+        const formattedArea = area.replace('_', ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
+        areas[formattedArea] = (areas[formattedArea] || 0) + 1;
+      });
+    });
+    return Object.entries(areas).map(([name, value]) => ({ name, value }));
+  }, [mentors]);
+
+  const mentorRatingsDistribution = useMemo(() => {
+    const ratings = { '5 Stars': 0, '4 Stars': 0, '3 Stars': 0, '2 Stars': 0, '1 Star': 0 };
+    mentors.forEach(m => {
+      const r = Math.round(m.rating);
+      if (r >= 4.5) ratings['5 Stars']++;
+      else if (r >= 3.5) ratings['4 Stars']++;
+      else if (r >= 2.5) ratings['3 Stars']++;
+      else if (r >= 1.5) ratings['2 Stars']++;
+      else ratings['1 Star']++;
+    });
+    return Object.entries(ratings).map(([name, value]) => ({ name, value }));
+  }, [mentors]);
+
+  const COLORS = ['#003DA5', '#53C3EE', '#FFC72C', '#8FD6BD', '#795D3E', '#ED8B00'];
+
   const filteredMentors = mentors.filter(mentor => {
-    const matchesSearch = 
+    const matchesSearch =
       mentor.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       mentor.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       mentor.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
       mentor.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       mentor.expertise.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+
     const matchesArea = !selectedArea || mentor.mentorshipAreas.includes(selectedArea);
-    
+
     return matchesSearch && matchesArea;
   });
 
@@ -536,6 +576,32 @@ export default function MentorshipPage() {
     setMentorApplicationBio("");
   };
 
+  const mentorshipAreasData = useMemo(() => {
+    const counts: Record<string, number> = {};
+    mentors.forEach(m => {
+      m.mentorshipAreas.forEach(area => {
+        const label = area.replace(/_/g, ' ');
+        counts[label] = (counts[label] || 0) + 1;
+      });
+    });
+    return Object.entries(counts)
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value);
+  }, [mentors]);
+
+  const mentorRatingsData = useMemo(() => {
+    const counts = { '5 Stars': 0, '4 Stars': 0, '3 Stars': 0, '2 Stars': 0, '1 Star': 0 };
+    mentors.forEach(m => {
+      const rating = Math.round(m.rating);
+      if (rating >= 5) counts['5 Stars']++;
+      else if (rating === 4) counts['4 Stars']++;
+      else if (rating === 3) counts['3 Stars']++;
+      else if (rating === 2) counts['2 Stars']++;
+      else counts['1 Star']++;
+    });
+    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+  }, [mentors]);
+
   return (
     <ProtectedRoute>
       <MainLayout>
@@ -628,7 +694,7 @@ export default function MentorshipPage() {
                             {mentor.firstName} {mentor.lastName}
                           </CardTitle>
                           <CardDescription>
-                            {mentor.jobTitle} 
+                            {mentor.jobTitle}
                             {mentor.company && ` • ${mentor.company}`}
                           </CardDescription>
                         </div>
@@ -680,101 +746,101 @@ export default function MentorshipPage() {
 
             {!isAdmin && (
               <TabsContent value="my-mentorships" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {mentorshipRequests.map((request) => (
-                  <Card key={request.id} className="hover:shadow-md transition-shadow">
-                    <CardHeader>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <CardTitle className="text-lg">{request.mentorName}</CardTitle>
-                          <CardDescription>{request.area}</CardDescription>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {mentorshipRequests.map((request) => (
+                    <Card key={request.id} className="hover:shadow-md transition-shadow">
+                      <CardHeader>
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <CardTitle className="text-lg">{request.mentorName}</CardTitle>
+                            <CardDescription>{request.area}</CardDescription>
+                          </div>
+                          <Badge className={getStatusColor(request.status)}>
+                            {request.status}
+                          </Badge>
                         </div>
-                        <Badge className={getStatusColor(request.status)}>
-                          {request.status}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-3 text-sm">
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Calendar className="h-4 w-4" />
-                        {request.startDate
-                          ? `Started ${new Date(request.startDate).toLocaleDateString()}`
-                          : "Start date TBD"}
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Clock className="h-4 w-4" />
-                        Last interaction: {request.lastInteraction || "Not yet"}
-                      </div>
-                      <div className="flex items-center justify-between">
+                      </CardHeader>
+                      <CardContent className="space-y-3 text-sm">
                         <div className="flex items-center gap-2 text-muted-foreground">
-                          <span className="text-xs font-medium uppercase tracking-wide">
-                            Your rating
-                          </span>
-                          {typeof request.rating === "number" ? (
-                            <div className="flex items-center gap-1">
-                              {renderStars(request.rating)}
-                              <span className="text-xs">{request.rating.toFixed(1)}/5</span>
-                            </div>
-                          ) : (
-                            <span className="text-xs">Not rated yet</span>
+                          <Calendar className="h-4 w-4" />
+                          {request.startDate
+                            ? `Started ${new Date(request.startDate).toLocaleDateString()}`
+                            : "Start date TBD"}
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Clock className="h-4 w-4" />
+                          Last interaction: {request.lastInteraction || "Not yet"}
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <span className="text-xs font-medium uppercase tracking-wide">
+                              Your rating
+                            </span>
+                            {typeof request.rating === "number" ? (
+                              <div className="flex items-center gap-1">
+                                {renderStars(request.rating)}
+                                <span className="text-xs">{request.rating.toFixed(1)}/5</span>
+                              </div>
+                            ) : (
+                              <span className="text-xs">Not rated yet</span>
+                            )}
+                          </div>
+                          {request.status === "COMPLETED" && (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => {
+                                setRatingDialogRequest(request);
+                                setRatingValue(request.rating || 0);
+                              }}
+                            >
+                              {typeof request.rating === "number" ? "Update Rating" : "Rate Mentor"}
+                            </Button>
                           )}
                         </div>
-                        {request.status === "COMPLETED" && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => {
-                              setRatingDialogRequest(request);
-                              setRatingValue(request.rating || 0);
-                            }}
-                          >
-                            {typeof request.rating === "number" ? "Update Rating" : "Rate Mentor"}
-                          </Button>
-                        )}
-                      </div>
-                      <div className="flex justify-between items-center pt-3">
-                        <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => setMessageDialogMentor(request.mentorName)}
-                          >
-                            <MessageCircle className="h-4 w-4 mr-1" />
-                            Message
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => setScheduleDialogMentor(request.mentorName)}
-                          >
-                            <Calendar className="h-4 w-4 mr-1" />
-                            Schedule
-                          </Button>
+                        <div className="flex justify-between items-center pt-3">
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => setMessageDialogMentor(request.mentorName)}
+                            >
+                              <MessageCircle className="h-4 w-4 mr-1" />
+                              Message
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => setScheduleDialogMentor(request.mentorName)}
+                            >
+                              <Calendar className="h-4 w-4 mr-1" />
+                              Schedule
+                            </Button>
+                          </div>
+                          {isAdmin && (
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => {
+                                setEditingRequest(request);
+                                setEditingStatus(request.status);
+                              }}
+                            >
+                              <Edit className="h-4 w-4 mr-1" />
+                              Edit
+                            </Button>
+                          )}
                         </div>
-                        {isAdmin && (
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={() => {
-                              setEditingRequest(request);
-                              setEditingStatus(request.status);
-                            }}
-                          >
-                            <Edit className="h-4 w-4 mr-1" />
-                            Edit
-                          </Button>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-                {mentorshipRequests.length === 0 && (
-                  <p className="text-sm text-muted-foreground">
-                    You don't have any mentorship requests yet.
-                  </p>
-                )}
-              </div>
-            </TabsContent>
+                      </CardContent>
+                    </Card>
+                  ))}
+                  {mentorshipRequests.length === 0 && (
+                    <p className="text-sm text-muted-foreground">
+                      You don&apos;t have any mentorship requests yet.
+                    </p>
+                  )}
+                </div>
+              </TabsContent>
             )}
 
             {!isAdmin && (
@@ -1024,37 +1090,119 @@ export default function MentorshipPage() {
                 </TabsContent>
 
                 <TabsContent value="analytics" className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Mentorship Growth</CardTitle>
-                      <CardDescription>
-                        Demo view of mentorships and approved mentors over time.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="h-72">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={mentorshipGrowthData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="month" />
-                          <YAxis />
-                          <Tooltip />
-                          <Legend />
-                          <Line
-                            type="monotone"
-                            dataKey="activeMentorships"
-                            stroke="#2563eb"
-                            name="Active Mentorships"
-                          />
-                          <Line
-                            type="monotone"
-                            dataKey="approvedMentors"
-                            stroke="#16a34a"
-                            name="Approved Mentors"
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </CardContent>
-                  </Card>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
+                      <div className="text-sm text-muted-foreground font-medium">Total Mentors</div>
+                      <div className="text-3xl font-bold text-primary mt-1">{mentors.length}</div>
+                    </div>
+                    <div className="p-4 bg-secondary/5 rounded-lg border border-secondary/10">
+                      <div className="text-sm text-muted-foreground font-medium">Active Mentorships</div>
+                      <div className="text-3xl font-bold text-secondary mt-1">
+                        {mentorshipRequests.filter(r => r.status === 'ACTIVE').length}
+                      </div>
+                    </div>
+                    <div className="p-4 bg-accent/5 rounded-lg border border-accent/10">
+                      <div className="text-sm text-muted-foreground font-medium">Avg Rating</div>
+                      <div className="text-3xl font-bold text-accent mt-1">
+                        {(mentors.reduce((acc, m) => acc + m.rating, 0) / mentors.length).toFixed(1)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="col-span-1 md:col-span-2">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <TrendingUp className="h-5 w-5" />
+                          Mentorship Program Growth
+                        </CardTitle>
+                        <CardDescription>
+                          Active mentorships and approved mentors over the last 6 months.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={mentorshipGrowthData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                            <defs>
+                              <linearGradient id="colorActive" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8} />
+                                <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
+                              </linearGradient>
+                              <linearGradient id="colorApproved" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#16a34a" stopOpacity={0.8} />
+                                <stop offset="95%" stopColor="#16a34a" stopOpacity={0} />
+                              </linearGradient>
+                            </defs>
+                            <XAxis dataKey="month" />
+                            <YAxis />
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                            <Tooltip
+                              contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                            />
+                            <Legend />
+                            <Area type="monotone" dataKey="activeMentorships" stroke="#2563eb" fillOpacity={1} fill="url(#colorActive)" name="Active Mentorships" />
+                            <Area type="monotone" dataKey="approvedMentors" stroke="#16a34a" fillOpacity={1} fill="url(#colorApproved)" name="Approved Mentors" />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Target className="h-5 w-5" />
+                          Mentorship Areas
+                        </CardTitle>
+                        <CardDescription>Distribution of expertise across mentors.</CardDescription>
+                      </CardHeader>
+                      <CardContent className="h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <PieChart>
+                            <Pie
+                              data={mentorshipAreasDistribution}
+                              cx="50%"
+                              cy="50%"
+                              innerRadius={60}
+                              outerRadius={80}
+                              paddingAngle={5}
+                              dataKey="value"
+                            >
+                              {mentorshipAreasDistribution.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                              ))}
+                            </Pie>
+                            <Tooltip />
+                            <Legend />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Star className="h-5 w-5" />
+                          Mentor Ratings
+                        </CardTitle>
+                        <CardDescription>Overview of mentor satisfaction ratings.</CardDescription>
+                      </CardHeader>
+                      <CardContent className="h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart
+                            data={mentorRatingsDistribution}
+                            layout="vertical"
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                            <XAxis type="number" />
+                            <YAxis dataKey="name" type="category" width={60} />
+                            <Tooltip cursor={{ fill: 'transparent' }} />
+                            <Bar dataKey="value" fill="#f59e0b" radius={[0, 4, 4, 0]} name="Mentors" />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </TabsContent>
 
                 <TabsContent value="settings" className="space-y-6">
@@ -1136,9 +1284,8 @@ export default function MentorshipPage() {
                           onClick={() => setRatingValue(i + 1)}
                         >
                           <Star
-                            className={`h-5 w-5 ${
-                              i < ratingValue ? "text-yellow-400 fill-current" : "text-gray-300"
-                            }`}
+                            className={`h-5 w-5 ${i < ratingValue ? "text-yellow-400 fill-current" : "text-gray-300"
+                              }`}
                           />
                         </button>
                       ))}
@@ -1176,163 +1323,40 @@ export default function MentorshipPage() {
                 </div>
               </DialogContent>
             </Dialog>
-          )}
+          )
+          }
 
           {/* Request Mentorship Dialog */}
-          {selectedMentor && (
-            <Dialog
-              open={isRequestDialogOpen}
-              onOpenChange={(open) => {
-                if (!open) {
-                  setIsRequestDialogOpen(false);
-                  setSelectedMentor(null);
-                  setMentorshipArea("");
-                  setMentorshipMessage("");
-                }
-              }}
-            >
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>
-                    Request Mentorship with {selectedMentor.firstName} {selectedMentor.lastName}
-                  </DialogTitle>
-                  <DialogDescription>
-                    Select the area you want support in and add a short message so your mentor
-                    understands your goals.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 mt-2">
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">Mentorship Area</label>
-                    <select
-                      className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background"
-                      value={mentorshipArea}
-                      onChange={(e) => setMentorshipArea(e.target.value)}
-                    >
-                      <option value="">Select an area</option>
-                      <option value="CAREER_DEVELOPMENT">Career Development</option>
-                      <option value="TECHNICAL_SKILLS">Technical Skills</option>
-                      <option value="LEADERSHIP">Leadership</option>
-                      <option value="ENTREPRENEURSHIP">Entrepreneurship</option>
-                      <option value="NETWORKING">Networking</option>
-                      <option value="ACADEMIC_GUIDANCE">Academic Guidance</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">Message (optional)</label>
-                    <textarea
-                      className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
-                      rows={4}
-                      placeholder="Share your background, what you’d like help with, or topics you’d like to focus on."
-                      value={mentorshipMessage}
-                      onChange={(e) => setMentorshipMessage(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex justify-end gap-2 pt-4">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setIsRequestDialogOpen(false);
-                        setSelectedMentor(null);
-                        setMentorshipArea("");
-                        setMentorshipMessage("");
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        if (!selectedMentor) return;
-                        handleRequestMentorship(selectedMentor);
-                      }}
-                      disabled={!mentorshipArea}
-                    >
-                      Send Request
-                    </Button>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-          )}
-
-          {isAdmin && (
-            <>
-              <Dialog open={isAddMentorOpen} onOpenChange={setIsAddMentorOpen}>
+          {
+            selectedMentor && (
+              <Dialog
+                open={isRequestDialogOpen}
+                onOpenChange={(open) => {
+                  if (!open) {
+                    setIsRequestDialogOpen(false);
+                    setSelectedMentor(null);
+                    setMentorshipArea("");
+                    setMentorshipMessage("");
+                  }
+                }}
+              >
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Add Mentor</DialogTitle>
+                    <DialogTitle>
+                      Request Mentorship with {selectedMentor.firstName} {selectedMentor.lastName}
+                    </DialogTitle>
                     <DialogDescription>
-                      Capture basic mentor details for this session. This demo form does not yet persist to the CSV.
+                      Select the area you want support in and add a short message so your mentor
+                      understands your goals.
                     </DialogDescription>
                   </DialogHeader>
                   <div className="space-y-4 mt-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">First Name</label>
-                        <Input
-                          placeholder="Enter first name"
-                          value={newMentorForm.firstName}
-                          onChange={(e) =>
-                            setNewMentorForm((prev) => ({
-                              ...prev,
-                              firstName: e.target.value,
-                            }))
-                          }
-                        />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Last Name</label>
-                        <Input
-                          placeholder="Enter last name"
-                          value={newMentorForm.lastName}
-                          onChange={(e) =>
-                            setNewMentorForm((prev) => ({
-                              ...prev,
-                              lastName: e.target.value,
-                            }))
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Job Title</label>
-                        <Input
-                          placeholder="e.g. Senior Engineer"
-                          value={newMentorForm.jobTitle}
-                          onChange={(e) =>
-                            setNewMentorForm((prev) => ({
-                              ...prev,
-                              jobTitle: e.target.value,
-                            }))
-                          }
-                        />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Company</label>
-                        <Input
-                          placeholder="e.g. SLU Health"
-                          value={newMentorForm.company}
-                          onChange={(e) =>
-                            setNewMentorForm((prev) => ({
-                              ...prev,
-                              company: e.target.value,
-                            }))
-                          }
-                        />
-                      </div>
-                    </div>
                     <div>
-                      <label className="text-sm font-medium mb-1 block">Primary Mentorship Area</label>
+                      <label className="text-sm font-medium mb-1 block">Mentorship Area</label>
                       <select
                         className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background"
-                        value={newMentorForm.primaryArea}
-                        onChange={(e) =>
-                          setNewMentorForm((prev) => ({
-                            ...prev,
-                            primaryArea: e.target.value,
-                          }))
-                        }
+                        value={mentorshipArea}
+                        onChange={(e) => setMentorshipArea(e.target.value)}
                       >
                         <option value="">Select an area</option>
                         <option value="CAREER_DEVELOPMENT">Career Development</option>
@@ -1344,492 +1368,624 @@ export default function MentorshipPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-1 block">Mentor Bio</label>
+                      <label className="text-sm font-medium mb-1 block">Message (optional)</label>
                       <textarea
                         className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
-                        rows={3}
-                        placeholder="Short summary of the mentor's background and expertise"
-                        value={newMentorForm.bio}
-                        onChange={(e) =>
-                          setNewMentorForm((prev) => ({
-                            ...prev,
-                            bio: e.target.value,
-                          }))
-                        }
+                        rows={4}
+                        placeholder="Share your background, what you’d like help with, or topics you’d like to focus on."
+                        value={mentorshipMessage}
+                        onChange={(e) => setMentorshipMessage(e.target.value)}
                       />
                     </div>
-                    {addMentorError && (
-                      <p className="text-sm text-destructive text-right">{addMentorError}</p>
-                    )}
                     <div className="flex justify-end gap-2 pt-4">
-                      <Button variant="outline" onClick={() => setIsAddMentorOpen(false)}>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setIsRequestDialogOpen(false);
+                          setSelectedMentor(null);
+                          setMentorshipArea("");
+                          setMentorshipMessage("");
+                        }}
+                      >
                         Cancel
                       </Button>
-                      <Button onClick={handleSaveNewMentor}>
-                        Save Mentor
+                      <Button
+                        onClick={() => {
+                          if (!selectedMentor) return;
+                          handleRequestMentorship(selectedMentor);
+                        }}
+                        disabled={!mentorshipArea}
+                      >
+                        Send Request
                       </Button>
                     </div>
                   </div>
                 </DialogContent>
               </Dialog>
+            )
+          }
 
-              <Dialog open={isProgramSettingsOpen} onOpenChange={setIsProgramSettingsOpen}>
+          {
+            isAdmin && (
+              <>
+                <Dialog open={isAddMentorOpen} onOpenChange={setIsAddMentorOpen}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Add Mentor</DialogTitle>
+                      <DialogDescription>
+                        Capture basic mentor details for this session. This demo form does not yet persist to the CSV.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 mt-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">First Name</label>
+                          <Input
+                            placeholder="Enter first name"
+                            value={newMentorForm.firstName}
+                            onChange={(e) =>
+                              setNewMentorForm((prev) => ({
+                                ...prev,
+                                firstName: e.target.value,
+                              }))
+                            }
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Last Name</label>
+                          <Input
+                            placeholder="Enter last name"
+                            value={newMentorForm.lastName}
+                            onChange={(e) =>
+                              setNewMentorForm((prev) => ({
+                                ...prev,
+                                lastName: e.target.value,
+                              }))
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Job Title</label>
+                          <Input
+                            placeholder="e.g. Senior Engineer"
+                            value={newMentorForm.jobTitle}
+                            onChange={(e) =>
+                              setNewMentorForm((prev) => ({
+                                ...prev,
+                                jobTitle: e.target.value,
+                              }))
+                            }
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Company</label>
+                          <Input
+                            placeholder="e.g. SLU Health"
+                            value={newMentorForm.company}
+                            onChange={(e) =>
+                              setNewMentorForm((prev) => ({
+                                ...prev,
+                                company: e.target.value,
+                              }))
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-1 block">Primary Mentorship Area</label>
+                        <select
+                          className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background"
+                          value={newMentorForm.primaryArea}
+                          onChange={(e) =>
+                            setNewMentorForm((prev) => ({
+                              ...prev,
+                              primaryArea: e.target.value,
+                            }))
+                          }
+                        >
+                          <option value="">Select an area</option>
+                          <option value="CAREER_DEVELOPMENT">Career Development</option>
+                          <option value="TECHNICAL_SKILLS">Technical Skills</option>
+                          <option value="LEADERSHIP">Leadership</option>
+                          <option value="ENTREPRENEURSHIP">Entrepreneurship</option>
+                          <option value="NETWORKING">Networking</option>
+                          <option value="ACADEMIC_GUIDANCE">Academic Guidance</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-1 block">Mentor Bio</label>
+                        <textarea
+                          className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
+                          rows={3}
+                          placeholder="Short summary of the mentor's background and expertise"
+                          value={newMentorForm.bio}
+                          onChange={(e) =>
+                            setNewMentorForm((prev) => ({
+                              ...prev,
+                              bio: e.target.value,
+                            }))
+                          }
+                        />
+                      </div>
+                      {addMentorError && (
+                        <p className="text-sm text-destructive text-right">{addMentorError}</p>
+                      )}
+                      <div className="flex justify-end gap-2 pt-4">
+                        <Button variant="outline" onClick={() => setIsAddMentorOpen(false)}>
+                          Cancel
+                        </Button>
+                        <Button onClick={handleSaveNewMentor}>
+                          Save Mentor
+                        </Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                <Dialog open={isProgramSettingsOpen} onOpenChange={setIsProgramSettingsOpen}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Mentorship Program Settings</DialogTitle>
+                      <DialogDescription>
+                        Configure high-level defaults for how the mentorship program operates.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 mt-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Max Mentees per Mentor</label>
+                          <Input
+                            type="number"
+                            className="mt-1"
+                            value={programSettings.maxMenteesPerMentor}
+                            onChange={(e) =>
+                              setProgramSettings((prev) => ({
+                                ...prev,
+                                maxMenteesPerMentor: parseInt(e.target.value) || 0,
+                              }))
+                            }
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">
+                            Default Session Duration (minutes)
+                          </label>
+                          <Input
+                            type="number"
+                            className="mt-1"
+                            value={programSettings.sessionDurationMinutes}
+                            onChange={(e) =>
+                              setProgramSettings((prev) => ({
+                                ...prev,
+                                sessionDurationMinutes: parseInt(e.target.value) || 0,
+                              }))
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Program Length (months)</label>
+                          <Input
+                            type="number"
+                            className="mt-1"
+                            value={programSettings.programDurationMonths}
+                            onChange={(e) =>
+                              setProgramSettings((prev) => ({
+                                ...prev,
+                                programDurationMonths: parseInt(e.target.value) || 0,
+                              }))
+                            }
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Auto-approve Requests</label>
+                          <select
+                            className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background"
+                            value={programSettings.autoApprove}
+                            onChange={(e) =>
+                              setProgramSettings((prev) => ({
+                                ...prev,
+                                autoApprove: e.target.value === "auto" ? "auto" : "manual",
+                              }))
+                            }
+                          >
+                            <option value="manual">Manual Review</option>
+                            <option value="auto">Auto-approve</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium mb-1 block">Notification Preferences</label>
+                        <div className="space-y-2 mt-1">
+                          <label className="flex items-center space-x-2">
+                            <input
+                              type="checkbox"
+                              className="rounded"
+                              checked={programSettings.notifications.newMentorApplications}
+                              onChange={(e) =>
+                                setProgramSettings((prev) => ({
+                                  ...prev,
+                                  notifications: {
+                                    ...prev.notifications,
+                                    newMentorApplications: e.target.checked,
+                                  },
+                                }))
+                              }
+                            />
+                            <span className="text-sm">New mentor applications</span>
+                          </label>
+                          <label className="flex items-center space-x-2">
+                            <input
+                              type="checkbox"
+                              className="rounded"
+                              checked={programSettings.notifications.mentorshipRequests}
+                              onChange={(e) =>
+                                setProgramSettings((prev) => ({
+                                  ...prev,
+                                  notifications: {
+                                    ...prev.notifications,
+                                    mentorshipRequests: e.target.checked,
+                                  },
+                                }))
+                              }
+                            />
+                            <span className="text-sm">Mentorship requests</span>
+                          </label>
+                          <label className="flex items-center space-x-2">
+                            <input
+                              type="checkbox"
+                              className="rounded"
+                              checked={programSettings.notifications.sessionReminders}
+                              onChange={(e) =>
+                                setProgramSettings((prev) => ({
+                                  ...prev,
+                                  notifications: {
+                                    ...prev.notifications,
+                                    sessionReminders: e.target.checked,
+                                  },
+                                }))
+                              }
+                            />
+                            <span className="text-sm">Session reminders</span>
+                          </label>
+                          <label className="flex items-center space-x-2">
+                            <input
+                              type="checkbox"
+                              className="rounded"
+                              checked={programSettings.notifications.programCompletion}
+                              onChange={(e) =>
+                                setProgramSettings((prev) => ({
+                                  ...prev,
+                                  notifications: {
+                                    ...prev.notifications,
+                                    programCompletion: e.target.checked,
+                                  },
+                                }))
+                              }
+                            />
+                            <span className="text-sm">Program completion</span>
+                          </label>
+                          <label className="flex items-center space-x-2">
+                            <input
+                              type="checkbox"
+                              className="rounded"
+                              checked={programSettings.notifications.feedbackRequests}
+                              onChange={(e) =>
+                                setProgramSettings((prev) => ({
+                                  ...prev,
+                                  notifications: {
+                                    ...prev.notifications,
+                                    feedbackRequests: e.target.checked,
+                                  },
+                                }))
+                              }
+                            />
+                            <span className="text-sm">Feedback requests</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div className="space-y-2 pt-4">
+                        <div className="flex justify-end gap-2">
+                          <Button variant="outline" onClick={() => setIsProgramSettingsOpen(false)}>
+                            Cancel
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              handleSaveProgramSettings();
+                              setIsProgramSettingsOpen(false);
+                            }}
+                            disabled={!programSettingsHydrated}
+                          >
+                            {saveSettingsStatus === "saved" ? "Settings Saved" : "Save Settings"}
+                          </Button>
+                        </div>
+                        {saveSettingsStatus === "saved" && (
+                          <p className="text-xs text-green-600 text-right">
+                            Program settings saved for this browser.
+                          </p>
+                        )}
+                        {saveSettingsStatus === "error" && (
+                          <p className="text-xs text-destructive text-right">
+                            Could not save settings. Please try again.
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                {/* Edit Mentorship Request Dialog */}
+                <Dialog
+                  open={!!editingRequest}
+                  onOpenChange={(open) => {
+                    if (!open) {
+                      setEditingRequest(null);
+                    }
+                  }}
+                >
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Edit Mentorship Request</DialogTitle>
+                      <DialogDescription>
+                        Update the status of a mentorship request. Changes are for this session only.
+                      </DialogDescription>
+                    </DialogHeader>
+                    {editingRequest && (
+                      <div className="space-y-4 mt-2 text-sm">
+                        <div>
+                          <span className="font-medium">Mentor: </span>
+                          {editingRequest.mentorName}
+                        </div>
+                        <div>
+                          <span className="font-medium">Area: </span>
+                          {editingRequest.area}
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Status</label>
+                          <select
+                            className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                            value={editingStatus}
+                            onChange={(e) =>
+                              setEditingStatus(e.target.value as MentorshipRequest["status"])
+                            }
+                          >
+                            <option value="REQUESTED">REQUESTED</option>
+                            <option value="ACTIVE">ACTIVE</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Last Interaction</label>
+                          <Input
+                            value={editingRequest.lastInteraction}
+                            onChange={(e) =>
+                              setEditingRequest((prev) =>
+                                prev ? { ...prev, lastInteraction: e.target.value } : prev
+                              )
+                            }
+                          />
+                        </div>
+                        <div className="flex justify-end gap-2 pt-4">
+                          <Button variant="outline" onClick={() => setEditingRequest(null)}>
+                            Cancel
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              if (!editingRequest) return;
+                              setMentorshipRequests((prev) =>
+                                prev.map((r) =>
+                                  r.id === editingRequest.id
+                                    ? { ...editingRequest, status: editingStatus }
+                                    : r
+                                )
+                              );
+                              setEditingRequest(null);
+                            }}
+                          >
+                            Save Changes
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </DialogContent>
+                </Dialog>
+
+                {/* Review Mentor Application Dialog */}
+                <Dialog
+                  open={!!reviewMentor}
+                  onOpenChange={(open) => {
+                    if (!open) {
+                      setReviewMentor(null);
+                    }
+                  }}
+                >
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Review Mentor Application</DialogTitle>
+                      <DialogDescription>
+                        Preview key details from the mentor&apos;s profile before approval.
+                      </DialogDescription>
+                    </DialogHeader>
+                    {reviewMentor && (
+                      <div className="space-y-3 mt-2 text-sm">
+                        <div className="font-medium text-base">
+                          {reviewMentor.firstName} {reviewMentor.lastName}
+                        </div>
+                        <div>
+                          <span className="font-medium">Role: </span>
+                          {reviewMentor.jobTitle}
+                          {reviewMentor.company && ` at ${reviewMentor.company}`}
+                        </div>
+                        <div>
+                          <span className="font-medium">Graduation Year: </span>
+                          {reviewMentor.graduationYear}
+                        </div>
+                        <div>
+                          <span className="font-medium">Expertise: </span>
+                          {reviewMentor.expertise.join(", ")}
+                        </div>
+                        <div>
+                          <span className="font-medium">Mentorship Areas: </span>
+                          {reviewMentor.mentorshipAreas.join(", ")}
+                        </div>
+                        <div>
+                          <span className="font-medium">Bio: </span>
+                          <span className="text-muted-foreground">{reviewMentor.bio}</span>
+                        </div>
+                        <div className="flex justify-end gap-2 pt-4">
+                          <Button variant="outline" onClick={() => setReviewMentor(null)}>
+                            Close
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </DialogContent>
+                </Dialog>
+              </>
+            )
+          }
+
+          {/* My Mentorships Message Dialog */}
+          {
+            messageDialogMentor && (
+              <Dialog
+                open={!!messageDialogMentor}
+                onOpenChange={(open) => {
+                  if (!open) {
+                    setMessageDialogMentor(null);
+                  }
+                }}
+              >
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Mentorship Program Settings</DialogTitle>
+                    <DialogTitle>Message {messageDialogMentor}</DialogTitle>
                     <DialogDescription>
-                      Configure high-level defaults for how the mentorship program operates.
+                      Send a quick update or question to your mentor.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 mt-2">
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">Message</label>
+                      <textarea
+                        className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
+                        rows={4}
+                        placeholder="Share an update, ask a question, or propose a topic for your next session."
+                        value={mentorshipMessage}
+                        onChange={(e) => setMentorshipMessage(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex justify-end gap-2 pt-4">
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setMessageDialogMentor(null);
+                          setMentorshipMessage("");
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        disabled={!mentorshipMessage.trim()}
+                        onClick={() => {
+                          // Demo-only: in a full implementation, this would call the messages API.
+                          setMessageDialogMentor(null);
+                          setMentorshipMessage("");
+                        }}
+                      >
+                        Send (Demo)
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            )
+          }
+
+          {/* My Mentorships Schedule Dialog */}
+          {
+            scheduleDialogMentor && (
+              <Dialog
+                open={!!scheduleDialogMentor}
+                onOpenChange={(open) => {
+                  if (!open) {
+                    setScheduleDialogMentor(null);
+                    setScheduleDate("");
+                    setScheduleTime("");
+                    setScheduleNote("");
+                  }
+                }}
+              >
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Schedule Session with {scheduleDialogMentor}</DialogTitle>
+                    <DialogDescription>
+                      Propose a date and time for your next mentorship meeting.
                     </DialogDescription>
                   </DialogHeader>
                   <div className="space-y-4 mt-2">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-sm font-medium mb-1 block">Max Mentees per Mentor</label>
+                        <label className="text-sm font-medium mb-1 block">Preferred Date</label>
                         <Input
-                          type="number"
-                          className="mt-1"
-                          value={programSettings.maxMenteesPerMentor}
-                          onChange={(e) =>
-                            setProgramSettings((prev) => ({
-                              ...prev,
-                              maxMenteesPerMentor: parseInt(e.target.value) || 0,
-                            }))
-                          }
+                          type="date"
+                          value={scheduleDate}
+                          onChange={(e) => setScheduleDate(e.target.value)}
                         />
                       </div>
                       <div>
-                        <label className="text-sm font-medium mb-1 block">
-                          Default Session Duration (minutes)
-                        </label>
+                        <label className="text-sm font-medium mb-1 block">Preferred Time</label>
                         <Input
-                          type="number"
-                          className="mt-1"
-                          value={programSettings.sessionDurationMinutes}
-                          onChange={(e) =>
-                            setProgramSettings((prev) => ({
-                              ...prev,
-                              sessionDurationMinutes: parseInt(e.target.value) || 0,
-                            }))
-                          }
+                          type="time"
+                          value={scheduleTime}
+                          onChange={(e) => setScheduleTime(e.target.value)}
                         />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Program Length (months)</label>
-                        <Input
-                          type="number"
-                          className="mt-1"
-                          value={programSettings.programDurationMonths}
-                          onChange={(e) =>
-                            setProgramSettings((prev) => ({
-                              ...prev,
-                              programDurationMonths: parseInt(e.target.value) || 0,
-                            }))
-                          }
-                        />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Auto-approve Requests</label>
-                        <select
-                          className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background"
-                          value={programSettings.autoApprove}
-                          onChange={(e) =>
-                            setProgramSettings((prev) => ({
-                              ...prev,
-                              autoApprove: e.target.value === "auto" ? "auto" : "manual",
-                            }))
-                          }
-                        >
-                          <option value="manual">Manual Review</option>
-                          <option value="auto">Auto-approve</option>
-                        </select>
                       </div>
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-1 block">Notification Preferences</label>
-                      <div className="space-y-2 mt-1">
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            className="rounded"
-                            checked={programSettings.notifications.newMentorApplications}
-                            onChange={(e) =>
-                              setProgramSettings((prev) => ({
-                                ...prev,
-                                notifications: {
-                                  ...prev.notifications,
-                                  newMentorApplications: e.target.checked,
-                                },
-                              }))
-                            }
-                          />
-                          <span className="text-sm">New mentor applications</span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            className="rounded"
-                            checked={programSettings.notifications.mentorshipRequests}
-                            onChange={(e) =>
-                              setProgramSettings((prev) => ({
-                                ...prev,
-                                notifications: {
-                                  ...prev.notifications,
-                                  mentorshipRequests: e.target.checked,
-                                },
-                              }))
-                            }
-                          />
-                          <span className="text-sm">Mentorship requests</span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            className="rounded"
-                            checked={programSettings.notifications.sessionReminders}
-                            onChange={(e) =>
-                              setProgramSettings((prev) => ({
-                                ...prev,
-                                notifications: {
-                                  ...prev.notifications,
-                                  sessionReminders: e.target.checked,
-                                },
-                              }))
-                            }
-                          />
-                          <span className="text-sm">Session reminders</span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            className="rounded"
-                            checked={programSettings.notifications.programCompletion}
-                            onChange={(e) =>
-                              setProgramSettings((prev) => ({
-                                ...prev,
-                                notifications: {
-                                  ...prev.notifications,
-                                  programCompletion: e.target.checked,
-                                },
-                              }))
-                            }
-                          />
-                          <span className="text-sm">Program completion</span>
-                        </label>
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            className="rounded"
-                            checked={programSettings.notifications.feedbackRequests}
-                            onChange={(e) =>
-                              setProgramSettings((prev) => ({
-                                ...prev,
-                                notifications: {
-                                  ...prev.notifications,
-                                  feedbackRequests: e.target.checked,
-                                },
-                              }))
-                            }
-                          />
-                          <span className="text-sm">Feedback requests</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div className="space-y-2 pt-4">
-                      <div className="flex justify-end gap-2">
-                        <Button variant="outline" onClick={() => setIsProgramSettingsOpen(false)}>
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            handleSaveProgramSettings();
-                            setIsProgramSettingsOpen(false);
-                          }}
-                          disabled={!programSettingsHydrated}
-                        >
-                          {saveSettingsStatus === "saved" ? "Settings Saved" : "Save Settings"}
-                        </Button>
-                      </div>
-                      {saveSettingsStatus === "saved" && (
-                        <p className="text-xs text-green-600 text-right">
-                          Program settings saved for this browser.
-                        </p>
-                      )}
-                      {saveSettingsStatus === "error" && (
-                        <p className="text-xs text-destructive text-right">
-                          Could not save settings. Please try again.
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-
-              {/* Edit Mentorship Request Dialog */}
-              <Dialog
-                open={!!editingRequest}
-                onOpenChange={(open) => {
-                  if (!open) {
-                    setEditingRequest(null);
-                  }
-                }}
-              >
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Edit Mentorship Request</DialogTitle>
-                    <DialogDescription>
-                      Update the status of a mentorship request. Changes are for this session only.
-                    </DialogDescription>
-                  </DialogHeader>
-                  {editingRequest && (
-                    <div className="space-y-4 mt-2 text-sm">
-                      <div>
-                        <span className="font-medium">Mentor: </span>
-                        {editingRequest.mentorName}
-                      </div>
-                      <div>
-                        <span className="font-medium">Area: </span>
-                        {editingRequest.area}
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Status</label>
-                        <select
-                          className="w-full px-3 py-2 border border-input rounded-md bg-background"
-                          value={editingStatus}
-                          onChange={(e) =>
-                            setEditingStatus(e.target.value as MentorshipRequest["status"])
-                          }
-                        >
-                          <option value="REQUESTED">REQUESTED</option>
-                          <option value="ACTIVE">ACTIVE</option>
-                          <option value="COMPLETED">COMPLETED</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Last Interaction</label>
-                        <Input
-                          value={editingRequest.lastInteraction}
-                          onChange={(e) =>
-                            setEditingRequest((prev) =>
-                              prev ? { ...prev, lastInteraction: e.target.value } : prev
-                            )
-                          }
-                        />
-                      </div>
-                      <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setEditingRequest(null)}>
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            if (!editingRequest) return;
-                            setMentorshipRequests((prev) =>
-                              prev.map((r) =>
-                                r.id === editingRequest.id
-                                  ? { ...editingRequest, status: editingStatus }
-                                  : r
-                              )
-                            );
-                            setEditingRequest(null);
-                          }}
-                        >
-                          Save Changes
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </DialogContent>
-              </Dialog>
-
-              {/* Review Mentor Application Dialog */}
-              <Dialog
-                open={!!reviewMentor}
-                onOpenChange={(open) => {
-                  if (!open) {
-                    setReviewMentor(null);
-                  }
-                }}
-              >
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Review Mentor Application</DialogTitle>
-                    <DialogDescription>
-                      Preview key details from the mentor's profile before approval.
-                    </DialogDescription>
-                  </DialogHeader>
-                  {reviewMentor && (
-                    <div className="space-y-3 mt-2 text-sm">
-                      <div className="font-medium text-base">
-                        {reviewMentor.firstName} {reviewMentor.lastName}
-                      </div>
-                      <div>
-                        <span className="font-medium">Role: </span>
-                        {reviewMentor.jobTitle} 
-                        {reviewMentor.company && ` at ${reviewMentor.company}`}
-                      </div>
-                      <div>
-                        <span className="font-medium">Graduation Year: </span>
-                        {reviewMentor.graduationYear}
-                      </div>
-                      <div>
-                        <span className="font-medium">Expertise: </span>
-                        {reviewMentor.expertise.join(", ")}
-                      </div>
-                      <div>
-                        <span className="font-medium">Mentorship Areas: </span>
-                        {reviewMentor.mentorshipAreas.join(", ")}
-                      </div>
-                      <div>
-                        <span className="font-medium">Bio: </span>
-                        <span className="text-muted-foreground">{reviewMentor.bio}</span>
-                      </div>
-                      <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setReviewMentor(null)}>
-                          Close
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </DialogContent>
-              </Dialog>
-            </>
-          )}
-
-          {/* My Mentorships Message Dialog */}
-          {messageDialogMentor && (
-            <Dialog
-              open={!!messageDialogMentor}
-              onOpenChange={(open) => {
-                if (!open) {
-                  setMessageDialogMentor(null);
-                }
-              }}
-            >
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Message {messageDialogMentor}</DialogTitle>
-                  <DialogDescription>
-                    Send a quick update or question to your mentor.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 mt-2">
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">Message</label>
-                    <textarea
-                      className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
-                      rows={4}
-                      placeholder="Share an update, ask a question, or propose a topic for your next session."
-                      value={mentorshipMessage}
-                      onChange={(e) => setMentorshipMessage(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex justify-end gap-2 pt-4">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setMessageDialogMentor(null);
-                        setMentorshipMessage("");
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      disabled={!mentorshipMessage.trim()}
-                      onClick={() => {
-                        // Demo-only: in a full implementation, this would call the messages API.
-                        setMessageDialogMentor(null);
-                        setMentorshipMessage("");
-                      }}
-                    >
-                      Send (Demo)
-                    </Button>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-          )}
-
-          {/* My Mentorships Schedule Dialog */}
-          {scheduleDialogMentor && (
-            <Dialog
-              open={!!scheduleDialogMentor}
-              onOpenChange={(open) => {
-                if (!open) {
-                  setScheduleDialogMentor(null);
-                  setScheduleDate("");
-                  setScheduleTime("");
-                  setScheduleNote("");
-                }
-              }}
-            >
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Schedule Session with {scheduleDialogMentor}</DialogTitle>
-                  <DialogDescription>
-                    Propose a date and time for your next mentorship meeting.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 mt-2">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Preferred Date</label>
-                      <Input
-                        type="date"
-                        value={scheduleDate}
-                        onChange={(e) => setScheduleDate(e.target.value)}
+                      <label className="text-sm font-medium mb-1 block">Note (optional)</label>
+                      <textarea
+                        className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
+                        rows={3}
+                        placeholder="Add any context or agenda you want to share."
+                        value={scheduleNote}
+                        onChange={(e) => setScheduleNote(e.target.value)}
                       />
                     </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Preferred Time</label>
-                      <Input
-                        type="time"
-                        value={scheduleTime}
-                        onChange={(e) => setScheduleTime(e.target.value)}
-                      />
+                    <div className="flex justify-end gap-2 pt-4">
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setScheduleDialogMentor(null);
+                          setScheduleDate("");
+                          setScheduleTime("");
+                          setScheduleNote("");
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        disabled={!scheduleDate || !scheduleTime}
+                        onClick={() => {
+                          // Demo-only: in a full implementation, this would create a calendar request.
+                          setScheduleDialogMentor(null);
+                          setScheduleDate("");
+                          setScheduleTime("");
+                          setScheduleNote("");
+                        }}
+                      >
+                        Send Request (Demo)
+                      </Button>
                     </div>
                   </div>
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">Note (optional)</label>
-                    <textarea
-                      className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
-                      rows={3}
-                      placeholder="Add any context or agenda you want to share."
-                      value={scheduleNote}
-                      onChange={(e) => setScheduleNote(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex justify-end gap-2 pt-4">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setScheduleDialogMentor(null);
-                        setScheduleDate("");
-                        setScheduleTime("");
-                        setScheduleNote("");
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      disabled={!scheduleDate || !scheduleTime}
-                      onClick={() => {
-                        // Demo-only: in a full implementation, this would create a calendar request.
-                        setScheduleDialogMentor(null);
-                        setScheduleDate("");
-                        setScheduleTime("");
-                        setScheduleNote("");
-                      }}
-                    >
-                      Send Request (Demo)
-                    </Button>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-          )}
-        </div>
-      </MainLayout>
-    </ProtectedRoute>
+                </DialogContent>
+              </Dialog>
+            )
+          }
+        </div >
+      </MainLayout >
+    </ProtectedRoute >
   );
 }

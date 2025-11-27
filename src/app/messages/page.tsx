@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useHydratedAuthStore } from '@/hooks/use-auth-store';
 import { SendMessageDialog } from '@/components/messaging/send-message-dialog';
-import { MessageSquare, Send, Search, Inbox, SendHorizontal, Archive, RefreshCw, Reply, Trash2, CheckCircle } from 'lucide-react';
+import { MessageSquare, Send, Search, Inbox, SendHorizontal, Archive, RefreshCw, Reply, Trash2, CheckCircle, Users } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -35,11 +35,27 @@ export default function MessagesPage() {
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [showMessageDialog, setShowMessageDialog] = useState(false);
 
+  const [connections, setConnections] = useState<any[]>([]);
+
   useEffect(() => {
     if (user?.email) {
       fetchMessages();
+      fetchConnections();
     }
   }, [user?.email]);
+
+  const fetchConnections = async () => {
+    try {
+      const response = await fetch('/api/connections');
+      if (response.ok) {
+        const data = await response.json();
+        const accepted = data.connections.filter((c: any) => c.status === 'accepted');
+        setConnections(accepted);
+      }
+    } catch (error) {
+      console.error('Error fetching connections:', error);
+    }
+  };
 
   const fetchMessages = async () => {
     if (!user?.email) return;
@@ -78,8 +94,8 @@ export default function MessagesPage() {
       });
 
       if (response.ok) {
-        setMessages(prev => 
-          prev.map(m => 
+        setMessages(prev =>
+          prev.map(m =>
             m.id === messageId ? { ...m, read: true } : m
           )
         );
@@ -92,7 +108,7 @@ export default function MessagesPage() {
   const formatTimeAgo = (date: Date) => {
     const now = new Date();
     const diffInMinutes = Math.floor((now.getTime() - new Date(date).getTime()) / (1000 * 60));
-    
+
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
@@ -100,7 +116,7 @@ export default function MessagesPage() {
   };
 
   const filteredMessages = messages.filter(message => {
-    const matchesSearch = 
+    const matchesSearch =
       message.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
       message.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
       message.senderName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -127,7 +143,7 @@ export default function MessagesPage() {
   const handleMessageClick = (message: Message) => {
     // Navigate to message thread page
     router.push(`/messages/${message.id}`);
-    
+
     // Mark as read if it's a received message and unread
     if (message.receiverEmail === user?.email && !message.read) {
       markAsRead(message.id);
@@ -172,196 +188,238 @@ export default function MessagesPage() {
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-2xl font-bold text-primary">{messages.length}</div>
-                  <p className="text-sm text-muted-foreground">Total Messages</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-2xl font-bold text-blue-500">{receivedMessages.length}</div>
-                  <p className="text-sm text-muted-foreground">Received</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-2xl font-bold text-green-500">{sentMessages.length}</div>
-                  <p className="text-sm text-muted-foreground">Sent</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="text-2xl font-bold text-orange-500">{unreadMessages.length}</div>
-                  <p className="text-sm text-muted-foreground">Unread</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Search and Filters */}
-            <Card className="mb-6">
-              <CardContent className="p-4">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <div className="flex-1">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        placeholder="Search messages by subject, content, or sender..."
-                        value={searchTerm}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-                        className="pl-10"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      variant={filter === 'all' ? 'default' : 'outline'}
-                      onClick={() => setFilter('all')}
-                      size="sm"
-                    >
-                      <Inbox className="h-4 w-4 mr-1" />
-                      All ({messages.length})
-                    </Button>
-                    <Button
-                      variant={filter === 'received' ? 'default' : 'outline'}
-                      onClick={() => setFilter('received')}
-                      size="sm"
-                    >
-                      <Inbox className="h-4 w-4 mr-1" />
-                      Received ({receivedMessages.length})
-                    </Button>
-                    <Button
-                      variant={filter === 'sent' ? 'default' : 'outline'}
-                      onClick={() => setFilter('sent')}
-                      size="sm"
-                    >
-                      <SendHorizontal className="h-4 w-4 mr-1" />
-                      Sent ({sentMessages.length})
-                    </Button>
-                    <Button
-                      variant={filter === 'unread' ? 'default' : 'outline'}
-                      onClick={() => setFilter('unread')}
-                      size="sm"
-                    >
-                      <CheckCircle className="h-4 w-4 mr-1" />
-                      Unread ({unreadMessages.length})
-                    </Button>
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              <div className="lg:col-span-3">
+                {/* Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-2xl font-bold text-primary">{messages.length}</div>
+                      <p className="text-sm text-muted-foreground">Total Messages</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-2xl font-bold text-blue-500">{receivedMessages.length}</div>
+                      <p className="text-sm text-muted-foreground">Received</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-2xl font-bold text-green-500">{sentMessages.length}</div>
+                      <p className="text-sm text-muted-foreground">Sent</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-2xl font-bold text-orange-500">{unreadMessages.length}</div>
+                      <p className="text-sm text-muted-foreground">Unread</p>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
 
-            {/* Messages List */}
-            {loading ? (
-              <Card>
-                <CardContent className="p-8 text-center">
-                  <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4 text-muted-foreground" />
-                  <p className="text-muted-foreground">Loading messages...</p>
-                </CardContent>
-              </Card>
-            ) : filteredMessages.length === 0 ? (
-              <Card>
-                <CardContent className="p-8 text-center">
-                  <MessageSquare className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-lg font-semibold mb-2">No messages found</h3>
-                  <p className="text-muted-foreground mb-4">
-                    {searchTerm 
-                      ? `No messages match your search "${searchTerm}"`
-                      : filter === 'unread'
-                      ? "You're all caught up! No unread messages."
-                      : "Start connecting with fellow alumni by sending your first message."
-                    }
-                  </p>
-                  <SendMessageDialog
-                    recipientEmail=""
-                    recipientName=""
-                    trigger={
-                      <Button>
-                        <Send className="h-4 w-4 mr-2" />
-                        Send Your First Message
-                      </Button>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            ) : (
-              <div className="space-y-2">
-                {filteredMessages.map((message) => {
-                  const isReceived = message.receiverEmail === user?.email;
-                  const isUnread = isReceived && !message.read;
-                  
-                  return (
-                    <Card 
-                      key={message.id} 
-                      className={`cursor-pointer hover:shadow-md transition-shadow ${
-                        isUnread ? 'border-l-4 border-l-blue-500 bg-blue-50/50' : ''
-                      }`}
-                      onClick={() => handleMessageClick(message)}
-                    >
-                      <CardContent className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3 flex-1 min-w-0" onClick={() => handleMessageClick(message)}>
-                            <div className="flex-shrink-0">
-                              {isReceived ? (
-                                <Inbox className="h-5 w-5 text-blue-500" />
-                              ) : (
-                                <SendHorizontal className="h-5 w-5 text-green-500" />
-                              )}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className={`font-medium truncate ${
-                                  isUnread ? 'text-gray-900' : 'text-gray-600'
-                                }`}>
-                                  {isReceived ? message.senderName : message.receiverName}
-                                </span>
-                                {isUnread && (
-                                  <Badge variant="secondary" className="text-xs">New</Badge>
-                                )}
-                              </div>
-                              <p className={`text-sm truncate ${
-                                isUnread ? 'font-semibold text-gray-900' : 'text-gray-600'
-                              }`}>
-                                {message.subject}
-                              </p>
-                              <p className="text-xs text-muted-foreground truncate">
-                                {message.content}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <div className="flex flex-col items-end gap-1">
-                              <span className="text-xs text-muted-foreground">
-                                {formatTimeAgo(message.timestamp)}
-                              </span>
-                              <div className="flex items-center gap-1">
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 px-2 text-xs"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    router.push(`/messages/${message.id}`);
-                                  }}
-                                >
-                                  <MessageSquare className="h-3 w-3 mr-1" />
-                                  Chat
-                                </Button>
-                                {isUnread && (
-                                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
+                {/* Search and Filters */}
+                <Card className="mb-6">
+                  <CardContent className="p-4">
+                    <div className="flex flex-col md:flex-row gap-4">
+                      <div className="flex-1">
+                        <div className="relative">
+                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                          <Input
+                            placeholder="Search messages by subject, content, or sender..."
+                            value={searchTerm}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+                            className="pl-10"
+                          />
                         </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          variant={filter === 'all' ? 'default' : 'outline'}
+                          onClick={() => setFilter('all')}
+                          size="sm"
+                        >
+                          <Inbox className="h-4 w-4 mr-1" />
+                          All ({messages.length})
+                        </Button>
+                        <Button
+                          variant={filter === 'received' ? 'default' : 'outline'}
+                          onClick={() => setFilter('received')}
+                          size="sm"
+                        >
+                          <Inbox className="h-4 w-4 mr-1" />
+                          Received ({receivedMessages.length})
+                        </Button>
+                        <Button
+                          variant={filter === 'sent' ? 'default' : 'outline'}
+                          onClick={() => setFilter('sent')}
+                          size="sm"
+                        >
+                          <SendHorizontal className="h-4 w-4 mr-1" />
+                          Sent ({sentMessages.length})
+                        </Button>
+                        <Button
+                          variant={filter === 'unread' ? 'default' : 'outline'}
+                          onClick={() => setFilter('unread')}
+                          size="sm"
+                        >
+                          <CheckCircle className="h-4 w-4 mr-1" />
+                          Unread ({unreadMessages.length})
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Messages List */}
+                {loading ? (
+                  <Card>
+                    <CardContent className="p-8 text-center">
+                      <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4 text-muted-foreground" />
+                      <p className="text-muted-foreground">Loading messages...</p>
+                    </CardContent>
+                  </Card>
+                ) : filteredMessages.length === 0 ? (
+                  <Card>
+                    <CardContent className="p-8 text-center">
+                      <MessageSquare className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+                      <h3 className="text-lg font-semibold mb-2">No messages found</h3>
+                      <p className="text-muted-foreground mb-4">
+                        {searchTerm
+                          ? `No messages match your search "${searchTerm}"`
+                          : filter === 'unread'
+                            ? "You're all caught up! No unread messages."
+                            : "Start connecting with fellow alumni by sending your first message."
+                        }
+                      </p>
+                      <SendMessageDialog
+                        recipientEmail=""
+                        recipientName=""
+                        trigger={
+                          <Button>
+                            <Send className="h-4 w-4 mr-2" />
+                            Send Your First Message
+                          </Button>
+                        }
+                      />
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="space-y-2">
+                    {filteredMessages.map((message) => {
+                      const isReceived = message.receiverEmail === user?.email;
+                      const isUnread = isReceived && !message.read;
+
+                      return (
+                        <Card
+                          key={message.id}
+                          className={`cursor-pointer hover:shadow-md transition-shadow ${isUnread ? 'border-l-4 border-l-blue-500 bg-blue-50/50' : ''
+                            }`}
+                          onClick={() => handleMessageClick(message)}
+                        >
+                          <CardContent className="p-4">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3 flex-1 min-w-0" onClick={() => handleMessageClick(message)}>
+                                <div className="flex-shrink-0">
+                                  {isReceived ? (
+                                    <Inbox className="h-5 w-5 text-blue-500" />
+                                  ) : (
+                                    <SendHorizontal className="h-5 w-5 text-green-500" />
+                                  )}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <span className={`font-medium truncate ${isUnread ? 'text-gray-900' : 'text-gray-600'
+                                      }`}>
+                                      {isReceived ? message.senderName : message.receiverName}
+                                    </span>
+                                    {isUnread && (
+                                      <Badge variant="secondary" className="text-xs">New</Badge>
+                                    )}
+                                  </div>
+                                  <p className={`text-sm truncate ${isUnread ? 'font-semibold text-gray-900' : 'text-gray-600'
+                                    }`}>
+                                    {message.subject}
+                                  </p>
+                                  <p className="text-xs text-muted-foreground truncate">
+                                    {message.content}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-2 flex-shrink-0">
+                                <div className="flex flex-col items-end gap-1">
+                                  <span className="text-xs text-muted-foreground">
+                                    {formatTimeAgo(message.timestamp)}
+                                  </span>
+                                  <div className="flex items-center gap-1">
+                                    <Button
+                                      size="sm"
+                                      variant="ghost"
+                                      className="h-6 px-2 text-xs"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        router.push(`/messages/${message.id}`);
+                                      }}
+                                    >
+                                      <MessageSquare className="h-3 w-3 mr-1" />
+                                      Chat
+                                    </Button>
+                                    {isUnread && (
+                                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-            )}
+
+              <div className="lg:col-span-1">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Users className="h-5 w-5" />
+                      My Connections
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {connections.length === 0 ? (
+                      <p className="text-sm text-muted-foreground text-center py-4">No connections yet.</p>
+                    ) : (
+                      <div className="space-y-4">
+                        {connections.map(c => (
+                          <div key={c.id} className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 overflow-hidden">
+                              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-xs flex-shrink-0">
+                                {c.profile?.firstName?.[0]}{c.profile?.lastName?.[0]}
+                              </div>
+                              <div className="min-w-0">
+                                <p className="text-sm font-medium truncate">{c.profile?.firstName} {c.profile?.lastName}</p>
+                                <p className="text-xs text-muted-foreground truncate">{c.profile?.jobTitle}</p>
+                              </div>
+                            </div>
+                            <SendMessageDialog
+                              recipientEmail={c.profile?.email}
+                              recipientName={`${c.profile?.firstName} ${c.profile?.lastName}`}
+                              trigger={
+                                <Button size="icon" variant="ghost" className="h-8 w-8">
+                                  <MessageSquare className="h-4 w-4" />
+                                </Button>
+                              }
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
 
             {/* Message Detail Dialog */}
             <Dialog open={showMessageDialog} onOpenChange={setShowMessageDialog}>

@@ -76,8 +76,8 @@ export function NotificationBell() {
       });
 
       if (response.ok) {
-        setNotifications(prev => 
-          prev.map(n => 
+        setNotifications(prev =>
+          prev.map(n =>
             n.id === notificationId ? { ...n, isRead: true } : n
           )
         );
@@ -85,6 +85,56 @@ export function NotificationBell() {
       }
     } catch (error) {
       console.error('Error marking notification as read:', error);
+    }
+  };
+
+  const handleAccept = async (e: React.MouseEvent, notification: Notification) => {
+    e.stopPropagation();
+    try {
+      const response = await fetch('/api/connections', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-email': user?.email || ''
+        },
+        body: JSON.stringify({
+          requesterId: notification.relatedId,
+          status: 'accepted',
+          requesterEmail: notification.senderEmail
+        })
+      });
+
+      if (response.ok) {
+        await markAsRead(notification.id);
+        alert('Connection accepted! You can now message this user.');
+        router.push('/messages');
+        setIsOpen(false);
+      }
+    } catch (error) {
+      console.error('Error accepting connection:', error);
+    }
+  };
+
+  const handleDecline = async (e: React.MouseEvent, notification: Notification) => {
+    e.stopPropagation();
+    try {
+      const response = await fetch('/api/connections', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-email': user?.email || ''
+        },
+        body: JSON.stringify({
+          requesterId: notification.relatedId,
+          status: 'rejected'
+        })
+      });
+
+      if (response.ok) {
+        await markAsRead(notification.id);
+      }
+    } catch (error) {
+      console.error('Error declining connection:', error);
     }
   };
 
@@ -107,7 +157,7 @@ export function NotificationBell() {
     const date = new Date(dateString);
     const now = new Date();
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
-    
+
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
@@ -127,8 +177,8 @@ export function NotificationBell() {
       >
         <Bell className="h-5 w-5" />
         {unreadCount > 0 && (
-          <Badge 
-            variant="destructive" 
+          <Badge
+            variant="destructive"
             className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
           >
             {unreadCount > 99 ? '99+' : unreadCount}
@@ -166,9 +216,8 @@ export function NotificationBell() {
                   {notifications.map((notification) => (
                     <div
                       key={notification.id}
-                      className={`p-4 border-b last:border-b-0 cursor-pointer hover:bg-gray-50 ${
-                        !notification.isRead ? 'bg-blue-50' : ''
-                      }`}
+                      className={`p-4 border-b last:border-b-0 cursor-pointer hover:bg-gray-50 ${!notification.isRead ? 'bg-blue-50' : ''
+                        }`}
                       onClick={() => {
                         if (!notification.isRead) {
                           markAsRead(notification.id);
@@ -179,9 +228,8 @@ export function NotificationBell() {
                         {getNotificationIcon(notification.type)}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between">
-                            <p className={`text-sm font-medium ${
-                              !notification.isRead ? 'text-gray-900' : 'text-gray-600'
-                            }`}>
+                            <p className={`text-sm font-medium ${!notification.isRead ? 'text-gray-900' : 'text-gray-600'
+                              }`}>
                               {notification.title}
                             </p>
                             <span className="text-xs text-muted-foreground">
@@ -194,6 +242,12 @@ export function NotificationBell() {
                           <p className="text-xs text-muted-foreground mt-1">
                             From: {notification.senderName}
                           </p>
+                          {notification.type === 'connection_request' && !notification.isRead && (
+                            <div className="flex gap-2 mt-2">
+                              <Button size="sm" onClick={(e) => handleAccept(e, notification)} className="h-7 text-xs">Accept</Button>
+                              <Button size="sm" variant="outline" onClick={(e) => handleDecline(e, notification)} className="h-7 text-xs">Decline</Button>
+                            </div>
+                          )}
                         </div>
                         {!notification.isRead && (
                           <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
@@ -203,7 +257,7 @@ export function NotificationBell() {
                   ))}
                 </div>
               )}
-              
+
               {notifications.length > 0 && (
                 <div className="p-3 border-t bg-gray-50">
                   <Button

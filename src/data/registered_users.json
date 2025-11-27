@@ -1,0 +1,27 @@
+{
+  "madhuxx24@gmail.com": {
+    "password": "Madhu@123",
+    "user": {
+      "id": "NEW1764110441800",
+      "email": "madhuxx24@gmail.com",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764110441800",
+        "firstName": "Madhu",
+        "lastName": "Dheeraath",
+        "department": "STEM",
+        "graduationYear": 2022,
+        "program": "Computer Science",
+        "phone": "",
+        "city": "",
+        "state": "",
+        "country": "USA",
+        "currentEmployer": "",
+        "jobTitle": "",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 40
+      }
+    }
+  }
+}

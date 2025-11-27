@@ -84,6 +84,26 @@ export async function POST(request: NextRequest) {
       user: newUser
     })
 
+    // Add to Alumni Directory Data Service so they appear in the directory immediately
+    AlumniDataService.create({
+      id: newUserId,
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      email: email.toLowerCase(),
+      graduationYear: parseInt(graduationYear) || new Date().getFullYear(),
+      program: program || 'Computer Science',
+      department: department || 'STEM',
+      phone: phone || '',
+      city: city || '',
+      state: state || '',
+      country: 'USA',
+      currentEmployer: '',
+      jobTitle: '',
+      employmentStatus: 'EMPLOYED',
+      verificationStatus: 'Pending',
+      profileCompleteness: 40
+    })
+
     return NextResponse.json({
       success: true,
       message: 'Registration successful! You can now login with your credentials.',

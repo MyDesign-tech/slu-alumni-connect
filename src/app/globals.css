@@ -46,15 +46,18 @@
 :root {
   --radius: 0.625rem;
   /* Base surface and text colors */
-  --background: #ffffff; /* Iris White */
-  --foreground: #00244d; /* Grand Blue for body text */
+  --background: #ffffff;
+  /* Iris White */
+  --foreground: #00244d;
+  /* Grand Blue for body text */
   --card: #ffffff;
   --card-foreground: #00244d;
   --popover: #ffffff;
   --popover-foreground: #00244d;
   /* Primary brand color: SLU Blue #003DA5 */
   --primary: #003da5;
-  --primary-foreground: #ffffff; /* Iris White on blue */
+  --primary-foreground: #ffffff;
+  /* Iris White on blue */
   /* Secondary accent: Fountain Blue #53C3EE */
   --secondary: #53c3ee;
   --secondary-foreground: #00244d;
@@ -65,65 +68,95 @@
   --accent: #ffc72c;
   --accent-foreground: #00244d;
   --destructive: #b91c1c;
-  --border: #c8c9c7; /* College Church Gray */
+  --border: #c8c9c7;
+  /* College Church Gray */
   --input: #e2e3e2;
-  --ring: #53c3ee; /* Fountain Blue focus ring */
+  --ring: #53c3ee;
+  /* Fountain Blue focus ring */
   /* Chart palette derived from SLU secondary colors */
-  --chart-1: #003da5; /* SLU Blue */
-  --chart-2: #53c3ee; /* Fountain Blue */
-  --chart-3: #ffc72c; /* Gateway Gold */
-  --chart-4: #8fd6bd; /* Rooftop Teal */
-  --chart-5: #795d3e; /* Billiken Bronze */
+  --chart-1: #003da5;
+  /* SLU Blue */
+  --chart-2: #53c3ee;
+  /* Fountain Blue */
+  --chart-3: #ffc72c;
+  /* Gateway Gold */
+  --chart-4: #8fd6bd;
+  /* Rooftop Teal */
+  --chart-5: #795d3e;
+  /* Billiken Bronze */
   /* Sidebar / shell colors */
   --sidebar: #ffffff;
   --sidebar-foreground: #00244d;
   --sidebar-primary: #003da5;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e3decb; /* West Pine Beige */
+  --sidebar-accent: #e3decb;
+  /* West Pine Beige */
   --sidebar-accent-foreground: #00244d;
   --sidebar-border: #c8c9c7;
   --sidebar-ring: #53c3ee;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #00244d;
+  /* Grand Blue background */
+  --foreground: #ffffff;
+  --card: #001a38;
+  --card-foreground: #ffffff;
+  --popover: #001a38;
+  --popover-foreground: #ffffff;
+  --primary: #53c3ee;
+  /* Fountain Blue for primary in dark mode */
+  --primary-foreground: #00244d;
+  --secondary: #003da5;
+  --secondary-foreground: #ffffff;
+  --muted: #003da5;
+  --muted-foreground: #c8c9c7;
+  --accent: #795d3e;
+  /* Billiken Bronze */
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #003da5;
+  --input: #003da5;
+  --ring: #53c3ee;
+  --chart-1: #53c3ee;
+  --chart-2: #003da5;
+  --chart-3: #ffc72c;
+  --chart-4: #8fd6bd;
+  --chart-5: #795d3e;
+  --sidebar: #001a38;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #53c3ee;
+  --sidebar-primary-foreground: #00244d;
+  --sidebar-accent: #003da5;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #003da5;
+  --sidebar-ring: #53c3ee;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/bg-pattern.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
   }
 }

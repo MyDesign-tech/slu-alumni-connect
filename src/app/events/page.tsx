@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, MapPin, Users, Clock, Filter, Plus, Edit, Trash2, Settings, BarChart3, Shield, RefreshCw } from "lucide-react";
-import { ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { ResponsiveContainer, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell, AreaChart, Area } from "recharts";
 import { useHydratedAuthStore } from "@/hooks/use-auth-store";
 
 interface Event {
@@ -32,7 +32,7 @@ interface Event {
 export default function EventsPage() {
   const { user, isHydrated } = useHydratedAuthStore();
   const isAdmin = user?.role === "ADMIN";
-  
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [adminTab, setAdminTab] = useState("manage-events");
@@ -48,6 +48,42 @@ export default function EventsPage() {
   });
   const [isCreateEventOpen, setIsCreateEventOpen] = useState(false);
   const [isEventSettingsOpen, setIsEventSettingsOpen] = useState(false);
+
+  // Analytics Data Preparation
+  const eventsByType = useMemo(() => {
+    const types: Record<string, number> = {};
+    events.forEach(event => {
+      types[event.type] = (types[event.type] || 0) + 1;
+    });
+    return Object.entries(types).map(([name, value]) => ({ name, value }));
+  }, [events]);
+
+  const registrationsByMonth = useMemo(() => {
+    const months: Record<string, number> = {};
+    events.forEach(event => {
+      if (!event.date) return;
+      const date = new Date(event.date);
+      const month = date.toLocaleString('default', { month: 'short' });
+      months[month] = (months[month] || 0) + (event.registered || 0);
+    });
+    // Sort months chronologically if needed, but for now simple map
+    return Object.entries(months).map(([name, value]) => ({ name, value }));
+  }, [events]);
+
+  const virtualVsInPerson = useMemo(() => {
+    let virtual = 0;
+    let inPerson = 0;
+    events.forEach(event => {
+      if (event.isVirtual) virtual++;
+      else inPerson++;
+    });
+    return [
+      { name: 'Virtual', value: virtual },
+      { name: 'In-Person', value: inPerson },
+    ];
+  }, [events]);
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
   const [createEventData, setCreateEventData] = useState({
     title: "",
     type: "Networking",
@@ -194,7 +230,7 @@ export default function EventsPage() {
           'x-user-email': user?.email || 'admin@slu.edu'
         }
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         console.log('✅ Real CSV events loaded:', data.events?.length || 0, 'events');
@@ -256,7 +292,7 @@ export default function EventsPage() {
 
   const filteredEvents = events.filter(event => {
     const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         event.description.toLowerCase().includes(searchTerm.toLowerCase());
+      event.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = !selectedType || event.type === selectedType;
     const bucket = getEventStatusBucket(event);
     const matchesStatus = !selectedStatus || bucket === selectedStatus;
@@ -267,7 +303,7 @@ export default function EventsPage() {
   const submitRSVP = async () => {
     if (!selectedEvent) return;
     const eventId = selectedEvent.id;
-    
+
     try {
       const response = await fetch(`/api/events/${selectedEvent.id}/rsvp`, {
         method: 'POST',
@@ -277,7 +313,7 @@ export default function EventsPage() {
         },
         body: JSON.stringify(rsvpData)
       });
-      
+
       if (response.ok) {
         alert("RSVP submitted successfully!");
         setSelectedEvent(null);
@@ -312,7 +348,7 @@ export default function EventsPage() {
 
   const handleDeleteEvent = async (event: Event) => {
     if (!confirm(`Are you sure you want to delete "${event.title}"?`)) return;
-    
+
     try {
       const response = await fetch(`/api/events/${event.id}`, {
         method: 'DELETE',
@@ -320,7 +356,7 @@ export default function EventsPage() {
           'x-user-email': user?.email || 'admin@slu.edu'
         }
       });
-      
+
       if (response.ok) {
         alert("Event deleted successfully!");
         fetchEvents(); // Refresh events list
@@ -423,7 +459,7 @@ export default function EventsPage() {
                 {isAdmin ? "Event Management" : "Alumni Events"}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                {isAdmin 
+                {isAdmin
                   ? "Manage events, track attendance, and create new opportunities for alumni engagement."
                   : "Discover upcoming events, reunions, and networking opportunities with fellow SLU alumni."
                 }
@@ -463,8 +499,8 @@ export default function EventsPage() {
                     />
                   </div>
                   <div className="flex gap-2">
-                    <select 
-                      value={selectedType} 
+                    <select
+                      value={selectedType}
                       onChange={(e) => setSelectedType(e.target.value)}
                       className="px-3 py-2 border border-input rounded-md bg-background"
                     >
@@ -531,7 +567,7 @@ export default function EventsPage() {
                               {event.registered}/{event.capacity}
                             </span>
                           </div>
-                          
+
                           <div className="flex gap-2">
                             <Button size="sm" variant="outline" onClick={() => handleEditEvent(event)}>
                               <Edit className="h-4 w-4 mr-1" />
@@ -559,7 +595,7 @@ export default function EventsPage() {
                     <div className="flex items-center justify-between">
                       <CardTitle className="flex items-center gap-2">
                         <BarChart3 className="h-5 w-5" />
-                        Event Analytics
+                        Event Analytics Dashboard
                       </CardTitle>
                       <Button
                         variant="outline"
@@ -571,163 +607,135 @@ export default function EventsPage() {
                         disabled={loading || statsLoading}
                       >
                         <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-                        Refresh
+                        Refresh Data
                       </Button>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-primary">{filteredEvents.length}</div>
-                        <div className="text-sm text-muted-foreground">Total Events</div>
+                    {/* Summary Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                      <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
+                        <div className="text-sm text-muted-foreground font-medium">Total Events</div>
+                        <div className="text-3xl font-bold text-primary mt-1">{filteredEvents.length}</div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-secondary">
+                      <div className="p-4 bg-secondary/5 rounded-lg border border-secondary/10">
+                        <div className="text-sm text-muted-foreground font-medium">Total Registrations</div>
+                        <div className="text-3xl font-bold text-secondary mt-1">
                           {filteredEvents.reduce((sum, event) => sum + event.registered, 0)}
                         </div>
-                        <div className="text-sm text-muted-foreground">Total Registrations</div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-accent">
-                          {Math.round((filteredEvents.reduce((sum, event) => sum + event.registered, 0) / 
-                            filteredEvents.reduce((sum, event) => sum + event.capacity, 0)) * 100)}%
+                      <div className="p-4 bg-accent/5 rounded-lg border border-accent/10">
+                        <div className="text-sm text-muted-foreground font-medium">Avg. Attendance</div>
+                        <div className="text-3xl font-bold text-accent mt-1">
+                          {filteredEvents.length > 0
+                            ? Math.round(filteredEvents.reduce((sum, event) => sum + event.registered, 0) / filteredEvents.length)
+                            : 0}
                         </div>
-                        <div className="text-sm text-muted-foreground">Avg Attendance</div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-primary">
+                      <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
+                        <div className="text-sm text-muted-foreground font-medium">Virtual Events</div>
+                        <div className="text-3xl font-bold text-primary mt-1">
                           {filteredEvents.filter(event => event.isVirtual).length}
                         </div>
-                        <div className="text-sm text-muted-foreground">Virtual Events</div>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {/* Attendance vs Capacity Over Time */}
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2 text-base">
-                            <Users className="h-4 w-4" />
-                            Attendance vs Capacity
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          {attendanceTrendData.length === 0 ? (
-                            <div className="h-64 flex items-center justify-center border-2 border-dashed border-muted-foreground/20 rounded-lg">
-                              <p className="text-sm text-muted-foreground text-center px-4">
-                                Attendance analytics will appear here once there are events with capacity and registrations.
-                              </p>
-                            </div>
-                          ) : (
-                            <div className="h-64">
-                              <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={attendanceTrendData} margin={{ top: 16, right: 24, left: 0, bottom: 0 }}>
-                                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                                  <XAxis dataKey="label" tick={{ fontSize: 12 }} />
-                                  <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-                                  <Tooltip />
-                                  <Legend />
-                                  <Line
-                                    type="monotone"
-                                    dataKey="capacity"
-                                    stroke="#9ca3af"
-                                    strokeWidth={2}
-                                    dot={{ r: 2 }}
-                                    name="Capacity"
-                                  />
-                                  <Line
-                                    type="monotone"
-                                    dataKey="registered"
-                                    stroke="#2563eb"
-                                    strokeWidth={2}
-                                    dot={{ r: 3 }}
-                                    name="Registered"
-                                  />
-                                </LineChart>
-                              </ResponsiveContainer>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      {/* Registration Trends */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold flex items-center gap-2">
+                          <Users className="h-4 w-4" />
+                          Registration Trends
+                        </h3>
+                        <div className="h-[300px] w-full border rounded-lg p-4">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={registrationsByMonth}>
+                              <defs>
+                                <linearGradient id="colorReg" x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="5%" stopColor="#0088FE" stopOpacity={0.8} />
+                                  <stop offset="95%" stopColor="#0088FE" stopOpacity={0} />
+                                </linearGradient>
+                              </defs>
+                              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                              <XAxis dataKey="name" />
+                              <YAxis />
+                              <Tooltip />
+                              <Area type="monotone" dataKey="value" stroke="#0088FE" fillOpacity={1} fill="url(#colorReg)" />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
 
                       {/* Event Type Distribution */}
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2 text-base">
-                            <BarChart3 className="h-4 w-4" />
-                            Event Type Distribution
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          {typeDistributionData.length === 0 ? (
-                            <div className="h-64 flex items-center justify-center border-2 border-dashed border-muted-foreground/20 rounded-lg">
-                              <p className="text-sm text-muted-foreground text-center px-4">
-                                Type distribution will appear here once events are loaded.
-                              </p>
-                            </div>
-                          ) : (
-                            <div className="h-64">
-                              <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={typeDistributionData} margin={{ top: 16, right: 24, left: 0, bottom: 0 }}>
-                                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                                  <XAxis dataKey="type" tick={{ fontSize: 12 }} />
-                                  <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-                                  <Tooltip />
-                                  <Legend />
-                                  <Bar dataKey="count" fill="#16a34a" name="Events" />
-                                </BarChart>
-                              </ResponsiveContainer>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold flex items-center gap-2">
+                          <BarChart3 className="h-4 w-4" />
+                          Event Types
+                        </h3>
+                        <div className="h-[300px] w-full border rounded-lg p-4">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={eventsByType} layout="vertical">
+                              <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                              <XAxis type="number" />
+                              <YAxis dataKey="name" type="category" width={100} />
+                              <Tooltip />
+                              <Bar dataKey="value" fill="#00C49F" radius={[0, 4, 4, 0]} />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
 
-                      {/* RSVP Status Breakdown */}
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2 text-base">
-                            <BarChart3 className="h-4 w-4" />
-                            RSVP Status Breakdown
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          {statsLoading && (
-                            <p className="text-sm text-muted-foreground">Loading RSVP analytics...</p>
-                          )}
-                          {statsError && (
-                            <p className="text-sm text-destructive">{statsError}</p>
-                          )}
-                          {!statsLoading && !statsError && rsvpStatusChart.data.length === 0 && (
-                            <div className="h-64 flex items-center justify-center border-2 border-dashed border-muted-foreground/20 rounded-lg">
-                              <p className="text-sm text-muted-foreground text-center px-4">
-                                RSVP analytics will appear here once there are RSVPs recorded for events.
-                              </p>
-                            </div>
-                          )}
-                          {!statsLoading && !statsError && rsvpStatusChart.data.length > 0 && (
-                            <div className="h-72">
-                              <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={rsvpStatusChart.data} margin={{ top: 16, right: 24, left: 0, bottom: 0 }}>
-                                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                                  <XAxis dataKey="title" tick={{ fontSize: 12 }} />
-                                  <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-                                  <Tooltip />
-                                  <Legend />
-                                  {rsvpStatusChart.keys.map((status, index) => (
-                                    <Bar
-                                      key={status}
-                                      dataKey={status}
-                                      stackId="rsvp"
-                                      fill={statusColors[index % statusColors.length]}
-                                      name={status}
-                                    />
-                                  ))}
-                                </BarChart>
-                              </ResponsiveContainer>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
+                      {/* Virtual vs In-Person */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold flex items-center gap-2">
+                          <MapPin className="h-4 w-4" />
+                          Virtual vs In-Person
+                        </h3>
+                        <div className="h-[300px] w-full border rounded-lg p-4 flex items-center justify-center">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <PieChart>
+                              <Pie
+                                data={virtualVsInPerson}
+                                cx="50%"
+                                cy="50%"
+                                innerRadius={60}
+                                outerRadius={80}
+                                fill="#8884d8"
+                                paddingAngle={5}
+                                dataKey="value"
+                              >
+                                {virtualVsInPerson.map((entry, index) => (
+                                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                              </Pie>
+                              <Tooltip />
+                              <Legend />
+                            </PieChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+
+                      {/* Top Performing Events */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold flex items-center gap-2">
+                          <Shield className="h-4 w-4" />
+                          Top Performing Events
+                        </h3>
+                        <div className="border rounded-lg overflow-hidden">
+                          <div className="grid grid-cols-3 bg-muted p-3 font-medium text-sm">
+                            <div className="col-span-2">Event Name</div>
+                            <div className="text-right">Registrations</div>
+                          </div>
+                          <div className="divide-y">
+                            {[...events].sort((a, b) => b.registered - a.registered).slice(0, 5).map((event) => (
+                              <div key={event.id} className="grid grid-cols-3 p-3 text-sm hover:bg-muted/50 transition-colors">
+                                <div className="col-span-2 truncate font-medium">{event.title}</div>
+                                <div className="text-right">{event.registered}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -777,8 +785,8 @@ export default function EventsPage() {
                   />
                 </div>
                 <div className="flex gap-2">
-                  <select 
-                    value={selectedType} 
+                  <select
+                    value={selectedType}
                     onChange={(e) => setSelectedType(e.target.value)}
                     className="px-3 py-2 border border-input rounded-md bg-background"
                   >
@@ -894,7 +902,7 @@ export default function EventsPage() {
                     Please provide your RSVP details for this event.
                   </DialogDescription>
                 </DialogHeader>
-              
+
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm font-medium">Number of Guests</label>
@@ -910,7 +918,7 @@ export default function EventsPage() {
                       Maximum 5 guests per registration
                     </p>
                   </div>
-                  
+
                   <div>
                     <label className="text-sm font-medium">Special Requirements</label>
                     <textarea
@@ -921,7 +929,7 @@ export default function EventsPage() {
                       rows={3}
                     />
                   </div>
-                  
+
                   <div className="flex gap-2 pt-4">
                     <Button variant="outline" onClick={() => setSelectedEvent(null)} className="flex-1">
                       Cancel

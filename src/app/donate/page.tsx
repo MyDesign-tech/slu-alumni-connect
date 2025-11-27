@@ -10,8 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useHydratedAuthStore } from "@/hooks/use-auth-store";
-import { Heart, DollarSign, Users, Award, Target, TrendingUp, Calendar, CheckCircle, Plus, Settings, Edit, Trash2, BarChart3, Shield, RefreshCw } from "lucide-react";
-import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { Heart, DollarSign, Users, Award, Target, TrendingUp, Calendar, CheckCircle, Plus, Settings, Edit, Trash2, BarChart3, Shield, RefreshCw, PieChart as PieChartIcon } from "lucide-react";
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell, BarChart, Bar } from "recharts";
 
 interface DonationCampaign {
   id: string;
@@ -31,12 +31,15 @@ interface DonationHistory {
   amount: number;
   date: string;
   status: string;
+  purpose?: string;
 }
+
+const COLORS = ['#003DA5', '#53C3EE', '#FFC72C', '#8FD6BD', '#795D3E', '#ED8B00'];
 
 export default function DonatePage() {
   const { user, isHydrated } = useHydratedAuthStore();
   const isAdmin = user?.role === "ADMIN";
-  
+
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [customAmount, setCustomAmount] = useState("");
   const [selectedCampaign, setSelectedCampaign] = useState<string | null>(null);
@@ -65,6 +68,7 @@ export default function DonatePage() {
   const [quickDonateAmount, setQuickDonateAmount] = useState("");
   const [activeTab, setActiveTab] = useState(isAdmin ? "manage-campaigns" : "active-campaigns");
 
+  // Analytics Data Calculation
   const donationTrendsData = useMemo(() => {
     if (!donations || donations.length === 0) return [] as { month: string; totalAmount: number; donationCount: number }[];
 
@@ -86,9 +90,29 @@ export default function DonatePage() {
       .sort(([a], [b]) => (a < b ? -1 : 1))
       .map(([, value]) => value);
 
-    // Show at most last 6 months for clarity
     return sorted.slice(-6);
   }, [donations]);
+
+  const donationsByPurposeData = useMemo(() => {
+    const counts: { [key: string]: number } = {};
+    donations.forEach(d => {
+      const purpose = d.purpose || 'General Fund';
+      counts[purpose] = (counts[purpose] || 0) + d.amount;
+    });
+    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+  }, [donations]);
+
+  const topCampaignsData = useMemo(() => {
+    return campaigns
+      .map(c => ({
+        name: c.title,
+        value: Math.min((c.raised / c.goal) * 100, 100),
+        raised: c.raised,
+        goal: c.goal
+      }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
+  }, [campaigns]);
 
   useEffect(() => {
     fetchCampaigns();
@@ -102,12 +126,11 @@ export default function DonatePage() {
           'x-user-email': user?.email || 'admin@slu.edu'
         }
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         setCampaigns(data.campaigns || []);
-        
-        // Update stats with real data
+
         if (data.campaigns) {
           const totalRaised = data.campaigns.reduce((sum: number, campaign: any) => sum + campaign.raised, 0);
           setStats(prev => ({
@@ -130,18 +153,17 @@ export default function DonatePage() {
           'x-user-email': user?.email || 'admin@slu.edu'
         }
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         setDonations(data.donations || []);
-        
-        // Calculate real statistics from donations
+
         if (data.donations) {
           const uniqueDonors = new Set(data.donations.map((d: any) => d.alumniId || d.id)).size;
-          const scholarshipDonations = data.donations.filter((d: any) => 
+          const scholarshipDonations = data.donations.filter((d: any) =>
             d.campaign?.toLowerCase().includes('scholarship') || d.purpose?.toLowerCase().includes('scholarship')
           ).length;
-          
+
           setStats(prev => ({
             ...prev,
             activeDonors: uniqueDonors,
@@ -189,11 +211,9 @@ export default function DonatePage() {
 
       if (response.ok) {
         alert(`Thank you for your ${formatCurrency(amount)} ${donationType} donation!`);
-        // Reset form
         setSelectedAmount(null);
         setCustomAmount("");
         setSelectedCampaign(null);
-        // Refresh data
         fetchCampaigns();
         fetchDonations();
       } else {
@@ -252,7 +272,6 @@ export default function DonatePage() {
       activeCampaigns: prev.activeCampaigns + 1,
     }));
 
-    // Fire-and-forget bulk email announcement for the new campaign
     try {
       fetch('/api/campaigns', {
         method: 'POST',
@@ -332,7 +351,7 @@ export default function DonatePage() {
                 {isAdmin ? "Donation Management" : "Support SLU"}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                {isAdmin 
+                {isAdmin
                   ? "Manage donation campaigns, track fundraising progress, and oversee financial contributions."
                   : "Your generosity helps create opportunities for current and future students while strengthening our alumni community."
                 }
@@ -385,12 +404,12 @@ export default function DonatePage() {
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className={`grid w-full ${isAdmin ? 'grid-cols-4' : 'grid-cols-3'}`}>
+            <TabsList className={`grid w-full ${isAdmin ? 'grid-cols-4' : 'grid-cols-4'}`}>
               {isAdmin ? (
                 <>
                   <TabsTrigger value="manage-campaigns">Manage Campaigns</TabsTrigger>
                   <TabsTrigger value="donations-overview">Donations Overview</TabsTrigger>
-                  <TabsTrigger value="analytics">Analytics</TabsTrigger>
+                  <TabsTrigger value="analytics">Analytics & Insights</TabsTrigger>
                   <TabsTrigger value="settings">Settings</TabsTrigger>
                 </>
               ) : (
@@ -398,6 +417,7 @@ export default function DonatePage() {
                   <TabsTrigger value="active-campaigns">Active Campaigns</TabsTrigger>
                   <TabsTrigger value="make-donation">Make a Donation</TabsTrigger>
                   <TabsTrigger value="my-donations">My Donations</TabsTrigger>
+                  <TabsTrigger value="analytics">Analytics & Insights</TabsTrigger>
                 </>
               )}
             </TabsList>
@@ -422,10 +442,10 @@ export default function DonatePage() {
                         </div>
                       </div>
                     </CardHeader>
-                    
+
                     <CardContent className="space-y-4">
                       <p className="text-muted-foreground">{campaign.description}</p>
-                      
+
                       {/* Progress Bar */}
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
@@ -433,7 +453,7 @@ export default function DonatePage() {
                           <span>Goal: {formatCurrency(campaign.goal)}</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-primary h-2 rounded-full transition-all duration-300"
                             style={{ width: `${getProgressPercentage(campaign.raised, campaign.goal)}%` }}
                           />
@@ -453,7 +473,7 @@ export default function DonatePage() {
                         </div>
                       </div>
 
-                      <Button 
+                      <Button
                         className="w-full"
                         onClick={() => handleDonateNow(campaign)}
                       >
@@ -482,7 +502,7 @@ export default function DonatePage() {
                   {/* Campaign Selection */}
                   <div>
                     <label className="text-sm font-medium mb-2 block">Select Campaign</label>
-                    <select 
+                    <select
                       className="w-full px-3 py-2 border border-input rounded-md bg-background"
                       value={selectedCampaign || ""}
                       onChange={(e) => setSelectedCampaign(e.target.value)}
@@ -586,12 +606,12 @@ export default function DonatePage() {
                     </div>
                   )}
 
-                  <Button 
-                    className="w-full" 
+                  <Button
+                    className="w-full"
                     size="lg"
                     disabled={!selectedCampaign || (!selectedAmount && !customAmount)}
                     onClick={() => handleDonate(
-                      selectedCampaign!, 
+                      selectedCampaign!,
                       selectedAmount || parseInt(customAmount) || 0
                     )}
                   >
@@ -634,7 +654,7 @@ export default function DonatePage() {
                           </div>
                         </div>
                       ))}
-                      
+
                       <div className="pt-4 border-t">
                         <div className="flex justify-between items-center">
                           <span className="font-medium">Total Donated:</span>
@@ -658,6 +678,117 @@ export default function DonatePage() {
                   )}
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            {/* Analytics Tab - Visible to ALL */}
+            <TabsContent value="analytics" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Donation Trends Chart */}
+                <Card className="lg:col-span-2">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <TrendingUp className="h-5 w-5" />
+                      Donation Trends
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {donationTrendsData.length === 0 ? (
+                      <div className="h-64 flex items-center justify-center border-2 border-dashed border-muted-foreground/20 rounded-lg">
+                        <div className="text-center">
+                          <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
+                          <p className="text-muted-foreground">Donation trends will appear here once you have donations.</p>
+                          <p className="text-sm text-muted-foreground">Track total amount and number of gifts over time.</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="h-64">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={donationTrendsData} margin={{ top: 16, right: 24, left: 0, bottom: 0 }}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                            <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+                            <YAxis tick={{ fontSize: 12 }} />
+                            <Tooltip
+                              formatter={(value, name) => {
+                                if (name === "totalAmount") {
+                                  return [formatCurrency(value as number), "Total Amount"];
+                                }
+                                return [value, "Donations"];
+                              }}
+                            />
+                            <Legend />
+                            <Area
+                              type="monotone"
+                              dataKey="totalAmount"
+                              name="Total Amount"
+                              stroke="#003DA5"
+                              fill="#003DA5"
+                              fillOpacity={0.1}
+                              strokeWidth={2}
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+
+                {/* Donations by Purpose */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <PieChartIcon className="h-5 w-5" />
+                      Donations by Purpose
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-[300px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={donationsByPurposeData}
+                          cx="50%"
+                          cy="50%"
+                          labelLine={false}
+                          outerRadius={100}
+                          fill="#8884d8"
+                          dataKey="value"
+                          label={({ name, percent }: { name?: string; percent?: number }) => `${name || ''} ${(percent ? percent * 100 : 0).toFixed(0)}%`}
+                        >
+                          {donationsByPurposeData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          ))}
+                        </Pie>
+                        <Tooltip formatter={(value) => formatCurrency(value as number)} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+
+                {/* Top Performing Campaigns */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Target className="h-5 w-5" />
+                      Top Performing Campaigns
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-[300px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={topCampaignsData} layout="vertical" margin={{ left: 40 }}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis type="number" domain={[0, 100]} />
+                        <YAxis dataKey="name" type="category" width={100} />
+                        <Tooltip
+                          formatter={(value, name, props) => {
+                            if (name === "value") return [`${(value as number).toFixed(1)}%`, "Funded"];
+                            return [value, name];
+                          }}
+                        />
+                        <Bar dataKey="value" fill="#53C3EE" radius={[0, 4, 4, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
 
             {/* Admin-only tabs */}
@@ -692,10 +823,6 @@ export default function DonatePage() {
                               <Button size="sm" variant="outline" onClick={() => handleEditCampaign(campaign)}>
                                 <Edit className="h-4 w-4 mr-1" />
                                 Edit
-                              </Button>
-                              <Button size="sm" variant="outline" onClick={() => handleCampaignAnalytics(campaign)}>
-                                <BarChart3 className="h-4 w-4 mr-1" />
-                                Analytics
                               </Button>
                               <Button size="sm" variant="destructive" onClick={() => handleArchiveCampaign(campaign)}>
                                 <Trash2 className="h-4 w-4 mr-1" />
@@ -766,557 +893,126 @@ export default function DonatePage() {
                     </Card>
                   </div>
                 </TabsContent>
-
-                {/* Analytics Tab */}
-                <TabsContent value="analytics" className="space-y-6">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Donation Trends Chart */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <TrendingUp className="h-5 w-5" />
-                          Donation Trends
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        {donationTrendsData.length === 0 ? (
-                          <div className="h-64 flex items-center justify-center border-2 border-dashed border-muted-foreground/20 rounded-lg">
-                            <div className="text-center">
-                              <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
-                              <p className="text-muted-foreground">Donation trends will appear here once you have donations.</p>
-                              <p className="text-sm text-muted-foreground">Track total amount and number of gifts over time.</p>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="h-64">
-                            <ResponsiveContainer width="100%" height="100%">
-                              <AreaChart data={donationTrendsData} margin={{ top: 16, right: 24, left: 0, bottom: 0 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                                <XAxis dataKey="month" tick={{ fontSize: 12 }} />
-                                <YAxis tick={{ fontSize: 12 }} />
-                                <Tooltip
-                                  formatter={(value, name) => {
-                                    if (name === "totalAmount") {
-                                      return [formatCurrency(value as number), "Total Amount"];
-                                    }
-                                    if (name === "donationCount") {
-                                      return [value as number, "Number of Gifts"];
-                                    }
-                                    return [value, name];
-                                  }}
-                                />
-                                <Legend
-                                  formatter={(value) =>
-                                    value === "totalAmount"
-                                      ? "Total Amount"
-                                      : value === "donationCount"
-                                      ? "Number of Gifts"
-                                      : value
-                                  }
-                                />
-                                <Area
-                                  type="monotone"
-                                  dataKey="totalAmount"
-                                  stroke="#2563eb"
-                                  strokeWidth={2}
-                                  fill="#bfdbfe"
-                                  name="totalAmount"
-                                />
-                                <Area
-                                  type="monotone"
-                                  dataKey="donationCount"
-                                  stroke="#16a34a"
-                                  strokeWidth={2}
-                                  fill="rgba(22,163,74,0.2)"
-                                  name="donationCount"
-                                />
-                              </AreaChart>
-                            </ResponsiveContainer>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-
-                    {/* Campaign Performance */}
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>Campaign Performance</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          {campaigns.map((campaign) => (
-                            <div key={campaign.id} className="space-y-2">
-                              <div className="flex justify-between text-sm">
-                                <span>{campaign.title}</span>
-                                <span>{Math.round((campaign.raised / campaign.goal) * 100)}%</span>
-                              </div>
-                              <div className="w-full bg-muted rounded-full h-2">
-                                <div
-                                  className="bg-primary h-2 rounded-full"
-                                  style={{ width: `${Math.min((campaign.raised / campaign.goal) * 100, 100)}%` }}
-                                />
-                              </div>
-                              <div className="flex justify-between text-xs text-muted-foreground">
-                                <span>${campaign.raised.toLocaleString()} raised</span>
-                                <span>${campaign.goal.toLocaleString()} goal</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </TabsContent>
-
-                {/* Settings Tab */}
-                <TabsContent value="settings" className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Settings className="h-5 w-5" />
-                        Donation Settings
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div>
-                        <h4 className="font-semibold mb-4">Payment Configuration</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label className="text-sm font-medium">Minimum Donation Amount</label>
-                            <Input type="number" defaultValue="10" className="mt-1" />
-                          </div>
-                          <div>
-                            <label className="text-sm font-medium">Processing Fee (%)</label>
-                            <Input type="number" defaultValue="2.9" step="0.1" className="mt-1" />
-                          </div>
-                          <div>
-                            <label className="text-sm font-medium">Default Currency</label>
-                            <select className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background">
-                              <option value="USD">USD</option>
-                              <option value="EUR">EUR</option>
-                              <option value="GBP">GBP</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label className="text-sm font-medium">Tax Deductible</label>
-                            <select className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background">
-                              <option value="true">Yes</option>
-                              <option value="false">No</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold mb-4">Notification Settings</h4>
-                        <div className="space-y-3">
-                          {[
-                            "New donation received",
-                            "Campaign goal reached",
-                            "Monthly donation reports",
-                            "Donor thank you emails",
-                            "Campaign deadline reminders"
-                          ].map((setting) => (
-                            <label key={setting} className="flex items-center space-x-2">
-                              <input type="checkbox" defaultChecked className="rounded" />
-                              <span className="text-sm">{setting}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-
-                      <Button className="w-full">
-                        Save Settings
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
               </>
             )}
           </Tabs>
-          {/* Quick Donate Dialog */}
-          {quickDonateCampaign && (
-            <Dialog
-              open={!!quickDonateCampaign}
-              onOpenChange={(open) => {
-                if (!open) {
-                  setQuickDonateCampaign(null);
-                  setQuickDonateAmount("");
-                }
-              }}
-            >
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Quick Donate</DialogTitle>
-                  <DialogDescription>
-                    Make a one-time gift to {quickDonateCampaign?.title}.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 mt-2">
-                  <p className="text-sm text-muted-foreground">
-                    You are supporting <span className="font-medium">{quickDonateCampaign?.title}</span>.
-                  </p>
-                  <div>
-                    <label className="text-sm font-medium mb-1 block">Donation Amount (USD)</label>
-                    <Input
-                      type="number"
-                      min={1}
-                      value={quickDonateAmount}
-                      onChange={(e) => setQuickDonateAmount(e.target.value)}
-                      placeholder="50"
-                    />
-                  </div>
-                  <div className="flex justify-end gap-2 pt-4">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setQuickDonateCampaign(null);
-                        setQuickDonateAmount("");
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      disabled={!quickDonateAmount || parseFloat(quickDonateAmount) <= 0}
-                      onClick={async () => {
-                        if (!quickDonateCampaign) return;
-                        const amount = parseFloat(quickDonateAmount);
-                        if (!amount || amount <= 0) return;
-                        await handleDonate(quickDonateCampaign.id, amount);
-                        setQuickDonateCampaign(null);
-                        setQuickDonateAmount("");
-                      }}
-                    >
-                      Confirm Donation
-                    </Button>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-          )}
 
-          {/* Create Campaign Dialog (admin) */}
-          {isAdmin && (
-            <>
-              <Dialog open={isCreateCampaignOpen} onOpenChange={setIsCreateCampaignOpen}>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Create Campaign</DialogTitle>
-                    <DialogDescription>
-                      Draft a new fundraising campaign for this session. This demo form does not persist to the CSV.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 mt-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Title</label>
-                        <Input
-                          placeholder="e.g. Student Scholarship Fund"
-                          value={editCampaignData.title}
-                          onChange={(e) =>
-                            setEditCampaignData(prev => ({ ...prev, title: e.target.value }))
-                          }
-                        />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Category</label>
-                        <select
-                          className="w-full px-3 py-2 border border-input rounded-md bg-background"
-                          value={editCampaignData.category}
-                          onChange={(e) =>
-                            setEditCampaignData(prev => ({ ...prev, category: e.target.value }))
-                          }
-                        >
-                          <option value="">Select category</option>
-                          <option value="Education">Education</option>
-                          <option value="Infrastructure">Infrastructure</option>
-                          <option value="Research">Research</option>
-                          <option value="Student Support">Student Support</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Description</label>
-                      <textarea
-                        className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
-                        rows={3}
-                        placeholder="Brief description of how this campaign will be used"
-                        value={editCampaignData.description}
-                        onChange={(e) =>
-                          setEditCampaignData(prev => ({ ...prev, description: e.target.value }))
-                        }
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Goal Amount</label>
-                        <Input
-                          type="number"
-                          value={editCampaignData.goal}
-                          onChange={(e) =>
-                            setEditCampaignData(prev => ({
-                              ...prev,
-                              goal: parseInt(e.target.value) || 0,
-                            }))
-                          }
-                          placeholder="10000"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">End Date</label>
-                        <Input
-                          type="date"
-                          value={editCampaignData.endDate}
-                          onChange={(e) =>
-                            setEditCampaignData(prev => ({ ...prev, endDate: e.target.value }))
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="flex justify-end gap-2 pt-4">
-                      <Button
-                        variant="outline"
-                        onClick={() => {
-                          setIsCreateCampaignOpen(false);
-                          setEditCampaignData({
-                            title: '',
-                            description: '',
-                            goal: 0,
-                            endDate: '',
-                            category: '',
-                          });
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={handleSaveNewCampaign}
-                      >
-                        Save Campaign
-                      </Button>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
+          {/* Create Campaign Dialog */}
+          <Dialog open={isCreateCampaignOpen} onOpenChange={setIsCreateCampaignOpen}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Create New Campaign</DialogTitle>
+                <DialogDescription>
+                  Launch a new fundraising campaign.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 mt-2">
+                <Input
+                  placeholder="Campaign Title"
+                  value={editCampaignData.title}
+                  onChange={(e) => setEditCampaignData({ ...editCampaignData, title: e.target.value })}
+                />
+                <Input
+                  placeholder="Goal Amount ($)"
+                  type="number"
+                  value={editCampaignData.goal || ""}
+                  onChange={(e) => setEditCampaignData({ ...editCampaignData, goal: parseFloat(e.target.value) })}
+                />
+                <Input
+                  placeholder="End Date"
+                  type="date"
+                  value={editCampaignData.endDate}
+                  onChange={(e) => setEditCampaignData({ ...editCampaignData, endDate: e.target.value })}
+                />
+                <select
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                  value={editCampaignData.category}
+                  onChange={(e) => setEditCampaignData({ ...editCampaignData, category: e.target.value })}
+                >
+                  <option value="">Select Category</option>
+                  <option value="Education">Education</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                  <option value="Research">Research</option>
+                  <option value="Student Support">Student Support</option>
+                </select>
+                <textarea
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background resize-none"
+                  rows={3}
+                  placeholder="Description"
+                  value={editCampaignData.description}
+                  onChange={(e) => setEditCampaignData({ ...editCampaignData, description: e.target.value })}
+                />
+                <Button onClick={handleSaveNewCampaign} className="w-full">
+                  Create Campaign
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
 
-              {/* Edit Campaign Dialog */}
-              <Dialog
-                open={!!editingCampaign}
-                onOpenChange={(open) => {
-                  if (!open) {
+          {/* Edit Campaign Dialog */}
+          <Dialog open={!!editingCampaign} onOpenChange={(open) => !open && setEditingCampaign(null)}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Edit Campaign</DialogTitle>
+              </DialogHeader>
+              {editingCampaign && (
+                <div className="space-y-4">
+                  <Input
+                    value={editCampaignData.title}
+                    onChange={(e) => setEditCampaignData({ ...editCampaignData, title: e.target.value })}
+                  />
+                  <Input
+                    type="number"
+                    value={editCampaignData.goal}
+                    onChange={(e) => setEditCampaignData({ ...editCampaignData, goal: parseFloat(e.target.value) })}
+                  />
+                  <Button onClick={() => {
+                    setCampaigns(prev => prev.map(c => c.id === editingCampaign.id ? { ...c, ...editCampaignData } : c));
                     setEditingCampaign(null);
-                  }
-                }}
-              >
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Edit Campaign</DialogTitle>
-                    <DialogDescription>
-                      Update campaign details for this session.
-                    </DialogDescription>
-                  </DialogHeader>
-                  {editingCampaign && (
-                    <div className="space-y-4 mt-2">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Title</label>
-                          <Input
-                            value={editCampaignData.title}
-                            onChange={(e) =>
-                              setEditCampaignData(prev => ({ ...prev, title: e.target.value }))
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Category</label>
-                          <select
-                            className="w-full px-3 py-2 border border-input rounded-md bg-background"
-                            value={editCampaignData.category}
-                            onChange={(e) =>
-                              setEditCampaignData(prev => ({ ...prev, category: e.target.value }))
-                            }
-                          >
-                            <option value="Education">Education</option>
-                            <option value="Infrastructure">Infrastructure</option>
-                            <option value="Research">Research</option>
-                            <option value="Student Support">Student Support</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Description</label>
-                        <textarea
-                          className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
-                          rows={3}
-                          value={editCampaignData.description}
-                          onChange={(e) =>
-                            setEditCampaignData(prev => ({ ...prev, description: e.target.value }))
-                          }
-                        />
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Goal Amount</label>
-                          <Input
-                            type="number"
-                            value={editCampaignData.goal}
-                            onChange={(e) =>
-                              setEditCampaignData(prev => ({
-                                ...prev,
-                                goal: parseInt(e.target.value) || 0,
-                              }))
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">End Date</label>
-                          <Input
-                            type="date"
-                            value={editCampaignData.endDate}
-                            onChange={(e) =>
-                              setEditCampaignData(prev => ({ ...prev, endDate: e.target.value }))
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setEditingCampaign(null)}>
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            if (!editingCampaign) return;
-                            setCampaigns(prev =>
-                              prev.map(c =>
-                                c.id === editingCampaign.id
-                                  ? {
-                                      ...c,
-                                      title: editCampaignData.title,
-                                      description: editCampaignData.description,
-                                      goal: editCampaignData.goal,
-                                      endDate: editCampaignData.endDate,
-                                      category: editCampaignData.category,
-                                    }
-                                  : c,
-                              ),
-                            );
-                            setEditingCampaign(null);
-                          }}
-                        >
-                          Save Changes
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </DialogContent>
-              </Dialog>
+                  }}>Save Changes</Button>
+                </div>
+              )}
+            </DialogContent>
+          </Dialog>
 
-              {/* Campaign Analytics Dialog */}
-              <Dialog
-                open={!!analyticsCampaign}
-                onOpenChange={(open) => {
-                  if (!open) {
-                    setAnalyticsCampaign(null);
-                  }
-                }}
-              >
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Campaign Analytics</DialogTitle>
-                    <DialogDescription>
-                      High-level performance for {analyticsCampaign?.title}.
-                    </DialogDescription>
-                  </DialogHeader>
-                  {analyticsCampaign && (
-                    <div className="space-y-3 mt-2 text-sm">
-                      <div className="flex justify-between">
-                        <span>Raised</span>
-                        <span>{formatCurrency(analyticsCampaign.raised)}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Goal</span>
-                        <span>{formatCurrency(analyticsCampaign.goal)}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Progress</span>
-                        <span>
-                          {getProgressPercentage(analyticsCampaign.raised, analyticsCampaign.goal).toFixed(0)}%
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Donors</span>
-                        <span>{analyticsCampaign.donors}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>End Date</span>
-                        <span>{new Date(analyticsCampaign.endDate).toLocaleDateString()}</span>
-                      </div>
-                    </div>
-                  )}
-                </DialogContent>
-              </Dialog>
+          {/* Quick Donate Dialog */}
+          <Dialog open={!!quickDonateCampaign} onOpenChange={(open) => !open && setQuickDonateCampaign(null)}>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Donate to {quickDonateCampaign?.title}</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div className="grid grid-cols-3 gap-2">
+                  {[25, 50, 100].map(amt => (
+                    <Button
+                      key={amt}
+                      variant={quickDonateAmount === amt.toString() ? "default" : "outline"}
+                      onClick={() => setQuickDonateAmount(amt.toString())}
+                    >
+                      ${amt}
+                    </Button>
+                  ))}
+                </div>
+                <Input
+                  placeholder="Custom Amount"
+                  value={quickDonateAmount}
+                  onChange={(e) => setQuickDonateAmount(e.target.value)}
+                />
+                <Button
+                  className="w-full"
+                  onClick={() => {
+                    if (quickDonateCampaign && quickDonateAmount) {
+                      handleDonate(quickDonateCampaign.id, parseFloat(quickDonateAmount));
+                      setQuickDonateCampaign(null);
+                    }
+                  }}
+                >
+                  Confirm Donation
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
 
-              {/* Header Donation Settings Dialog */}
-              <Dialog open={isDonationSettingsOpen} onOpenChange={setIsDonationSettingsOpen}>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Donation Settings</DialogTitle>
-                    <DialogDescription>
-                      Configure global defaults for processing alumni donations.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 mt-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Minimum Donation Amount</label>
-                        <Input type="number" defaultValue="10" />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Processing Fee (%)</label>
-                        <Input type="number" defaultValue="2.9" step="0.1" />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Default Currency</label>
-                        <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                          <option value="USD">USD</option>
-                          <option value="EUR">EUR</option>
-                          <option value="GBP">GBP</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Tax Deductible</label>
-                        <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                          <option value="true">Yes</option>
-                          <option value="false">No</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Notification Preferences</label>
-                      <div className="space-y-2 mt-1">
-                        {["New donation received", "Campaign goal reached", "Monthly donation summaries"].map((label) => (
-                          <label key={label} className="flex items-center space-x-2">
-                            <input type="checkbox" defaultChecked className="rounded" />
-                            <span className="text-sm">{label}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex justify-end gap-2 pt-4">
-                      <Button variant="outline" onClick={() => setIsDonationSettingsOpen(false)}>
-                        Cancel
-                      </Button>
-                      <Button onClick={() => setIsDonationSettingsOpen(false)}>
-                        Save Settings (Demo)
-                      </Button>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </>
-          )}
         </div>
       </MainLayout>
     </ProtectedRoute>

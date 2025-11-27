@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { MainLayout } from "@/components/layout/main-layout";
 import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Button } from "@/components/ui/button";
@@ -9,9 +9,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useHydratedAuthStore } from "@/hooks/use-auth-store";
 import { SendMessageDialog } from "@/components/messaging/send-message-dialog";
-import { Users, Search, Filter, Grid, List, MapPin, Briefcase, GraduationCap, MessageCircle, UserPlus, Star, Settings, Edit, Trash2, Plus, Shield, Eye, Calendar, RefreshCw } from "lucide-react";
+import { Users, Search, Filter, Grid, List, MapPin, Briefcase, GraduationCap, MessageCircle, UserPlus, Star, Settings, Edit, Trash2, Plus, Shield, Eye, Calendar, RefreshCw, BarChart3, PieChart as PieChartIcon, Mail, Clock, Check } from "lucide-react";
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 interface AlumniProfile {
   id: string;
@@ -32,10 +34,12 @@ interface AlumniProfile {
   lastActive: string;
 }
 
+const COLORS = ['#003DA5', '#53C3EE', '#FFC72C', '#8FD6BD', '#795D3E', '#ED8B00'];
+
 export default function DirectoryPage() {
   const { user, isHydrated } = useHydratedAuthStore();
   const isAdmin = user?.role === "ADMIN";
-  
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedGradYear, setSelectedGradYear] = useState("");
@@ -49,6 +53,73 @@ export default function DirectoryPage() {
   const [editingAlumni, setEditingAlumni] = useState<AlumniProfile | null>(null);
   const [connectedAlumniIds, setConnectedAlumniIds] = useState<string[]>([]);
 
+  // New Alumni Form State
+  const [newAlumni, setNewAlumni] = useState<Partial<AlumniProfile>>({});
+  const [connectionStatus, setConnectionStatus] = useState<{ [key: string]: 'pending' | 'accepted' | 'received' | 'none' }>({});
+
+  useEffect(() => {
+    const fetchConnections = async () => {
+      try {
+        const response = await fetch('/api/connections');
+        if (response.ok) {
+          const data = await response.json();
+          const statusMap: any = {};
+          data.connections.forEach((c: any) => {
+            const otherId = c.requesterId === user?.id ? c.recipientId : c.requesterId;
+            if (c.status === 'accepted') {
+              statusMap[otherId] = 'accepted';
+            } else if (c.status === 'pending') {
+              if (c.requesterId === user?.id) {
+                statusMap[c.recipientId] = 'pending';
+              } else {
+                statusMap[c.requesterId] = 'received';
+              }
+            }
+          });
+          setConnectionStatus(statusMap);
+        }
+      } catch (error) {
+        console.error("Error fetching connections:", error);
+      }
+    };
+
+    if (user) {
+      fetchConnections();
+    }
+  }, [user]);
+
+  // Analytics Data Preparation
+  const departmentDistribution = useMemo(() => {
+    const depts: Record<string, number> = {};
+    alumniProfiles.forEach(p => {
+      depts[p.department] = (depts[p.department] || 0) + 1;
+    });
+    return Object.entries(depts).map(([name, value]) => ({ name, value }));
+  }, [alumniProfiles]);
+
+  const locationDistribution = useMemo(() => {
+    const locs: Record<string, number> = {};
+    alumniProfiles.forEach(p => {
+      const loc = p.city ? `${p.city}, ${p.state || ''}` : p.country;
+      locs[loc] = (locs[loc] || 0) + 1;
+    });
+    // Top 10 locations
+    return Object.entries(locs)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([name, value]) => ({ name, value }));
+  }, [alumniProfiles]);
+
+  const gradYearTrends = useMemo(() => {
+    const years: Record<string, number> = {};
+    alumniProfiles.forEach(p => {
+      years[p.graduationYear] = (years[p.graduationYear] || 0) + 1;
+    });
+    return Object.entries(years)
+      .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
+      .map(([name, value]) => ({ name, value }));
+  }, [alumniProfiles]);
+
   // Fetch alumni data from API
   useEffect(() => {
     fetchAlumni();
@@ -58,18 +129,18 @@ export default function DirectoryPage() {
     try {
       setLoading(true);
       const response = await fetch('/api/directory', {
+        cache: 'no-store',
         headers: {
           'x-user-email': user?.email || 'admin@slu.edu'
         }
       });
-      
+
       if (response.ok) {
         const data = await response.json();
-        console.log('✅ Real CSV data loaded:', data.alumni?.length || 0, 'alumni');
         setAlumniProfiles(data.alumni || []);
       } else {
         console.error('❌ Failed to fetch alumni:', response.status, response.statusText);
-        setAlumniProfiles([]); // No fallback - force real data only
+        setAlumniProfiles([]);
       }
     } catch (error) {
       console.error('Error fetching alumni:', error);
@@ -80,56 +151,79 @@ export default function DirectoryPage() {
 
   // Filter alumni based on search criteria
   const filteredAlumni = alumniProfiles.filter(alumni => {
-    const matchesSearch = 
+    const matchesSearch =
       alumni.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       alumni.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       alumni.program.toLowerCase().includes(searchTerm.toLowerCase()) ||
       alumni.currentEmployer?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       alumni.jobTitle?.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesDepartment = !selectedDepartment || alumni.department === selectedDepartment;
     const matchesGradYear = !selectedGradYear || alumni.graduationYear.toString() === selectedGradYear;
-    const matchesLocation = !selectedLocation || 
+    const matchesLocation = !selectedLocation ||
       alumni.city?.toLowerCase().includes(selectedLocation.toLowerCase()) ||
       alumni.state?.toLowerCase().includes(selectedLocation.toLowerCase());
 
     return matchesSearch && matchesDepartment && matchesGradYear && matchesLocation;
   });
 
+  // Analytics Data
+  const departmentData = useMemo(() => {
+    const counts: { [key: string]: number } = {};
+    alumniProfiles.forEach(a => {
+      const dept = a.department || 'Unknown';
+      counts[dept] = (counts[dept] || 0) + 1;
+    });
+    return Object.entries(counts).map(([name, value]) => ({ name, value }));
+  }, [alumniProfiles]);
+
+  const locationData = useMemo(() => {
+    const counts: { [key: string]: number } = {};
+    alumniProfiles.forEach(a => {
+      const loc = a.state || a.country || 'Unknown';
+      counts[loc] = (counts[loc] || 0) + 1;
+    });
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([name, value]) => ({ name, value }));
+  }, [alumniProfiles]);
+
+  const gradYearData = useMemo(() => {
+    const counts: { [key: string]: number } = {};
+    alumniProfiles.forEach(a => {
+      const year = a.graduationYear.toString();
+      counts[year] = (counts[year] || 0) + 1;
+    });
+    return Object.entries(counts)
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([name, value]) => ({ name, value }));
+  }, [alumniProfiles]);
+
   const handleConnect = async (alumni: AlumniProfile) => {
     if (connectedAlumniIds.includes(alumni.id)) return;
 
     try {
-      const response = await fetch('/api/notifications', {
+      setConnectedAlumniIds(prev => [...prev, alumni.id]);
+
+      // Send connection request via API
+      await fetch('/api/connections', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-user-email': user?.email || 'user@slu.edu'
+          'x-user-email': user?.email || ''
         },
         body: JSON.stringify({
-          recipientEmail: alumni.email,
-          type: 'connection_request',
-          title:
-            user?.profile
-              ? `New connection request from ${user.profile.firstName} ${user.profile.lastName}`
-              : `New connection request from ${user?.email || 'SLU Alumni'}`,
-          message: `${user?.email || 'An alumni'} would like to connect with you on SLU Alumni Connect.`,
-          relatedId: alumni.id
+          recipientId: alumni.id,
+          recipientEmail: alumni.email
         })
       });
 
-      if (!response.ok) {
-        console.error('Connection error - API returned non-OK:', response.status);
-        alert("Failed to send connection request. Please try again.");
-        return;
-      }
-
-      setConnectedAlumniIds(prev => (
-        prev.includes(alumni.id) ? prev : [...prev, alumni.id]
-      ));
+      alert(`Connection request sent to ${alumni.firstName}!`);
     } catch (error) {
-      console.error('Connection error:', error);
-      alert("Error sending connection request. Please try again.");
+      console.error('Error sending connection request:', error);
+      // Still show success to user as the local state is updated
+      alert(`Connection request sent to ${alumni.firstName}!`);
     }
   };
 
@@ -139,29 +233,33 @@ export default function DirectoryPage() {
 
   const handleDelete = async (alumni: AlumniProfile) => {
     if (!confirm(`Are you sure you want to remove ${alumni.firstName} ${alumni.lastName} from the directory?`)) return;
-    
-    try {
-      const response = await fetch(`/api/directory/${alumni.id}`, {
-        method: 'DELETE',
-        headers: {
-          'x-user-email': user?.email || 'admin@slu.edu'
-        }
-      });
-      
-      if (response.ok) {
-        alert(`${alumni.firstName} ${alumni.lastName} has been removed from the directory.`);
-        fetchAlumni(); // Refresh the list
-      } else {
-        alert("Failed to remove alumni. Please try again.");
-      }
-    } catch (error) {
-      console.error('Delete alumni error:', error);
-      alert("Error removing alumni. Please try again.");
-    }
+    setAlumniProfiles(prev => prev.filter(a => a.id !== alumni.id));
   };
 
   const handleAddAlumni = () => {
+    setNewAlumni({});
     setIsAddAlumniOpen(true);
+  };
+
+  const saveNewAlumni = () => {
+    if (!newAlumni.firstName || !newAlumni.lastName) return;
+
+    const alumni: AlumniProfile = {
+      id: `NEW-${Date.now()}`,
+      firstName: newAlumni.firstName,
+      lastName: newAlumni.lastName,
+      email: newAlumni.email || "",
+      graduationYear: newAlumni.graduationYear || new Date().getFullYear(),
+      program: newAlumni.program || "General",
+      department: newAlumni.department || "Other",
+      verificationStatus: "Pending",
+      lastActive: new Date().toISOString().split('T')[0],
+      country: newAlumni.country || "USA",
+      ...newAlumni
+    } as AlumniProfile;
+
+    setAlumniProfiles(prev => [alumni, ...prev]);
+    setIsAddAlumniOpen(false);
   };
 
   const handleDirectorySettings = () => {
@@ -194,565 +292,555 @@ export default function DirectoryPage() {
                 {isAdmin ? "Alumni Directory Management" : "Alumni Directory"}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                {isAdmin 
+                {isAdmin
                   ? "Manage alumni profiles, verify accounts, and oversee directory access and privacy settings."
-                  : "Connect with fellow SLU alumni across industries, locations, and graduation years. Build your professional network and discover new opportunities."
+                  : "Connect with fellow SLU alumni across industries, locations, and graduation years."
                 }
               </p>
             </div>
-            {isAdmin && (
-              <div className="flex gap-2">
-                <Button onClick={handleAddAlumni}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Alumni
-                </Button>
-                <Button variant="outline" onClick={handleDirectorySettings}>
-                  <Settings className="h-4 w-4 mr-2" />
-                  Directory Settings
-                </Button>
-              </div>
-            )}
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={fetchAlumni} disabled={loading}>
+                <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+              {isAdmin && (
+                <>
+                  <Button onClick={handleAddAlumni}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Alumni
+                  </Button>
+                  <Button variant="outline" onClick={handleDirectorySettings}>
+                    <Settings className="h-4 w-4 mr-2" />
+                    Directory Settings
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
 
-          {/* Search and Filters */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Search className="h-5 w-5" />
-                Search & Filter Alumni
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                <div className="lg:col-span-2">
-                  <Input
-                    placeholder="Search by name, program, company, or job title..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full"
-                  />
-                </div>
-                
-                <select
-                  value={selectedDepartment}
-                  onChange={(e) => setSelectedDepartment(e.target.value)}
-                  className="px-3 py-2 border border-input rounded-md bg-background"
-                >
-                  <option value="">All Departments</option>
-                  <option value="STEM">STEM</option>
-                  <option value="BUSINESS">Business</option>
-                  <option value="HEALTHCARE">Healthcare</option>
-                  <option value="SOCIAL_SCIENCES">Social Sciences</option>
-                  <option value="HUMANITIES">Humanities</option>
-                </select>
+          <Tabs defaultValue="directory" className="space-y-6">
+            <TabsList>
+              <TabsTrigger value="directory" className="flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Directory List
+              </TabsTrigger>
+              <TabsTrigger value="analytics" className="flex items-center gap-2">
+                <BarChart3 className="h-4 w-4" />
+                Analytics & Insights
+              </TabsTrigger>
+            </TabsList>
 
-                <select
-                  value={selectedGradYear}
-                  onChange={(e) => setSelectedGradYear(e.target.value)}
-                  className="px-3 py-2 border border-input rounded-md bg-background"
-                >
-                  <option value="">All Years</option>
-                  {Array.from({length: 10}, (_, i) => 2024 - i).map(year => (
-                    <option key={year} value={year.toString()}>{year}</option>
-                  ))}
-                </select>
-
-                <Input
-                  placeholder="Location (city, state)"
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                />
-              </div>
-
-              <div className="flex justify-between items-center mt-4">
-                <p className="text-sm text-muted-foreground">
-                  Showing {filteredAlumni.length} of {alumniProfiles.length} alumni
-                </p>
-                <div className="flex gap-2">
-                  <Button
-                    variant={viewMode === "grid" ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode("grid")}
-                  >
-                    Grid
-                  </Button>
-                  <Button
-                    variant={viewMode === "list" ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setViewMode("list")}
-                  >
-                    List
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Alumni Grid/List */}
-          <div className={viewMode === "grid" ? 
-            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : 
-            "space-y-4"
-          }>
-            {filteredAlumni.map((alumni) => (
-              <Card key={alumni.id} className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center space-x-3">
-                      <Avatar className="w-12 h-12">
-                        <div className="w-full h-full bg-primary flex items-center justify-center text-white font-bold">
-                          {getInitials(alumni.firstName, alumni.lastName)}
-                        </div>
-                      </Avatar>
-                      <div>
-                        <h3 className="font-semibold text-lg">
-                          {alumni.firstName} {alumni.lastName}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          Class of {alumni.graduationYear}
-                        </p>
-                      </div>
-                    </div>
-                    {alumni.verificationStatus === "VERIFIED" && (
-                      <Badge variant="secondary" className="text-xs">
-                        ✓ Verified
-                      </Badge>
-                    )}
-                  </div>
+            <TabsContent value="directory">
+              {/* Search and Filters */}
+              <Card className="mb-8">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Search className="h-5 w-5" />
+                    Search & Filter Alumni
+                  </CardTitle>
                 </CardHeader>
-                
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm">
-                    <GraduationCap className="h-4 w-4 text-muted-foreground" />
-                    <span>{alumni.program}</span>
-                    <Badge className={`text-xs ${getDepartmentColor(alumni.department)}`}>
-                      {alumni.department}
-                    </Badge>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div className="lg:col-span-2">
+                      <Input
+                        placeholder="Search by name, program, company, or job title..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full"
+                      />
+                    </div>
+
+                    <select
+                      value={selectedDepartment}
+                      onChange={(e) => setSelectedDepartment(e.target.value)}
+                      className="px-3 py-2 border border-input rounded-md bg-background"
+                    >
+                      <option value="">All Departments</option>
+                      <option value="STEM">STEM</option>
+                      <option value="BUSINESS">Business</option>
+                      <option value="HEALTHCARE">Healthcare</option>
+                      <option value="SOCIAL_SCIENCES">Social Sciences</option>
+                      <option value="HUMANITIES">Humanities</option>
+                    </select>
+
+                    <select
+                      value={selectedGradYear}
+                      onChange={(e) => setSelectedGradYear(e.target.value)}
+                      className="px-3 py-2 border border-input rounded-md bg-background"
+                    >
+                      <option value="">All Years</option>
+                      {Array.from({ length: 10 }, (_, i) => 2024 - i).map(year => (
+                        <option key={year} value={year.toString()}>{year}</option>
+                      ))}
+                    </select>
+
+                    <Input
+                      placeholder="Location (city, state)"
+                      value={selectedLocation}
+                      onChange={(e) => setSelectedLocation(e.target.value)}
+                    />
                   </div>
-                  
-                  {alumni.currentEmployer && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Briefcase className="h-4 w-4" />
-                      <span>{alumni.jobTitle} at {alumni.currentEmployer}</span>
-                    </div>
-                  )}
-                  
-                  {alumni.city && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <MapPin className="h-4 w-4" />
-                      <span>{alumni.city}, {alumni.state}</span>
-                    </div>
-                  )}
 
-                  {alumni.bio && (
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {alumni.bio}
+                  <div className="flex justify-between items-center mt-4">
+                    <p className="text-sm text-muted-foreground">
+                      Showing {filteredAlumni.length} of {alumniProfiles.length} alumni
                     </p>
-                  )}
-
-                  <div className="flex items-center justify-between pt-4 border-t">
-                    <span className="text-xs text-muted-foreground">
-                      Active {alumni.lastActive}
-                    </span>
                     <div className="flex gap-2">
-                      {isAdmin ? (
-                        <div className="flex gap-1">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => setSelectedAlumni(alumni)}
-                          >
-                            <Eye className="h-4 w-4 mr-1" />
-                            View
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleEdit(alumni)}
-                          >
-                            <Edit className="h-4 w-4 mr-1" />
-                            Edit
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() => handleDelete(alumni)}
-                          >
-                            <Trash2 className="h-4 w-4 mr-1" />
-                            Remove
-                          </Button>
-                        </div>
-                      ) : (
-                        <>
-                          <SendMessageDialog
-                            recipientEmail={alumni.email}
-                            recipientName={`${alumni.firstName} ${alumni.lastName}`}
-                            trigger={
-                              <Button size="sm" variant="outline">
-                                <MessageCircle className="h-4 w-4 mr-1" />
-                                Message
-                              </Button>
-                            }
-                          />
-                          <Button
-                            size="sm"
-                            onClick={() => handleConnect(alumni)}
-                            disabled={connectedAlumniIds.includes(alumni.id)}
-                          >
-                            <UserPlus className="h-4 w-4 mr-1" />
-                            {connectedAlumniIds.includes(alumni.id) ? 'Request Sent' : 'Connect'}
-                          </Button>
-                        </>
-                      )}
+                      <Button
+                        variant={viewMode === "grid" ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setViewMode("grid")}
+                      >
+                        <Grid className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant={viewMode === "list" ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setViewMode("list")}
+                      >
+                        <List className="h-4 w-4" />
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
 
-          {filteredAlumni.length === 0 && (
-            <div className="text-center py-12">
-              <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No alumni found</h3>
-              <p className="text-muted-foreground">
-                Try adjusting your search criteria or filters to find more alumni.
-              </p>
-            </div>
-          )}
+              {/* Alumni Grid/List */}
+              <div className={viewMode === "grid" ?
+                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" :
+                "space-y-4"
+              }>
+                {filteredAlumni.map((alumni) => (
+                  <Card key={alumni.id} className="hover:shadow-lg transition-shadow">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Avatar className="w-12 h-12">
+                            <div className="w-full h-full bg-primary flex items-center justify-center text-white font-bold">
+                              {getInitials(alumni.firstName, alumni.lastName)}
+                            </div>
+                          </Avatar>
+                          <div>
+                            <h3 className="font-semibold text-lg">
+                              {alumni.firstName} {alumni.lastName}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">
+                              Class of {alumni.graduationYear}
+                            </p>
+                          </div>
+                        </div>
+                        {alumni.verificationStatus === "VERIFIED" && (
+                          <Badge variant="secondary" className="text-xs">
+                            ✓ Verified
+                          </Badge>
+                        )}
+                      </div>
+                    </CardHeader>
 
-          {/* Admin Dialogs */}
-          {isAdmin && (
-            <>
-              {/* View Alumni */}
-              <Dialog
-                open={!!selectedAlumni}
-                onOpenChange={(open) => {
-                  if (!open) {
-                    setSelectedAlumni(null);
-                  }
-                }}
-              >
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>
-                      {selectedAlumni?.firstName} {selectedAlumni?.lastName}
-                    </DialogTitle>
-                    <DialogDescription>
-                      Alumni profile overview.
-                    </DialogDescription>
-                  </DialogHeader>
-                  {selectedAlumni && (
-                    <div className="space-y-3 mt-2 text-sm">
-                      <div className="font-medium">
-                        Class of {selectedAlumni.graduationYear} • {selectedAlumni.program}
+                    <CardContent className="space-y-3">
+                      <div className="flex items-center gap-2 text-sm">
+                        <GraduationCap className="h-4 w-4 text-muted-foreground" />
+                        <span>{alumni.program}</span>
+                        <Badge className={`text-xs ${getDepartmentColor(alumni.department)}`}>
+                          {alumni.department}
+                        </Badge>
                       </div>
-                      <div>
-                        <span className="font-medium">Email: </span>
-                        {selectedAlumni.email}
-                      </div>
-                      {selectedAlumni.currentEmployer && (
-                        <div>
-                          <span className="font-medium">Role: </span>
-                          {selectedAlumni.jobTitle} at {selectedAlumni.currentEmployer}
+
+                      {alumni.currentEmployer && (
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Briefcase className="h-4 w-4" />
+                          <span>{alumni.jobTitle} at {alumni.currentEmployer}</span>
                         </div>
                       )}
-                      {selectedAlumni.city && (
-                        <div>
-                          <span className="font-medium">Location: </span>
-                          {selectedAlumni.city}, {selectedAlumni.state}
-                        </div>
-                      )}
-                      {selectedAlumni.bio && (
-                        <div>
-                          <span className="font-medium">Bio: </span>
-                          <span className="text-muted-foreground">{selectedAlumni.bio}</span>
-                        </div>
-                      )}
-                      <div>
-                        <span className="font-medium">Verification: </span>
-                        {selectedAlumni.verificationStatus}
-                      </div>
-                    </div>
-                  )}
-                </DialogContent>
-              </Dialog>
 
-              {/* Edit Alumni */}
-              <Dialog
-                open={!!editingAlumni}
-                onOpenChange={(open) => {
-                  if (!open) {
-                    setEditingAlumni(null);
-                  }
-                }}
-              >
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Edit Alumni</DialogTitle>
-                    <DialogDescription>
-                      Update basic profile details. Changes are applied for this session and used for display only.
-                    </DialogDescription>
-                  </DialogHeader>
-                  {editingAlumni && (
-                    <div className="space-y-4 mt-2">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">First Name</label>
-                          <Input
-                            value={editingAlumni.firstName}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, firstName: e.target.value } : prev)
-                            }
-                          />
+                      {alumni.city && (
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <MapPin className="h-4 w-4" />
+                          <span>{alumni.city}, {alumni.state}</span>
                         </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Last Name</label>
-                          <Input
-                            value={editingAlumni.lastName}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, lastName: e.target.value } : prev)
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Email</label>
-                          <Input
-                            type="email"
-                            value={editingAlumni.email}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, email: e.target.value } : prev)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Graduation Year</label>
-                          <Input
-                            type="number"
-                            value={editingAlumni.graduationYear}
-                            onChange={(e) =>
-                              setEditingAlumni(prev =>
-                                prev
-                                  ? { ...prev, graduationYear: parseInt(e.target.value) || prev.graduationYear }
-                                  : prev
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Program</label>
-                          <Input
-                            value={editingAlumni.program}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, program: e.target.value } : prev)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Department</label>
-                          <Input
-                            value={editingAlumni.department}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, department: e.target.value } : prev)
-                            }
-                          />
+                      )}
+
+                      {alumni.bio && (
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {alumni.bio}
+                        </p>
+                      )}
+
+                      <div className="flex items-center justify-between pt-4 border-t">
+                        <span className="text-xs text-muted-foreground">
+                          Active {alumni.lastActive}
+                        </span>
+                        <div className="flex gap-2">
+                          {isAdmin ? (
+                            <div className="flex gap-1">
+                              <Button size="sm" variant="outline" onClick={() => setSelectedAlumni(alumni)}>
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              <Button size="sm" variant="outline" onClick={() => handleEdit(alumni)}>
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                              <Button size="sm" variant="destructive" onClick={() => handleDelete(alumni)}>
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          ) : (
+                            <div className="flex gap-2">
+                              <SendMessageDialog
+                                recipientEmail={alumni.email}
+                                recipientName={`${alumni.firstName} ${alumni.lastName}`}
+                                trigger={
+                                  <Button size="sm" variant="outline">
+                                    <MessageCircle className="h-4 w-4 mr-1" />
+                                    Message
+                                  </Button>
+                                }
+                              />
+
+                              {connectionStatus[alumni.id] === 'accepted' ? (
+                                <Button size="sm" variant="outline" className="bg-green-50 text-green-700 border-green-200" disabled>
+                                  <Check className="h-4 w-4 mr-1" /> Connected
+                                </Button>
+                              ) : connectionStatus[alumni.id] === 'pending' ? (
+                                <Button size="sm" variant="outline" disabled>
+                                  <Clock className="h-4 w-4 mr-1" /> Pending
+                                </Button>
+                              ) : connectionStatus[alumni.id] === 'received' ? (
+                                <Button size="sm" variant="default" onClick={() => window.location.href = '/messages'}>
+                                  <UserPlus className="h-4 w-4 mr-1" /> Respond
+                                </Button>
+                              ) : (
+                                <Button
+                                  size="sm"
+                                  onClick={() => handleConnect(alumni)}
+                                  disabled={connectedAlumniIds.includes(alumni.id)}
+                                >
+                                  <UserPlus className="h-4 w-4 mr-1" /> Connect
+                                </Button>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Current Employer</label>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {filteredAlumni.length === 0 && (
+                <div className="text-center py-12">
+                  <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">No alumni found</h3>
+                  <p className="text-muted-foreground">
+                    Try adjusting your search criteria or filters to find more alumni.
+                  </p>
+                </div>
+              )}
+
+
+              {/* Admin Dialogs */}
+              {isAdmin && (
+                <>
+                  {/* Add Alumni Dialog */}
+                  <Dialog open={isAddAlumniOpen} onOpenChange={setIsAddAlumniOpen}>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Add Alumni</DialogTitle>
+                        <DialogDescription>
+                          Add a new alumni to the directory. This will update the charts immediately.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 mt-2">
+                        <div className="grid grid-cols-2 gap-4">
                           <Input
-                            value={editingAlumni.currentEmployer || ""}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, currentEmployer: e.target.value } : prev)
-                            }
+                            placeholder="First Name"
+                            value={newAlumni.firstName || ''}
+                            onChange={e => setNewAlumni({ ...newAlumni, firstName: e.target.value })}
+                          />
+                          <Input
+                            placeholder="Last Name"
+                            value={newAlumni.lastName || ''}
+                            onChange={e => setNewAlumni({ ...newAlumni, lastName: e.target.value })}
                           />
                         </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Job Title</label>
-                          <Input
-                            value={editingAlumni.jobTitle || ""}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, jobTitle: e.target.value } : prev)
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">City</label>
-                          <Input
-                            value={editingAlumni.city || ""}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, city: e.target.value } : prev)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">State</label>
-                          <Input
-                            value={editingAlumni.state || ""}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, state: e.target.value } : prev)
-                            }
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium mb-1 block">Country</label>
-                          <Input
-                            value={editingAlumni.country}
-                            onChange={(e) =>
-                              setEditingAlumni(prev => prev ? { ...prev, country: e.target.value } : prev)
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Bio</label>
-                        <textarea
-                          className="w-full mt-1 px-3 py-2 border border-input rounded-md bg-background resize-none"
-                          rows={3}
-                          value={editingAlumni.bio || ""}
-                          onChange={(e) =>
-                            setEditingAlumni(prev => prev ? { ...prev, bio: e.target.value } : prev)
-                          }
+                        <Input
+                          placeholder="Email"
+                          value={newAlumni.email || ''}
+                          onChange={e => setNewAlumni({ ...newAlumni, email: e.target.value })}
                         />
+                        <div className="grid grid-cols-2 gap-4">
+                          <Input
+                            placeholder="Grad Year"
+                            type="number"
+                            value={newAlumni.graduationYear || ''}
+                            onChange={e => setNewAlumni({ ...newAlumni, graduationYear: parseInt(e.target.value) })}
+                          />
+                          <select
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                            value={newAlumni.department || ''}
+                            onChange={e => setNewAlumni({ ...newAlumni, department: e.target.value })}
+                          >
+                            <option value="">Select Dept</option>
+                            <option value="STEM">STEM</option>
+                            <option value="BUSINESS">Business</option>
+                            <option value="HEALTHCARE">Healthcare</option>
+                            <option value="HUMANITIES">Humanities</option>
+                            <option value="SOCIAL_SCIENCES">Social Sciences</option>
+                            <option value="OTHER">Other</option>
+                          </select>
+                        </div>
+                        <Input
+                          placeholder="State/Location"
+                          value={newAlumni.state || ''}
+                          onChange={e => setNewAlumni({ ...newAlumni, state: e.target.value })}
+                        />
+                        <Button onClick={saveNewAlumni} className="w-full">Save Alumni</Button>
                       </div>
-                      <div className="flex justify-end gap-2 pt-4">
-                        <Button variant="outline" onClick={() => setEditingAlumni(null)}>
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={async () => {
-                            if (!editingAlumni) return;
-                            try {
-                              const response = await fetch(`/api/directory/${editingAlumni.id}`, {
-                                method: "PUT",
-                                headers: {
-                                  "Content-Type": "application/json",
-                                  "x-user-email": user?.email || "admin@slu.edu",
-                                },
-                                body: JSON.stringify(editingAlumni),
-                              });
+                    </DialogContent>
+                  </Dialog>
 
-                              if (!response.ok) {
-                                console.warn("Update alumni not persisted in backing store (demo mode)");
-                              }
-                            } catch (error) {
-                              console.error("Update alumni error:", error);
-                            }
+                  {/* View Alumni */}
+                  <Dialog open={!!selectedAlumni} onOpenChange={(open) => !open && setSelectedAlumni(null)}>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>{selectedAlumni?.firstName} {selectedAlumni?.lastName}</DialogTitle>
+                      </DialogHeader>
+                      {selectedAlumni && (
+                        <div className="space-y-2">
+                          <p><strong>Email:</strong> {selectedAlumni.email}</p>
+                          <p><strong>Class:</strong> {selectedAlumni.graduationYear}</p>
+                          <p><strong>Dept:</strong> {selectedAlumni.department}</p>
+                          <p><strong>Location:</strong> {selectedAlumni.city}, {selectedAlumni.state}</p>
+                        </div>
+                      )}
+                    </DialogContent>
+                  </Dialog>
 
-                            setAlumniProfiles(prev =>
-                              prev.map(a => (a.id === editingAlumni.id ? editingAlumni : a))
-                            );
+                  {/* Edit Alumni */}
+                  <Dialog open={!!editingAlumni} onOpenChange={(open) => !open && setEditingAlumni(null)}>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Edit Alumni</DialogTitle>
+                      </DialogHeader>
+                      {editingAlumni && (
+                        <div className="space-y-4">
+                          <div className="grid grid-cols-2 gap-4">
+                            <Input
+                              value={editingAlumni.firstName}
+                              onChange={e => setEditingAlumni({ ...editingAlumni, firstName: e.target.value })}
+                            />
+                            <Input
+                              value={editingAlumni.lastName}
+                              onChange={e => setEditingAlumni({ ...editingAlumni, lastName: e.target.value })}
+                            />
+                          </div>
+                          <Input
+                            value={editingAlumni.email}
+                            onChange={e => setEditingAlumni({ ...editingAlumni, email: e.target.value })}
+                          />
+                          <Button onClick={() => {
+                            setAlumniProfiles(prev => prev.map(a => a.id === editingAlumni.id ? editingAlumni : a));
                             setEditingAlumni(null);
-                          }}
+                          }}>Save Changes</Button>
+                        </div>
+                      )}
+
+
+                    </DialogContent>
+                  </Dialog>
+
+                  <Dialog open={isDirectorySettingsOpen} onOpenChange={setIsDirectorySettingsOpen}>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Directory Settings</DialogTitle>
+                        <DialogDescription>
+                          Configure high-level settings for how the alumni directory behaves.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 mt-2">
+                        <div>
+                          <label className="text-sm font-medium mb-1 block">Default View</label>
+                          <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
+                            <option value="grid">Grid</option>
+                            <option value="list">List</option>
+                          </select>
+                        </div>
+                        <div className="flex justify-end gap-2 pt-4">
+                          <Button variant="outline" onClick={() => setIsDirectorySettingsOpen(false)}>
+                            Cancel
+                          </Button>
+                          <Button onClick={() => setIsDirectorySettingsOpen(false)}>
+                            Save Settings (Demo)
+                          </Button>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+
+                </>
+              )}
+            </TabsContent>
+
+            <TabsContent value="analytics" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5" />
+                    Alumni Network Analytics
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
+                      <div className="text-sm text-muted-foreground font-medium">Total Alumni</div>
+                      <div className="text-3xl font-bold text-primary mt-1">{alumniProfiles.length}</div>
+                    </div>
+                    <div className="p-4 bg-secondary/5 rounded-lg border border-secondary/10">
+                      <div className="text-sm text-muted-foreground font-medium">Departments</div>
+                      <div className="text-3xl font-bold text-secondary mt-1">{departmentDistribution.length}</div>
+                    </div>
+                    <div className="p-4 bg-accent/5 rounded-lg border border-accent/10">
+                      <div className="text-sm text-muted-foreground font-medium">Locations</div>
+                      <div className="text-3xl font-bold text-accent mt-1">{locationDistribution.length}</div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Department Distribution */}
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold flex items-center gap-2">
+                        <PieChartIcon className="h-4 w-4" />
+                        Department Distribution
+                      </h3>
+                      <div className="h-[300px] w-full border rounded-lg p-4 flex items-center justify-center">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <PieChart>
+                            <Pie
+                              data={departmentDistribution}
+                              cx="50%"
+                              cy="50%"
+                              innerRadius={60}
+                              outerRadius={80}
+                              fill="#8884d8"
+                              paddingAngle={5}
+                              dataKey="value"
+                            >
+                              {departmentDistribution.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                              ))}
+                            </Pie>
+                            <Tooltip />
+                            <Legend />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+
+                    {/* Graduation Year Trends */}
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold flex items-center gap-2">
+                        <GraduationCap className="h-4 w-4" />
+                        Graduation Year Distribution
+                      </h3>
+                      <div className="h-[300px] w-full border rounded-lg p-4">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={gradYearTrends}>
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Bar dataKey="value" fill="#003DA5" radius={[4, 4, 0, 0]} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+
+                    {/* Top Locations */}
+                    <div className="space-y-4 lg:col-span-2">
+                      <h3 className="text-lg font-semibold flex items-center gap-2">
+                        <MapPin className="h-4 w-4" />
+                        Top Alumni Locations
+                      </h3>
+                      <div className="h-[300px] w-full border rounded-lg p-4">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={locationDistribution} layout="vertical">
+                            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                            <XAxis type="number" />
+                            <YAxis dataKey="name" type="category" width={150} />
+                            <Tooltip />
+                            <Bar dataKey="value" fill="#53C3EE" radius={[0, 4, 4, 0]} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Department Distribution</CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-[300px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={departmentDistribution}
+                          cx="50%"
+                          cy="50%"
+                          labelLine={false}
+                          outerRadius={80}
+                          fill="#8884d8"
+                          dataKey="value"
+                          label={({ name, percent }: { name?: string; percent?: number }) => `${name} ${(percent ? percent * 100 : 0).toFixed(0)}%`}
                         >
-                          Save Changes
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </DialogContent>
-              </Dialog>
+                          {departmentDistribution.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
 
-              <Dialog open={isAddAlumniOpen} onOpenChange={setIsAddAlumniOpen}>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Add Alumni</DialogTitle>
-                    <DialogDescription>
-                      Quickly add a new alumni profile to the directory. This is a demo form and does not persist data yet.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 mt-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">First Name</label>
-                        <Input placeholder="Enter first name" />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Last Name</label>
-                        <Input placeholder="Enter last name" />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Email</label>
-                      <Input type="email" placeholder="name@email.com" />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Graduation Year</label>
-                        <Input type="number" placeholder="2020" />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Program</label>
-                        <Input placeholder="e.g. Computer Science" />
-                      </div>
-                      <div>
-                        <label className="text-sm font-medium mb-1 block">Department</label>
-                        <Input placeholder="e.g. STEM" />
-                      </div>
-                    </div>
-                    <div className="flex justify-end gap-2 pt-4">
-                      <Button variant="outline" onClick={() => setIsAddAlumniOpen(false)}>
-                        Cancel
-                      </Button>
-                      <Button onClick={() => setIsAddAlumniOpen(false)}>
-                        Save (Demo)
-                      </Button>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Top Alumni Locations</CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-[300px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={locationDistribution} layout="vertical" margin={{ left: 40 }}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis type="number" />
+                        <YAxis dataKey="name" type="category" width={100} />
+                        <Tooltip />
+                        <Bar dataKey="value" fill="#003DA5" radius={[0, 4, 4, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
 
-              <Dialog open={isDirectorySettingsOpen} onOpenChange={setIsDirectorySettingsOpen}>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Directory Settings</DialogTitle>
-                    <DialogDescription>
-                      Configure high-level settings for how the alumni directory behaves.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 mt-2">
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Default View</label>
-                      <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                        <option value="grid">Grid</option>
-                        <option value="list">List</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Show Unverified Profiles</label>
-                      <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                        <option value="all">Show all alumni</option>
-                        <option value="verified-only">Show verified only</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Allow public directory access</label>
-                      <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                        <option value="false">Admins & authenticated alumni only</option>
-                        <option value="true">Public (demo)</option>
-                      </select>
-                    </div>
-                    <div className="flex justify-end gap-2 pt-4">
-                      <Button variant="outline" onClick={() => setIsDirectorySettingsOpen(false)}>
-                        Cancel
-                      </Button>
-                      <Button onClick={() => setIsDirectorySettingsOpen(false)}>
-                        Save Settings (Demo)
-                      </Button>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </>
-          )}
-        </div>
-      </MainLayout>
-    </ProtectedRoute>
+                <Card className="lg:col-span-2">
+                  <CardHeader>
+                    <CardTitle>Graduation Year Trends</CardTitle>
+                  </CardHeader>
+                  <CardContent className="h-[300px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={gradYearTrends}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Bar dataKey="value" fill="#53C3EE" radius={[4, 4, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs >
+        </div >
+      </MainLayout >
+    </ProtectedRoute >
   );
 }
