@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { AlumniDataService } from '@/lib/data-service'
 import { registeredUsers } from '@/lib/registered-users'
 
+// Storage key for pending notifications (must match admin-data-store)
+const PENDING_NOTIFICATIONS_KEY = 'admin_pending_notifications';
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -104,10 +107,20 @@ export async function POST(request: NextRequest) {
       profileCompleteness: 40
     })
 
+    // Return success with notification flag for client-side handling
     return NextResponse.json({
       success: true,
       message: 'Registration successful! You can now login with your credentials.',
-      user: newUser
+      user: newUser,
+      // Include notification data for client-side storage
+      notificationData: {
+        id: newUserId,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.toLowerCase(),
+        program: program || 'Computer Science',
+        graduationYear: parseInt(graduationYear) || new Date().getFullYear()
+      }
     })
 
   } catch (error) {

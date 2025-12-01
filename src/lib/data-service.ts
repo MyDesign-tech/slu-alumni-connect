@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import alumniRows from "@/data/slu_alumni_data.json";
 
 const saveData = (fileName: string, data: any[]) => {
   try {
@@ -10,37 +9,70 @@ const saveData = (fileName: string, data: any[]) => {
     }
     const filePath = path.join(dir, fileName);
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+    console.log(`✅ Data saved to ${fileName}`);
   } catch (error) {
     console.error(`Error saving ${fileName}:`, error);
   }
 };
+
+const loadData = (fileName: string): any[] => {
+  try {
+    const filePath = path.join(process.cwd(), 'src/data', fileName);
+    if (fs.existsSync(filePath)) {
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      return JSON.parse(fileContent);
+    }
+    console.warn(`File not found: ${fileName}, returning empty array`);
+    return [];
+  } catch (error) {
+    console.error(`Error loading ${fileName}:`, error);
+    return [];
+  }
+};
+
 import eventsRows from "@/data/slu_events_data.json";
 import donationsRows from "@/data/slu_donations_data.json";
 import mentorshipRows from "@/data/slu_mentorship_data.json";
 import rsvpRows from "@/data/slu_rsvp_data.json";
 import engagementRows from "@/data/slu_engagement_data.json";
 
-// Initialize mutable in-memory data stores
-let alumniData = alumniRows.map(row => ({
-  id: row.AlumniID,
-  firstName: row.FirstName,
-  lastName: row.LastName,
-  email: row.Email,
-  phone: row.Phone,
-  graduationYear: parseInt(row.GraduationYear) || 0,
-  program: row.Program,
-  department: row.Department,
-  verificationStatus: row.VerificationStatus,
-  currentEmployer: row.CurrentEmployer,
-  jobTitle: row.JobTitle,
-  employmentStatus: row.EmploymentStatus,
-  city: row.Location_City,
-  state: row.Location_State,
-  country: row.Location_Country,
-  profileCompleteness: parseInt(row.ProfileCompleteness) || 0,
-  lastActive: row.LastUpdatedDate,
-  createdAt: row.AccountCreatedDate
-}));
+// Declare global cache to persist across module reloads (Next.js HMR)
+declare global {
+  var __alumniDataCache: any[] | undefined;
+}
+
+// Load and transform alumni data ONCE, cache in global
+if (!global.__alumniDataCache) {
+  const rawData = loadData('slu_alumni_data.json');
+  global.__alumniDataCache = rawData.map((row: any) => ({
+    id: row.AlumniID,
+    firstName: row.FirstName,
+    lastName: row.LastName,
+    email: row.Email,
+    phone: row.Phone,
+    graduationYear: parseInt(row.GraduationYear) || 0,
+    program: row.Program,
+    department: row.Department,
+    verificationStatus: row.VerificationStatus,
+    currentEmployer: row.CurrentEmployer,
+    jobTitle: row.JobTitle,
+    employmentStatus: row.EmploymentStatus,
+    city: row.Location_City,
+    state: row.Location_State,
+    country: row.Location_Country,
+    profileCompleteness: parseInt(row.ProfileCompleteness) || 0,
+    lastActive: row.LastUpdatedDate,
+    createdAt: row.AccountCreatedDate,
+    isActive: row.IsActive !== undefined ? row.IsActive : true, // Default to active if not specified
+    lastLoginDate: row.LastLoginDate || row.LastUpdatedDate // Use last updated if no login date
+  }));
+  console.log(`📚 [INIT] Loaded ${global.__alumniDataCache.length} alumni records from file`);
+} else {
+  console.log(`♻️  [INIT] Using cached alumni data: ${global.__alumniDataCache.length} records`);
+}
+
+// Use the global cache - this survives module reloads
+let alumniData = global.__alumniDataCache;
 
 let eventsData = eventsRows.map(row => ({
   id: row.EventID,
@@ -102,6 +134,32 @@ let rsvpData = rsvpRows.map(row => ({
  * Alumni Data Service
  */
 export class AlumniDataService {
+  // Reload data from file
+  static reload() {
+    const freshData = loadData('slu_alumni_data.json');
+    alumniData = freshData.map((row: any) => ({
+      id: row.AlumniID,
+      firstName: row.FirstName,
+      lastName: row.LastName,
+      email: row.Email,
+      phone: row.Phone,
+      graduationYear: parseInt(row.GraduationYear) || 0,
+      program: row.Program,
+      department: row.Department,
+      verificationStatus: row.VerificationStatus,
+      currentEmployer: row.CurrentEmployer,
+      jobTitle: row.JobTitle,
+      employmentStatus: row.EmploymentStatus,
+      city: row.Location_City,
+      state: row.Location_State,
+      country: row.Location_Country,
+      profileCompleteness: parseInt(row.ProfileCompleteness) || 0,
+      lastActive: row.LastUpdatedDate,
+      createdAt: row.AccountCreatedDate
+    }));
+    console.log(`🔄 Reloaded ${alumniData.length} alumni records from file`);
+  }
+
   static getAll() {
     return alumniData;
   }
@@ -139,9 +197,16 @@ export class AlumniDataService {
       Location_Country: a.country,
       ProfileCompleteness: a.profileCompleteness.toString(),
       LastUpdatedDate: a.lastActive,
-      AccountCreatedDate: a.createdAt
+      AccountCreatedDate: a.createdAt,
+      IsActive: a.isActive !== undefined ? a.isActive : true,
+      LastLoginDate: a.lastLoginDate || a.lastActive
     }));
     saveData('slu_alumni_data.json', rows);
+
+    // Update the global cache
+    global.__alumniDataCache = alumniData;
+    console.log(`➕ [CREATE] Added alumni, new count: ${alumniData.length}`);
+    console.log(`♻️  [CREATE] Updated global cache`);
 
     return newAlumni;
   }
@@ -168,40 +233,82 @@ export class AlumniDataService {
       Location_Country: a.country,
       ProfileCompleteness: a.profileCompleteness.toString(),
       LastUpdatedDate: a.lastActive,
-      AccountCreatedDate: a.createdAt
+      AccountCreatedDate: a.createdAt,
+      IsActive: a.isActive !== undefined ? a.isActive : true,
+      LastLoginDate: a.lastLoginDate || a.lastActive
     }));
     saveData('slu_alumni_data.json', rows);
+
+    // Update the global cache
+    global.__alumniDataCache = alumniData;
 
     return this.getById(id);
   }
 
   static delete(id: string) {
-    alumniData = alumniData.filter(a => a.id !== id);
+    try {
+      console.log(`\n========== DELETE OPERATION START ==========`);
+      console.log(`🗑️ [DELETE] Target ID: ${id}`);
+      console.log(`📊 [DELETE] Current count: ${alumniData.length}`);
 
-    // Persist to file
-    const rows = alumniData.map(a => ({
-      AlumniID: a.id,
-      FirstName: a.firstName,
-      LastName: a.lastName,
-      Email: a.email,
-      Phone: a.phone,
-      GraduationYear: a.graduationYear.toString(),
-      Program: a.program,
-      Department: a.department,
-      VerificationStatus: a.verificationStatus,
-      CurrentEmployer: a.currentEmployer,
-      JobTitle: a.jobTitle,
-      EmploymentStatus: a.employmentStatus,
-      Location_City: a.city,
-      Location_State: a.state,
-      Location_Country: a.country,
-      ProfileCompleteness: a.profileCompleteness.toString(),
-      LastUpdatedDate: a.lastActive,
-      AccountCreatedDate: a.createdAt
-    }));
-    saveData('slu_alumni_data.json', rows);
+      // Find the alumni
+      const alumniToDelete = alumniData.find(a => a.id === id);
+      if (!alumniToDelete) {
+        console.log(`❌ [DELETE] NOT FOUND in memory`);
+        console.log(`========== DELETE OPERATION END (FAILED) ==========\n`);
+        return false;
+      }
 
-    return true;
+      console.log(`✅ [DELETE] Found: ${alumniToDelete.firstName} ${alumniToDelete.lastName}`);
+
+      // Remove from array
+      alumniData = alumniData.filter(a => a.id !== id);
+      console.log(`📊 [DELETE] New count: ${alumniData.length}`);
+
+      // Write to file IMMEDIATELY
+      const filePath = path.join(process.cwd(), 'src/data', 'slu_alumni_data.json');
+      const jsonData = alumniData.map(a => ({
+        AlumniID: a.id,
+        FirstName: a.firstName,
+        LastName: a.lastName,
+        Email: a.email,
+        Phone: a.phone,
+        GraduationYear: a.graduationYear.toString(),
+        Program: a.program,
+        Department: a.department,
+        VerificationStatus: a.verificationStatus,
+        CurrentEmployer: a.currentEmployer,
+        JobTitle: a.jobTitle,
+        EmploymentStatus: a.employmentStatus,
+        Location_City: a.city,
+        Location_State: a.state,
+        Location_Country: a.country,
+        ProfileCompleteness: a.profileCompleteness.toString(),
+        LastUpdatedDate: a.lastActive,
+        AccountCreatedDate: a.createdAt,
+        IsActive: a.isActive !== undefined ? a.isActive : true,
+        LastLoginDate: a.lastLoginDate || a.lastActive
+      }));
+
+      console.log(`💾 [DELETE] Writing ${jsonData.length} records to file...`);
+      fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2), 'utf-8');
+      console.log(`✅ [DELETE] File written successfully`);
+
+      // Update the global cache to match
+      global.__alumniDataCache = alumniData;
+      console.log(`♻️  [DELETE] Updated global cache: ${global.__alumniDataCache.length} records`);
+
+      // Verify
+      const verify = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      console.log(`✅ [DELETE] Verified: File contains ${verify.length} records`);
+      console.log(`========== DELETE OPERATION END (SUCCESS) ==========\n`);
+
+      return true;
+    } catch (error) {
+      console.error(`\n❌❌❌ [DELETE] CRITICAL ERROR:`, error);
+      console.log(`========== DELETE OPERATION END (ERROR) ==========\n`);
+      return false;
+    }
   }
 
   static search(filters: {
@@ -243,6 +350,22 @@ export class AlumniDataService {
 
     return results;
   }
+
+  static update(id: string, updates: any) {
+    const alumniIndex = alumniData.findIndex(a => a.id === id);
+    if (alumniIndex === -1) return null;
+
+    alumniData[alumniIndex] = { ...alumniData[alumniIndex], ...updates };
+    return alumniData[alumniIndex];
+  }
+
+  static delete(id: string) {
+    const alumniIndex = alumniData.findIndex(a => a.id === id);
+    if (alumniIndex === -1) return false;
+
+    alumniData.splice(alumniIndex, 1);
+    return true;
+  }
 }
 
 /**
@@ -266,6 +389,22 @@ export class EventsDataService {
     };
     eventsData = [newEvent, ...eventsData];
     return newEvent;
+  }
+
+  static update(id: string, updates: any) {
+    const eventIndex = eventsData.findIndex(e => e.id === id);
+    if (eventIndex === -1) return null;
+
+    eventsData[eventIndex] = { ...eventsData[eventIndex], ...updates };
+    return eventsData[eventIndex];
+  }
+
+  static delete(id: string) {
+    const eventIndex = eventsData.findIndex(e => e.id === id);
+    if (eventIndex === -1) return false;
+
+    eventsData.splice(eventIndex, 1);
+    return true;
   }
 
   static getUpcoming() {
@@ -322,6 +461,64 @@ export class DonationsDataService {
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, limit);
   }
+
+  static getTopDonors(limit: number = 10) {
+    // Aggregate donations by alumniId
+    const donorTotals: { [alumniId: string]: { totalAmount: number; donationCount: number } } = {};
+
+    donationsData.forEach(donation => {
+      const alumniId = donation.alumniId;
+      if (!donorTotals[alumniId]) {
+        donorTotals[alumniId] = { totalAmount: 0, donationCount: 0 };
+      }
+      donorTotals[alumniId].totalAmount += donation.amount;
+      donorTotals[alumniId].donationCount += 1;
+    });
+
+    // Get alumni details and sort by total amount
+    const alumni = AlumniDataService.getAll();
+    const topDonors = Object.entries(donorTotals)
+      .map(([alumniId, stats]) => {
+        const alumniProfile = alumni.find(a => a.id === alumniId);
+        return {
+          id: alumniId,
+          name: alumniProfile
+            ? `${alumniProfile.firstName} ${alumniProfile.lastName}`
+            : `Alumni #${alumniId.slice(-4)}`,
+          amount: stats.totalAmount,
+          donations: stats.donationCount
+        };
+      })
+      .sort((a, b) => b.amount - a.amount)
+      .slice(0, limit);
+
+    return topDonors;
+  }
+
+  // Get real donation statistics from actual data
+  static getStats() {
+    const uniqueDonorIds = new Set(donationsData.map(d => d.alumniId));
+    const totalRaised = donationsData.reduce((sum, d) => sum + d.amount, 0);
+
+    // Calculate scholarships funded from scholarship-related donations
+    const scholarshipDonations = donationsData.filter(d =>
+      d.purpose?.toLowerCase().includes('scholarship')
+    );
+    const scholarshipTotal = scholarshipDonations.reduce((sum, d) => sum + d.amount, 0);
+    // Assume average scholarship is $5,000
+    const scholarshipsFunded = Math.floor(scholarshipTotal / 5000);
+
+    // Get unique purposes as active campaigns
+    const uniquePurposes = new Set(donationsData.map(d => d.purpose || 'General Fund'));
+
+    return {
+      totalRaised,
+      activeDonors: uniqueDonorIds.size,
+      scholarshipsFunded,
+      activeCampaigns: uniquePurposes.size,
+      totalDonations: donationsData.length
+    };
+  }
 }
 
 /**
@@ -332,19 +529,143 @@ export class MentorshipDataService {
     return mentorshipData;
   }
 
+  static getAllAreas(): string[] {
+    const mentorships = this.getAll();
+    const areas = [...new Set(mentorships.map(m => m.area))].filter(Boolean);
+    return areas.sort();
+  }
+
   static create(mentorship: any) {
     const newMentorship = {
       ...mentorship,
       id: mentorship.id || `MEN-${Date.now()}`,
       status: 'Requested',
-      startDate: new Date().toISOString().split('T')[0]
+      startDate: new Date().toISOString().split('T')[0],
+      lastInteractionDate: new Date().toISOString().split('T')[0]
     };
     mentorshipData = [newMentorship, ...mentorshipData];
+
+    // Persist to file
+    const filePath = path.join(process.cwd(), 'src/data', 'slu_mentorship_data.json');
+    const jsonData = mentorshipData.map(m => ({
+      MentorshipID: m.id,
+      MentorAlumniID: m.mentorId,
+      MenteeAlumniID: m.menteeId,
+      MentorshipArea: m.area,
+      StartDate: m.startDate,
+      EndDate: m.endDate || '',
+      Status: m.status,
+      FrequencyPerMonth: m.frequency?.toString() || '0',
+      LastInteractionDate: m.lastInteraction || m.startDate,
+      SatisfactionRating: m.rating ? m.rating.toString() : null
+    }));
+    fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 4), 'utf-8');
+    console.log(`✅ [MENTORSHIP CREATE] Added mentorship ${newMentorship.id}`);
+
     return newMentorship;
+  }
+
+  static update(id: string, updates: any) {
+    const index = mentorshipData.findIndex(m => m.id === id);
+    if (index === -1) return null;
+
+    mentorshipData[index] = {
+      ...mentorshipData[index],
+      ...updates,
+      lastInteractionDate: new Date().toISOString().split('T')[0]
+    };
+
+    // Persist to file
+    const filePath = path.join(process.cwd(), 'src/data', 'slu_mentorship_data.json');
+    const jsonData = mentorshipData.map(m => ({
+      MentorshipID: m.id,
+      MentorAlumniID: m.mentorId,
+      MenteeAlumniID: m.menteeId,
+      MentorshipArea: m.area,
+      StartDate: m.startDate,
+      EndDate: m.endDate || '',
+      Status: m.status,
+      FrequencyPerMonth: m.frequency?.toString() || '0',
+      LastInteractionDate: m.lastInteraction || m.startDate,
+      SatisfactionRating: m.rating ? m.rating.toString() : null
+    }));
+    fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 4), 'utf-8');
+    console.log(`✅ [MENTORSHIP UPDATE] Updated mentorship ${id} with status: ${updates.status || 'N/A'}`);
+
+    return mentorshipData[index];
+  }
+
+  static delete(id: string) {
+    const initialLength = mentorshipData.length;
+    mentorshipData = mentorshipData.filter(m => m.id !== id);
+
+    if (mentorshipData.length < initialLength) {
+      // Persist to file
+      const filePath = path.join(process.cwd(), 'src/data', 'slu_mentorship_data.json');
+      const jsonData = mentorshipData.map(m => ({
+        MentorshipID: m.id,
+        MentorAlumniID: m.mentorId,
+        MenteeAlumniID: m.menteeId,
+        MentorshipArea: m.area,
+        StartDate: m.startDate,
+        EndDate: m.endDate || '',
+        Status: m.status,
+        FrequencyPerMonth: m.frequency?.toString() || '0',
+        LastInteractionDate: m.lastInteraction || m.startDate,
+        SatisfactionRating: m.rating ? m.rating.toString() : null
+      }));
+      fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 4), 'utf-8');
+      console.log(`✅ [MENTORSHIP DELETE] Deleted mentorship ${id}`);
+      return true;
+    }
+    return false;
+  }
+
+  static getById(id: string) {
+    return mentorshipData.find(m => m.id === id);
+  }
+
+  static getByStatus(status: string) {
+    return mentorshipData.filter(m => m.status === status);
   }
 
   static getActiveMentorships() {
     return mentorshipData.filter(mentorship => mentorship.status === 'Active');
+  }
+
+  static getPendingRequests() {
+    return mentorshipData.filter(m => m.status === 'Requested');
+  }
+
+  static getCompletedMentorships() {
+    return mentorshipData.filter(m => m.status === 'Completed');
+  }
+
+  static getByMentorId(mentorId: string) {
+    return mentorshipData.filter(m => m.mentorId === mentorId);
+  }
+
+  static getByMenteeId(menteeId: string) {
+    return mentorshipData.filter(m => m.menteeId === menteeId);
+  }
+
+  static approveRequest(id: string) {
+    return this.update(id, {
+      status: 'Active',
+      startDate: new Date().toISOString().split('T')[0]
+    });
+  }
+
+  static rejectRequest(id: string) {
+    return this.delete(id);
+  }
+
+  static completeMentorship(id: string, rating?: number) {
+    return this.update(id, {
+      status: 'Completed',
+      endDate: new Date().toISOString().split('T')[0],
+      ...(rating && { rating })
+    });
   }
 
   static getMentorsByArea(area?: string) {

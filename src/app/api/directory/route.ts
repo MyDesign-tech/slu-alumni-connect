@@ -38,12 +38,12 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { 
-      firstName, 
-      lastName, 
-      email, 
-      graduationYear, 
-      program, 
+    const {
+      firstName,
+      lastName,
+      email,
+      graduationYear,
+      program,
       department,
       currentEmployer,
       jobTitle,
@@ -53,35 +53,39 @@ export async function POST(request: NextRequest) {
       bio
     } = body;
 
-    if (!firstName || !lastName || !email || !graduationYear || !program || !department) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    if (!firstName || !lastName || !email) {
+      return NextResponse.json({ error: "Missing required fields: firstName, lastName, email" }, { status: 400 });
     }
 
-    // In production, this would add to the database/CSV
-    const newAlumni = {
-      id: `ALM${String(Date.now()).slice(-5)}`,
+    console.log(`➕ [API POST] Creating new alumni: ${firstName} ${lastName}`);
+
+    // Create alumni using data service (will persist to file)
+    const newAlumni = AlumniDataService.create({
       firstName,
       lastName,
       email,
-      graduationYear: parseInt(graduationYear),
-      program,
-      department,
-      currentEmployer: currentEmployer || "",
-      jobTitle: jobTitle || "",
-      city: city || "",
-      state: state || "",
-      country: country || "USA",
-      bio: bio || "",
-      verificationStatus: "Pending",
-      lastActive: "just added"
-    };
+      phone: '',
+      graduationYear: parseInt(graduationYear) || new Date().getFullYear(),
+      program: program || 'General',
+      department: department || 'OTHER',
+      currentEmployer: currentEmployer || '',
+      jobTitle: jobTitle || '',
+      employmentStatus: 'Unknown',
+      city: city || '',
+      state: state || '',
+      country: country || 'USA',
+      bio: bio || '',
+      profileCompleteness: 40
+    });
 
-    return NextResponse.json({ 
-      message: "Alumni added successfully", 
-      alumni: newAlumni 
+    console.log(`✅ [API POST] Alumni created: ${newAlumni.id}`);
+
+    return NextResponse.json({
+      message: "Alumni added successfully",
+      alumni: newAlumni
     }, { status: 201 });
   } catch (error) {
-    console.error("Add alumni error:", error);
+    console.error("❌ [API POST] Add alumni error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

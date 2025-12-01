@@ -23,5 +23,156 @@
         "profileCompleteness": 40
       }
     }
+  },
+  "maheshbabu@slu.edu": {
+    "password": "mahesh@123",
+    "user": {
+      "id": "NEW1764280209515",
+      "email": "maheshbabu@slu.edu",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764280209515",
+        "firstName": "Mahesh",
+        "lastName": "Babu",
+        "department": "HUMANITIES",
+        "graduationYear": 2022,
+        "program": "Liberal Arts",
+        "phone": "8019143065",
+        "city": "New York",
+        "state": "NY",
+        "country": "USA",
+        "currentEmployer": "Infosys",
+        "jobTitle": "Web Devloper",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 100,
+        "bio": "graduated in 2022"
+      }
+    }
+  },
+  "bunny@slu.edu": {
+    "password": "bunny@123",
+    "user": {
+      "id": "NEW1764334138245",
+      "email": "bunny@slu.edu",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764334138245",
+        "firstName": "bunny",
+        "lastName": "bunny",
+        "department": "HUMANITIES",
+        "graduationYear": 2020,
+        "program": "Liberal Arts",
+        "phone": "",
+        "city": "",
+        "state": "",
+        "country": "USA",
+        "currentEmployer": "",
+        "jobTitle": "",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 40
+      }
+    }
+  },
+  "geethamsh@gmail.com": {
+    "password": "geethamsh@123",
+    "user": {
+      "id": "NEW1764334277823",
+      "email": "geethamsh@gmail.com",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764334277823",
+        "firstName": "geethamsh",
+        "lastName": "gaini",
+        "department": "HUMANITIES",
+        "graduationYear": 2019,
+        "program": "Liberal Arts",
+        "phone": "",
+        "city": "",
+        "state": "",
+        "country": "USA",
+        "currentEmployer": "",
+        "jobTitle": "",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 40
+      }
+    }
+  },
+  "aagam@slu.edu": {
+    "password": "aagam@123",
+    "user": {
+      "id": "NEW1764436311372",
+      "email": "aagam@slu.edu",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764436311372",
+        "firstName": "aagam",
+        "lastName": "baa",
+        "department": "BUSINESS",
+        "graduationYear": 2022,
+        "program": "Business Administration",
+        "phone": "",
+        "city": "",
+        "state": "",
+        "country": "USA",
+        "currentEmployer": "",
+        "jobTitle": "",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 40
+      }
+    }
+  },
+  "jashwanth@gmail.com": {
+    "password": "madhu@123",
+    "user": {
+      "id": "NEW1764608936911",
+      "email": "jashwanth@gmail.com",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764608936911",
+        "firstName": "jashwanth",
+        "lastName": "ch",
+        "department": "STEM",
+        "graduationYear": 2021,
+        "program": "Engineering",
+        "phone": "",
+        "city": "",
+        "state": "",
+        "country": "USA",
+        "currentEmployer": "",
+        "jobTitle": "",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 40
+      }
+    }
+  },
+  "dheeraj@gmail.com": {
+    "password": "Madhu@123",
+    "user": {
+      "id": "NEW1764609000095",
+      "email": "dheeraj@gmail.com",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764609000095",
+        "firstName": "dheeraj",
+        "lastName": "d",
+        "department": "HEALTHCARE",
+        "graduationYear": 2021,
+        "program": "Medicine",
+        "phone": "",
+        "city": "",
+        "state": "",
+        "country": "USA",
+        "currentEmployer": "",
+        "jobTitle": "",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 40
+      }
+    }
   }
 }

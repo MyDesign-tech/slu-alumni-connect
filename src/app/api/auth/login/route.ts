@@ -74,6 +74,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Update last login timestamp for activity tracking
+    const today = new Date().toISOString().split('T')[0];
+    AlumniDataService.update(alumniProfile.id, {
+      lastActive: today,
+      lastLoginDate: today
+    });
+    console.log(`✅ [LOGIN] Updated last login for ${alumniProfile.email} to ${today}`);
+
     // Return user data from CSV
     const user = {
       id: alumniProfile.id,

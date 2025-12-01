@@ -1,60 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser, isAdmin } from "@/lib/auth-utils";
-
-// Sample alumni data (shared with main directory route)
-let alumni = [
-  {
-    id: "1",
-    firstName: "Sarah",
-    lastName: "Johnson",
-    email: "sarah.johnson@email.com",
-    graduationYear: 2015,
-    program: "Computer Science",
-    department: "STEM",
-    currentEmployer: "Microsoft",
-    jobTitle: "Senior Software Engineer",
-    city: "Seattle",
-    state: "WA",
-    country: "USA",
-    bio: "Passionate software engineer with expertise in cloud computing and distributed systems.",
-    verificationStatus: "verified",
-    lastActive: "2 days ago"
-  },
-  {
-    id: "2",
-    firstName: "Michael",
-    lastName: "Chen",
-    email: "michael.chen@email.com",
-    graduationYear: 2012,
-    program: "Business Administration",
-    department: "BUSINESS",
-    currentEmployer: "Procter & Gamble",
-    jobTitle: "Marketing Director",
-    city: "Cincinnati",
-    state: "OH",
-    country: "USA",
-    bio: "Marketing professional focused on digital transformation and brand strategy.",
-    verificationStatus: "verified",
-    lastActive: "1 week ago"
-  },
-  {
-    id: "3",
-    firstName: "Dr. Emily",
-    lastName: "Rodriguez",
-    email: "emily.rodriguez@email.com",
-    graduationYear: 2008,
-    program: "Medicine",
-    department: "HEALTHCARE",
-    currentEmployer: "BJC HealthCare",
-    jobTitle: "Chief Medical Officer",
-    city: "St. Louis",
-    state: "MO",
-    country: "USA",
-    bio: "Healthcare leader committed to improving patient outcomes and medical education.",
-    verificationStatus: "verified",
-    lastActive: "3 days ago"
-  }
-];
+import { AlumniDataService } from "@/lib/data-service";
 
 export async function GET(
   request: NextRequest,
@@ -67,6 +13,7 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const alumni = AlumniDataService.getAll();
     const alumniProfile = alumni.find((a) => a.id === id);
     if (!alumniProfile) {
       return NextResponse.json({ error: "Alumni not found" }, { status: 404 });
@@ -90,18 +37,18 @@ export async function PUT(
       return NextResponse.json({ error: "Admin access required" }, { status: 403 });
     }
 
+    const alumni = AlumniDataService.getAll();
     const alumniIndex = alumni.findIndex((a) => a.id === id);
     if (alumniIndex === -1) {
       return NextResponse.json({ error: "Alumni not found" }, { status: 404 });
     }
 
     const body = await request.json();
-    const updatedAlumni = { ...alumni[alumniIndex], ...body };
-    alumni[alumniIndex] = updatedAlumni;
+    const updatedAlumni = AlumniDataService.update(id, body);
 
-    return NextResponse.json({ 
-      message: "Alumni updated successfully", 
-      alumni: updatedAlumni 
+    return NextResponse.json({
+      message: "Alumni updated successfully",
+      alumni: updatedAlumni
     });
   } catch (error) {
     console.error("Update alumni error:", error);
@@ -115,22 +62,47 @@ export async function DELETE(
 ) {
   try {
     const { id } = await context.params;
+    console.log(`🌐 [API DELETE] Request to delete alumni: ${id}`);
+
     const user = await getCurrentUser(request);
     if (!user || !isAdmin(user)) {
+      console.log(`❌ [API DELETE] Unauthorized: ${user?.email || 'no user'}, role: ${user?.role || 'none'}`);
       return NextResponse.json({ error: "Admin access required" }, { status: 403 });
     }
 
-    const alumniIndex = alumni.findIndex((a) => a.id === id);
-    if (alumniIndex === -1) {
+    console.log(`✅ [API DELETE] Admin authorized: ${user.email}`);
+
+    const alumni = AlumniDataService.getAll();
+    const alumniProfile = alumni.find((a) => a.id === id);
+    if (!alumniProfile) {
+      console.log(`❌ [API DELETE] Alumni not found in service: ${id}`);
+      console.log(`📊 [API DELETE] Total alumni in service: ${alumni.length}`);
       return NextResponse.json({ error: "Alumni not found" }, { status: 404 });
     }
 
-    const deletedAlumni = alumni[alumniIndex];
-    alumni.splice(alumniIndex, 1);
+    console.log(`✅ [API DELETE] Found alumni: ${alumniProfile.firstName} ${alumniProfile.lastName}`);
 
-    return NextResponse.json({ 
+    const deleteResult = AlumniDataService.delete(id);
+    console.log(`${deleteResult ? '✅' : '❌'} [API DELETE] Delete result: ${deleteResult}`);
+
+    if (!deleteResult) {
+      return NextResponse.json({ error: "Failed to delete alumni" }, { status: 500 });
+    }
+
+    // Verify deletion
+    const afterDelete = AlumniDataService.getAll();
+    console.log(`📊 [API DELETE] Alumni count after delete: ${afterDelete.length}`);
+    const stillExists = afterDelete.find(a => a.id === id);
+    if (stillExists) {
+      console.error(`❌ [API DELETE] CRITICAL: Alumni still exists after deletion!`);
+    } else {
+      console.log(`✅ [API DELETE] Verified: Alumni successfully removed from memory`);
+    }
+
+    return NextResponse.json({
       message: "Alumni removed successfully",
-      alumni: deletedAlumni
+      alumni: alumniProfile,
+      newCount: afterDelete.length
     });
   } catch (error) {
     console.error("Delete alumni error:", error);

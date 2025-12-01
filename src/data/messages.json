@@ -1,0 +1,90 @@
+[
+  {
+    "id": "1",
+    "senderEmail": "linda.smith859@email.com",
+    "senderName": "Linda Smith",
+    "receiverEmail": "donald.davis559@email.com",
+    "receiverName": "Donald Davis",
+    "subject": "Alumni Event",
+    "content": "Hey Donald, are you planning to attend the upcoming alumni networking event in Los Angeles?",
+    "timestamp": "2024-11-14T10:30:00.000Z",
+    "read": false
+  },
+  {
+    "id": "2",
+    "senderEmail": "donald.davis559@email.com",
+    "senderName": "Donald Davis",
+    "receiverEmail": "linda.smith859@email.com",
+    "receiverName": "Linda Smith",
+    "subject": "Re: Alumni Event",
+    "content": "Hi Linda! Yes, I'm definitely planning to attend. It should be a great opportunity to reconnect with fellow alumni. Are you going?",
+    "timestamp": "2024-11-14T11:15:00.000Z",
+    "read": true
+  },
+  {
+    "id": "3",
+    "senderEmail": "linda.smith859@email.com",
+    "senderName": "Linda Smith",
+    "receiverEmail": "donald.davis559@email.com",
+    "receiverName": "Donald Davis",
+    "subject": "Re: Alumni Event",
+    "content": "Absolutely! I wouldn't miss it. Maybe we can grab coffee beforehand and catch up properly?",
+    "timestamp": "2024-11-14T12:00:00.000Z",
+    "read": false
+  },
+  {
+    "senderEmail": "maheshbabu@slu.edu",
+    "senderName": "Mahesh Babu",
+    "receiverEmail": "barbara.lopez880@email.com",
+    "receiverName": "Barbara Lopez",
+    "subject": "Regarding Event",
+    "content": "hii",
+    "id": "MSG1764435651042-397",
+    "timestamp": "2025-11-29T17:00:51.042Z",
+    "read": true
+  },
+  {
+    "senderEmail": "barbara.lopez880@email.com",
+    "senderName": "Barbara Lopez",
+    "receiverEmail": "maheshbabu@slu.edu",
+    "receiverName": "Mahesh Babu",
+    "subject": "Re: Conversation",
+    "content": "hi",
+    "id": "MSG1764435675251-254",
+    "timestamp": "2025-11-29T17:01:15.251Z",
+    "read": true
+  },
+  {
+    "senderEmail": "maheshbabu@slu.edu",
+    "senderName": "Mahesh Babu",
+    "receiverEmail": "barbara.lopez880@email.com",
+    "receiverName": "Barbara Lopez",
+    "subject": "Re: Conversation",
+    "content": "how are you",
+    "id": "MSG1764435688881-147",
+    "timestamp": "2025-11-29T17:01:28.881Z",
+    "read": true
+  },
+  {
+    "senderEmail": "barbara.lopez880@email.com",
+    "senderName": "Barbara Lopez",
+    "receiverEmail": "maheshbabu@slu.edu",
+    "receiverName": "Mahesh Babu",
+    "subject": "Re: Conversation",
+    "content": "hello",
+    "id": "MSG1764435721374-660",
+    "timestamp": "2025-11-29T17:02:01.374Z",
+    "read": true
+  },
+  {
+    "senderEmail": "maheshbabu@slu.edu",
+    "senderName": "Mahesh Babu",
+    "receiverEmail": "barbara.lopez880@email.com",
+    "receiverName": "Barbara Lopez",
+    "subject": "Re: Conversation",
+    "content": "hello",
+    "id": "MSG1764435731236-483",
+    "timestamp": "2025-11-29T17:02:11.236Z",
+    "read": true
+  }
+]

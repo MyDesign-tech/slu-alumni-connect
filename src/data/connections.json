@@ -5,5 +5,19 @@
     "recipientId": "NEW1764110441800",
     "status": "pending",
     "createdAt": "2025-11-25T22:52:24.591Z"
+  },
+  {
+    "id": "CONN1764320026274-737",
+    "requesterId": "ALM03476",
+    "recipientId": "NEW1764110441800",
+    "status": "pending",
+    "createdAt": "2025-11-28T08:53:46.274Z"
+  },
+  {
+    "id": "CONN1764435617319-800",
+    "requesterId": "ALM00016",
+    "recipientId": "NEW1764280209515",
+    "status": "accepted",
+    "createdAt": "2025-11-29T17:00:17.319Z"
   }
 ]

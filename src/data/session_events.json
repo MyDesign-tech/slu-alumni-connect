@@ -1,0 +1,53 @@
+[
+  {
+    "id": "EVT20470",
+    "title": "HP Event",
+    "type": "Networking",
+    "date": "2025-12-12",
+    "time": "18:00",
+    "location": "jsjknkjnksfkj",
+    "capacity": 100,
+    "registered": 0,
+    "status": "Planned",
+    "description": "nkjndkjsnjkfw",
+    "department": "General",
+    "isVirtual": false,
+    "allowGuests": true,
+    "budget": 0,
+    "createdDate": "2025-11-29"
+  },
+  {
+    "id": "EVT33315",
+    "title": "IQOO",
+    "type": "Social",
+    "date": "2025-12-01",
+    "time": "18:00",
+    "location": "wjnjknke",
+    "capacity": 100,
+    "registered": 0,
+    "status": "Planned",
+    "description": "jnkjnskn",
+    "department": "General",
+    "isVirtual": false,
+    "allowGuests": true,
+    "budget": 0,
+    "createdDate": "2025-11-29"
+  },
+  {
+    "id": "EVT21789",
+    "title": "Number Theiry",
+    "type": "Workshop",
+    "date": "2025-12-12",
+    "time": "14:00",
+    "location": "n snc j jef j d",
+    "capacity": 100,
+    "registered": 0,
+    "status": "Planned",
+    "description": " dj jjd",
+    "department": "Engineering",
+    "isVirtual": true,
+    "allowGuests": false,
+    "budget": 0,
+    "createdDate": "2025-11-29"
+  }
+]

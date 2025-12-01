@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,16 +11,35 @@ import { GraduationCap, Users, Calendar, Heart, ArrowRight, Star, MapPin } from 
 
 import { ResponsiveContainer, ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area } from "recharts";
 
-const growthData = [
-  { year: '2020', alumni: 150000, donations: 2.5 },
-  { year: '2021', alumni: 162000, donations: 3.1 },
-  { year: '2022', alumni: 171000, donations: 3.5 },
-  { year: '2023', alumni: 178000, donations: 3.8 },
-  { year: '2024', alumni: 185000, donations: 4.2 },
-];
-
 export default function Home() {
   const { user, isAuthenticated, isHydrated } = useHydratedAuthStore();
+  const [stats, setStats] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('/api/stats');
+        if (response.ok) {
+          const data = await response.json();
+          setStats(data);
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  const totalAlumni = stats?.totalAlumni || 0;
+  const totalCountries = stats?.totalCountries || 0;
+  const totalRaised = stats?.totalRaised || 0;
+  const scholarshipsFunded = stats?.scholarshipsFunded || 0;
+  const growthData = stats?.growthData || [];
+  const upcomingEvents = stats?.upcomingEvents || [];
 
   return (
     <MainLayout>
@@ -82,19 +102,35 @@ export default function Home() {
           {/* Key Metrics */}
           <div className="lg:col-span-1 flex flex-col justify-center space-y-8 border-b lg:border-b-0 lg:border-r border-gray-100 pr-0 lg:pr-8">
             <div className="text-center lg:text-left">
-              <div className="text-5xl font-bold text-primary mb-2">185k+</div>
+              {loading ? (
+                <div className="h-16 bg-gray-200 rounded animate-pulse mb-2"></div>
+              ) : (
+                <div className="text-5xl font-bold text-primary mb-2">
+                  {totalAlumni >= 1000 ? `${(totalAlumni / 1000).toFixed(1)}k` : totalAlumni}+
+                </div>
+              )}
               <div className="text-muted-foreground font-medium uppercase tracking-wide flex items-center justify-center lg:justify-start gap-2">
                 <Users className="h-4 w-4" /> Global Alumni
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="text-5xl font-bold text-secondary mb-2">120+</div>
+              {loading ? (
+                <div className="h-16 bg-gray-200 rounded animate-pulse mb-2"></div>
+              ) : (
+                <div className="text-5xl font-bold text-secondary mb-2">{totalCountries}+</div>
+              )}
               <div className="text-muted-foreground font-medium uppercase tracking-wide flex items-center justify-center lg:justify-start gap-2">
                 <MapPin className="h-4 w-4" /> Countries
               </div>
             </div>
             <div className="text-center lg:text-left">
-              <div className="text-5xl font-bold text-accent mb-2">$4.2M</div>
+              {loading ? (
+                <div className="h-16 bg-gray-200 rounded animate-pulse mb-2"></div>
+              ) : (
+                <div className="text-5xl font-bold text-accent mb-2">
+                  ${(totalRaised / 1000000).toFixed(1)}M
+                </div>
+              )}
               <div className="text-muted-foreground font-medium uppercase tracking-wide flex items-center justify-center lg:justify-start gap-2">
                 <Heart className="h-4 w-4" /> Raised for Scholarships
               </div>
@@ -105,6 +141,15 @@ export default function Home() {
           <div className="lg:col-span-2 flex flex-col">
             <h3 className="text-lg font-semibold mb-4 text-center lg:text-left">Community Impact Growth</h3>
             <div className="flex-1 min-h-[280px]">
+              {loading ? (
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-muted-foreground">Loading chart data...</div>
+                </div>
+              ) : growthData.length === 0 ? (
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-muted-foreground">No data available</div>
+                </div>
+              ) : (
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={growthData} margin={{ top: 10, right: 40, left: 10, bottom: 20 }}>
                   <defs>
@@ -125,6 +170,7 @@ export default function Home() {
                   <Line yAxisId="right" type="monotone" dataKey="donations" stroke="#FDB913" strokeWidth={3} dot={{ r: 4, fill: "#FDB913" }} name="Scholarships ($M)" />
                 </ComposedChart>
               </ResponsiveContainer>
+              )}
             </div>
           </div>
         </div>
@@ -195,77 +241,42 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Alumni Networking Mixer",
-                  date: "March 15, 2025",
-                  location: "St. Louis, MO",
-                  image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=600&fit=crop",
-                  description: "Join us for an evening of networking with alumni professionals across industries."
-                },
-                {
-                  title: "Spring Reunion Weekend",
-                  date: "April 20-22, 2025",
-                  location: "SLU Campus",
-                  image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop",
-                  description: "Celebrate your class reunion with campus tours, banquets, and special events."
-                },
-                {
-                  title: "Career Development Workshop",
-                  date: "May 10, 2025",
-                  location: "Virtual Event",
-                  image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-                  description: "Enhance your professional skills with expert-led workshops and panel discussions."
-                },
-                {
-                  title: "Billiken Basketball Alumni Game",
-                  date: "June 5, 2025",
-                  location: "Chaifetz Arena",
-                  image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=600&fit=crop",
-                  description: "Watch current players compete and meet fellow alumni sports enthusiasts."
-                },
-                {
-                  title: "Global Alumni Summit",
-                  date: "July 12-14, 2025",
-                  location: "Worldwide",
-                  image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop",
-                  description: "Connect with SLU alumni from around the globe in this virtual summit."
-                },
-                {
-                  title: "Young Alumni Social",
-                  date: "August 8, 2025",
-                  location: "Downtown St. Louis",
-                  image: "https://images.unsplash.com/photo-1529610768580-f808cd8e3a95?w=800&h=600&fit=crop",
-                  description: "Recent graduates gather for food, drinks, and networking opportunities."
-                }
-              ].map((event, i) => (
+              {loading ? (
+                Array.from({ length: 6 }).map((_, i) => (
+                  <Card key={i} className="overflow-hidden border-none shadow-lg animate-pulse">
+                    <div className="h-48 bg-gray-200"></div>
+                    <CardContent className="p-6">
+                      <div className="h-4 bg-gray-200 rounded mb-4"></div>
+                      <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded mb-3 w-2/3"></div>
+                      <div className="h-16 bg-gray-200 rounded"></div>
+                    </CardContent>
+                  </Card>
+                ))
+              ) : upcomingEvents.length === 0 ? (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-muted-foreground">No upcoming events at this time.</p>
+                </div>
+              ) : (
+                upcomingEvents.map((event: any, i: number) => (
                 <Card key={i} className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="h-48 overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        if (target.parentElement) {
-                          target.parentElement.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20"><div class="text-center p-4"><svg class="w-16 h-16 mx-auto mb-2 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><p class="text-sm font-medium text-primary/60">${event.title}</p></div></div>`;
-                        }
-                      }}
-                    />
+                  <div className="h-48 overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
+                    <div className="text-center p-4">
+                      <Calendar className="w-16 h-16 mx-auto mb-2 text-primary/40" />
+                      <p className="text-sm font-medium text-primary/60">{event.type || 'Event'}</p>
+                    </div>
                   </div>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 text-sm text-primary mb-2">
                       <Calendar className="h-4 w-4" />
-                      <span className="font-medium">{event.date}</span>
+                      <span className="font-medium">{new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                     </div>
                     <h3 className="font-bold text-xl mb-2">{event.title}</h3>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                       <MapPin className="h-4 w-4" />
                       <span>{event.location}</span>
                     </div>
-                    <p className="text-muted-foreground text-sm mb-4">{event.description}</p>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{event.description || 'Join us for this exciting alumni event.'}</p>
                     <Button size="sm" className="w-full" variant="outline" asChild>
                       <Link href="/events">
                         View Details
@@ -274,7 +285,7 @@ export default function Home() {
                     </Button>
                   </CardContent>
                 </Card>
-              ))}
+              )))}
             </div>
 
             <div className="text-center mt-12">

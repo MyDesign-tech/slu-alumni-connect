@@ -1,9 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser, isAdmin } from "@/lib/auth-utils";
 import { RSVPDataService, EventsDataService, AlumniDataService } from "@/lib/data-service";
+import fs from "fs";
+import path from "path";
 
-// In-memory RSVPs created during the current server session
-let sessionRSVPs: any[] = [];
+const RSVP_PATH = path.join(process.cwd(), "src", "data", "session_rsvps.json");
+const EVENTS_PATH = path.join(process.cwd(), "src", "data", "session_events.json");
+
+function loadPersistedRSVPs(): any[] {
+  try { 
+    if (fs.existsSync(RSVP_PATH)) {
+      return JSON.parse(fs.readFileSync(RSVP_PATH, "utf-8")) || []; 
+    }
+  } catch(e) {
+    console.error("Failed to load RSVPs:", e);
+  }
+  return [];
+}
+
+function saveRSVPsToFile(rsvps: any[]) {
+  try { 
+    fs.writeFileSync(RSVP_PATH, JSON.stringify(rsvps, null, 2), "utf-8"); 
+  } catch(e) { 
+    console.error("Failed to save RSVPs:", e); 
+  }
+}
+
+function loadPersistedEvents(): any[] {
+  try { 
+    if (fs.existsSync(EVENTS_PATH)) {
+      return JSON.parse(fs.readFileSync(EVENTS_PATH, "utf-8")) || []; 
+    }
+  } catch(e) {}
+  return [];
+}
+
+function getEventById(eventId: string): any {
+  const csvEvent = EventsDataService.getById(eventId);
+  if (csvEvent) return csvEvent;
+  const persistedEvents = loadPersistedEvents();
+  return persistedEvents.find((e: any) => e.id === eventId) || null;
+}
 
 export async function POST(
   request: NextRequest,
@@ -18,60 +55,50 @@ export async function POST(
     }
 
     const body = await request.json();
-    const { guestCount, specialRequirements } = body;
+    let { guestCount, specialRequirements } = body;
 
-    // Check if event exists (from CSV). In this demo, some events may be
-    // created in memory only, so we don't hard-fail if it's missing.
-    const event = EventsDataService.getById(eventId);
+    const event = getEventById(eventId);
     if (!event) {
-      console.warn(`Event ${eventId} not found in CSV; allowing RSVP in demo without strict validation.`);
+      console.warn(`Event ${eventId} not found; allowing RSVP in demo mode.`);
     }
 
-    // Check if user already has RSVP
-    const existingRSVPs = RSVPDataService.getByEvent(eventId);
-    const userRSVP = existingRSVPs.find(rsvp => rsvp.alumniId === user.id);
+    const persistedRSVPs = loadPersistedRSVPs();
     
-    if (userRSVP) {
-      console.warn(`Duplicate RSVP detected for user ${user.id} and event ${eventId}, allowing in demo.`);
+    const existingCSVRsvp = RSVPDataService.getByEvent(eventId).find(rsvp => rsvp.alumniId === user.id);
+    const existingPersistedRsvp = persistedRSVPs.find(r => r.eventId === eventId && r.alumniId === user.id);
+    
+    if (existingCSVRsvp || existingPersistedRsvp) {
+      return NextResponse.json({ error: "You have already RSVP'd to this event" }, { status: 400 });
     }
 
-    // Check capacity using the event's current registered count from CSV when
-    // available. If the event was created only in-memory, we fall back to a
-    // very high capacity so RSVPs are not blocked in the demo.
+    if (event && event.allowGuests === false) {
+      guestCount = 0;
+    }
+
     const safeGuestCount = typeof guestCount === "number" ? guestCount : parseInt(guestCount) || 0;
-    const totalGuests = safeGuestCount + 1; // Include the user
-    const currentAttendees = event?.registered || 0;
-    const capacity = event?.capacity ?? currentAttendees + totalGuests + 1000;
 
-    if (currentAttendees + totalGuests > capacity) {
-      console.warn(`RSVP exceeds capacity for event ${eventId} in demo, allowing anyway.`);
-    }
-
-    // In production, this would save to database/CSV
-    const rsvp = {
-      id: `RSV${String(Date.now()).slice(-6)}`,
-      eventId: eventId,
-      alumniId: user.id,
-      rsvpDate: new Date().toISOString().split('T')[0],
-      status: "Confirmed",
-      guestCount: safeGuestCount,
-      attended: false,
-      checkInTime: "",
-      specialRequirements: specialRequirements || ""
-    };
-
-    // Store in-memory so admins can see new RSVPs during this server session
     const profile: any = (user as any).profile || {};
     const alumniName = profile.firstName
       ? `${profile.firstName} ${profile.lastName || ""}`.trim()
       : user.email;
 
-    sessionRSVPs.push({
-      ...rsvp,
+    const rsvp = {
+      id: `RSV${String(Date.now()).slice(-6)}`,
+      eventId: eventId,
+      alumniId: user.id,
       alumniEmail: user.email,
       alumniName,
+      rsvpDate: new Date().toISOString().split('T')[0],
+      status: "Confirmed",
+      guestCount: safeGuestCount,
+      attended: false,
+      checkInTime: "",
+      specialRequirements: specialRequirements || "",
       eventTitle: event?.title ?? ""
-    });
+    };
+
+    persistedRSVPs.push(rsvp);
+    saveRSVPsToFile(persistedRSVPs);
 
     return NextResponse.json({
       message: "RSVP confirmed successfully",
@@ -95,7 +122,6 @@ export async function GET(
       return NextResponse.json({ error: "Admin access required" }, { status: 403 });
     }
 
-    // RSVPs from CSV
     const csvRsvps = RSVPDataService.getByEvent(eventId);
     const csvWithAlumni = csvRsvps.map((rsvp) => {
       const alumni = AlumniDataService.getById(rsvp.alumniId);
@@ -106,11 +132,10 @@ export async function GET(
       };
     });
 
-    // RSVPs created in this session via the POST handler
-    const sessionForEvent = sessionRSVPs.filter((r) => r.eventId === eventId);
+    const persistedRSVPs = loadPersistedRSVPs().filter((r) => r.eventId === eventId);
 
     return NextResponse.json({
-      rsvps: [...csvWithAlumni, ...sessionForEvent],
+      rsvps: [...csvWithAlumni, ...persistedRSVPs],
     });
   } catch (error) {
     console.error("Get RSVPs error:", error);

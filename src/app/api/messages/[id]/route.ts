@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { messagesStore } from '@/lib/messages-store';
+import { MessagesService } from '@/lib/messages-store';
 
 export async function GET(
   request: NextRequest,
@@ -16,7 +16,7 @@ export async function GET(
     const userEmailLower = userEmail.toLowerCase();
     
     // Find the specific message
-    const targetMessage = messagesStore.find(m => m.id === messageId);
+    const targetMessage = MessagesService.getById(messageId);
     
     if (!targetMessage) {
       return NextResponse.json({ error: 'Message not found' }, { status: 404 });
@@ -27,19 +27,22 @@ export async function GET(
       ? targetMessage.receiverEmail 
       : targetMessage.senderEmail;
 
-    // Find all messages in this conversation thread
-    const threadMessages = messagesStore.filter(message => 
+    // Get all messages for this user
+    const allMessages = MessagesService.getByUser(userEmail);
+    
+    // Filter to get only messages in this conversation thread
+    const threadMessages = allMessages.filter(message => 
       (message.senderEmail.toLowerCase() === userEmailLower && message.receiverEmail.toLowerCase() === otherParticipantEmail.toLowerCase()) ||
       (message.senderEmail.toLowerCase() === otherParticipantEmail.toLowerCase() && message.receiverEmail.toLowerCase() === userEmailLower)
     );
 
-    // Sort by timestamp
+    // Sort by timestamp (oldest first for chat view)
     threadMessages.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
 
     // Mark unread messages as read
     threadMessages.forEach(msg => {
       if (msg.receiverEmail.toLowerCase() === userEmailLower && !msg.read) {
-        msg.read = true;
+        MessagesService.markAsRead(msg.id, userEmail);
       }
     });
 

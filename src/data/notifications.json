@@ -10,5 +10,101 @@
     "isRead": true,
     "createdAt": "2025-11-25T22:52:24.594Z",
     "relatedId": "ALM00016"
+  },
+  {
+    "id": "NOT1764320026275-739",
+    "recipientEmail": "madhuxx24@gmail.com",
+    "senderEmail": "mark.harris750@email.com",
+    "senderName": "Mark Harris",
+    "type": "connection_request",
+    "title": "New Connection Request",
+    "message": "Mark Harris wants to connect with you.",
+    "isRead": false,
+    "createdAt": "2025-11-28T08:53:46.275Z",
+    "relatedId": "ALM03476"
+  },
+  {
+    "id": "NOT1764435617321-475",
+    "recipientEmail": "maheshbabu@slu.edu",
+    "senderEmail": "barbara.lopez880@email.com",
+    "senderName": "Barbara Lopez",
+    "type": "connection_request",
+    "title": "New Connection Request",
+    "message": "Barbara Lopez wants to connect with you.",
+    "isRead": true,
+    "createdAt": "2025-11-29T17:00:17.321Z",
+    "relatedId": "ALM00016"
+  },
+  {
+    "id": "NOT1764435632357-786",
+    "recipientEmail": "barbara.lopez880@email.com",
+    "senderEmail": "maheshbabu@slu.edu",
+    "senderName": "Mahesh Babu",
+    "type": "system_alert",
+    "title": "Connection Accepted",
+    "message": "Mahesh Babu accepted your connection request.",
+    "isRead": true,
+    "createdAt": "2025-11-29T17:00:32.357Z",
+    "relatedId": "NEW1764280209515"
+  },
+  {
+    "id": "NOT1764435651080-682",
+    "recipientEmail": "barbara.lopez880@email.com",
+    "senderEmail": "maheshbabu@slu.edu",
+    "senderName": "SLU Alumni Connect",
+    "type": "message",
+    "title": "New message from Mahesh Babu",
+    "message": "Subject: Regarding Event",
+    "isRead": false,
+    "createdAt": "2025-11-29T17:00:51.080Z",
+    "relatedId": "MSG1764435651042-397"
+  },
+  {
+    "id": "NOT1764435675269-617",
+    "recipientEmail": "maheshbabu@slu.edu",
+    "senderEmail": "barbara.lopez880@email.com",
+    "senderName": "SLU Alumni Connect",
+    "type": "message",
+    "title": "New message from Barbara Lopez",
+    "message": "Subject: Re: Conversation",
+    "isRead": false,
+    "createdAt": "2025-11-29T17:01:15.269Z",
+    "relatedId": "MSG1764435675251-254"
+  },
+  {
+    "id": "NOT1764435688905-688",
+    "recipientEmail": "barbara.lopez880@email.com",
+    "senderEmail": "maheshbabu@slu.edu",
+    "senderName": "SLU Alumni Connect",
+    "type": "message",
+    "title": "New message from Mahesh Babu",
+    "message": "Subject: Re: Conversation",
+    "isRead": false,
+    "createdAt": "2025-11-29T17:01:28.905Z",
+    "relatedId": "MSG1764435688881-147"
+  },
+  {
+    "id": "NOT1764435721402-979",
+    "recipientEmail": "maheshbabu@slu.edu",
+    "senderEmail": "barbara.lopez880@email.com",
+    "senderName": "SLU Alumni Connect",
+    "type": "message",
+    "title": "New message from Barbara Lopez",
+    "message": "Subject: Re: Conversation",
+    "isRead": false,
+    "createdAt": "2025-11-29T17:02:01.402Z",
+    "relatedId": "MSG1764435721374-660"
+  },
+  {
+    "id": "NOT1764435731253-99",
+    "recipientEmail": "barbara.lopez880@email.com",
+    "senderEmail": "maheshbabu@slu.edu",
+    "senderName": "SLU Alumni Connect",
+    "type": "message",
+    "title": "New message from Mahesh Babu",
+    "message": "Subject: Re: Conversation",
+    "isRead": false,
+    "createdAt": "2025-11-29T17:02:11.253Z",
+    "relatedId": "MSG1764435731236-483"
   }
 ]

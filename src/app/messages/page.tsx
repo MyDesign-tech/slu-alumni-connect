@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { MainLayout } from '@/components/layout/main-layout';
 import { ProtectedRoute } from '@/components/auth/protected-route';
@@ -21,7 +21,7 @@ interface Message {
   receiverName: string;
   subject: string;
   content: string;
-  timestamp: Date;
+  timestamp: Date | string;
   read: boolean;
 }
 
@@ -37,27 +37,7 @@ export default function MessagesPage() {
 
   const [connections, setConnections] = useState<any[]>([]);
 
-  useEffect(() => {
-    if (user?.email) {
-      fetchMessages();
-      fetchConnections();
-    }
-  }, [user?.email]);
-
-  const fetchConnections = async () => {
-    try {
-      const response = await fetch('/api/connections');
-      if (response.ok) {
-        const data = await response.json();
-        const accepted = data.connections.filter((c: any) => c.status === 'accepted');
-        setConnections(accepted);
-      }
-    } catch (error) {
-      console.error('Error fetching connections:', error);
-    }
-  };
-
-  const fetchMessages = async () => {
+  const fetchMessages = useCallback(async () => {
     if (!user?.email) return;
 
     try {
@@ -77,15 +57,55 @@ export default function MessagesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?.email]);
+
+  const fetchConnections = useCallback(async () => {
+    if (!user?.email) return;
+    
+    try {
+      const response = await fetch('/api/connections', {
+        headers: {
+          'x-user-email': user.email
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const accepted = data.connections.filter((c: any) => c.status === 'accepted');
+        setConnections(accepted);
+      }
+    } catch (error) {
+      console.error('Error fetching connections:', error);
+    }
+  }, [user?.email]);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchMessages();
+      fetchConnections();
+    }
+  }, [user?.email, fetchMessages, fetchConnections]);
+
+  // Listen for message-sent event to refresh messages
+  useEffect(() => {
+    const handleMessageSent = () => {
+      fetchMessages();
+    };
+
+    window.addEventListener('message-sent', handleMessageSent);
+    return () => {
+      window.removeEventListener('message-sent', handleMessageSent);
+    };
+  }, [fetchMessages]);
 
   const markAsRead = async (messageId: string) => {
+    if (!user?.email) return;
+    
     try {
       const response = await fetch('/api/messages', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'x-user-email': user?.email || ''
+          'x-user-email': user.email
         },
         body: JSON.stringify({
           messageId,
@@ -105,14 +125,37 @@ export default function MessagesPage() {
     }
   };
 
-  const formatTimeAgo = (date: Date) => {
+  const deleteMessage = async (messageId: string) => {
+    if (!user?.email) return;
+    
+    if (!confirm('Are you sure you want to delete this message?')) return;
+    
+    try {
+      const response = await fetch(`/api/messages?messageId=${messageId}`, {
+        method: 'DELETE',
+        headers: {
+          'x-user-email': user.email
+        }
+      });
+
+      if (response.ok) {
+        setMessages(prev => prev.filter(m => m.id !== messageId));
+      }
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
+
+  const formatTimeAgo = (date: Date | string) => {
     const now = new Date();
-    const diffInMinutes = Math.floor((now.getTime() - new Date(date).getTime()) / (1000 * 60));
+    const msgDate = new Date(date);
+    const diffInMinutes = Math.floor((now.getTime() - msgDate.getTime()) / (1000 * 60));
 
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
-    return `${Math.floor(diffInMinutes / 1440)}d ago`;
+    if (diffInMinutes < 10080) return `${Math.floor(diffInMinutes / 1440)}d ago`;
+    return msgDate.toLocaleDateString();
   };
 
   const filteredMessages = messages.filter(message => {
@@ -124,20 +167,22 @@ export default function MessagesPage() {
 
     if (!matchesSearch) return false;
 
+    const userEmail = user?.email?.toLowerCase();
+    
     switch (filter) {
       case 'received':
-        return message.receiverEmail === user?.email;
+        return message.receiverEmail.toLowerCase() === userEmail;
       case 'sent':
-        return message.senderEmail === user?.email;
+        return message.senderEmail.toLowerCase() === userEmail;
       case 'unread':
-        return message.receiverEmail === user?.email && !message.read;
+        return message.receiverEmail.toLowerCase() === userEmail && !message.read;
       default:
         return true;
     }
   });
 
-  const receivedMessages = messages.filter(m => m.receiverEmail === user?.email);
-  const sentMessages = messages.filter(m => m.senderEmail === user?.email);
+  const receivedMessages = messages.filter(m => m.receiverEmail.toLowerCase() === user?.email?.toLowerCase());
+  const sentMessages = messages.filter(m => m.senderEmail.toLowerCase() === user?.email?.toLowerCase());
   const unreadMessages = receivedMessages.filter(m => !m.read);
 
   const handleMessageClick = (message: Message) => {
@@ -145,7 +190,7 @@ export default function MessagesPage() {
     router.push(`/messages/${message.id}`);
 
     // Mark as read if it's a received message and unread
-    if (message.receiverEmail === user?.email && !message.read) {
+    if (message.receiverEmail.toLowerCase() === user?.email?.toLowerCase() && !message.read) {
       markAsRead(message.id);
     }
   };
@@ -178,6 +223,7 @@ export default function MessagesPage() {
                 <SendMessageDialog
                   recipientEmail=""
                   recipientName=""
+                  onMessageSent={fetchMessages}
                   trigger={
                     <Button>
                       <Send className="h-4 w-4 mr-2" />
@@ -295,6 +341,7 @@ export default function MessagesPage() {
                       <SendMessageDialog
                         recipientEmail=""
                         recipientName=""
+                        onMessageSent={fetchMessages}
                         trigger={
                           <Button>
                             <Send className="h-4 w-4 mr-2" />
@@ -320,7 +367,7 @@ export default function MessagesPage() {
                           <CardContent className="p-4">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-3 flex-1 min-w-0" onClick={() => handleMessageClick(message)}>
-                                <div className="flex-shrink-0">
+                                <div className="shrink-0">
                                   {isReceived ? (
                                     <Inbox className="h-5 w-5 text-blue-500" />
                                   ) : (
@@ -346,7 +393,7 @@ export default function MessagesPage() {
                                   </p>
                                 </div>
                               </div>
-                              <div className="flex items-center gap-2 flex-shrink-0">
+                              <div className="flex items-center gap-2 shrink-0">
                                 <div className="flex flex-col items-end gap-1">
                                   <span className="text-xs text-muted-foreground">
                                     {formatTimeAgo(message.timestamp)}
@@ -363,6 +410,17 @@ export default function MessagesPage() {
                                     >
                                       <MessageSquare className="h-3 w-3 mr-1" />
                                       Chat
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      variant="ghost"
+                                      className="h-6 px-2 text-xs text-red-500 hover:text-red-700 hover:bg-red-50"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        deleteMessage(message.id);
+                                      }}
+                                    >
+                                      <Trash2 className="h-3 w-3" />
                                     </Button>
                                     {isUnread && (
                                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
@@ -389,13 +447,22 @@ export default function MessagesPage() {
                   </CardHeader>
                   <CardContent>
                     {connections.length === 0 ? (
-                      <p className="text-sm text-muted-foreground text-center py-4">No connections yet.</p>
+                      <div className="text-center py-4">
+                        <p className="text-sm text-muted-foreground mb-2">No connections yet.</p>
+                        <Button
+                          variant="link"
+                          size="sm"
+                          onClick={() => router.push('/directory')}
+                        >
+                          Find Alumni →
+                        </Button>
+                      </div>
                     ) : (
                       <div className="space-y-4">
                         {connections.map(c => (
                           <div key={c.id} className="flex items-center justify-between">
                             <div className="flex items-center gap-2 overflow-hidden">
-                              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-xs flex-shrink-0">
+                              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-xs shrink-0">
                                 {c.profile?.firstName?.[0]}{c.profile?.lastName?.[0]}
                               </div>
                               <div className="min-w-0">
@@ -406,6 +473,7 @@ export default function MessagesPage() {
                             <SendMessageDialog
                               recipientEmail={c.profile?.email}
                               recipientName={`${c.profile?.firstName} ${c.profile?.lastName}`}
+                              onMessageSent={fetchMessages}
                               trigger={
                                 <Button size="icon" variant="ghost" className="h-8 w-8">
                                   <MessageSquare className="h-4 w-4" />

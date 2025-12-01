@@ -101,7 +101,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-10 bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/40 rounded-lg focus:bg-white/15 focus:border-white/40 transition-all duration-300 text-sm px-3"
+                className="h-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30 rounded-lg transition-all duration-300 text-sm px-3"
               />
             </div>
 
@@ -124,7 +124,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-10 bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/40 rounded-lg focus:bg-white/15 focus:border-white/40 transition-all duration-300 text-sm px-3"
+                className="h-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30 rounded-lg transition-all duration-300 text-sm px-3"
               />
             </div>
 
@@ -149,7 +149,7 @@ export default function LoginPage() {
 
           <div className="relative pt-1">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10"></div>
+              <div className="w-full border-t border-white/20"></div>
             </div>
             <div className="relative flex justify-center text-xs">
               <span className="bg-transparent px-2 text-white/50 uppercase tracking-wide font-medium text-[9px]">
@@ -167,7 +167,7 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <div className="text-center text-xs text-white/50 pt-2 border-t border-white/10">
+          <div className="text-center text-xs text-white/50 pt-2 border-t border-white/20">
             <p className="font-semibold text-white/60 mb-0.5 text-[10px]">IT Help Desk</p>
             <p className="text-[10px]">
               <a href="tel:+18007583678" className="text-white/70 hover:text-white transition-colors underline">+1-800-758-3678</a> or{" "}

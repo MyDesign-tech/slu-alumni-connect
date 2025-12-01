@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { AlumniDataService } from "@/lib/data-service";
-import { messagesStore } from "@/lib/messages-store";
+import { MessagesService } from "@/lib/messages-store";
 import { registeredUsers } from "@/lib/registered-users";
 
 export async function GET(request: NextRequest) {
@@ -11,16 +11,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const userEmailLower = user.email.toLowerCase()
-
-    // Return messages for the current user
-    const userMessages = messagesStore.filter(msg => 
-      msg.senderEmail.toLowerCase() === userEmailLower || 
-      msg.receiverEmail.toLowerCase() === userEmailLower
-    );
-    
-    // Sort by timestamp (newest first)
-    userMessages.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    // Return messages for the current user using the service
+    const userMessages = MessagesService.getByUser(user.email);
 
     return NextResponse.json({ messages: userMessages });
   } catch (error) {
@@ -64,19 +56,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const newMessage = {
-      id: Date.now().toString(),
+    // Create the message using MessagesService
+    const newMessage = MessagesService.create({
       senderEmail: user.email,
       senderName: senderName || user.email,
       receiverEmail,
       receiverName,
       subject: subject || "New Message",
-      content,
-      timestamp: new Date(),
-      read: false
-    };
-
-    messagesStore.push(newMessage);
+      content
+    });
 
     // Create notification for the recipient
     try {
@@ -120,17 +108,16 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json();
     const { messageId, read } = body;
 
-    const userEmailLower = user.email.toLowerCase()
-
-    const message = messagesStore.find(m => 
-      m.id === messageId && m.receiverEmail.toLowerCase() === userEmailLower
-    );
+    let message;
+    if (read === false) {
+      message = MessagesService.markAsUnread(messageId, user.email);
+    } else {
+      message = MessagesService.markAsRead(messageId, user.email);
+    }
 
     if (!message) {
       return NextResponse.json({ error: "Message not found" }, { status: 404 });
     }
-
-    message.read = read !== undefined ? read : true;
 
     return NextResponse.json({ 
       message: "Message updated successfully", 
@@ -138,6 +125,34 @@ export async function PATCH(request: NextRequest) {
     });
   } catch (error) {
     console.error("Update message error:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+// Delete message
+export async function DELETE(request: NextRequest) {
+  try {
+    const user = await getCurrentUser(request);
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const messageId = searchParams.get('messageId');
+
+    if (!messageId) {
+      return NextResponse.json({ error: "Message ID required" }, { status: 400 });
+    }
+
+    const deleted = MessagesService.delete(messageId, user.email);
+
+    if (!deleted) {
+      return NextResponse.json({ error: "Message not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Message deleted successfully" });
+  } catch (error) {
+    console.error("Delete message error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

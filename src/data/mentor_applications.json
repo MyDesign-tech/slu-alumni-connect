@@ -1,0 +1,44 @@
+[
+  {
+    "id": "APP-1764592385999",
+    "userId": "ALM00016",
+    "email": "barbara.lopez880@email.com",
+    "firstName": "Barbara",
+    "lastName": "Lopez",
+    "jobTitle": "Designer",
+    "company": "Google",
+    "graduationYear": 2012,
+    "experience": "mid",
+    "availability": "3-4 hours/week",
+    "areas": [
+      "ACADEMIC_GUIDANCE",
+      "NETWORKING",
+      "CAREER_DEVELOPMENT"
+    ],
+    "bio": "dhbhbfhvhef",
+    "status": "approved",
+    "submittedAt": "2025-12-01T12:33:05.999Z",
+    "reviewedAt": "2025-12-01T12:33:25.089Z",
+    "reviewedBy": "ADMIN001"
+  },
+  {
+    "id": "APP-1764595085488",
+    "userId": "ALM00017",
+    "email": "nancy.davis159@email.com",
+    "firstName": "Nancy",
+    "lastName": "Davis",
+    "jobTitle": "Executive",
+    "company": "Apple",
+    "graduationYear": 2011,
+    "experience": "mid",
+    "availability": "2-3 hours/week",
+    "areas": [
+      "NETWORKING"
+    ],
+    "bio": "hjbvjxnbjhdbvjbdrj",
+    "status": "approved",
+    "submittedAt": "2025-12-01T13:18:05.488Z",
+    "reviewedAt": "2025-12-01T13:18:16.296Z",
+    "reviewedBy": "ADMIN001"
+  }
+]

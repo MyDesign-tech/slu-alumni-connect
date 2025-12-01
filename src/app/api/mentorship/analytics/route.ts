@@ -51,9 +51,40 @@ export async function GET(request: NextRequest) {
             areaDistribution[m.area] = (areaDistribution[m.area] || 0) + 1;
         });
 
+        // Calculate growth data for the last 7 months
+        const growthMonths = months.slice(-7);
+        const growthData = growthMonths.map(month => {
+            const [year, monthNum] = month.split('-');
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            // Count active mentorships up to this month
+            const activeMentorships = allMentorships.filter(m => {
+                const startDate = new Date(m.startDate);
+                const monthDate = new Date(parseInt(year), parseInt(monthNum) - 1);
+                return startDate <= monthDate && (m.status === 'Active' || 
+                    (m.endDate && new Date(m.endDate) >= monthDate));
+            }).length;
+
+            // Count unique mentors up to this month
+            const mentorIds = new Set(
+                allMentorships.filter(m => {
+                    const startDate = new Date(m.startDate);
+                    const monthDate = new Date(parseInt(year), parseInt(monthNum) - 1);
+                    return startDate <= monthDate;
+                }).map(m => m.mentorId)
+            );
+
+            return {
+                month: monthNames[parseInt(monthNum) - 1],
+                activeMentorships,
+                approvedMentors: mentorIds.size
+            };
+        });
+
         return NextResponse.json({
             stats,
             seasonalityData,
+            growthData,
             areaDistribution: Object.entries(areaDistribution).map(([name, value]) => ({ name, value })),
             rawData: allMentorships
         });

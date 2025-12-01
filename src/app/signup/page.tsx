@@ -5,10 +5,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Eye, EyeOff } from "lucide-react";
-import { SluLogo } from "@/components/slu-logo";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { GraduationCap, ArrowRight, Loader2, Eye, EyeOff } from "lucide-react";
+import { addSignupNotification } from "@/lib/admin-data-store";
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +35,7 @@ export default function SignupPage() {
     e.preventDefault();
     setError("");
     setIsLoading(true);
-    
+
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -79,16 +78,20 @@ export default function SignupPage() {
           lastName: formData.lastName.trim(),
           graduationYear: formData.graduationYear || new Date().getFullYear().toString(),
           program: formData.program || 'Computer Science',
-          department: formData.program.includes('Computer Science') || formData.program.includes('Engineering') ? 'STEM' : 
-                     formData.program.includes('Business') ? 'BUSINESS' :
-                     formData.program.includes('Medicine') || formData.program.includes('Nursing') ? 'HEALTHCARE' :
-                     formData.program.includes('Social Work') || formData.program.includes('Education') ? 'SOCIAL_SCIENCES' : 'HUMANITIES'
+          department: formData.program.includes('Computer Science') || formData.program.includes('Engineering') ? 'STEM' :
+            formData.program.includes('Business') ? 'BUSINESS' :
+              formData.program.includes('Medicine') || formData.program.includes('Nursing') ? 'HEALTHCARE' :
+                formData.program.includes('Social Work') || formData.program.includes('Education') ? 'SOCIAL_SCIENCES' : 'HUMANITIES'
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
+        // Add notification for admin to verify this new user
+        if (data.notificationData) {
+          addSignupNotification(data.notificationData);
+        }
         alert('Registration successful! Redirecting to login page...');
         router.push('/login');
       } else {
@@ -103,22 +106,53 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center p-4">
-      <Card className="w-full max-w-lg">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-4">
-            <SluLogo />
+    <div className="min-h-screen w-full relative flex items-center justify-center p-4">
+      {/* Full Background Image */}
+      <div className="absolute inset-0 bg-[url('/login-bg.png')] bg-cover bg-center"></div>
+
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      {/* Top Left Branding */}
+      <div className="absolute top-8 left-8 z-10 text-white">
+        <div className="flex items-center gap-2 text-2xl font-bold mb-2">
+          <GraduationCap className="h-8 w-8" />
+          <span>SLU Alumni Connect</span>
+        </div>
+        <p className="text-blue-100 max-w-md text-sm">
+          Saint Louis University&apos;s official platform for alumni engagement, mentorship, and lifelong connection.
+        </p>
+      </div>
+
+      {/* Floating Signup Card */}
+      <Card className="relative z-10 w-full max-w-lg shadow-2xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-2xl border border-white/20 rounded-xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-700">
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none"></div>
+
+        <CardHeader className="space-y-1 text-center pb-4 pt-5 relative z-10">
+          <div className="mb-2 inline-flex mx-auto p-1.5 rounded-full bg-white/10 backdrop-blur-sm">
+            <GraduationCap className="h-5 w-5 text-white" />
           </div>
-          <CardTitle className="text-2xl font-bold">Join the Network</CardTitle>
-          <CardDescription>
-            Connect with fellow SLU alumni and build lasting relationships
-          </CardDescription>
+          <h1 className="text-xl font-bold tracking-tight text-white drop-shadow-lg">Join the Network</h1>
+          <p className="text-white/70 text-xs">
+            Create your account to connect with fellow SLU alumni
+          </p>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label htmlFor="firstName" className="text-sm font-medium">
+
+        <CardContent className="space-y-3.5 px-5 pb-5 relative z-10">
+          {error && (
+            <div className="bg-red-500/20 backdrop-blur-sm text-white text-xs p-2.5 rounded-lg border border-red-500/30 animate-in fade-in slide-in-from-top-2">
+              <div className="flex items-center gap-2">
+                <div className="w-1 h-1 rounded-full bg-red-400"></div>
+                {error}
+              </div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-white/90" htmlFor="firstName">
                   First Name
                 </label>
                 <Input
@@ -128,10 +162,11 @@ export default function SignupPage() {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30"
                 />
               </div>
-              <div className="space-y-2">
-                <label htmlFor="lastName" className="text-sm font-medium">
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-white/90" htmlFor="lastName">
                   Last Name
                 </label>
                 <Input
@@ -141,28 +176,30 @@ export default function SignupPage() {
                   value={formData.lastName}
                   onChange={handleInputChange}
                   required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-white/90" htmlFor="email">
                 Email Address
               </label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="john.doe@slu.edu"
+                placeholder="billiken@slu.edu"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label htmlFor="graduationYear" className="text-sm font-medium">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-white/90" htmlFor="graduationYear">
                   Graduation Year
                 </label>
                 <Input
@@ -175,10 +212,11 @@ export default function SignupPage() {
                   value={formData.graduationYear}
                   onChange={handleInputChange}
                   required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30"
                 />
               </div>
-              <div className="space-y-2">
-                <label htmlFor="program" className="text-sm font-medium">
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-white/90" htmlFor="program">
                   Program
                 </label>
                 <select
@@ -186,26 +224,24 @@ export default function SignupPage() {
                   name="program"
                   value={formData.program}
                   onChange={handleInputChange}
-                  className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                   required
+                  className="flex h-9 w-full rounded-md border bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30 px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <option value="">Select Program</option>
-                  <option value="Computer Science">Computer Science</option>
-                  <option value="Business Administration">Business Administration</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="Liberal Arts">Liberal Arts</option>
-                  <option value="Fine Arts">Fine Arts</option>
-                  <option value="Law">Law</option>
-                  <option value="Medicine">Medicine</option>
-                  <option value="Nursing">Nursing</option>
-                  <option value="Education">Education</option>
-                  <option value="Social Work">Social Work</option>
+                  <option value="" className="text-gray-900">Select Program</option>
+                  <option value="Computer Science" className="text-gray-900">Computer Science</option>
+                  <option value="Business Administration" className="text-gray-900">Business Administration</option>
+                  <option value="Engineering" className="text-gray-900">Engineering</option>
+                  <option value="Liberal Arts" className="text-gray-900">Liberal Arts</option>
+                  <option value="Medicine" className="text-gray-900">Medicine</option>
+                  <option value="Nursing" className="text-gray-900">Nursing</option>
+                  <option value="Law" className="text-gray-900">Law</option>
+                  <option value="Education" className="text-gray-900">Education</option>
                 </select>
               </div>
             </div>
-            
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-white/90" htmlFor="password">
                 Password
               </label>
               <div className="relative">
@@ -213,29 +249,25 @@ export default function SignupPage() {
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Create a strong password"
+                  placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleInputChange}
                   required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30 pr-10"
                 />
-                <Button
+                <button
                   type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
                   onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
+                  tabIndex={-1}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </Button>
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="confirmPassword" className="text-sm font-medium">
+            <div className="space-y-1.5">
+              <label className="text-xs font-medium text-white/90" htmlFor="confirmPassword">
                 Confirm Password
               </label>
               <div className="relative">
@@ -247,73 +279,44 @@ export default function SignupPage() {
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50 backdrop-blur-sm focus:bg-white/15 focus:border-white/30 pr-10"
                 />
-                <Button
+                <button
                   type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
+                  tabIndex={-1}
                 >
-                  {showConfirmPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </Button>
+                  {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <input
-                id="terms"
-                type="checkbox"
-                className="rounded border-gray-300"
-                required
-              />
-              <label htmlFor="terms" className="text-sm">
-                I agree to the{" "}
-                <Link href="/terms" className="text-primary hover:underline">
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link href="/privacy" className="text-primary hover:underline">
-                  Privacy Policy
-                </Link>
-              </label>
-            </div>
-
-            {error && (
-              <div className="p-3 rounded-md bg-red-50 border border-red-200">
-                <p className="text-sm text-red-600 font-medium">{error}</p>
-              </div>
-            )}
-
-            <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
-              {isLoading ? "Creating Account..." : "Create Account"}
+            <Button
+              type="submit"
+              className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl mt-4"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating account...
+                </>
+              ) : (
+                <>
+                  Create account
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </>
+              )}
             </Button>
-          </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
+            <div className="text-center text-xs text-white/70 mt-3">
               Already have an account?{" "}
-              <Link href="/login" className="text-primary hover:underline font-medium">
-                Sign in here
+              <Link href="/login" className="text-white font-medium hover:underline">
+                Sign in
               </Link>
-            </p>
-          </div>
-          <div className="mt-4 text-center text-xs text-muted-foreground">
-            <p className="font-medium">IT Help Desk</p>
-            <p className="mt-1">
-              Call <a href="tel:+18007583678" className="underline">+1-800-758-3678</a> or email{" "}
-              <a
-                href="mailto:ask@slu.edu"
-                className="underline"
-              >
-                ask@slu.edu
-              </a>
-            </p>
-          </div>
+            </div>
+          </form>
         </CardContent>
       </Card>
     </div>

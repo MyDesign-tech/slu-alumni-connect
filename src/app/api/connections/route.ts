@@ -3,6 +3,7 @@ import { ConnectionService } from '@/lib/connection-service';
 import { NotificationService } from '@/lib/notification-service';
 import { AlumniDataService } from '@/lib/data-service';
 import { getCurrentUser } from '@/lib/auth-utils';
+import { registeredUsers } from '@/lib/registered-users';
 
 export async function POST(request: NextRequest) {
     try {
@@ -81,7 +82,29 @@ export async function GET(request: NextRequest) {
 
         const expandedConnections = connections.map(c => {
             const otherId = c.requesterId === user.id ? c.recipientId : c.requesterId;
-            const profile = AlumniDataService.getById(otherId);
+            
+            // First check CSV alumni data
+            let profile = AlumniDataService.getById(otherId);
+            
+            // If not found, check registered users by ID
+            if (!profile) {
+                for (const userData of registeredUsers.values()) {
+                    if (userData.user.id === otherId) {
+                        profile = {
+                            id: userData.user.id,
+                            firstName: userData.user.profile.firstName,
+                            lastName: userData.user.profile.lastName,
+                            email: userData.user.email,
+                            jobTitle: userData.user.profile.jobTitle || '',
+                            currentEmployer: userData.user.profile.currentEmployer || '',
+                            department: userData.user.profile.department,
+                            graduationYear: userData.user.profile.graduationYear
+                        } as any;
+                        break;
+                    }
+                }
+            }
+            
             return {
                 ...c,
                 profile: profile ? {

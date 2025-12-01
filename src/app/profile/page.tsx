@@ -89,50 +89,77 @@ export default function ProfilePage() {
     setProfileData(prev => ({ ...prev, [name]: value }));
   };
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
   const handleSave = async () => {
     try {
-      // Update the auth store with new data
-      if (user) {
-        const updatedUser = {
-          ...user,
-          email: profileData.email,
-          profile: {
-            ...user.profile,
-            id: user.profile?.id || `PROF${Date.now()}`,
-            firstName: profileData.firstName,
-            lastName: profileData.lastName,
-            phone: profileData.phone,
-            graduationYear: parseInt(profileData.graduationYear) || 2020,
-            program: profileData.program,
-            department: profileData.department,
-            currentEmployer: profileData.currentEmployer,
-            jobTitle: profileData.jobTitle,
-            city: profileData.city,
-            state: profileData.state,
-            country: profileData.country,
-            bio: profileData.bio,
-            profileCompleteness: user.profile?.profileCompleteness || 0,
-          }
-        };
+      setIsSaving(true);
+      setSaveMessage(null);
 
-        // Update the global auth store
-        updateUser(updatedUser);
+      // First save to API to update the data service (for directory sync)
+      const response = await fetch('/api/profile/update', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-user-email': user?.email || ''
+        },
+        body: JSON.stringify(profileData),
+      });
 
-        // TODO: Also save to API
-        const response = await fetch('/api/profile/update', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(profileData),
-        });
+      if (response.ok) {
+        const data = await response.json();
+        
+        // Update the auth store with new data
+        if (user) {
+          const updatedUser = {
+            ...user,
+            email: profileData.email,
+            profile: {
+              ...user.profile,
+              id: user.profile?.id || `PROF${Date.now()}`,
+              firstName: profileData.firstName,
+              lastName: profileData.lastName,
+              phone: profileData.phone,
+              graduationYear: parseInt(profileData.graduationYear) || 2020,
+              program: profileData.program,
+              department: profileData.department,
+              currentEmployer: profileData.currentEmployer,
+              jobTitle: profileData.jobTitle,
+              city: profileData.city,
+              state: profileData.state,
+              country: profileData.country,
+              bio: profileData.bio,
+              profileCompleteness: data.alumni?.profileCompleteness || profileCompleteness,
+              lastUpdatedDate: new Date().toISOString(),
+            }
+          };
 
-        if (response.ok) {
-          console.log("Profile saved successfully");
+          // Update the global auth store
+          updateUser(updatedUser);
         }
+
+        // Dispatch a custom event to notify other components (like Directory) to refresh
+        window.dispatchEvent(new CustomEvent('profileUpdated', { 
+          detail: { 
+            email: profileData.email,
+            timestamp: data.timestamp 
+          } 
+        }));
+
+        setSaveMessage({ type: 'success', text: 'Profile updated successfully! Changes will reflect in directory.' });
+        setTimeout(() => setSaveMessage(null), 3000);
+      } else {
+        const errorData = await response.json();
+        setSaveMessage({ type: 'error', text: errorData.error || 'Failed to update profile. Please try again.' });
       }
 
       setIsEditing(false);
     } catch (error) {
       console.error("Error saving profile:", error);
+      setSaveMessage({ type: 'error', text: 'Error saving profile. Please try again.' });
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -502,12 +529,23 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* Save Button */}
+            {/* Save Button and Status Message */}
             {isEditing && (
-              <div className="mt-8 flex justify-end">
-                <Button onClick={handleSave} size="lg">
-                  Save Changes
-                </Button>
+              <div className="mt-8 space-y-4">
+                {saveMessage && (
+                  <div className={`p-4 rounded-lg ${
+                    saveMessage.type === 'success' 
+                      ? 'bg-green-50 text-green-800 border border-green-200' 
+                      : 'bg-red-50 text-red-800 border border-red-200'
+                  }`}>
+                    {saveMessage.text}
+                  </div>
+                )}
+                <div className="flex justify-end">
+                  <Button onClick={handleSave} size="lg" disabled={isSaving}>
+                    {isSaving ? 'Saving...' : 'Save Changes'}
+                  </Button>
+                </div>
               </div>
             )}
           </div>

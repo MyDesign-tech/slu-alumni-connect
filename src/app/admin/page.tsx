@@ -77,6 +77,8 @@ export default function AdminDashboard() {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [stats, setStats] = useState<any>(null);
   const [users, setUsers] = useState<any[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [donations, setDonations] = useState<Donation[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAdminUser, setSelectedAdminUser] = useState<any | null>(null);
   const [userAction, setUserAction] = useState<string | null>(null);
@@ -121,12 +123,68 @@ export default function AdminDashboard() {
     }
   }, [user?.email]);
 
+  // Fetch events for admin dashboard
+  const fetchEvents = useCallback(async () => {
+    try {
+      const response = await fetch('/api/events', {
+        headers: {
+          'x-user-email': user?.email || 'admin@slu.edu'
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        // Transform events to match the interface
+        const transformedEvents = (data.events || []).slice(0, 10).map((e: any) => ({
+          id: e.id,
+          title: e.title,
+          date: e.date,
+          attendees: e.registered || 0,
+          status: new Date(e.date) > new Date() ? 'UPCOMING' : 'COMPLETED',
+          category: e.type || 'General'
+        }));
+        setEvents(transformedEvents);
+      }
+    } catch (error) {
+      console.error('Failed to fetch events:', error);
+    }
+  }, [user?.email]);
+
+  // Fetch recent donations for admin dashboard
+  const fetchDonations = useCallback(async () => {
+    try {
+      const response = await fetch('/api/donations', {
+        headers: {
+          'x-user-email': user?.email || 'admin@slu.edu'
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        // Transform donations to match the interface
+        const transformedDonations = (data.donations || []).slice(0, 10).map((d: any) => ({
+          id: d.id,
+          donor: d.donorName || `Donor #${d.id.slice(-4)}`,
+          amount: d.amount,
+          campaign: d.campaign || d.purpose || 'General Fund',
+          date: d.date,
+          status: (d.status?.toUpperCase() || 'COMPLETED') as 'COMPLETED' | 'PENDING' | 'FAILED'
+        }));
+        setDonations(transformedDonations);
+      }
+    } catch (error) {
+      console.error('Failed to fetch donations:', error);
+    }
+  }, [user?.email]);
+
   useEffect(() => {
     if (isHydrated && isAdmin) {
       fetchStats();
       fetchUsers();
+      fetchEvents();
+      fetchDonations();
     }
-  }, [isHydrated, isAdmin, fetchStats, fetchUsers]);
+  }, [isHydrated, isAdmin, fetchStats, fetchUsers, fetchEvents, fetchDonations]);
 
   // Admin protection check
   if (!isHydrated) {
@@ -162,62 +220,6 @@ export default function AdminDashboard() {
       </ProtectedRoute>
     );
   }
-
-  // Sample events data
-  const events: Event[] = [
-    {
-      id: "1",
-      title: "Annual Alumni Gala",
-      date: "2024-12-15",
-      attendees: 245,
-      status: "UPCOMING",
-      category: "Social"
-    },
-    {
-      id: "2",
-      title: "Career Networking Night",
-      date: "2024-11-20",
-      attendees: 89,
-      status: "UPCOMING",
-      category: "Professional"
-    },
-    {
-      id: "3",
-      title: "Homecoming Weekend",
-      date: "2024-10-15",
-      attendees: 567,
-      status: "COMPLETED",
-      category: "Social"
-    }
-  ];
-
-  // Sample donations data
-  const donations: Donation[] = [
-    {
-      id: "1",
-      donor: "Sarah Johnson",
-      amount: 500,
-      campaign: "Student Scholarship Fund",
-      date: "2024-11-10",
-      status: "COMPLETED"
-    },
-    {
-      id: "2",
-      donor: "Michael Chen",
-      amount: 1000,
-      campaign: "Alumni Center Renovation",
-      date: "2024-11-08",
-      status: "COMPLETED"
-    },
-    {
-      id: "3",
-      donor: "Anonymous",
-      amount: 250,
-      campaign: "Research Innovation Grant",
-      date: "2024-11-05",
-      status: "PENDING"
-    }
-  ];
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -909,7 +911,7 @@ function AdminUserActionDialog({
   const primaryLabel = isDelete
     ? "Remove from List"
     : isEdit
-    ? "Mark as Verified (Demo)"
+    ? "Mark as Verified"
     : "Close";
 
   return (

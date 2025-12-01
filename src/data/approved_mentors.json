@@ -1,0 +1,77 @@
+[
+  {
+    "id": "ALM00016",
+    "oddsId": "ALM00016",
+    "firstName": "Barbara",
+    "lastName": "Lopez",
+    "email": "barbara.lopez880@email.com",
+    "jobTitle": "Designer",
+    "company": "Google",
+    "graduationYear": 2012,
+    "expertise": [
+      "ACADEMIC_GUIDANCE",
+      "NETWORKING",
+      "CAREER_DEVELOPMENT"
+    ],
+    "mentorshipAreas": [
+      "ACADEMIC_GUIDANCE",
+      "NETWORKING",
+      "CAREER_DEVELOPMENT"
+    ],
+    "availability": "3-4 hours/week",
+    "bio": "dhbhbfhvhef",
+    "rating": 4,
+    "totalMentees": 0,
+    "status": "available",
+    "approvedAt": "2025-12-01T12:33:25.089Z",
+    "applicationId": "APP-1764592385999",
+    "totalRatings": 1
+  },
+  {
+    "id": "ALM00017",
+    "oddsId": "ALM00017",
+    "firstName": "Nancy",
+    "lastName": "Davis",
+    "email": "nancy.davis159@email.com",
+    "jobTitle": "Executive",
+    "company": "Apple",
+    "graduationYear": 2011,
+    "expertise": [
+      "NETWORKING"
+    ],
+    "mentorshipAreas": [
+      "NETWORKING"
+    ],
+    "availability": "2-3 hours/week",
+    "bio": "hjbvjxnbjhdbvjbdrj",
+    "rating": 0,
+    "totalMentees": 0,
+    "status": "available",
+    "approvedAt": "2025-12-01T13:18:16.297Z",
+    "applicationId": "APP-1764595085488"
+  },
+  {
+    "id": "MENTOR-1764605658388-p41dw",
+    "oddsId": "MENTOR-1764605658388-p41dw",
+    "userId": "MENTOR-1764605658388-p41dw",
+    "firstName": "hgvshczdc",
+    "lastName": "vhsahvdhj",
+    "email": "hgvshczdc.vhsahvdhj1764605658388@slu.edu",
+    "jobTitle": "ahdhjas",
+    "company": "adghhgas",
+    "graduationYear": 2025,
+    "expertise": [
+      "Career Development"
+    ],
+    "mentorshipAreas": [
+      "Career Development"
+    ],
+    "availability": "2-3 hours/week",
+    "bio": "ahdjbhas",
+    "rating": 0,
+    "totalMentees": 0,
+    "status": "available",
+    "approvedAt": "2025-12-01T16:14:18.415Z",
+    "source": "admin-added"
+  }
+]
