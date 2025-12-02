@@ -1,0 +1,151 @@
+EventID,EventName,EventType,EventDate,EventTime,Location,MaxCapacity,Status,Description,CreatedDate,Department,IsVirtual,Budget,AttendanceCount
+EVT00001,Webinar - Winter 2023,Webinar,2024-10-03,16:56,Austin,278,Planned,career connecting building connecting connecting,2024-08-13,STEM,False,31177,429
+EVT00002,Class Reunion - Winter 2024,Workshop,2024-11-24,14:02,Los Angeles,458,Cancelled,reunion career networking connecting reunion,2024-10-07,Humanities,False,11256,51
+EVT00003,Webinar - Summer 2024,Career Fair,2025-12-02,10:20,New York,206,Planned,celebration building reunion connecting building,2025-11-01,Healthcare,True,37555,232
+EVT00004,Webinar - Spring 2023,Mentorship Program,2024-01-16,10:22,San Diego,26,Cancelled,celebration learning learning learning building,2023-11-19,STEM,False,28278,126
+EVT00005,Alumni Reunion - Summer 2023,Webinar,2025-02-10,11:48,Houston,492,Ongoing,celebration building learning celebration career,2024-12-18,Humanities,True,48658,357
+EVT00006,Class Reunion - Summer 2023,Webinar,2024-10-10,12:29,Philadelphia,297,Planned,connecting reunion networking building celebration,2024-09-24,Healthcare,False,25202,134
+EVT00007,Career Fair - Spring 2023,Class Reunion,2024-11-12,15:36,Boston,280,Completed,career career reunion networking reunion,2024-11-04,Humanities,True,20479,302
+EVT00008,Mentorship Program - Summer 2024,Workshop,2024-04-15,15:44,Austin,209,Ongoing,career mentorship building reunion connecting,2024-04-07,Business,False,3929,184
+EVT00009,Workshop - Winter 2023,Career Fair,2025-07-17,17:13,Denver,49,Planned,celebration networking celebration reunion celebration,2025-06-01,Social Sciences,False,18222,27
+EVT00010,Career Fair - Fall 2023,Career Fair,2025-12-30,12:43,San Jose,132,Ongoing,building reunion building career career,2025-12-14,Humanities,True,9382,498
+EVT00011,Mentorship Program - Summer 2023,Class Reunion,2023-11-04,13:52,Seattle,182,Cancelled,reunion building mentorship learning mentorship,2023-08-31,Humanities,True,40112,49
+EVT00012,Workshop - Summer 2024,Fundraising Gala,2025-06-26,12:02,Denver,349,Completed,connecting learning building learning celebration,2025-04-06,STEM,False,23227,371
+EVT00013,Networking Mixer - Spring 2024,Workshop,2024-12-09,16:57,Boston,124,Planned,connecting networking mentorship connecting career,2024-09-25,Business,False,48505,271
+EVT00014,Fundraising Gala - Winter 2023,Networking Mixer,2025-05-23,16:54,Phoenix,294,Cancelled,networking learning networking reunion celebration,2025-03-01,STEM,False,22634,350
+EVT00015,Mentorship Program - Fall 2023,Mentorship Program,2024-07-21,15:38,Philadelphia,184,Planned,learning reunion learning learning building,2024-04-23,Humanities,False,25677,202
+EVT00016,Career Fair - Winter 2024,Career Fair,2024-04-21,17:42,Jacksonville,382,Planned,connecting building reunion connecting networking,2024-03-02,Social Sciences,True,41062,18
+EVT00017,Career Fair - Fall 2024,Alumni Reunion,2024-12-10,10:34,San Jose,363,Cancelled,networking career learning mentorship celebration,2024-09-24,Humanities,False,6664,384
+EVT00018,Webinar - Summer 2024,Mentorship Program,2024-08-19,09:17,San Diego,465,Planned,career celebration connecting connecting celebration,2024-05-26,Business,True,25669,286
+EVT00019,Webinar - Spring 2023,Networking Mixer,2024-05-27,14:37,Houston,60,Completed,career mentorship mentorship reunion networking,2024-05-06,Humanities,False,26059,496
+EVT00020,Workshop - Fall 2024,Career Fair,2024-09-21,14:00,Philadelphia,95,Cancelled,learning reunion connecting celebration career,2024-08-21,Humanities,False,31574,468
+EVT00021,Fundraising Gala - Winter 2023,Fundraising Gala,2026-01-26,15:58,Seattle,403,Completed,building career building connecting building,2025-11-19,Business,False,22336,62
+EVT00022,Fundraising Gala - Fall 2024,Career Fair,2026-01-18,12:49,Denver,123,Cancelled,mentorship reunion learning career learning,2025-12-22,Humanities,False,32925,482
+EVT00023,Networking Mixer - Fall 2023,Workshop,2025-01-13,16:58,Austin,196,Cancelled,networking networking learning connecting connecting,2024-11-08,Business,False,4169,46
+EVT00024,Mentorship Program - Winter 2023,Mentorship Program,2026-02-13,10:40,New York,55,Planned,career reunion career mentorship connecting,2025-12-29,Healthcare,True,21462,215
+EVT00025,Workshop - Winter 2023,Alumni Reunion,2025-11-24,15:13,Boston,64,Completed,celebration networking mentorship reunion learning,2025-09-04,Humanities,True,31275,53
+EVT00026,Alumni Reunion - Summer 2024,Mentorship Program,2025-05-25,08:43,Houston,217,Planned,career building reunion mentorship connecting,2025-05-06,STEM,True,17362,398
+EVT00027,Networking Mixer - Spring 2023,Mentorship Program,2025-02-21,17:01,Jacksonville,350,Planned,connecting learning reunion career mentorship,2024-11-25,Social Sciences,False,12301,477
+EVT00028,Webinar - Summer 2023,Class Reunion,2026-01-18,14:21,Dallas,218,Ongoing,celebration connecting building career networking,2025-12-06,Social Sciences,False,1696,149
+EVT00029,Alumni Reunion - Winter 2024,Alumni Reunion,2024-06-16,14:34,Austin,377,Cancelled,learning reunion networking learning career,2024-06-07,Humanities,False,35154,310
+EVT00030,Webinar - Winter 2024,Mentorship Program,2024-11-26,08:26,Philadelphia,253,Completed,building mentorship mentorship career celebration,2024-09-22,Business,False,22569,451
+EVT00031,Networking Mixer - Spring 2023,Webinar,2025-11-07,13:00,Los Angeles,108,Ongoing,reunion building reunion career celebration,2025-10-21,STEM,False,19351,313
+EVT00032,Class Reunion - Spring 2024,Class Reunion,2024-11-15,09:25,San Antonio,123,Ongoing,learning career reunion celebration connecting,2024-08-27,Social Sciences,True,33038,391
+EVT00033,Fundraising Gala - Winter 2024,Class Reunion,2024-05-21,10:25,Philadelphia,55,Planned,networking reunion learning mentorship networking,2024-02-28,Healthcare,False,38497,173
+EVT00034,Workshop - Spring 2023,Networking Mixer,2024-12-21,11:00,New York,286,Ongoing,connecting connecting networking networking mentorship,2024-09-27,Healthcare,True,592,182
+EVT00035,Workshop - Fall 2024,Workshop,2025-07-05,10:04,Jacksonville,118,Planned,career celebration career learning networking,2025-05-10,STEM,False,45416,337
+EVT00036,Fundraising Gala - Winter 2024,Fundraising Gala,2023-11-15,09:59,New York,320,Planned,connecting career career networking learning,2023-11-01,Business,False,47050,327
+EVT00037,Alumni Reunion - Summer 2023,Alumni Reunion,2026-04-10,11:33,New York,106,Cancelled,learning career mentorship career building,2026-04-01,Healthcare,True,10597,459
+EVT00038,Career Fair - Fall 2024,Workshop,2026-03-29,13:48,Houston,305,Cancelled,connecting mentorship career networking celebration,2025-12-31,Social Sciences,False,4454,91
+EVT00039,Alumni Reunion - Summer 2024,Webinar,2025-09-19,15:35,Boston,143,Planned,connecting networking reunion building learning,2025-08-04,Social Sciences,True,40370,372
+EVT00040,Networking Mixer - Summer 2024,Class Reunion,2026-02-22,10:43,Los Angeles,397,Planned,celebration connecting celebration celebration reunion,2026-01-15,Humanities,False,33596,281
+EVT00041,Networking Mixer - Fall 2024,Webinar,2023-11-15,13:02,New York,54,Ongoing,career building mentorship mentorship mentorship,2023-09-11,STEM,False,36542,201
+EVT00042,Workshop - Spring 2024,Webinar,2026-01-21,13:36,San Antonio,262,Planned,networking celebration reunion networking learning,2025-12-12,Humanities,True,2846,160
+EVT00043,Class Reunion - Fall 2023,Career Fair,2026-04-12,15:24,Phoenix,132,Cancelled,building mentorship networking mentorship learning,2026-02-27,Social Sciences,False,2802,73
+EVT00044,Networking Mixer - Winter 2024,Career Fair,2025-06-07,11:16,San Antonio,286,Cancelled,mentorship reunion celebration learning reunion,2025-04-20,Business,False,5016,307
+EVT00045,Career Fair - Summer 2023,Mentorship Program,2025-12-15,17:06,Phoenix,277,Planned,networking mentorship mentorship networking reunion,2025-09-24,Social Sciences,False,24038,435
+EVT00046,Alumni Reunion - Winter 2023,Alumni Reunion,2025-05-23,08:59,San Jose,96,Ongoing,reunion learning networking learning career,2025-03-11,Business,False,13544,194
+EVT00047,Class Reunion - Fall 2024,Fundraising Gala,2024-09-18,08:24,Boston,312,Ongoing,career mentorship career career career,2024-06-29,STEM,True,27777,93
+EVT00048,Webinar - Spring 2023,Class Reunion,2024-07-06,14:26,Philadelphia,212,Ongoing,reunion reunion connecting learning learning,2024-04-21,Humanities,False,49065,50
+EVT00049,Workshop - Summer 2023,Networking Mixer,2024-06-22,16:22,Philadelphia,113,Planned,connecting learning connecting building mentorship,2024-04-25,Humanities,True,37948,338
+EVT00050,Workshop - Winter 2024,Webinar,2026-02-18,10:45,Chicago,485,Planned,connecting learning learning reunion networking,2026-01-14,Humanities,False,44077,42
+EVT00051,Webinar - Spring 2023,Class Reunion,2024-12-13,12:42,Los Angeles,333,Planned,networking mentorship career mentorship reunion,2024-10-31,Business,False,42755,405
+EVT00052,Mentorship Program - Winter 2023,Career Fair,2026-01-11,10:11,Boston,42,Completed,career celebration reunion reunion celebration,2025-12-25,Business,False,31653,440
+EVT00053,Mentorship Program - Summer 2024,Webinar,2024-05-27,16:05,Los Angeles,193,Cancelled,connecting mentorship reunion connecting networking,2024-03-31,Social Sciences,True,3506,436
+EVT00054,Alumni Reunion - Fall 2024,Career Fair,2024-03-27,09:57,Denver,91,Completed,connecting connecting reunion learning reunion,2024-01-05,STEM,False,13960,116
+EVT00055,Class Reunion - Spring 2023,Alumni Reunion,2026-04-05,10:26,Boston,453,Ongoing,reunion networking connecting building building,2026-01-23,Healthcare,False,35436,125
+EVT00056,Webinar - Summer 2023,Workshop,2024-10-29,12:12,Chicago,64,Completed,reunion connecting mentorship learning connecting,2024-09-26,STEM,False,20091,194
+EVT00057,Class Reunion - Fall 2023,Fundraising Gala,2026-03-13,16:56,Austin,492,Planned,learning reunion career mentorship building,2026-02-21,Humanities,False,2418,241
+EVT00058,Career Fair - Winter 2024,Class Reunion,2024-12-30,10:24,San Diego,211,Completed,mentorship celebration reunion building networking,2024-11-30,STEM,True,27474,248
+EVT00059,Alumni Reunion - Summer 2023,Mentorship Program,2024-10-07,11:03,Denver,376,Cancelled,celebration reunion reunion networking mentorship,2024-08-20,STEM,True,20125,455
+EVT00060,Mentorship Program - Fall 2024,Mentorship Program,2024-02-21,12:49,San Diego,46,Planned,celebration career building mentorship building,2023-12-11,Humanities,False,29614,411
+EVT00061,Webinar - Spring 2023,Career Fair,2026-03-11,09:27,Los Angeles,387,Cancelled,connecting networking reunion connecting mentorship,2025-12-27,Humanities,False,6719,85
+EVT00062,Career Fair - Winter 2023,Class Reunion,2025-09-16,15:34,Seattle,47,Planned,connecting building networking mentorship connecting,2025-08-10,Business,True,3821,49
+EVT00063,Fundraising Gala - Summer 2023,Class Reunion,2024-05-05,10:14,Chicago,494,Cancelled,networking career celebration reunion building,2024-03-30,STEM,False,42807,398
+EVT00064,Mentorship Program - Spring 2024,Alumni Reunion,2025-07-23,11:03,New York,323,Ongoing,connecting career celebration learning networking,2025-05-15,Social Sciences,True,2537,306
+EVT00065,Mentorship Program - Summer 2023,Workshop,2024-03-12,16:06,New York,432,Ongoing,learning connecting mentorship connecting learning,2024-01-15,Healthcare,True,21971,442
+EVT00066,Fundraising Gala - Summer 2024,Networking Mixer,2025-09-15,15:48,Jacksonville,364,Completed,building reunion learning reunion building,2025-07-15,Humanities,False,2653,239
+EVT00067,Networking Mixer - Summer 2024,Class Reunion,2023-12-31,17:04,San Diego,336,Cancelled,networking connecting mentorship celebration networking,2023-11-20,Healthcare,False,20468,225
+EVT00068,Class Reunion - Summer 2024,Mentorship Program,2024-02-10,08:30,Houston,224,Planned,reunion celebration reunion reunion mentorship,2023-11-30,Business,False,4634,172
+EVT00069,Career Fair - Summer 2023,Workshop,2024-04-01,09:51,Dallas,122,Planned,mentorship learning connecting building reunion,2024-03-04,Social Sciences,False,39059,407
+EVT00070,Career Fair - Spring 2023,Class Reunion,2023-11-06,10:26,Dallas,307,Planned,building mentorship career reunion celebration,2023-10-06,Healthcare,False,12878,141
+EVT00071,Alumni Reunion - Summer 2023,Networking Mixer,2026-03-20,08:00,New York,128,Cancelled,learning connecting networking networking career,2025-12-21,Social Sciences,False,44946,441
+EVT00072,Fundraising Gala - Fall 2024,Mentorship Program,2024-01-02,15:04,San Jose,35,Planned,reunion reunion building learning building,2023-11-03,Social Sciences,False,25154,414
+EVT00073,Webinar - Fall 2023,Workshop,2025-02-02,14:37,Philadelphia,176,Planned,celebration connecting learning building mentorship,2024-12-26,Business,True,40484,160
+EVT00074,Networking Mixer - Spring 2024,Class Reunion,2024-12-01,16:57,Boston,494,Completed,connecting celebration reunion building learning,2024-09-30,Healthcare,True,47253,496
+EVT00075,Networking Mixer - Summer 2023,Workshop,2025-05-23,13:04,San Antonio,191,Ongoing,learning connecting mentorship career building,2025-05-08,Humanities,False,11932,447
+EVT00076,Networking Mixer - Fall 2024,Class Reunion,2025-06-24,14:45,San Jose,439,Ongoing,networking celebration connecting learning career,2025-04-13,Healthcare,False,21264,125
+EVT00077,Mentorship Program - Summer 2023,Workshop,2025-08-14,08:07,Seattle,255,Planned,reunion mentorship learning learning reunion,2025-07-31,Business,True,20920,404
+EVT00078,Workshop - Spring 2023,Webinar,2024-07-03,15:21,San Diego,37,Cancelled,building learning reunion celebration reunion,2024-06-23,Social Sciences,False,8089,410
+EVT00079,Class Reunion - Fall 2024,Workshop,2025-09-30,13:55,San Diego,151,Completed,reunion career learning mentorship learning,2025-09-05,STEM,True,8733,91
+EVT00080,Class Reunion - Spring 2023,Career Fair,2025-08-13,17:09,San Antonio,235,Ongoing,celebration mentorship building connecting learning,2025-07-31,Healthcare,False,39566,425
+EVT00081,Fundraising Gala - Winter 2024,Career Fair,2024-01-11,13:58,Boston,57,Planned,connecting career connecting learning networking,2023-10-14,STEM,True,43941,208
+EVT00082,Alumni Reunion - Winter 2024,Webinar,2025-10-12,15:09,San Diego,103,Planned,connecting networking connecting learning career,2025-07-21,Social Sciences,True,2574,145
+EVT00083,Workshop - Spring 2023,Career Fair,2026-04-13,14:57,Austin,482,Ongoing,learning celebration reunion celebration career,2026-01-24,Humanities,False,9943,337
+EVT00084,Workshop - Summer 2023,Workshop,2025-08-01,14:24,Houston,189,Ongoing,learning reunion mentorship career career,2025-05-28,Social Sciences,True,34139,264
+EVT00085,Class Reunion - Fall 2024,Mentorship Program,2025-08-17,15:46,Chicago,351,Ongoing,connecting mentorship building learning career,2025-07-26,Humanities,False,3707,74
+EVT00086,Networking Mixer - Summer 2023,Mentorship Program,2023-12-10,10:15,Seattle,226,Planned,building building mentorship career career,2023-11-20,Humanities,False,17337,286
+EVT00087,Class Reunion - Fall 2023,Networking Mixer,2025-04-21,08:48,Denver,278,Completed,networking reunion career reunion networking,2025-01-22,Business,False,19995,121
+EVT00088,Mentorship Program - Summer 2024,Workshop,2025-02-05,16:06,Chicago,111,Planned,career celebration networking celebration reunion,2024-12-11,Humanities,True,29684,90
+EVT00089,Fundraising Gala - Spring 2023,Mentorship Program,2025-02-27,15:02,San Jose,369,Planned,career mentorship mentorship learning connecting,2025-01-01,Business,False,27306,184
+EVT00090,Fundraising Gala - Spring 2023,Career Fair,2024-10-13,13:10,Seattle,219,Cancelled,connecting networking celebration celebration networking,2024-10-06,Social Sciences,True,33813,485
+EVT00091,Workshop - Winter 2024,Class Reunion,2025-05-05,17:34,Phoenix,189,Ongoing,mentorship connecting mentorship mentorship celebration,2025-04-09,Healthcare,True,10854,251
+EVT00092,Alumni Reunion - Winter 2023,Fundraising Gala,2024-12-24,11:58,Los Angeles,195,Cancelled,building networking reunion connecting reunion,2024-12-02,Business,True,42717,230
+EVT00093,Networking Mixer - Summer 2024,Networking Mixer,2025-08-11,16:14,San Diego,25,Cancelled,learning building networking celebration networking,2025-05-31,STEM,True,2984,340
+EVT00094,Webinar - Winter 2023,Fundraising Gala,2024-05-09,17:50,Los Angeles,193,Completed,connecting career career connecting learning,2024-03-19,Social Sciences,False,43577,204
+EVT00095,Class Reunion - Spring 2023,Workshop,2025-05-25,16:14,Philadelphia,341,Ongoing,celebration mentorship reunion mentorship learning,2025-05-04,Humanities,False,17573,261
+EVT00096,Webinar - Fall 2023,Alumni Reunion,2024-09-17,15:25,Philadelphia,41,Planned,mentorship building mentorship mentorship career,2024-07-09,Healthcare,False,12746,292
+EVT00097,Class Reunion - Winter 2024,Networking Mixer,2024-09-18,16:27,Houston,499,Ongoing,learning celebration celebration celebration reunion,2024-07-25,STEM,False,16218,125
+EVT00098,Career Fair - Fall 2023,Workshop,2023-12-22,14:22,Seattle,330,Ongoing,building career career celebration connecting,2023-12-05,Healthcare,False,8143,209
+EVT00099,Fundraising Gala - Spring 2024,Class Reunion,2024-11-22,10:11,Phoenix,41,Cancelled,learning celebration networking career learning,2024-11-14,Healthcare,False,2294,190
+EVT00100,Mentorship Program - Summer 2023,Class Reunion,2025-01-04,11:27,San Antonio,399,Cancelled,reunion learning connecting building connecting,2024-12-26,STEM,False,22416,494
+EVT00101,Networking Mixer - Winter 2023,Alumni Reunion,2025-05-16,15:37,Seattle,47,Planned,connecting networking connecting career networking,2025-03-09,Healthcare,False,24330,45
+EVT00102,Workshop - Winter 2024,Fundraising Gala,2025-01-12,15:06,Philadelphia,387,Cancelled,connecting learning celebration celebration reunion,2024-10-19,STEM,True,42741,262
+EVT00103,Class Reunion - Winter 2023,Alumni Reunion,2025-12-31,15:32,Austin,225,Completed,connecting celebration connecting networking mentorship,2025-10-04,Social Sciences,False,14650,344
+EVT00104,Fundraising Gala - Spring 2024,Fundraising Gala,2025-12-10,10:43,Chicago,453,Cancelled,networking career building mentorship reunion,2025-09-16,Humanities,False,22303,434
+EVT00105,Workshop - Winter 2023,Class Reunion,2025-04-15,13:51,San Antonio,243,Ongoing,reunion connecting connecting celebration learning,2025-01-25,Healthcare,False,46238,465
+EVT00106,Webinar - Summer 2024,Mentorship Program,2025-04-20,15:36,Austin,265,Planned,career learning career learning building,2025-02-10,Business,True,39448,10
+EVT00107,Networking Mixer - Spring 2024,Career Fair,2024-08-12,11:53,Jacksonville,293,Ongoing,reunion reunion celebration learning career,2024-07-05,Social Sciences,False,19904,20
+EVT00108,Webinar - Spring 2023,Networking Mixer,2025-12-03,17:40,Boston,294,Cancelled,mentorship networking networking career celebration,2025-11-04,Social Sciences,False,36402,51
+EVT00109,Workshop - Spring 2023,Mentorship Program,2024-03-14,15:52,Seattle,403,Completed,reunion connecting reunion learning celebration,2024-01-20,Healthcare,False,4514,499
+EVT00110,Alumni Reunion - Fall 2024,Class Reunion,2024-09-01,12:34,Chicago,428,Planned,celebration networking mentorship reunion celebration,2024-06-06,Social Sciences,False,1040,313
+EVT00111,Career Fair - Winter 2024,Workshop,2024-03-27,13:45,Denver,236,Ongoing,career reunion career celebration career,2024-01-13,Humanities,False,47996,442
+EVT00112,Career Fair - Spring 2023,Networking Mixer,2026-01-31,17:02,Los Angeles,240,Completed,connecting career connecting reunion connecting,2025-11-04,STEM,False,31820,427
+EVT00113,Career Fair - Fall 2024,Fundraising Gala,2024-11-16,10:49,San Antonio,48,Completed,learning mentorship reunion career connecting,2024-09-01,Humanities,False,22926,196
+EVT00114,Career Fair - Winter 2023,Alumni Reunion,2023-12-25,13:34,San Antonio,132,Planned,networking reunion building building learning,2023-10-02,Social Sciences,False,48812,490
+EVT00115,Webinar - Fall 2023,Mentorship Program,2025-08-01,09:47,San Diego,289,Ongoing,career learning connecting connecting career,2025-06-11,STEM,False,32362,202
+EVT00116,Alumni Reunion - Winter 2024,Class Reunion,2026-04-20,17:02,Houston,44,Planned,celebration celebration mentorship celebration connecting,2026-02-12,Social Sciences,False,49045,89
+EVT00117,Alumni Reunion - Fall 2024,Webinar,2024-12-12,14:29,New York,137,Ongoing,celebration building learning mentorship mentorship,2024-11-06,Healthcare,False,25536,117
+EVT00118,Webinar - Winter 2023,Webinar,2025-09-26,13:25,San Diego,147,Ongoing,building networking celebration career reunion,2025-09-06,STEM,True,21810,25
+EVT00119,Webinar - Winter 2024,Webinar,2025-08-08,17:13,Seattle,348,Completed,career mentorship celebration networking reunion,2025-06-24,Business,False,49507,306
+EVT00120,Mentorship Program - Summer 2024,Alumni Reunion,2026-02-01,16:06,Seattle,365,Cancelled,celebration learning learning building mentorship,2025-11-15,Business,False,42850,322
+EVT00121,Webinar - Winter 2024,Class Reunion,2024-01-19,16:01,New York,411,Completed,networking career celebration learning connecting,2023-12-19,Social Sciences,False,37613,421
+EVT00122,Career Fair - Spring 2024,Class Reunion,2024-04-18,13:21,Philadelphia,123,Planned,celebration learning reunion networking career,2024-03-11,STEM,False,16299,258
+EVT00123,Workshop - Winter 2023,Mentorship Program,2024-12-13,14:53,San Antonio,50,Planned,mentorship celebration building building learning,2024-11-16,STEM,False,37465,71
+EVT00124,Networking Mixer - Summer 2023,Webinar,2024-05-26,15:26,San Diego,359,Completed,reunion career networking career building,2024-03-19,Social Sciences,False,2969,180
+EVT00125,Networking Mixer - Fall 2024,Networking Mixer,2024-07-15,11:42,Chicago,263,Completed,reunion mentorship connecting learning mentorship,2024-04-21,STEM,False,32709,453
+EVT00126,Networking Mixer - Winter 2023,Networking Mixer,2025-04-12,13:23,Denver,441,Cancelled,networking reunion networking reunion learning,2025-01-17,Humanities,False,27891,208
+EVT00127,Networking Mixer - Spring 2024,Webinar,2024-12-16,14:43,Dallas,426,Ongoing,celebration connecting networking networking reunion,2024-11-03,Social Sciences,False,28063,107
+EVT00128,Workshop - Winter 2023,Networking Mixer,2025-09-12,10:15,San Diego,373,Completed,building networking career celebration learning,2025-07-27,Business,True,8094,402
+EVT00129,Alumni Reunion - Spring 2023,Career Fair,2026-03-30,08:35,San Diego,444,Cancelled,building networking career celebration reunion,2026-02-04,Social Sciences,False,17673,240
+EVT00130,Class Reunion - Fall 2024,Webinar,2025-01-15,14:52,Jacksonville,40,Completed,celebration celebration learning learning mentorship,2024-11-01,Business,False,20949,58
+EVT00131,Career Fair - Spring 2024,Fundraising Gala,2025-12-01,17:57,Austin,235,Ongoing,networking connecting networking connecting reunion,2025-11-07,Social Sciences,False,42776,181
+EVT00132,Mentorship Program - Spring 2024,Alumni Reunion,2023-12-02,16:04,New York,114,Completed,learning networking networking reunion mentorship,2023-09-25,STEM,False,23536,19
+EVT00133,Class Reunion - Summer 2023,Webinar,2024-02-10,17:43,New York,369,Planned,mentorship career learning reunion career,2023-11-22,Social Sciences,False,41882,189
+EVT00134,Workshop - Summer 2024,Career Fair,2025-12-27,17:57,Jacksonville,446,Ongoing,learning career networking connecting career,2025-12-11,STEM,False,5146,396
+EVT00135,Career Fair - Winter 2024,Alumni Reunion,2024-06-21,08:40,Philadelphia,207,Cancelled,connecting building celebration learning learning,2024-04-17,Business,False,19395,42
+EVT00136,Class Reunion - Fall 2023,Alumni Reunion,2024-11-08,10:44,Austin,499,Ongoing,career reunion mentorship building connecting,2024-09-16,Healthcare,False,10700,134
+EVT00137,Alumni Reunion - Fall 2024,Workshop,2024-03-29,09:16,Phoenix,396,Cancelled,building career career learning learning,2024-02-26,Social Sciences,False,49912,90
+EVT00138,Career Fair - Fall 2024,Workshop,2024-01-15,08:07,Austin,32,Cancelled,learning networking networking mentorship mentorship,2023-10-31,Business,True,30459,413
+EVT00139,Class Reunion - Summer 2023,Networking Mixer,2025-04-27,17:32,San Diego,220,Planned,mentorship connecting building building networking,2025-02-28,STEM,True,24001,351
+EVT00140,Workshop - Summer 2023,Fundraising Gala,2024-02-16,17:30,Houston,498,Ongoing,celebration building reunion career celebration,2023-11-25,Healthcare,False,28129,25
+EVT00141,Alumni Reunion - Winter 2023,Networking Mixer,2024-06-04,15:30,Denver,358,Ongoing,building learning building learning celebration,2024-03-24,STEM,True,5141,376
+EVT00142,Career Fair - Spring 2024,Mentorship Program,2026-03-23,13:57,Jacksonville,78,Ongoing,learning celebration connecting building mentorship,2026-02-23,Social Sciences,False,10465,295
+EVT00143,Workshop - Winter 2024,Career Fair,2025-05-25,12:08,Denver,31,Ongoing,networking building mentorship learning building,2025-04-11,Humanities,False,11988,142
+EVT00144,Webinar - Fall 2024,Class Reunion,2025-02-24,16:54,San Jose,180,Completed,learning reunion networking mentorship reunion,2024-12-06,STEM,True,22942,219
+EVT00145,Alumni Reunion - Spring 2023,Class Reunion,2024-12-30,17:24,Houston,183,Cancelled,connecting building reunion career learning,2024-10-29,Humanities,False,5471,471
+EVT00146,Webinar - Fall 2024,Class Reunion,2025-10-02,13:41,San Diego,204,Ongoing,mentorship mentorship reunion reunion celebration,2025-08-19,Business,True,5981,65
+EVT00147,Fundraising Gala - Summer 2024,Alumni Reunion,2025-02-27,14:40,Phoenix,108,Planned,mentorship career career celebration reunion,2025-02-15,Humanities,True,29394,401
+EVT00148,Alumni Reunion - Spring 2023,Webinar,2024-06-17,15:18,Seattle,106,Planned,networking learning networking learning mentorship,2024-05-16,Social Sciences,False,11507,181
+EVT00149,Mentorship Program - Spring 2024,Class Reunion,2025-07-10,17:47,Dallas,335,Ongoing,mentorship learning connecting reunion learning,2025-06-08,Social Sciences,False,8046,460
+EVT00150,Mentorship Program - Fall 2023,Fundraising Gala,2026-03-06,14:47,San Jose,300,Ongoing,career career career building celebration,2026-02-07,STEM,False,43274,408
