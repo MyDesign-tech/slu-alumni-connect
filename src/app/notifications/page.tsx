@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { MainLayout } from '@/components/layout/main-layout';
 import { ProtectedRoute } from '@/components/auth/protected-route';
 import { Button } from '@/components/ui/button';
@@ -24,6 +25,7 @@ interface Notification {
 
 export default function NotificationsPage() {
   const { user } = useHydratedAuthStore();
+  const router = useRouter();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'unread' | 'read'>('all');
@@ -237,6 +239,20 @@ export default function NotificationsPage() {
                       if (!notification.isRead) {
                         markAsRead(notification.id);
                       }
+                      // Navigate based on notification type
+                      if (notification.type === 'message') {
+                        if (notification.relatedId) {
+                          router.push(`/messages/${notification.relatedId}`);
+                        } else {
+                          router.push('/messages');
+                        }
+                      } else if (notification.type === 'event_invite' || notification.type === 'rsvp_confirmation') {
+                        router.push('/events');
+                      } else if (notification.type === 'connection_request') {
+                        router.push('/directory');
+                      } else if (notification.type === 'donation_thank_you') {
+                        router.push('/donate');
+                      }
                     }}
                   >
                     <CardContent className="p-6">
@@ -265,9 +281,32 @@ export default function NotificationsPage() {
                             <p className="text-sm text-muted-foreground">
                               From: {notification.senderName}
                             </p>
-                            <Badge variant="outline" className="text-xs">
-                              {notification.type.replace('_', ' ')}
-                            </Badge>
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (notification.type === 'message') {
+                                  if (notification.relatedId) {
+                                    router.push(`/messages/${notification.relatedId}`);
+                                  } else {
+                                    router.push('/messages');
+                                  }
+                                } else if (notification.type === 'event_invite' || notification.type === 'rsvp_confirmation') {
+                                  router.push('/events');
+                                } else if (notification.type === 'connection_request') {
+                                  router.push('/directory');
+                                } else if (notification.type === 'donation_thank_you') {
+                                  router.push('/donate');
+                                }
+                              }}
+                            >
+                              {notification.type === 'message' ? 'View Message' : 
+                               notification.type === 'event_invite' ? 'View Event' :
+                               notification.type === 'rsvp_confirmation' ? 'View Event' :
+                               notification.type === 'connection_request' ? 'View Connection' :
+                               notification.type === 'donation_thank_you' ? 'View Donation' : 'View'}
+                            </Button>
                           </div>
                         </div>
                       </div>
