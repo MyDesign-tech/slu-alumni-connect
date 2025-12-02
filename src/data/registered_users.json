@@ -174,5 +174,30 @@
         "profileCompleteness": 40
       }
     }
+  },
+  "jklpoi@gmail.com": {
+    "password": "madhu@123",
+    "user": {
+      "id": "NEW1764659499447",
+      "email": "jklpoi@gmail.com",
+      "role": "ALUMNI",
+      "profile": {
+        "id": "PROF1764659499447",
+        "firstName": "dwahbjhe",
+        "lastName": "vwhgdvs",
+        "department": "STEM",
+        "graduationYear": 2021,
+        "program": "Engineering",
+        "phone": "",
+        "city": "",
+        "state": "",
+        "country": "USA",
+        "currentEmployer": "",
+        "jobTitle": "",
+        "employmentStatus": "EMPLOYED",
+        "verificationStatus": "PENDING",
+        "profileCompleteness": 40
+      }
+    }
   }
 }

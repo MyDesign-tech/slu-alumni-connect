@@ -73,5 +73,30 @@
     "status": "available",
     "approvedAt": "2025-12-01T16:14:18.415Z",
     "source": "admin-added"
+  },
+  {
+    "id": "NEW1764659499447",
+    "oddsId": "NEW1764659499447",
+    "firstName": "dwahbjhe",
+    "lastName": "vwhgdvs",
+    "email": "jklpoi@gmail.com",
+    "jobTitle": "Mentor",
+    "company": "SLU Alumni",
+    "graduationYear": 2021,
+    "expertise": [
+      "ACADEMIC_GUIDANCE",
+      "NETWORKING"
+    ],
+    "mentorshipAreas": [
+      "ACADEMIC_GUIDANCE",
+      "NETWORKING"
+    ],
+    "availability": "1-2 hours/week",
+    "bio": "hbefdshbjhbdsfds",
+    "rating": 0,
+    "totalMentees": 0,
+    "status": "available",
+    "approvedAt": "2025-12-02T07:13:16.020Z",
+    "applicationId": "APP-1764659571400"
   }
 ]

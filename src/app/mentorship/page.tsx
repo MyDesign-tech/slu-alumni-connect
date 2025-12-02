@@ -79,6 +79,8 @@ export default function MentorshipPage() {
   const [mentorshipMessage, setMentorshipMessage] = useState("");
   const [isRequestDialogOpen, setIsRequestDialogOpen] = useState(false);
   const [messageDialogMentor, setMessageDialogMentor] = useState<string | null>(null);
+  const [messageDialogEmail, setMessageDialogEmail] = useState<string | null>(null);
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
   const [scheduleDialogMentor, setScheduleDialogMentor] = useState<string | null>(null);
   const [scheduleDate, setScheduleDate] = useState("");
   const [scheduleTime, setScheduleTime] = useState("");
@@ -1937,7 +1939,10 @@ export default function MentorshipPage() {
                                   </span>
                                   <div className="flex gap-2">
                                     {request.status === 'ACTIVE' && (
-                                      <Button size="sm" variant="outline" onClick={() => setMessageDialogMentor(request.mentorName)}>
+                                      <Button size="sm" variant="outline" onClick={() => {
+                                        setMessageDialogMentor(request.mentorName);
+                                        setMessageDialogEmail(request.mentorEmail ?? null);
+                                      }}>
                                         <MessageCircle className="h-4 w-4 mr-1" />
                                         Message
                                       </Button>
@@ -2058,7 +2063,10 @@ export default function MentorshipPage() {
                                       </>
                                     )}
                                     {request.status === 'ACTIVE' && (
-                                      <Button size="sm" variant="outline" onClick={() => setMessageDialogMentor(request.menteeName ?? null)}>
+                                      <Button size="sm" variant="outline" onClick={() => {
+                                        setMessageDialogMentor(request.menteeName ?? null);
+                                        setMessageDialogEmail(request.menteeEmail ?? null);
+                                      }}>
                                         <MessageCircle className="h-4 w-4 mr-1" />
                                         Message
                                       </Button>
@@ -4546,6 +4554,7 @@ export default function MentorshipPage() {
                     onOpenChange={(open) => {
                       if (!open) {
                         setMessageDialogMentor(null);
+                        setMessageDialogEmail(null);
                       }
                     }}
                   >
@@ -4553,7 +4562,7 @@ export default function MentorshipPage() {
                       <DialogHeader>
                         <DialogTitle>Message {messageDialogMentor}</DialogTitle>
                         <DialogDescription>
-                          Send a quick update or question to your mentor.
+                          Send a quick update or question about your mentorship.
                         </DialogDescription>
                       </DialogHeader>
                       <div className="space-y-4 mt-2">
@@ -4572,20 +4581,49 @@ export default function MentorshipPage() {
                             variant="outline"
                             onClick={() => {
                               setMessageDialogMentor(null);
+                              setMessageDialogEmail(null);
                               setMentorshipMessage("");
                             }}
                           >
                             Cancel
                           </Button>
                           <Button
-                            disabled={!mentorshipMessage.trim()}
-                            onClick={() => {
-                              // Demo-only: in a full implementation, this would call the messages API.
-                              setMessageDialogMentor(null);
-                              setMentorshipMessage("");
+                            disabled={!mentorshipMessage.trim() || isSendingMessage || !messageDialogEmail}
+                            onClick={async () => {
+                              if (!messageDialogEmail || !mentorshipMessage.trim()) return;
+                              
+                              setIsSendingMessage(true);
+                              try {
+                                const response = await fetch('/api/messages', {
+                                  method: 'POST',
+                                  headers: {
+                                    'Content-Type': 'application/json',
+                                  },
+                                  body: JSON.stringify({
+                                    receiverEmail: messageDialogEmail,
+                                    subject: `Mentorship Message`,
+                                    content: mentorshipMessage,
+                                  }),
+                                });
+
+                                if (response.ok) {
+                                  alert(`Message sent to ${messageDialogMentor}!`);
+                                  setMessageDialogMentor(null);
+                                  setMessageDialogEmail(null);
+                                  setMentorshipMessage("");
+                                } else {
+                                  const data = await response.json();
+                                  alert(data.error || 'Failed to send message');
+                                }
+                              } catch (error) {
+                                console.error('Error sending message:', error);
+                                alert('Failed to send message. Please try again.');
+                              } finally {
+                                setIsSendingMessage(false);
+                              }
                             }}
                           >
-                            Send Message
+                            {isSendingMessage ? 'Sending...' : 'Send Message'}
                           </Button>
                         </div>
                       </div>
