@@ -1933,7 +1933,7 @@ export default function MentorshipPage() {
                                 <div className="mt-3 flex items-center justify-between">
                                   <span className="text-xs text-muted-foreground">
                                     {request.startDate ? `Started: ${new Date(request.startDate).toLocaleDateString()}` : 
-                                     request.requestDate ? `Requested: ${new Date(request.requestDate).toLocaleDateString()}` : ''}
+                                     request.requestedAt ? `Requested: ${new Date(request.requestedAt).toLocaleDateString()}` : ''}
                                   </span>
                                   <div className="flex gap-2">
                                     {request.status === 'ACTIVE' && (
@@ -1942,9 +1942,9 @@ export default function MentorshipPage() {
                                         Message
                                       </Button>
                                     )}
-                                    {request.status === 'COMPLETED' && request.rating > 0 && (
+                                    {request.status === 'COMPLETED' && (request.rating ?? 0) > 0 && (
                                       <div className="flex items-center gap-1">
-                                        {renderStars(request.rating)}
+                                        {renderStars(request.rating ?? 0)}
                                         <span className="text-sm font-medium">{request.rating}/5</span>
                                       </div>
                                     )}
@@ -2033,7 +2033,7 @@ export default function MentorshipPage() {
                                 {/* Actions based on status */}
                                 <div className="mt-3 flex items-center justify-between">
                                   <span className="text-xs text-muted-foreground">
-                                    {request.requestDate ? `Requested: ${new Date(request.requestDate).toLocaleDateString()}` : ''}
+                                    {request.requestedAt ? `Requested: ${new Date(request.requestedAt).toLocaleDateString()}` : ''}
                                   </span>
                                   <div className="flex gap-2">
                                     {request.status === 'REQUESTED' && (
@@ -2058,14 +2058,14 @@ export default function MentorshipPage() {
                                       </>
                                     )}
                                     {request.status === 'ACTIVE' && (
-                                      <Button size="sm" variant="outline" onClick={() => setMessageDialogMentor(request.menteeName)}>
+                                      <Button size="sm" variant="outline" onClick={() => setMessageDialogMentor(request.menteeName ?? null)}>
                                         <MessageCircle className="h-4 w-4 mr-1" />
                                         Message
                                       </Button>
                                     )}
-                                    {request.status === 'COMPLETED' && request.rating > 0 && (
+                                    {request.status === 'COMPLETED' && (request.rating ?? 0) > 0 && (
                                       <div className="flex items-center gap-1">
-                                        {renderStars(request.rating)}
+                                        {renderStars(request.rating ?? 0)}
                                         <span className="text-sm font-medium">{request.rating}/5</span>
                                       </div>
                                     )}
@@ -2891,7 +2891,7 @@ export default function MentorshipPage() {
                                   outerRadius={100}
                                   paddingAngle={2}
                                   dataKey="value"
-                                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                                  label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
                                 >
                                   {(() => {
                                     const areas: { [key: string]: number } = {};
@@ -2989,7 +2989,7 @@ export default function MentorshipPage() {
                                   cy="50%"
                                   outerRadius={100}
                                   dataKey="value"
-                                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                                  label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
                                 >
                                   {[0, 1, 2, 3].map((_, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -3669,9 +3669,9 @@ export default function MentorshipPage() {
                             <div className="p-4 bg-white rounded-lg border shadow-sm">
                               <div className="text-sm text-muted-foreground">Rating Quality</div>
                               <div className="text-lg font-semibold text-primary mt-1">
-                                {parseFloat(avgMentorRating) >= 4.5 ? 'Excellent' :
-                                  parseFloat(avgMentorRating) >= 4.0 ? 'Very Good' :
-                                    parseFloat(avgMentorRating) >= 3.5 ? 'Good' : 'Needs Attention'}
+                                {parseFloat(String(avgMentorRating)) >= 4.5 ? 'Excellent' :
+                                  parseFloat(String(avgMentorRating)) >= 4.0 ? 'Very Good' :
+                                    parseFloat(String(avgMentorRating)) >= 3.5 ? 'Good' : 'Needs Attention'}
                               </div>
                               <div className="text-xs text-muted-foreground mt-1">
                                 Based on {avgMentorRating} average rating

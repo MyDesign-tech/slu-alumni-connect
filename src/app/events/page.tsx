@@ -27,6 +27,7 @@ interface Event {
   department: string;
   status?: string;
   createdDate?: string;
+  allowGuests?: boolean;
 }
 
 export default function EventsPage() {
@@ -336,11 +337,14 @@ export default function EventsPage() {
     type: "Networking",
     date: "",
     time: "",
+    endTime: "",
     location: "",
     capacity: 100,
     description: "",
     department: "General",
     isVirtual: false,
+    virtualLink: "",
+    allowGuests: true,
   });
 
   const eventsForAnalytics = useMemo(
@@ -815,7 +819,7 @@ export default function EventsPage() {
       await response.json();
       alert('Event created successfully!');
       setIsCreateEventOpen(false);
-      setCreateEventData({ title: "", type: "Networking", date: "", time: "", endTime: "", location: "", capacity: 100, description: "", department: "General", isVirtual: false, virtualLink: "" });
+      setCreateEventData({ title: "", type: "Networking", date: "", time: "", endTime: "", location: "", capacity: 100, description: "", department: "General", isVirtual: false, virtualLink: "", allowGuests: true });
       setCreateEventErrors({});
       fetchEvents();
     } catch (error) {

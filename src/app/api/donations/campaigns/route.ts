@@ -85,7 +85,7 @@ function generateCampaignsFromData(): any[] {
     if (!purposeStats[purpose]) {
       purposeStats[purpose] = { raised: 0, donors: new Set() };
     }
-    purposeStats[purpose].raised += donation.amount || parseFloat(donation.donationAmount) || 0;
+    purposeStats[purpose].raised += donation.amount || 0;
     purposeStats[purpose].donors.add(donation.alumniId);
   });
 

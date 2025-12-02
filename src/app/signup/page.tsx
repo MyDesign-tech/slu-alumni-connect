@@ -90,7 +90,11 @@ export default function SignupPage() {
       if (response.ok) {
         // Add notification for admin to verify this new user
         if (data.notificationData) {
-          addSignupNotification(data.notificationData);
+          addSignupNotification(
+            data.notificationData.userId,
+            data.notificationData.userName,
+            data.notificationData.userEmail
+          );
         }
         alert('Registration successful! Redirecting to login page...');
         router.push('/login');

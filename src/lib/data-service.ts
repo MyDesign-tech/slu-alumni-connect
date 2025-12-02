@@ -350,22 +350,6 @@ export class AlumniDataService {
 
     return results;
   }
-
-  static update(id: string, updates: any) {
-    const alumniIndex = alumniData.findIndex(a => a.id === id);
-    if (alumniIndex === -1) return null;
-
-    alumniData[alumniIndex] = { ...alumniData[alumniIndex], ...updates };
-    return alumniData[alumniIndex];
-  }
-
-  static delete(id: string) {
-    const alumniIndex = alumniData.findIndex(a => a.id === id);
-    if (alumniIndex === -1) return false;
-
-    alumniData.splice(alumniIndex, 1);
-    return true;
-  }
 }
 
 /**
