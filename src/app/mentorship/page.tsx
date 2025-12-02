@@ -4590,7 +4590,7 @@ export default function MentorshipPage() {
                           <Button
                             disabled={!mentorshipMessage.trim() || isSendingMessage || !messageDialogEmail}
                             onClick={async () => {
-                              if (!messageDialogEmail || !mentorshipMessage.trim()) return;
+                              if (!messageDialogEmail || !mentorshipMessage.trim() || !user?.email) return;
                               
                               setIsSendingMessage(true);
                               try {
@@ -4598,6 +4598,7 @@ export default function MentorshipPage() {
                                   method: 'POST',
                                   headers: {
                                     'Content-Type': 'application/json',
+                                    'x-user-email': user.email,
                                   },
                                   body: JSON.stringify({
                                     receiverEmail: messageDialogEmail,
